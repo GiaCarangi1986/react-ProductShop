@@ -1,0 +1,72 @@
+.user{
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--df-color-opacity-black);
+    & gx-icon {
+      --icon-width: 100%;
+      --icon-height: 100%;
+    }
+    &_button{
+        --gx-spacing-large: 10px;
+        &::part(base) {
+          box-shadow: none;
+        }
+    }
+    &_menu{ 
+        --gx-spacing-large: 10px;
+        width: 196px;
+      &_item{
+        --gx-spacing-large: 10px;
+        &:hover{
+            &::part(base) {
+                background-color: var(--df-color-white);
+                color: var(--df-color-accent);
+              }
+        }
+        &:active{
+            background-color: var(--df-color-menu-hover);
+        }
+        &::part(base) {
+            font-family: Roboto;
+          }
+      }
+    }
+    &_arrow{
+      width: 8.66px;
+      height: 5.73px;
+    }
+    &_container{
+      display: flex;
+      flex-direction: row;
+      margin-right: 25.27px;
+      align-items: center;
+      height: 100%;
+      position: relative;
+    }
+    &_name{
+      display: block;
+      font-family: Roboto;
+      color: var(--df-color-default);
+      margin: 0 10px 0 0;
+      max-width: 450px;
+    }
+    &_title{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        &:hover {
+            .user_name, gx-icon {
+                color: var(--df-color-accent);
+            }
+        }
+    }
+  }
+
+.user_dropdown[open] {
+    gx-icon {
+        transform: rotate(180deg);
+        transform-origin: 50% 50%;
+        transition: 0.2;
+    }
+}

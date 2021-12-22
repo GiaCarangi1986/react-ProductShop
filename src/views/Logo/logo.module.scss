@@ -1,0 +1,15 @@
+.logo {
+    &-header{
+        min-width: 85px;
+        min-height: 30px;
+        margin-left: 41px;
+    }
+    &-auth {
+        width: 140px;
+        height: 40px;
+    }
+    & gx-icon {
+        --icon-width: 100%;
+        --icon-height: 100%;
+    }
+}

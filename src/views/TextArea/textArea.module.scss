@@ -1,0 +1,17 @@
+.textarea {
+  --gx-input-font-size-medium: 16px;
+  --gx-input-border-radius-medium: 6px;
+  --gx-input-color: var(--df-color-default);
+  --gx-input-font-family: var(--df-font-family);
+  --gx-input-border-width: 2px;
+  --gx-input-border-color: var(--df-border-color-default);
+  --gx-input-border-color-hover: var(--df-border-color-hover);
+  --gx-input-border-color-focus: var(--df-border-color-hover);
+
+  --gx-focus-ring-box-shadow: transparent;
+
+  // label
+  --gx-input-label-font-size-medium: 14px;
+  --gx-input-label-color: var(--df-border-color-hover);
+  --gx-spacing-xxx-small: 7px;
+}

@@ -1,0 +1,18 @@
+.checkbox {
+  --gx-color-primary-50: var(--df-color-accent);
+  --gx-color-primary-60: var(--df-color-accent-hover);
+  --gx-input-color: var(--df-color-default);
+  --gx-input-font-family: var(--df-font-family);
+  --gx-input-font-size-medium: 14px;
+  --gx-input-font-weight: 400;
+  --gx-focus-ring-box-shadow: transparent;
+  --gx-input-border-color-focus: var(--df-color-accent-hover);
+  --gx-input-border-width: var(--df-border-width);
+  --gx-input-border-color: var(--df-color-disabled);
+  --gx-toggle-size: 18px;
+  --gx-transition-fast: 0;
+}
+
+.checkbox::part(control) {
+  border-radius: 4px;
+}

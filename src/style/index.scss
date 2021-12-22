@@ -1,0 +1,148 @@
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto-Medium.woff2') format('woff2'),
+  url('../fonts/Roboto-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto-Regular.woff2') format('woff2'),
+  url('../fonts/Roboto-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto-Bold.woff2') format('woff2'),
+  url('../fonts/Roboto-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --df-input-height: 40px;
+  --df-background-color: #F6F8FA;
+  --df-border-width: 2px;
+  --df-color-default: #002C44;
+  --df-border-color-default: 	hsla(201, 100%, 13%, 0.25);
+  --df-border-color-hover: 	hsla(201, 100%, 13%, 0.5);
+  --df-border-color-light: #E6EAED;
+  --df-color-accent: #009BA4;
+  --df-color-accent-hover: #03BBC6;
+  --df-color-accent-active: #03959D;
+  --df-color-error-box-shadow: hsla(0, 80%, 53%, 0.35);
+  --df-color-disabled: #BFCAD0;
+  --df-color-red: #E72525;
+  --df-color-row-arhive:hsla(0, 80%, 53%, 0.05);
+  --df-color-red-hover: #FF0000;
+  --df-color-red-active: #d6b2b2;
+  --df-font-family: 'Roboto', sans-serif;
+  --df-box-shadow: 0px 0px 14px var(--df-border-color-default);
+  --df-color-opacity-black: #f2f4f6;
+  --df-color-menu-hover: #EDF8F8;
+  --df-color-white: white;
+  --df-input-color: rgba(0, 44, 68, 0.5);
+  --df-preload: rgba(white, 0);
+  --df-preload-vis: rgba(white, 0.7);
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  outline: none !important;
+  scrollbar-color: var(--df-color-accent) rgba(0,0,0,.1);
+  scrollbar-width: thin;
+}
+
+body {
+  width: 100%;
+  max-height: 100vh;
+  padding: 0;
+  margin: 0;
+  min-width: 320px;
+  font-family: var(--df-font-family);
+  font-size: 16px;
+  font-style: normal;
+  font-stretch: normal;
+  font-weight: normal;
+  line-height: 1.4;
+  letter-spacing: normal;
+  text-align: left;
+  color: black;
+  background: var(--df-background-color);
+  overscroll-behavior: none;
+  overflow: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+ul, ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li{
+  list-style-type: none;
+}
+
+a {
+  cursor: pointer;
+  color: blue;
+  transition: .2s;
+  outline: none !important;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+  text-decoration: none;
+}
+
+a:hover {
+  color: blue;
+  text-decoration: none;
+}
+
+strong {
+  font-weight: bold;
+}
+
+* {
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  &::-webkit-scrollbar-track {
+    background: rgba(0,0,0,.1);
+    margin: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--df-color-accent);
+  }
+}
+
+gx-modal {
+  --gx-scrollbar-width: 5px;
+  --gx-scrollbar-height: 5px;
+  --gx-scrollbar-track-color: rgba(0,0,0,.1);
+  --gx-scrollbar-thumb-color: var(--df-color-accent);
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.none {
+  display: none;
+}
+
+.char-arrow {
+  margin: 0 10px;
+  font-size: 20px;
+}

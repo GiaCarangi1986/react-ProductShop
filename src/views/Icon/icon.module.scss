@@ -1,0 +1,29 @@
+.icon {
+    --icon-width: 18px;
+    --icon-height: 18px;
+    &_user{
+        padding: 10px 12px;
+    }
+    &_arrow{
+        --icon-width: 9px;
+        --icon-height: 6px;
+        color: var(--df-color-default);
+        &:target{
+            transform: rotate(-180deg);
+        }
+    }
+    &_sort{
+        transform: rotate(-180deg);
+    }
+}
+
+.icon_dropdown {
+    --icon-width: 14px;
+    --icon-height: 14px;
+}
+
+.icon_excel {
+    --icon-width: 30px;
+    --icon-height: 35px;
+    margin: auto;
+}

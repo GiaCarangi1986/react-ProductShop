@@ -1,0 +1,41 @@
+.error-text {
+    color: var(--df-color-red);
+    font-size: 10px;
+}
+.error-text-absolute {
+    position: absolute;
+    bottom: -14px;
+    left: 0;
+    margin-bottom: 20px;
+}
+
+.error-auth {
+    width: 100%;
+    text-align: center;
+}
+
+.error-addOrUpdateService {
+    bottom: -15px;
+    margin-bottom: 0;
+}
+.error-settingsForTable{
+    bottom: 22px;
+    right: 0;
+    left: auto;
+    font-size: 11px;
+}
+.error-itemsTableColumn{
+    right: 11px;
+    left: auto;
+    font-size: 11px;
+
+    margin-bottom: 0;
+    bottom: 39.5px;
+}
+
+.error-form {
+    font-size: 14px;
+    position: absolute;
+    top: 10px;
+    
+}

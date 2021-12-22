@@ -1,0 +1,71 @@
+.dropdown {
+  --gx-input-font-family: var(--df-font-family);
+  --gx-font-weight-semibold: 500;
+  --gx-button-font-size-medium: 14px;
+  --gx-input-line-height-medium: 16px;
+  --gx-color-primary-50: var(--df-border-color-hover);
+  --gx-border-radius-medium: 0px;
+  --gx-z-index-dropdown: 50;
+  // width: 100%;
+  height: 100%;
+}
+
+.dropdown::part(panel) {
+  overflow: hidden;
+  max-height: 70vh;
+  min-height: 30vh;
+}
+
+.dropdown-not-full::part(panel) {
+  min-height: 6vh;
+  min-width: 189px;
+}
+
+.dropdown-menu { 
+  --gx-spacing-x-small: 12px;
+  min-width: 340px;
+}
+
+.dropdown-menu__item, 
+.dropdown-menu__item-search {
+  --gx-spacing-xx-small: 0px;
+  --gx-spacing-x-large: 0px;
+  width: 100%;
+}
+
+.dropdown-menu__item:hover { 
+  background-color: var(--df-color-menu-hover);
+}
+
+.dropdown-menu__item gx-checkbox { 
+  width: 100%;
+}
+
+.dropdown-menu__item gx-checkbox::part(base) { 
+  width: 100%;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+}
+.dropdown-menu__item::part(label) { 
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-menu__item-search gx-input::part(form-control) {
+  padding: 5px 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.circle {
+  width: 10px;
+  height: 10px;
+  background-color: var(--df-color-red);
+  border-radius: 50%;
+  position: absolute;
+  top: 8px;
+  right: 0px;
+  z-index: 1;
+}

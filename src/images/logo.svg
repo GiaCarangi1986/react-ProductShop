@@ -1,0 +1,20 @@
+<svg width="140" height="40" viewBox="0 0 141 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+ <defs>
+  <filter height="200%" width="200%" y="-50%" x="-50%" id="svg_9_blur">
+   <feGaussianBlur stdDeviation="10" in="SourceGraphic"/>
+  </filter>
+ </defs>
+ <g>
+  <title>background</title>
+  <rect fill="#fff" id="canvas_background" width="140" height="40" y="-1" x="-1"/>
+  <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
+   <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%"/>
+  </g>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <text stroke="#000" transform="matrix(1.604850172996521,0,0,1.604850172996521,-215.44007099419832,-195) " xml:space="preserve" text-anchor="start" font-family="Arvo, sans-serif" font-size="24" id="svg_1" y="140" x="140" stroke-width="0" fill="#009ba4">Marlen</text>
+  <rect filter="url(#svg_9_blur)" stroke="#009ba4" id="svg_9" height="3" width="140" y="35" x="0" stroke-width="1.5" fill="#009ba4"/>
+ </g>
+</svg>

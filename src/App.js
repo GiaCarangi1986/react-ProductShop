@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router';
+import { Routes, Route } from 'react-router-dom'
+import { useStoreon } from 'storeon/react'
+import { AuthPage } from './pages'
+import { ERROR_TYPES, PATHS } from './const'
+import { useNetwork } from './utils'
+import { ErrorPopup } from './views';
 
-function App() {
+const App = () => {
+  const navigate = useNavigate();
+  const { errorPopup, dispatch } = useStoreon('errorPopup')
+  const isOffline = useNetwork()
+
+  useEffect(() => {
+    if (isOffline) {
+      dispatch('error/toggle', { errorPopup: ERROR_TYPES.offline })
+    } else {
+      dispatch('error/toggle', { errorPopup: null })
+    }
+  }, [isOffline])
+
+  useEffect(() => {
+    navigate(PATHS.auth.path)
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <Routes >
+        <Route
+          strict
+          path={PATHS.auth.path}
+          exact={PATHS.auth.exact}
+          element={<AuthPage />}
+        />
+      </Routes >
+      {errorPopup ? <ErrorPopup /> : null}
+    </>
+  )
 }
 
-export default App;
+export default App
