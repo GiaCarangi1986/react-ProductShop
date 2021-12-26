@@ -2,15 +2,15 @@
   --gx-input-height-medium: 40px;
   --gx-input-font-size-medium: 16px;
   --gx-input-border-radius-medium: 6px;
-  --gx-input-color: var(--df-color-default);
-  --gx-input-font-family: var(--df-font-family);
+  --gx-input-color: var(--ps-color-default);
+  --gx-input-font-family: var(--ps-font-family);
   --gx-input-border-width: 2px;
-  --gx-input-border-color: var(--df-border-color-default);
-  --gx-input-border-color-hover: var(--df-border-color-hover);
-  --gx-input-border-color-focus: var(--df-border-color-hover);
+  --gx-input-border-color: var(--ps-border-color-default);
+  --gx-input-border-color-hover: var(--ps-border-color-hover);
+  --gx-input-border-color-focus: var(--ps-border-color-hover);
   // label
   --gx-input-label-font-size-medium: 14px;
-  --gx-input-label-color: var(--df-border-color-hover);
+  --gx-input-label-color: var(--ps-border-color-hover);
   --gx-spacing-xxx-small: 7px;
 }
 
@@ -20,7 +20,7 @@
   --gx-input-border-color: transparent;
   --gx-input-spacing-medium: 0px;
   --gx-input-font-size-medium: 18px;
-  --gx-input-color: var(--df-color-default);
+  --gx-input-color: var(--ps-color-default);
   cursor: default;
 }
 
@@ -34,13 +34,13 @@
 }
 
 .input::placeholder::part(input) {
-  color: var(--df-border-color-hover);
+  color: var(--ps-border-color-hover);
 }
 
 .input::part(label) {
   font-weight: 500;
   line-height: 16px;
-  color: var(--df-border-color-hover);
+  color: var(--ps-border-color-hover);
 }
 
 .input-label{
@@ -58,7 +58,7 @@
     transition: 0.2s;
     margin-top: 6.5px;
     font-size: 16px;
-    color: var(--df-input-color);
+    color: var(--ps-input-color);
   }
 }
 

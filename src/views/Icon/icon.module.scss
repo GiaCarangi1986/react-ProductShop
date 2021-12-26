@@ -7,7 +7,7 @@
     &_arrow{
         --icon-width: 9px;
         --icon-height: 6px;
-        color: var(--df-color-default);
+        color: var(--ps-color-default);
         &:target{
             transform: rotate(-180deg);
         }

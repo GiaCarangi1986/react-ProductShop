@@ -6,7 +6,7 @@
     height: 60px;
   }
   background-color: white;
-  border-bottom: 1px solid var(--df-border-color-light);
+  border-bottom: 1px solid var(--ps-border-color-light);
   &__navigation{
     display: flex;
     flex-direction: row;
@@ -24,8 +24,8 @@
 .centered-div {
   width: 100%;
   height: 100%;
-  background-color: var(--df-color-red);
-  color: var(--df-background-color);
+  background-color: var(--ps-color-red);
+  color: var(--ps-background-color);
   display: flex;
   justify-content: center;
   align-items: center;

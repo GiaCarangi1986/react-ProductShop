@@ -24,30 +24,30 @@
 }
 
 :root {
-  --df-input-height: 40px;
-  --df-background-color: #F6F8FA;
-  --df-border-width: 2px;
-  --df-color-default: #002C44;
-  --df-border-color-default: 	hsla(201, 100%, 13%, 0.25);
-  --df-border-color-hover: 	hsla(201, 100%, 13%, 0.5);
-  --df-border-color-light: #E6EAED;
-  --df-color-accent: #009BA4;
-  --df-color-accent-hover: #03BBC6;
-  --df-color-accent-active: #03959D;
-  --df-color-error-box-shadow: hsla(0, 80%, 53%, 0.35);
-  --df-color-disabled: #BFCAD0;
-  --df-color-red: #E72525;
-  --df-color-row-arhive:hsla(0, 80%, 53%, 0.05);
-  --df-color-red-hover: #FF0000;
-  --df-color-red-active: #d6b2b2;
-  --df-font-family: 'Roboto', sans-serif;
-  --df-box-shadow: 0px 0px 14px var(--df-border-color-default);
-  --df-color-opacity-black: #f2f4f6;
-  --df-color-menu-hover: #EDF8F8;
-  --df-color-white: white;
-  --df-input-color: rgba(0, 44, 68, 0.5);
-  --df-preload: rgba(white, 0);
-  --df-preload-vis: rgba(white, 0.7);
+  --ps-input-height: 40px;
+  --ps-background-color: #F6F8FA;
+  --ps-border-width: 2px;
+  --ps-color-default: #002C44;
+  --ps-border-color-default: 	hsla(201, 100%, 13%, 0.25);
+  --ps-border-color-hover: 	hsla(201, 100%, 13%, 0.5);
+  --ps-border-color-light: #E6EAED;
+  --ps-color-accent: #009BA4;
+  --ps-color-accent-hover: #03BBC6;
+  --ps-color-accent-active: #03959D;
+  --ps-color-error-box-shadow: hsla(0, 80%, 53%, 0.35);
+  --ps-color-disabled: #BFCAD0;
+  --ps-color-red: #E72525;
+  --ps-color-row-arhive:hsla(0, 80%, 53%, 0.05);
+  --ps-color-red-hover: #FF0000;
+  --ps-color-red-active: #d6b2b2;
+  --ps-font-family: 'Roboto', sans-serif;
+  --ps-box-shadow: 0px 0px 14px var(--ps-border-color-default);
+  --ps-color-opacity-black: #f2f4f6;
+  --ps-color-menu-hover: #EDF8F8;
+  --ps-color-white: white;
+  --ps-input-color: rgba(0, 44, 68, 0.5);
+  --ps-preload: rgba(white, 0);
+  --ps-preload-vis: rgba(white, 0.7);
 }
 
 *,
@@ -55,7 +55,7 @@
 *::before {
   box-sizing: border-box;
   outline: none !important;
-  scrollbar-color: var(--df-color-accent) rgba(0,0,0,.1);
+  scrollbar-color: var(--ps-color-accent) rgba(0,0,0,.1);
   scrollbar-width: thin;
 }
 
@@ -65,7 +65,7 @@ body {
   padding: 0;
   margin: 0;
   min-width: 320px;
-  font-family: var(--df-font-family);
+  font-family: var(--ps-font-family);
   font-size: 16px;
   font-style: normal;
   font-stretch: normal;
@@ -74,7 +74,7 @@ body {
   letter-spacing: normal;
   text-align: left;
   color: black;
-  background: var(--df-background-color);
+  background: var(--ps-background-color);
   overscroll-behavior: none;
   overflow: hidden;
 }
@@ -123,7 +123,7 @@ strong {
   }
 
   &::-webkit-scrollbar-thumb {
-    background: var(--df-color-accent);
+    background: var(--ps-color-accent);
   }
 }
 
@@ -131,7 +131,7 @@ gx-modal {
   --gx-scrollbar-width: 5px;
   --gx-scrollbar-height: 5px;
   --gx-scrollbar-track-color: rgba(0,0,0,.1);
-  --gx-scrollbar-thumb-color: var(--df-color-accent);
+  --gx-scrollbar-thumb-color: var(--ps-color-accent);
 }
 
 .hidden {

@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import { GxSpinner } from '@garpix/garpix-web-components-react';
 import style from './loader.module.scss';
 
-const PreloaderPage = ({ loaderClass = '', size = 'large' }) => {
+const PreloaderPage = ({ loaderClass = '', size = 'large', ...props }) => {
   const classes = classNames({
     [style['loader-layout']]: true,
     [style[`loader-${loaderClass}`]]: loaderClass,
@@ -11,7 +11,7 @@ const PreloaderPage = ({ loaderClass = '', size = 'large' }) => {
 
   return (
     <div className={classes}>
-      <GxSpinner size={size} />
+      <GxSpinner size={size} {...props} />
     </div>
   )
 }

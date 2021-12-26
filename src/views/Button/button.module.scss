@@ -1,15 +1,14 @@
 .button {
   --gx-input-height-medium: 40px;
-  --gx-color-primary-50: var(--df-color-accent);
-  --gx-color-primary-60: var(--df-color-accent-active);
+  --gx-color-primary-50: var(--ps-color-accent);
+  --gx-color-primary-60: var(--ps-color-accent-active);
   --gx-input-border-radius-medium: 6px;
   --gx-input-border-width: 2px;
   --gx-button-font-size-medium: 16px;
   --gx-input-line-height-medium: 19px;
   --gx-font-weight-semibold: 500;
-  --gx-color-danger-50: var(--df-color-red);
-  // --gx-input-line-height-medium: 1;
-  font-family: var(--df-font-family);
+  --gx-color-danger-50: var(--ps-color-red);
+  font-family: var(--ps-font-family);
   position: static;
   @media (max-width: 1100px) {
     --gx-button-font-size-medium: 15px;
@@ -23,18 +22,18 @@
 }
 
 .button:hover {
-  --gx-color-primary-60: var(--df-color-accent-hover);
+  --gx-color-primary-60: var(--ps-color-accent-hover);
 }
 
 .button:active {
-  --gx-color-primary-60: var(--df-color-accent-active);
+  --gx-color-primary-60: var(--ps-color-accent-active);
 }
 
 .button::part(base):focus,
 .button::part(base):active,
 .button::part(base):focus-visible {
-  --gx-color-primary-40: var(--df-color-accent-active);
-  --gx-color-primary-60: var(--df-color-accent-hover);
+  --gx-color-primary-40: var(--ps-color-accent-active);
+  --gx-color-primary-60: var(--ps-color-accent-hover);
   outline: none;
   box-shadow: none;
 }
@@ -42,7 +41,7 @@
 .dropdown-btn {
   width: 100%;
   --gx-button-font-size-medium: 14px;
-  --gx-color-primary-50: var(--df-border-color-hover);
+  --gx-color-primary-50: var(--ps-border-color-hover);
   --gx-spacing-large: 0px;
 
   position: relative;
@@ -53,17 +52,17 @@
 }
 
 .dropdown-btn:hover {
-  --gx-color-primary-60: var(--df-color-accent-hover);
+  --gx-color-primary-60: var(--ps-color-accent-hover);
 }
 
 .dropdown-btn:active,
 .dropdown-btn::part(base):focus {
-  --gx-color-primary-60: var(--df-color-accent-active);
+  --gx-color-primary-60: var(--ps-color-accent-active);
   box-shadow: none;
 }
 
 .dropdown-btn-open-dropdown{
-  --gx-color-primary-50: var(--df-color-accent-active);
+  --gx-color-primary-50: var(--ps-color-accent-active);
 }
 
 .dropdown-btn::part(base) {
@@ -85,7 +84,7 @@
 }
 
 .sort-btn-first::part(base) {
-  --gx-color-primary-50: var(--df-color-disabled);
+  --gx-color-primary-50: var(--ps-color-disabled);
 }
 
 .search-btn {
@@ -108,7 +107,7 @@
 }
 
 .search-btn:hover::part(base) {
-  color: var(--df-color-accent);
+  color: var(--ps-color-accent);
 }
 
 .button-edit-copy,
@@ -119,7 +118,7 @@
 
 .button-edit-copy::part(base),
 .button-edit-edit::part(base) {
-  --gx-color-primary-50: var(--df-color-disabled);
+  --gx-color-primary-50: var(--ps-color-disabled);
   min-width: 18px;
   width: 18px;
   height: 18px;
@@ -134,15 +133,15 @@
 
 .button-edit-copy::part(base):hover,
 .button-edit-edit::part(base):hover {
-  --gx-color-primary-60: var(--df-color-accent);
+  --gx-color-primary-60: var(--ps-color-accent);
 }
 
 .button-edit-copy:active,
 .button-edit-copy::part(base):focus,
 .button-edit-edit:active,
 .button-edit-edit::part(base):focus {
-  --gx-color-primary-40: var(--df-color-accent-active);
-  --gx-color-primary-60: var(--df-color-accent-hover);
+  --gx-color-primary-40: var(--ps-color-accent-active);
+  --gx-color-primary-60: var(--ps-color-accent-hover);
   box-shadow: none;
 }
 
@@ -200,15 +199,15 @@
 }
 
 .buttonDis:not([disabled='false'])[disabled]::part(base){
-  border-color: var(--df-color-disabled);
-  color: var(--df-color-white);
+  border-color: var(--ps-color-disabled);
+  color: var(--ps-color-white);
   opacity: 1;
-  background-color: var(--df-color-disabled);
+  background-color: var(--ps-color-disabled);
 }
 
 .outline:not([disabled='false'])[disabled]::part(base){
-  border-color: var(--df-color-disabled);
-  color: var(--df-color-disabled);
+  border-color: var(--ps-color-disabled);
+  color: var(--ps-color-disabled);
   opacity: 1;
   background-color: transparent;
 }
@@ -224,8 +223,8 @@
   border: none;
 }
 .excel:hover::part(base){
-  --gx-color-primary-60: var(--df-color-accent-hover);
+  --gx-color-primary-60: var(--ps-color-accent-hover);
 }
 .excel:not([disabled='false'])[disabled]::part(base){
-  color: var(--df-color-disabled);
+  color: var(--ps-color-disabled);
 }

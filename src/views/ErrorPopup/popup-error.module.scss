@@ -7,15 +7,18 @@
   left: 0;
   width: 100vw;
   height: 100vh;
+  // background-color: rgba(var(--ps-color-white), 0.5);
   background-color: rgba(#fff, 0.5);
   backdrop-filter: blur(1px);
   z-index: 1000;
 }
 
+// заменить rgba(50,50,50, 0.2)
 .error-popup {
   width: 600px;
   min-height: 100px;
   padding: 20px;
+  // background-color: var(--ps-color-white);
   background-color: #fff;
   border-radius: 4px;
   box-shadow: 0 0 20px rgba(50,50,50, 0.2);

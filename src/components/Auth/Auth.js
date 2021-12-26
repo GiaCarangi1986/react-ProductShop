@@ -94,7 +94,7 @@ const Auth = () => {
             data-cy='subBtn'
           >
             {formik.isSubmitting && (
-              <PreloaderPage loaderClass='loading-indicator' slot='icon-left' />
+              <PreloaderPage loaderClass='indicator' slot='icon-left' />
             )}
             Войти</Button>
         </Form>

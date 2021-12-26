@@ -8,12 +8,12 @@
     margin-right: 38px;
     font-family: Roboto;
     opacity: 0.5;
-    color: var(--df-color-default);
+    color: var(--ps-color-default);
     height: 100%;
     display: flex;
     align-items: center;
     &:hover {
-      color: var(--df-color-accent);
+      color: var(--ps-color-accent);
     }
     &:before {
       position: absolute;
@@ -29,7 +29,7 @@
     &_special{
       opacity: 1;
       &:before {
-        background: var(--df-color-accent);
+        background: var(--ps-color-accent);
       }
     }
   }

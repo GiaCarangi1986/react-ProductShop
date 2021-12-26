@@ -2,7 +2,7 @@
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background-color: var(--df-color-opacity-black);
+    background-color: var(--ps-color-opacity-black);
     & gx-icon {
       --icon-width: 100%;
       --icon-height: 100%;
@@ -20,12 +20,12 @@
         --gx-spacing-large: 10px;
         &:hover{
             &::part(base) {
-                background-color: var(--df-color-white);
-                color: var(--df-color-accent);
+                background-color: var(--ps-color-white);
+                color: var(--ps-color-accent);
               }
         }
         &:active{
-            background-color: var(--df-color-menu-hover);
+            background-color: var(--ps-color-menu-hover);
         }
         &::part(base) {
             font-family: Roboto;
@@ -47,7 +47,7 @@
     &_name{
       display: block;
       font-family: Roboto;
-      color: var(--df-color-default);
+      color: var(--ps-color-default);
       margin: 0 10px 0 0;
       max-width: 450px;
     }
@@ -57,7 +57,7 @@
         align-items: center;
         &:hover {
             .user_name, gx-icon {
-                color: var(--df-color-accent);
+                color: var(--ps-color-accent);
             }
         }
     }
