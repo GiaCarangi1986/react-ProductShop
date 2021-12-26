@@ -18,7 +18,7 @@
 }
 
 .loader-indicator {
-  --gx-color-primary-50: var(--ps-color-white);
+  --gx-color-primary-50: var(--ps-color-white);;
   position: absolute;
   top: 0;
   width: min-content;
@@ -33,5 +33,8 @@
 @media screen and (max-width: 1200px){
   .loader-layout {
     top: 60px;
+  }
+  .loader-indicator {
+    top: 0;
   }
 }

@@ -45,11 +45,12 @@ const signUp = () => {
     username: Yup.string()
       .nullable()
       .required(errorsMessenge.requiredField)
+      .min(4, errorsMessenge.shortString)
       .max(50, errorsMessenge.longString),
     password: Yup.string()
       .nullable()
       .required(errorsMessenge.requiredField)
-      .min(8, errorsMessenge.shortString)
+      .min(4, errorsMessenge.shortString)
       .max(50, errorsMessenge.longString),
   });
 };

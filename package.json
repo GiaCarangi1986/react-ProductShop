@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@garpix/base-api": "^1.2.0",
     "@garpix/garpix-web-components": "^0.13.0",
     "@garpix/garpix-web-components-react": "^0.13.0",
+    "@storeon/localstorage": "^1.4.0",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",

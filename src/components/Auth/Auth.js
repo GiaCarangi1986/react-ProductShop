@@ -1,24 +1,41 @@
 import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
-// import { useHistory } from 'react-router';
-// import { useStoreon } from 'storeon/react';
+import { useNavigate } from 'react-router';
+import { useStoreon } from 'storeon/react';
 import { Button, Fieldset, Form, Input, Logo, ErrorText, PreloaderPage } from '../../views';
-import {
-  // handingErrors,
-  deleteSpaces, checkValuesFields
-} from '../../utils'
+import { handingErrors, deleteSpaces, checkValuesFields } from '../../utils'
 import * as schema from '../../schema';
-// import { PATHS } from '../../const';
-// import api from '../../api';
+import { PATHS } from '../../const';
+import api from '../../api';
 
 import style from './auth.module.scss';
 
 const Auth = () => {
   const [disabledBtn, setDisabledBtn] = useState(true)
-  // const history = useHistory();
+  const { dispatch, currentUser } = useStoreon('currentUser');
+  const navigate = useNavigate();
 
   const onSubmit = (values, { resetForm, setSubmitting, setFieldError }) => {
-    console.log(values);
+    api.loginUser(values)
+      .then((data) => {
+        setSubmitting(false);
+        resetForm();
+        dispatch('user/save', {
+          first_name: data.first_name || '',
+          last_name: data.last_name || '',
+          ...data
+        });
+        navigate(PATHS.services_classifier.path);
+      })
+      .catch((err) => {
+        const { response = null } = err
+        if (response) {
+          const errResponse = handingErrors(response);
+          setFieldError([errResponse.key], errResponse.val)
+        }
+        setDisabledBtn(false)
+        setSubmitting(false)
+      })
   };
 
   const formik = useFormik({
@@ -31,6 +48,13 @@ const Auth = () => {
     onSubmit
   })
 
+  const handleBlur = e => {
+    const { name } = e.target;
+    const value = deleteSpaces(formik.values[name])
+    formik.handleBlur(e)
+    formik.setFieldValue([name], value)
+  }
+
   useEffect(() => {
     if (formik.values) {
       const errorsList = { ...formik.errors };
@@ -41,12 +65,11 @@ const Auth = () => {
     }
   }, [formik])
 
-  const handleBlur = e => {
-    const { name } = e.target;
-    const value = deleteSpaces(formik.values[name])
-    formik.handleBlur(e)
-    formik.setFieldValue([name], value)
-  }
+  useEffect(() => {
+    if (currentUser) {
+      navigate(PATHS.services_classifier.path)
+    }
+  }, [currentUser])
 
   return (
     <section className={style['auth-layout']}>
