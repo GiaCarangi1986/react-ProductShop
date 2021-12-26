@@ -18,7 +18,11 @@
 }
 
 .loader-indicator {
-  --gx-color-primary-50: red;
+  --gx-color-primary-50: var(--ps-color-white);
+  position: absolute;
+  top: 0;
+  width: min-content;
+  left: 10px;
 }
 
 .loader-indicator gx-spinner::part(base) {

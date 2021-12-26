@@ -88,15 +88,19 @@ const Auth = () => {
               </ErrorText>
             ) : null}
           </div>
-          <Button
-            disabled={disabledBtn}
-            type='submit'
-            data-cy='subBtn'
-          >
-            {formik.isSubmitting && (
-              <PreloaderPage loaderClass='indicator' slot='icon-left' />
-            )}
-            Войти</Button>
+          <div className={style.btn_wrapper}>
+            <Button
+              disabled={disabledBtn}
+              type='submit'
+              data-cy='subBtn'
+              className='auth'
+            >
+              {formik.isSubmitting && (
+                <PreloaderPage loaderClass='indicator' slot='icon-left' />
+              )}
+              Войти
+            </Button>
+          </div>
         </Form>
       </div>
     </section>

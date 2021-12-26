@@ -38,6 +38,15 @@
   box-shadow: none;
 }
 
+.auth{
+  width: 45%;
+  position: relative;
+}
+
+.auth::part(base){
+  width: 100%;
+}
+
 .dropdown-btn {
   width: 100%;
   --gx-button-font-size-medium: 14px;

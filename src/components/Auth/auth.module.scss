@@ -29,18 +29,17 @@
   margin-bottom: 20px;
 }
 
-.auth gx-button {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
 .auth gx-input {
   margin-bottom: 20px;
 }
 
 .auth gx-input::part(form-control) {
   width: 320px;
+}
+
+.btn_wrapper{
+  display: flex;
+  justify-content: center;
 }
 
 .error {
