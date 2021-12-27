@@ -1,5 +1,5 @@
 import { createStoreon } from 'storeon';
-import { persistState } from '@storeon/localstorage';
+import persistState from 'storeon-sessionstorage'
 
 const errorFn = store => {
   store.on('@init', () => ({ errorPopup: null }));
