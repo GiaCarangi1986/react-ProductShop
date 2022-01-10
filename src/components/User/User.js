@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import {
-  GxDropdown,
   GxMenu,
   GxMenuItem,
 } from '@garpix/garpix-web-components-react'
-import { Button, Icon } from '../../views'
+import { Button, Icon, Dropdown } from '../../views'
 import { MODAL_TYPES } from '../../const'
 import { useStoreon } from 'storeon/react';
 import style from './user.module.scss'
@@ -36,7 +35,7 @@ const User = () => {
       <div className={style.user}>
         <Icon icon='user' nameOfStyle='user' />
       </div>
-      <GxDropdown distance='20' className={style.user_dropdown}>
+      <Dropdown distance='20' className='user' withoutBase>
         <Button slot='trigger' variant='text' className='user'>
           <div className={style.user_title}>
             <span className={style.user_name}>{userFullName}</span>
@@ -54,7 +53,7 @@ const User = () => {
             </Button>
           </GxMenuItem>
         </GxMenu>
-      </GxDropdown>
+      </Dropdown>
     </div>
   )
 }
