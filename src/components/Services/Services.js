@@ -1,6 +1,6 @@
 import React from 'react'
 import { FetcherList } from '@garpix/fetcher';
-import ServicesTable from '../ServicesTable';
+// import ServicesTable from '../ServicesTable';
 
 import api from '../../api'
 import style from './services.module.scss';
@@ -12,11 +12,14 @@ const Services = () => {
         <FetcherList
           isScrollTop={false}
           isHistoryPush={false}
-          api={api.getServicesList}
+          api={api.getCheckList}
+          initFilter={{ page_size: 10 }}
+          match={{ name: 'name' }}
+          location
         >
           {(props) => {
             // return <ServicesTable {...props} />
-            return null
+            return <div>Типа лист чеков</div>
           }}
         </FetcherList>
       </section>

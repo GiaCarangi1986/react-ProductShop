@@ -28,6 +28,7 @@ export const LoginUser = (data) => {
 export const CheckList = (status = 2) => {
   if (status === 1) {
     return { // лист чеков
+      check: 'check'
     }
   }
   throw {
