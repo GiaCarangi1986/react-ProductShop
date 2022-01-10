@@ -1,0 +1,20 @@
+.menu_user{
+  --gx-spacing-large: 10px;
+  width: 196px;
+}
+
+.menu_item_user{
+  --gx-spacing-large: 10px;
+  &:hover{
+      &::part(base) {
+          background-color: var(--ps-color-white);
+          color: var(--ps-color-accent);
+        }
+  }
+  &:active{
+      background-color: var(--ps-color-menu-hover);
+  }
+  &::part(base) {
+      font-family: Roboto;
+    }
+}

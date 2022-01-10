@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {
-  GxMenu,
-  GxMenuItem,
-} from '@garpix/garpix-web-components-react'
-import { Button, Icon, Dropdown } from '../../views'
+import { Button, Icon, Dropdown, Menu } from '../../views'
 import { MODAL_TYPES } from '../../const'
 import { useStoreon } from 'storeon/react';
 import style from './user.module.scss'
@@ -13,9 +9,16 @@ const User = () => {
   const [userFullName, setUserFullName] = useState(null)
 
   const logout = () => {
-    debugger
     dispatch('modal/toggle', { modal: MODAL_TYPES.logout })
   }
+
+  const MENU_OPTIONS = [
+    {
+      func: logout,
+      text: 'Выйти',
+      value: 'logout',
+    },
+  ]
 
   useEffect(() => {
     if (currentUser) {
@@ -46,13 +49,7 @@ const User = () => {
             />
           </div>
         </Button>
-        <GxMenu className={style.user_menu}>
-          <GxMenuItem className={style.user_menu_item}>
-            <Button variant='text' onClick={logout}>
-              Выйти
-            </Button>
-          </GxMenuItem>
-        </GxMenu>
+        <Menu styleForMenu='user' styleForMenuItem='user' items={MENU_OPTIONS} />
       </Dropdown>
     </div>
   )

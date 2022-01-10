@@ -14,6 +14,7 @@ import Modal from './Modal'
 import PreloaderPage from './Preloader/PreloaderPage';
 import Select from './Select'
 import TextArea from './TextArea'
+import Menu from './Menu';
 
 export {
   Button,
@@ -32,5 +33,6 @@ export {
   Modal,
   PreloaderPage,
   Select,
-  TextArea
+  TextArea,
+  Menu,
 }
