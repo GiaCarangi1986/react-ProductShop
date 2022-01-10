@@ -1,5 +1,5 @@
 import React from 'react'
-import { FetcherList } from '@garpix/fetcher';
+import { FetcherList } from '@garpix/fetcher/fetcher-list/react-router';
 // import ServicesTable from '../ServicesTable';
 
 import api from '../../api'
@@ -14,8 +14,6 @@ const Services = () => {
           isHistoryPush={false}
           api={api.getCheckList}
           initFilter={{ page_size: 10 }}
-          match={{ name: 'name' }}
-          location
         >
           {(props) => {
             // return <ServicesTable {...props} />
