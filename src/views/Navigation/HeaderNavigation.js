@@ -6,7 +6,7 @@ import style from './navigation.module.scss'
 
 const HeaderNavigation = () => {
   const location = useLocation()
-  const { path } = PATHS.services_classifier
+  const { path } = PATHS.check_operations
 
   const mainActiveClasses = classNames({
     [style.navigation_link_special]: location.pathname === path
@@ -16,18 +16,18 @@ const HeaderNavigation = () => {
     <ul className={style.navigation} data-cy='ul'>
       <li>
         <NavLink
-          to={PATHS.services_classifier.path}
+          to={PATHS.check_operations.path}
           className={style.navigation_link}
           activeClassName={mainActiveClasses}>
-          Классификатор услуг
+          Операции с чеками
         </NavLink>
       </li>
       <li>
         <NavLink
-          to={PATHS.history_table.path}
+          to={PATHS.crud_operations.path}
           className={style.navigation_link}
           activeClassName={style.navigation_link_special}>
-          История изменений
+          Работа с таблицами
         </NavLink>
       </li>
     </ul>

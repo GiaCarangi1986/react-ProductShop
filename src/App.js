@@ -33,6 +33,12 @@ const App = () => {
           exact={PATHS.auth.exact}
           element={<AuthPage />}
         />
+        <Route
+          strict
+          path={PATHS.check_operations.path}
+          exact={PATHS.check_operations.exact}
+          element={<AuthPage />}
+        />
       </Routes >
       {errorPopup ? <ErrorPopup /> : null}
     </>

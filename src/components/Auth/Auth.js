@@ -25,7 +25,7 @@ const Auth = () => {
           last_name: data.last_name || '',
           ...data
         });
-        navigate(PATHS.services_classifier.path);
+        navigate(PATHS.check_operations.path);
       })
       .catch((err) => {
         const { response = null } = err
@@ -67,7 +67,7 @@ const Auth = () => {
 
   useEffect(() => {
     if (currentUser) {
-      navigate(PATHS.services_classifier.path)
+      navigate(PATHS.check_operations.path)
     }
   }, [currentUser])
 

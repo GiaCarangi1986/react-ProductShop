@@ -1,14 +1,14 @@
 export const PATHS = {
-  services_classifier: {
+  check_operations: { // табл со всеми чеками (для кассира доступны ток отложенные, для остальных - полный список), будет кнопка добавить и т п
     path: '/',
     exact: false,
   },
-  auth: {
+  auth: { // авторизация
     path: '/auth',
     exact: true,
   },
-  history_table: {
-    path: '/history',
+  crud_operations: { // CRUD операции по работе с категориями, продуктами, поставками
+    path: '/crud',
     exact: false,
   },
 }
