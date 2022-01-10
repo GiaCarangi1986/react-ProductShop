@@ -3,18 +3,20 @@
   width: 196px;
 }
 
-.menu_item_user{
+.menu-item_user{
   --gx-spacing-large: 10px;
   &:hover{
       &::part(base) {
           background-color: var(--ps-color-white);
           color: var(--ps-color-accent);
+          border: none;
         }
   }
   &:active{
-      background-color: var(--ps-color-menu-hover);
+    background-color: var(--ps-color-menu-hover);
   }
   &::part(base) {
       font-family: Roboto;
+      padding: 0;
     }
 }
