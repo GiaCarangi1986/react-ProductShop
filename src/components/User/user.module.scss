@@ -7,12 +7,6 @@
       --icon-width: 100%;
       --icon-height: 100%;
     }
-    &_button{
-        --gx-spacing-large: 10px;
-        &::part(base) {
-          box-shadow: none;
-        }
-    }
     &_menu{ 
         --gx-spacing-large: 10px;
         width: 196px;
@@ -55,6 +49,7 @@
         display: flex;
         flex-direction: row;
         align-items: center;
+        height: 100%;
         &:hover {
             .user_name, gx-icon {
                 color: var(--ps-color-accent);

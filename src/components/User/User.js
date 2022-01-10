@@ -3,16 +3,33 @@ import {
   GxDropdown,
   GxMenu,
   GxMenuItem,
-  GxButton,
 } from '@garpix/garpix-web-components-react'
 import { Button, Icon } from '../../views'
 import { MODAL_TYPES } from '../../const'
+import { useStoreon } from 'storeon/react';
 import style from './user.module.scss'
 
 const User = () => {
+  const { dispatch, currentUser } = useStoreon('currentUser')
   const [userFullName, setUserFullName] = useState(null)
 
-  const logout = () => console.log('logout');
+  const logout = () => {
+    debugger
+    dispatch('modal/toggle', { modal: MODAL_TYPES.logout })
+  }
+
+  useEffect(() => {
+    if (currentUser) {
+      const firstName = currentUser.first_name
+      const lastName = currentUser.last_name
+
+      if (firstName !== '' && lastName !== '') {
+        setUserFullName(`${lastName} ${firstName}`)
+      } else {
+        setUserFullName('Неизвестный пользователь')
+      }
+    }
+  }, [currentUser])
 
   return (
     <div className={style.user_container}>
@@ -20,7 +37,7 @@ const User = () => {
         <Icon icon='user' nameOfStyle='user' />
       </div>
       <GxDropdown distance='20' className={style.user_dropdown}>
-        <GxButton slot='trigger' variant='text' className={style.user_button}>
+        <Button slot='trigger' variant='text' className='user'>
           <div className={style.user_title}>
             <span className={style.user_name}>{userFullName}</span>
             <Icon
@@ -29,7 +46,7 @@ const User = () => {
               className={style.user_icon}
             />
           </div>
-        </GxButton>
+        </Button>
         <GxMenu className={style.user_menu}>
           <GxMenuItem className={style.user_menu_item}>
             <Button variant='text' onClick={logout}>

@@ -1,11 +1,11 @@
 import BaseApi from '@garpix/base-api'
-import { LoginUser, CheckList } from './mochData'
+import { LoginUser, CheckList, LogoutUser } from './mochData'
 // import {} from './serializer'
 
 class Api extends BaseApi {
   async loginUser(params) {
     try {
-      const res = await this.post('/api/login_user/', params)
+      const res = await this.post('/api/login/', params)
       return res.data
     }
     catch (err) {
@@ -15,11 +15,21 @@ class Api extends BaseApi {
 
   async getCheckList(params = {}) {
     try {
-      const res = await this.post('/api/get_check_list/', params)
+      const res = await this.post('/api/check_list/', params)
       return res.data
     }
     catch (err) {
       return CheckList(1) // 1 - норм, 2 - ошибка
+    }
+  }
+
+  async logoutUser() {
+    try {
+      const res = await this.post('/api/logout/')
+      return res.data
+    }
+    catch (err) {
+      return LogoutUser(1) // 1 - норм, 2 - ошибка
     }
   }
 }

@@ -1,0 +1,161 @@
+.modal-title, .modal-centered__title {
+  margin-top: 40px;
+  margin-bottom: 33px;
+  margin-left: 20px;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 38px;
+}
+
+.modal-centered__title {
+  margin: 0;
+}
+
+.modal-btns,
+.modal-btn-ok {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.settings-checkbox {
+  width: 100%;
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 11px 43px 11px 18px;
+  border-radius: 4px;
+}
+
+.settings-checkbox-items{
+  padding-left: 43px;
+}
+
+.settings-checkbox__line {
+  display: block;
+  height: 1px;
+  background-color: var(--df-background-color);
+}
+
+.settings-form,
+.service-form {
+  margin: 0 20px;
+}
+
+.settings-form {
+  max-width: 435px;
+}
+
+.settings-list {
+  counter-reset: counter;
+  overflow-y: auto;
+  height: calc(100vh - 270px);
+  margin-right: -40px;
+  margin-left: -25px;
+}
+.settings-list__item {
+  counter-increment: counter;
+  position: relative;
+}
+
+.settings-list__item::before {
+  content: counter(counter);
+  position: absolute;
+  top: 50%;
+  left: -3.5px;
+  width: 25px;
+  height: 25px;
+  display: inline-flex;
+  transform: translateY(-50%);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+  color: var(--df-color-disabled);
+  justify-content: center;
+  align-items: center;
+}
+
+.settings-checkbox:hover {
+  background-color: var(--df-color-menu-hover);
+}
+
+.btns-group {
+  margin-top: 20px;
+  margin-right: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.btns-action {
+  --gx-spacing-large: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 87px;
+}
+
+.btns-action gx-button::part(base) {
+  width: 25px;
+  min-width: 25px;
+  height: 25px;
+  color: var(--df-border-color-hover);
+}
+
+.btns-action gx-button::part(base):enabled:hover {
+  color: var(--df-color-accent);
+}
+
+.btns-action gx-button:last-child:hover {
+  cursor: grab;
+}
+
+.btns-action gx-button:last-child:active {
+  cursor: grabbing;
+}
+
+.btns-action gx-icon {
+  width: 25px;
+  height: 25px;
+}
+
+.service-grid,
+.service-col {
+  --gx-grid-column-padding: 0;
+  --gx-grid-padding: 0;
+}
+
+.service-grid {
+  margin-bottom: 10px;
+}
+
+.service-col {
+  padding-bottom: 20px;
+}
+
+.service-col:first-child {
+  padding-right: 10px;
+}
+
+.service-col:last-child {
+  padding-left: 10px;
+}
+
+.service-col_end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.service-btm {
+  margin-top: 30px;
+}
+
+.service-col-special {
+  padding-bottom: 20px;
+  padding-left: 0;
+}
+.service-col-special gx-input{
+  width: 387.6px;
+}

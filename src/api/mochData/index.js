@@ -1,6 +1,7 @@
 export const ERROR_MESSAGE = {
   uncorrect_login_data: 'Неверный логин и/или пароль',
   uncorrect_getting_status: 'Список чеков не удалось получить',
+  uncorrect_logout: 'Не удалось разлогинить пользователя',
 }
 
 const CORRECT_USER_DATA = {
@@ -34,6 +35,18 @@ export const CheckList = (status = 2) => {
   throw {
     response: {
       data: { non_field_errors: [ERROR_MESSAGE.uncorrect_getting_status] },
+      status: 404,
+    }
+  }
+}
+
+export const LogoutUser = (status = 1) => {
+  if (status === 1) {
+    return {}
+  }
+  throw {
+    response: {
+      data: { non_field_errors: [ERROR_MESSAGE.uncorrect_logout] },
       status: 404,
     }
   }

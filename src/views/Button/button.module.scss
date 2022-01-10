@@ -189,6 +189,13 @@
   margin-right: 17px;
 }
 
+.user{
+  --gx-spacing-large: 10px;
+  &::part(base) {
+    box-shadow: none;
+  }
+}
+
 @media (max-width: 1200px) {
   .button {
     --gx-input-height-medium: 35px;

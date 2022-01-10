@@ -20,9 +20,19 @@ const userInfo = (store) => {
   store.on('user/reset', () => ({ currentUser: null }));
 }
 
+const modalFn = store => {
+  store.on('@init', () => ({ modal: null }));
+  store.on('modal/toggle', ({ }, { modal, ...params }) => ({
+    modal,
+    ...params
+  }));
+  store.on('modal/close', () => ({ modal: null }));
+};
+
 const storeonParams = [
   errorFn,
   userInfo,
+  modalFn,
   persistState([
     'currentUser',
   ]),

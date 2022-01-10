@@ -1,13 +1,13 @@
 import React from 'react'
 import { Layout } from '../views';
-import Services from '../components/Services'
+import CheckOptions from '../components/CheckOptions'
 
-const ServicesClassifier = () => {
+const CheckOptionsPage = () => {
   return (
     <Layout>
-      <Services />
+      <CheckOptions />
     </Layout>
   )
 }
 
-export default ServicesClassifier;
+export default CheckOptionsPage;

@@ -1,11 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react';
 import { FetcherList } from '@garpix/fetcher/fetcher-list/react-router';
+import { useNavigate } from 'react-router';
+import { useStoreon } from 'storeon/react';
+import { PATHS } from '../../const';
 // import ServicesTable from '../ServicesTable';
 
 import api from '../../api'
 import style from './services.module.scss';
 
-const Services = () => {
+const CheckOptions = () => {
+  const { currentUser } = useStoreon('currentUser');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!currentUser) {
+      navigate(PATHS.auth.path)
+    }
+  }, [currentUser])
+
   return (
     <>
       <section className={style.services}>
@@ -25,4 +37,4 @@ const Services = () => {
   )
 }
 
-export default Services;
+export default CheckOptions;
