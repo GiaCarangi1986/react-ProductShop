@@ -11,8 +11,8 @@ const Header = () => {
     <header className={style.header}>
       <div className={style.header__column}>
         <Logo icon='logo' variant='header' />
-        <nav className={style.header__navigation} data-cy='nav'>
-          <HeaderNavigation/>
+        <nav className={style.header__navigation}>
+          <HeaderNavigation />
         </nav>
         <User />
       </div>

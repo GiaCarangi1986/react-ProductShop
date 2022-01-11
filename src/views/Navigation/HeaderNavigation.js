@@ -15,7 +15,7 @@ const HeaderNavigation = () => {
   }
 
   return (
-    <ul className={style.navigation} data-cy='ul'>
+    <ul className={style.navigation}>
       <li>
         <NavLink
           to={PATHS.check_operations.path}

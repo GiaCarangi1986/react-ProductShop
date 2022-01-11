@@ -6,6 +6,7 @@ import { AuthPage, CheckOperationsPage } from './pages'
 import { ERROR_TYPES, PATHS } from './const'
 import { useNetwork } from './utils'
 import { ErrorPopup } from './views';
+import { ModalLogout } from './components/Modal'
 
 const App = () => {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ const App = () => {
 
   return (
     <>
-      <Routes >
+      <Routes>
         <Route
           strict
           path={PATHS.auth.path}
@@ -45,7 +46,8 @@ const App = () => {
           exact={PATHS.crud_operations.exact}
           element={<CheckOperationsPage />}
         />
-      </Routes >
+      </Routes>
+      <ModalLogout />
       {errorPopup ? <ErrorPopup /> : null}
     </>
   )

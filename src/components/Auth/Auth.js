@@ -79,12 +79,10 @@ const Auth = () => {
           className={style['auth-form']}
           onGx-submit={formik.handleSubmit}
           novalidate
-          data-cy='form'
         >
           <Fieldset error={formik.errors.username} touched={formik.touched.username}>
             <Input
               label='Логин'
-              data-cy='username'
               nameOfStyle='input-label'
               value={formik.values.username}
               name='username'
@@ -95,7 +93,6 @@ const Auth = () => {
           <Fieldset error={formik.errors.password} touched={formik.touched.password}>
             <Input
               label='Пароль'
-              data-cy='password'
               type='password'
               nameOfStyle='input-label'
               value={formik.values.password}
@@ -115,7 +112,6 @@ const Auth = () => {
             <Button
               disabled={disabledBtn}
               type='submit'
-              data-cy='subBtn'
               className='auth'
             >
               {formik.isSubmitting && (

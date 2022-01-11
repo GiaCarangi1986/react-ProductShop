@@ -44,7 +44,6 @@ const Dropdown = ({
         slot='trigger'
         variant='text'
         className='dropdown-btn'
-        data-cy='btn'
         open={open}
       >
         {text}

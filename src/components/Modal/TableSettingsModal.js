@@ -200,7 +200,6 @@
 //         <Form
 //           className={style['settings-form']}
 //           onGx-submit={formik.handleSubmit}
-//           data-cy='form'
 //         >
 //           <div className={style['settings-checkbox']}>
 //             <Checkbox
@@ -209,7 +208,6 @@
 //               onGx-change={(e) => {
 //                 chooseAllCheck(e.target.checked)
 //               }}
-//               data-cy='checkbox'
 //             >
 //               Все
 //             </Checkbox>
@@ -237,7 +235,6 @@
 //                     checked={Boolean(formik.values[value.name])}
 //                     value={formik.values[value.name]}
 //                     name={value.name}
-//                     data-cy='checkbox'
 //                   >
 //                     {value.label}
 //                   </Checkbox>
@@ -246,7 +243,6 @@
 //                       variant='text'
 //                       disabled={props.key === 0 || !formik.values[value.name]}
 //                       onClick={() => move(props.key)}
-//                       data-cy='btn'
 //                     >
 //                       <Icon icon='arrowUp' />
 //                     </Button>
@@ -257,7 +253,6 @@
 //                         !formik.values[value.name]
 //                       }
 //                       onClick={() => move(props.key, 1)}
-//                       data-cy='btn'
 //                     >
 //                       <Icon icon='arrowDown' />
 //                     </Button>
@@ -280,11 +275,11 @@
 //                 Выберите хотя бы 1 поле
 //               </ErrorText>
 //             ) : null}
-//             <Button type='reset' disabled={formik.isSubmitting} outline onClick={() => initialValues(true)} data-cy='btn'
+//             <Button type='reset' disabled={formik.isSubmitting} outline onClick={() => initialValues(true)}
 //             >
 //               Сбросить
 //             </Button>
-//             <Button type='submit' disabled={formik.isSubmitting || isUncheckedAll || identityVerification()} data-cy='btn' buttonDis
+//             <Button type='submit' disabled={formik.isSubmitting || isUncheckedAll || identityVerification()} buttonDis
 //             >
 //               Применить
 //             </Button>

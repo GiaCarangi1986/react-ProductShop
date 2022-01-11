@@ -196,7 +196,7 @@
   }
 }
 
-.logout{
+.btn_menu_logout{
   width: 100%;
   --gx-spacing-large: 10px;
   &::part(base){
@@ -217,6 +217,10 @@
         color: var(--ps-color-menu-hover);
       }
   }
+}
+
+.btn_choose_logout{
+  position: relative;
 }
 
 @media (max-width: 1200px) {

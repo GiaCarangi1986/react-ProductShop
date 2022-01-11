@@ -9,7 +9,6 @@ const User = () => {
   const [userFullName, setUserFullName] = useState(null)
 
   const logout = () => {
-    console.log('here');
     dispatch('modal/toggle', { modal: MODAL_TYPES.logout })
   }
 

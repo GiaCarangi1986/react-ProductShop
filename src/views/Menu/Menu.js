@@ -9,10 +9,6 @@ const Menu = ({ styleForMenu = '', styleForMenuItem = '', items = [], ...props }
     [style.menu]: true,
     [style[`menu_${styleForMenu}`]]: styleForMenu,
   })
-  const classesMenuItem = classNames({
-    [style['menu-item']]: true,
-    [style[`menu-item_${styleForMenuItem}`]]: styleForMenuItem,
-  })
 
   if (items.length === 0) {
     return null
@@ -22,7 +18,7 @@ const Menu = ({ styleForMenu = '', styleForMenuItem = '', items = [], ...props }
     <GxMenu className={classesMenu} {...props}>
       {items && items.map(item => {
         return (
-          <Button variant='text' onClick={item.func} className='logout' key={item.value}>
+          <Button variant='text' onClick={item.func} className='btn_menu_logout' key={item.value}>
             {item.text}
           </Button>
         )
