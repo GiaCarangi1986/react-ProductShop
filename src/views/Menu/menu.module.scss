@@ -2,21 +2,3 @@
   --gx-spacing-large: 10px;
   width: 196px;
 }
-
-.menu-item_user{
-  --gx-spacing-large: 10px;
-  &:hover{
-      &::part(base) {
-          background-color: var(--ps-color-white);
-          color: var(--ps-color-accent);
-          border: none;
-        }
-  }
-  &:active{
-    background-color: var(--ps-color-menu-hover);
-  }
-  &::part(base) {
-      font-family: Roboto;
-      padding: 0;
-    }
-}

@@ -1,5 +1,5 @@
 import React from 'react'
-import { GxMenuItem, GxMenu } from '@garpix/garpix-web-components-react';
+import { GxMenu } from '@garpix/garpix-web-components-react';
 import { Button } from '..';
 import classNames from 'classnames';
 import style from './menu.module.scss';
@@ -22,11 +22,9 @@ const Menu = ({ styleForMenu = '', styleForMenuItem = '', items = [], ...props }
     <GxMenu className={classesMenu} {...props}>
       {items && items.map(item => {
         return (
-          <GxMenuItem className={classesMenuItem} key={item.value} value={item.value}>
-            <Button variant='text' onClick={item.func} className='logout'>
-              {item.text}
-            </Button>
-          </GxMenuItem>
+          <Button variant='text' onClick={item.func} className='logout' key={item.value}>
+            {item.text}
+          </Button>
         )
       })}
     </GxMenu>
