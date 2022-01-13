@@ -13,3 +13,13 @@
         --icon-height: 100%;
     }
 }
+
+@media (max-width: 1024px){
+    .logo {
+        &-header{
+            min-width: 75px;
+            min-height: 30px;
+            margin-left: 30px;
+        }
+    }
+}

@@ -32,6 +32,14 @@ const HeaderNavigation = () => {
           Работа с таблицами
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          to={PATHS.reports.path}
+          className={setStyle}
+        >
+          Отчеты
+        </NavLink>
+      </li>
     </ul>
   )
 }

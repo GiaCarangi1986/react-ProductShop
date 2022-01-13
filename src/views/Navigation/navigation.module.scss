@@ -37,3 +37,14 @@
     }
   }
 }
+
+@media (max-width: 1024px) {
+  .navigation {
+    margin-left: 50px;
+    &_link{
+      font-size: 14px;
+      margin-right: 33px;
+      max-width: 130px;
+    }
+  }
+}

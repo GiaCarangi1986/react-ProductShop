@@ -46,6 +46,12 @@ const App = () => {
           exact={PATHS.crud_operations.exact}
           element={<CheckOperationsPage />}
         />
+        <Route
+          strict
+          path={PATHS.reports.path}
+          exact={PATHS.reports.exact}
+          element={<CheckOperationsPage />}
+        />
       </Routes>
       <ModalLogout />
       {errorPopup ? <ErrorPopup /> : null}

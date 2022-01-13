@@ -11,6 +11,10 @@ export const PATHS = {
     path: '/crud',
     exact: false,
   },
+  reports: { // вкладка с отчетами
+    path: '/reports',
+    exact: false,
+  },
 }
 
 export const MODAL_TYPES = {
@@ -525,3 +529,7 @@ export const BASE_TIME = [
     name: 'month',
   },
 ]
+
+export const SCREENS = {
+  middle: "(max-width: 1024px)",
+};
