@@ -3,7 +3,7 @@ import { FetcherList } from '@garpix/fetcher/fetcher-list/react-router';
 import { useNavigate } from 'react-router';
 import { useStoreon } from 'storeon/react';
 import { PATHS } from '../../const';
-// import ServicesTable from '../ServicesTable';
+import CheckTable from '../CheckTable';
 
 import api from '../../api'
 import style from './services.module.scss';
@@ -28,8 +28,7 @@ const CheckOptions = () => {
           initFilter={{ page_size: 10 }}
         >
           {(props) => {
-            // return <ServicesTable {...props} />
-            return <div>Типа лист чеков</div>
+            return <CheckTable {...props} />
           }}
         </FetcherList>
       </section>

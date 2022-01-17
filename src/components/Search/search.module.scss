@@ -1,0 +1,8 @@
+.search {
+  display: block;
+  width: 281px;
+}
+
+.search gx-input::part(input) {
+  width: 100%;
+}

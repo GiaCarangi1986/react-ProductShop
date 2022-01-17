@@ -9011,6 +9011,11 @@ react-media@^1.10.0:
     json2mq "^0.2.0"
     prop-types "^15.5.10"
 
+react-movable@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/react-movable/-/react-movable-3.0.2.tgz#45e6bd95db9f8340a114ddc8860dc9994719e94a"
+  integrity sha512-dDDYm3CRnDy8YLXMyyaR2MbcQiTwhPOP+dfl3fZukiI6mN1flVatcjSozT7HXjVk2yHwBC67ZOWGVAmjY6F/dA==
+
 react-refresh@^0.11.0:
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.11.0.tgz#77198b944733f0f1f1a90e791de4541f9f074046"

@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router';
 import { Routes, Route } from 'react-router-dom'
 import { useStoreon } from 'storeon/react'
-import { AuthPage, CheckOperationsPage } from './pages'
+import { AuthPage, CheckOperationsPage, CrudOperationsPage, ReportPage } from './pages'
 import { ERROR_TYPES, PATHS } from './const'
 import { useNetwork } from './utils'
 import { ErrorPopup } from './views';
@@ -44,13 +44,13 @@ const App = () => {
           strict
           path={PATHS.crud_operations.path}
           exact={PATHS.crud_operations.exact}
-          element={<CheckOperationsPage />}
+          element={<CrudOperationsPage />}
         />
         <Route
           strict
           path={PATHS.reports.path}
           exact={PATHS.reports.exact}
-          element={<CheckOperationsPage />}
+          element={<ReportPage />}
         />
       </Routes>
       <ModalLogout />

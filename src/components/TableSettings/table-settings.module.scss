@@ -1,0 +1,75 @@
+.table-settings {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.table-settings__left {
+  width: 65%;
+  display: flex;
+  flex-direction: row;
+  min-width: 260px;
+  @media (max-width: 1020px) {
+    flex-wrap: wrap;
+  }
+}
+
+.table-settings-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  // min-height: 35px;
+}
+
+.table-settings-col_none{
+  width: 175.55px;
+  @media (max-width: 1100px) {
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+  min-height: 35px;
+}
+
+.table-settings__right{
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  @media (max-width: 990px) {
+    flex-wrap: wrap;
+  }
+}
+
+.table-settings__right .table-settings-col {
+  margin-right: 0;
+  margin-left: 20px;
+  @media (max-width: 1100px) {
+    margin-left: 10px;
+  }
+}
+
+.table-settings-col__full {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.table-settings__right gx-button[variant='text'] {
+  --gx-spacing-large: 0;
+}
+
+@media (max-width: 1500px) {
+
+  .table-settings {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 990px) {
+  .table-settings__right_btn-second{
+    order: 1;
+  }
+}
