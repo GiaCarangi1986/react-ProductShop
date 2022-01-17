@@ -1,18 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import classNames from 'classnames'
-import { useStoreon } from 'storeon/react'
 import { dataStates } from '@garpix/fetcher'
-// import AddOrUpdateServiceModal from '../AddOrUpdateServiceModal';
 import { TableSettingsModal } from '../Modal'
 import Table from './Table'
 import TableSettings from '../TableSettings'
 import { Button, Icon, PreloaderPage } from '../../views'
 import {
-  MODAL_TYPES,
   TABLE_EVENT_TYPES,
   WIDTH_COL,
 } from '../../const'
-import api from '../../api'
 
 import style from './check_table.module.scss'
 
@@ -20,19 +16,18 @@ const CheckTable = ({
   count,
   results = [],
   filterParams = {},
-  loadData = () => { },
   showMore = () => { },
   status,
   otherData = {},
   isNext,
-  updateElement = () => { },
 }) => {
+
   const [eventType, setEventType] = useState(null)
   const [colsTrue, setColsTrue] = useState([])
   const [cols, setCols] = useState(null)
   const [statusLoading, setStatusLoading] = useState(status)
 
-  useEffect(() => {
+  useEffect(() => { // ok
     setStatusLoading(status)
   }, [status])
 
@@ -135,7 +130,6 @@ const CheckTable = ({
               <Button
                 type='button'
                 onClick={() => {
-                  // dispatch('params/update', { pageSize: otherData?.count_all || count })
                   setEventType(TABLE_EVENT_TYPES.allLoaded)
                 }}
                 outline
@@ -147,15 +141,6 @@ const CheckTable = ({
         ) : null}
       </div>
       {statusLoading === dataStates.loading && eventType !== TABLE_EVENT_TYPES.scroll ? <PreloaderPage /> : null}
-      {/* <AddOrUpdateServiceModal
-        results={results}
-        filterParams={filterParams}
-        setEventType={setEventType}
-        updateElement={updateElement}
-        getFilters={() => getFilters({ params: fpFilters })}
-        setAddedFilters={setAddedFilters}
-        loadData={loadData}
-      /> */}
       <TableSettingsModal setEventType={setEventType} setStatusLoading={setStatusLoading} />
     </>
   )

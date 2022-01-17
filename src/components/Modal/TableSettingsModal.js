@@ -3,26 +3,19 @@ import classNames from 'classnames'
 import { useFormik } from 'formik'
 import { useStoreon } from 'storeon/react'
 import { List, arrayMove } from 'react-movable'
-import { dataStates } from '@garpix/fetcher'
 import { Button, Checkbox, ErrorText, Icon, Form, Modal } from '../../views'
 import {
-  ERROR_TYPES,
   MODAL_TYPES,
   SETTINGS_ITEMS,
-  TABLE_EVENT_TYPES
 } from '../../const'
 
 import style from './modal.module.scss'
-import api from '../../api'
 
 const isEqual = require('react-fast-compare');
 
 const TableSettingsModal = ({
-  setEventType = () => { },
-  setStatusLoading = () => { }
 }) => {
   const {
-    dispatch,
     modal,
   } = useStoreon(
     'modal',
@@ -55,28 +48,7 @@ const TableSettingsModal = ({
   }
 
   const onSubmit = (values, actions) => {
-    // const params = [...items].map((item) => {
-    //   return { ...item, value: values[item.name] }
-    // })
-    // setEventType(TABLE_EVENT_TYPES.settings)
-    // setStatusLoading(dataStates.loading)
-    // dispatch('modal/close')
-    // actions.setSubmitting(true)
-    // api.setSettingsList(params)
-    //   .then(() => {
-    //     dispatch('params/reset-settings')
-    //     dispatch('settings/update', params)
-    //     setOldValue(values)
-    //     setPosition(params)
-    //     setItems(params)
-    //     actions.setValues(values)
-    //     actions.setSubmitting(false)
-    //   })
-    //   .catch(() => {
-    //     setStatusLoading(dataStates.failed)
-    //     actions.setSubmitting(false)
-    //     dispatch('error/toggle', { errorPopup: ERROR_TYPES.settings })
-    //   })
+
   }
 
   const formik = useFormik({

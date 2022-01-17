@@ -439,43 +439,19 @@ export const SORT_TYPES = {
   descending: 'descending',
 };
 
-export const NAMES = {
+export const NAMES = { // примерная структура столбцов
   action_colunm: '',
 
-  name_of_tariff: 'Названиe тарифа',
-  concated_code: 'составной код',
-  line_business: 'Линия бизнеса (Line of Business)',
-  line_business_code: 'Код LOB',
-  service_line: 'Линейка услуг (Service Line)',
-  service_line_code: 'Код SRV.LINE',
-  service: 'Услуга (Service)',
-  service_code: 'Код SRV',
-  service_element: 'Элемент услуги (Service Element)',
-  service_element_code: 'Код SRV.ELEMENT',
-  tariff: 'Тариф (Tariff)',
-  tariff_code: 'Код Tariff',
-  tariff_element: 'Элемент тарификации',
-  tariff_unit: 'Элемент >Единица тарификации (Unit)',
-  tariff_type: 'Тип тарифа, ежемесячно (Charge Type)',
-  flat_rate: 'Перерасчет по фактическим дням для flat rate',
-  price: 'Базовая цена (без НДС)',
-
-  created_at: 'Дата создания',
-  archived_at: 'Дата архивации',
-  start_at: 'Дата старта',
-  end_at: 'Дата завершения',
-
-  price_code: 'Код базовой цены',
-  cost_price: 'Себестоимость',
-  max_discount: 'Процент допустимой скидки',
-  readable_freq: 'Частота сбора информации',
-
-  comment: 'Комментарий',
+  id: 'ID',
+  date_time: 'Дата и время',
+  sum: 'Итоговая сумма',
+  kassir: 'ФИО кассира',
+  bonus_add: 'Кол-во начисленных бонусов',
+  bonus_pop: 'Кол-во снятых бонусов',
+  product_count: 'Кол-во продуктов',
 };
 
 export const TABLE_EVENT_TYPES = {
-  archiveVisable: 'archiveVisable',
-  filtration: 'filtration',
   search: 'search',
   settings: 'settings',
   scroll: 'scroll',

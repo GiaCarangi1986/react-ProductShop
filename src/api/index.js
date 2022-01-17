@@ -1,6 +1,6 @@
 import BaseApi from '@garpix/base-api'
 import { LoginUser, CheckList, LogoutUser } from './mochData'
-// import {} from './serializer'
+import { checkSerializer } from './serializer'
 
 class Api extends BaseApi {
   async loginUser(params) {
@@ -13,13 +13,18 @@ class Api extends BaseApi {
     }
   }
 
-  async getCheckList(params = {}) {
+  async getCheckList({ page = 1, pageSize = 30, search = '', ...params }) {
     try {
-      const res = await this.post('/api/check_list/', params)
+      const res = await this.post('/api/check_list/', {
+        page,
+        page_size: pageSize,
+        search,
+        ...params,
+      })
       return res.data
     }
     catch (err) {
-      return CheckList(1) // 1 - норм, 2 - ошибка
+      return checkSerializer(CheckList(1)) // 1 - норм, 2 - ошибка
     }
   }
 
@@ -34,7 +39,6 @@ class Api extends BaseApi {
   }
 }
 
-// export const MAIN_URL = process.env.REACT_APP_API_URL
 export const MAIN_URL = 'http://localhost:8010'
 const api = new Api(`${MAIN_URL}`)
 export default api

@@ -29,7 +29,33 @@ export const LoginUser = (data) => {
 export const CheckList = (status = 2) => {
   if (status === 1) {
     return { // лист чеков
-      check: 'check'
+      results: [
+        {
+          id: 1,
+          date_time: new Date(),
+          sum: 1000,
+          kassir: 'Курочкина Е. С.',
+          bonus_add: 10,
+          bonus_pop: 2,
+          product_count: 2,
+        },
+      ],
+      count: 1,
+      next: [
+        {
+          id: 2,
+          date_time: new Date(),
+          sum: 50,
+          kassir: 'Курочкина Е. С.',
+          bonus_add: 0,
+          bonus_pop: 1,
+          product_count: 1,
+        },
+      ],
+      previous: [
+
+      ],
+      count_all: 2,
     }
   }
   throw {

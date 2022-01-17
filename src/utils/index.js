@@ -93,67 +93,15 @@ function dateFotmattedForModal(date) {
   return currentDate
 }
 
-export function processingResult(item) {
+export function processingResult(item) { // use
   return {
-    id: item?.pk || '', // id
-    concated_code: item?.concated_code || '', // составной код
-
-    line_business: item?.service?.service?.line?.line_business?.title || '', // линия бизнеса
-    line_business_code: item?.service?.service?.line?.line_business?.code || 0, // LOB
-    line_business_pk: item?.service?.service?.line?.line_business?.pk || '', // line business id
-
-    service_line: item?.service?.service?.line?.title || '', // линейка услуг
-    service_line_code: item?.service?.service?.line?.code || 0, // service_code.line
-    service_line_pk: item?.service?.service?.line?.pk || '', // линейка услуг id
-
-    num_clients: item?.service?.service?.line?.num_clients || 0, // clients count
-
-    service: item?.service?.service?.title || '', // услуга
-    service_code: item?.service?.service?.code || 0, // service_code
-    service_pk: item?.service?.service?.pk || '', // услуга id
-
-    service_element: item?.service?.title || '', // элемент услуги
-    service_element_code: item?.service?.code || 0, // service_code.el
-    service_element_pk: item?.service?.pk || '', // элемент услуги id
-
-    tariff: item?.title || '', // тариф
-    tariff_code: item?.code || 0, // TARRIF
-    tariff_pk: item?.pk || '', // тариф id
-
-    tariff_element: item?.element?.title || '', // эл. тарификации
-    tariff_element_pk: item?.element?.pk || '', // эл. тарификации id
-
-    tariff_unit: item?.element?.unit?.unit || '', // ед. тарификации
-    tariff_unit_pk: item?.element?.unit?.pk || '', // ед. тарификации id
-
-    tariff_type: item?.element?.charge_type?.charge_type || '', // тип тарифа
-    tariff_type_pk: item?.element?.charge_type?.pk || '', // тип тарифа id
-
-    flat_rate: item?.element?.flat_rate || false, // перерасчет
-    price: item?.element?.price || '', // базовая цена
-    is_available: item?.service?.service?.is_available || false, // доступна для подключения
-
-    created_at: dateFotmattedForTable(item?.created_at) || '', // дата создания
-    archived_at: dateFotmattedForTable(item?.archived_at) || '', // дата архивирования
-
-    start_at: dateFotmattedForTable(item?.service?.service?.start_at) || '', // дата старта
-    end_at: dateFotmattedForTable(item?.service?.service?.end_at) || '', // дата окончания
-    start_at_special_formatted: dateFotmattedForModal(item?.service?.service?.start_at) || '', // дата старта (отформатированная для модалки)
-    end_at_special_formatted: dateFotmattedForModal(item?.service?.service?.end_at) || '', // дата окончания (отформатированная для модалки)
-
-
-    max_discount: item?.element?.max_discount || null, // максимальная скидка
-    readable_freq: item?.element?.update_frequency?.readable_freq || null, // частота обновления text
-
-    update_frequency: {
-      readable_freq: item?.element?.update_frequency?.readable_freq || null,
-      pk: item?.element?.update_frequency?.pk || null,
-      freq: item?.element?.update_frequency?.freq || null,
-      base: item?.element?.update_frequency?.base || null,
-    }, // частота обновления
-    // 
-    cost_price: item?.element?.cost_price || 0.00, // базовая цена
-    comment: item?.comment // комментарий
+    id: item?.id || '', // id чека
+    date_time: item?.date_time || '', // дата и время совершения покупки
+    sum: item?.sum || 0, // итоговая сумма
+    kassir: item?.kassir || '', // ФИО кассир
+    bonus_add: item?.bonus_add || 0, // сколько начислено бонусов
+    bonus_pop: item?.bonus_pop || 0, // сколько снято бонусов
+    product_count: item?.product_count || 0, // кол-во продуктов в чеке
   };
 }
 

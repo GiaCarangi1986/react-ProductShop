@@ -4,7 +4,6 @@ import React, {
 } from 'react'
 import classNames from 'classnames'
 import { dataStates } from '@garpix/fetcher'
-// import FiltersDropdown from '../FiltersDropdown'
 import {
   TABLE_EVENT_TYPES,
 } from '../../const'
