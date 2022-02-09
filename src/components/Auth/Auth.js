@@ -83,6 +83,7 @@ const Auth = () => {
           <Fieldset error={formik.errors.username} touched={formik.touched.username}>
             <Input
               label='Логин'
+              type='email'
               nameOfStyle='input-label'
               value={formik.values.username}
               name='username'
@@ -101,7 +102,7 @@ const Auth = () => {
               onGx-blur={handleBlur}
             />
           </Fieldset>
-          <div className={style.error}>
+          <div className={style.error} >
             {formik.errors.non_field_errors ? (
               <ErrorText errorClass='auth' absolute>
                 {formik.errors.non_field_errors}
