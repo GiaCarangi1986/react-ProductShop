@@ -3,6 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 20px;
 }
 
 .table-settings__left {
@@ -19,10 +20,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   margin-right: 20px;
-  margin-bottom: 20px;
-  // min-height: 35px;
+  margin-top: 26px;
 }
 
 .table-settings-col_none{
@@ -59,6 +58,19 @@
 
 .table-settings__right gx-button[variant='text'] {
   --gx-spacing-large: 0;
+}
+
+.table-settings__input_wrap{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.service-form::part(base){
+  margin-right: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 @media (max-width: 1500px) {

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import classNames from 'classnames'
 import { dataStates } from '@garpix/fetcher'
-import { TableSettingsModal } from '../Modal'
 import Table from './Table'
 import TableSettings from '../TableSettings'
 import { Button, Icon, PreloaderPage } from '../../views'
@@ -22,6 +21,7 @@ const CheckTable = ({
   isNext,
 }) => {
 
+  /* TODO: медиа запросы поправить сворачивание шапки */
   const [eventType, setEventType] = useState(null)
   const [colsTrue, setColsTrue] = useState([])
   const [cols, setCols] = useState(null)
@@ -141,7 +141,6 @@ const CheckTable = ({
         ) : null}
       </div>
       {statusLoading === dataStates.loading && eventType !== TABLE_EVENT_TYPES.scroll ? <PreloaderPage /> : null}
-      <TableSettingsModal setEventType={setEventType} setStatusLoading={setStatusLoading} />
     </>
   )
 }

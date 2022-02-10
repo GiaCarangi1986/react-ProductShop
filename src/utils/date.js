@@ -6,4 +6,11 @@ const cleanTheDate = (dateStr) => {
   return dayjs(dateStr).locale('ru').format('LLL')
 }
 
-export default cleanTheDate
+const formatDateToInput = () => {
+  return dayjs(new Date()).format('YYYY-MM-DDTHH:mm')
+}
+
+export {
+  formatDateToInput,
+  cleanTheDate
+}

@@ -28,17 +28,14 @@ const priceTemp = (val = 150, err = errorsMessenge.lardgeString) => Yup.string()
 //   .required(errorsMessenge.requiredField);
 
 const dateTempEnd = Yup.mixed()
-  // .nullable()
-  // .required(errorsMessenge.requiredField)
   .test('CorrectDates', errorsMessenge.correctDates, (value, context) => {
     if (context.parent.start_at && value) {
       const dateStart = context.parent.start_at;
       const dateEnd = value;
-      return dateStart < dateEnd;
+      return dateStart <= dateEnd;
     }
     return true
   });
-
 
 const signUp = () => {
   return Yup.object().shape({
@@ -55,26 +52,7 @@ const signUp = () => {
   });
 };
 
-const addOrUpdateTariffSchema = Yup.object().shape({
-  line_business: objectTemp,
-  line_business_code: numberTemp,
-  service_line: objectTemp,
-  service_line_code: numberTemp,
-  service: objectTemp,
-  service_code: numberTemp,
-  service_element: objectTemp,
-  service_element_code: numberTemp,
-  tariff: stringTemp,
-  code: numberTemp,
-  tariff_element: objectTemp,
-  tariff_unit: objectTemp,
-  tariff_type: objectTemp,
-  flat_rate: objectTemp,
-  price: priceTemp(11, errorsMessenge.price),
-  cost_price: priceTemp(11, errorsMessenge.price),
-  frequency_info: objectTemp,
-  // comment: Yup.string().max(300, errorsMessenge.lardgeTextarea),
-  // start_at: dateTempStart,
+const dateSearch = Yup.object().shape({
   end_at: dateTempEnd,
 });
 
@@ -131,7 +109,7 @@ export {
   signUp,
   addLineBussinessSchema,
   addLineServiceSchema,
-  addOrUpdateTariffSchema,
+  dateSearch,
   addServiceSchema,
   addElementServiceSchema,
   addChargeType,

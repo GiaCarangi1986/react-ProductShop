@@ -4,8 +4,9 @@ import { useStoreon } from 'storeon/react'
 import {
   MODAL_TYPES,
 } from '../../const'
-import { Button, Icon } from '../../views'
-import Search from '../Search'
+import { Button, Icon, Input, Fieldset } from '../../views'
+import { NAMES } from '../../const'
+import DateSearch from './DateSearch'
 import style from './table-settings.module.scss'
 
 const TableSettings = ({
@@ -28,9 +29,6 @@ const TableSettings = ({
       tariff: { data: null, type: 'create' },
     })
   }
-  const openSettingsTable = () => {
-    dispatch('modal/toggle', { modal: MODAL_TYPES.settings })
-  }
 
   const classes = classNames({
     [style['table-settings-col']]: true,
@@ -41,18 +39,9 @@ const TableSettings = ({
   return (
     <div className={style['table-settings']}>
       <div className={style['table-settings__left']}>
+        <DateSearch />
         <div className={style['table-settings-col']}>
-          <Search setEventType={setEventType} />
-        </div>
-        <div className={style['table-settings-col']}>
-          <Button
-            disabled={settingsDisabled}
-            onClick={openSettingsTable}
-            outline
-          >
-            <Icon slot='icon-left' icon='settings' />
-            Настроить таблицу
-          </Button>
+          тут чекбоксы будут
         </div>
       </div>
 
@@ -61,7 +50,7 @@ const TableSettings = ({
         <div className={classes}>
           {isShowResetBtn && (
             <Button variant='text' onClick={resetAllFilters} data-cy='btn'>
-              Сбросить все фильтры
+              Сбросить все фильтры и/или поиск
             </Button>
           )}
         </div>

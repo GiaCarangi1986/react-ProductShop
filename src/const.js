@@ -509,3 +509,14 @@ export const BASE_TIME = [
 export const SCREENS = {
   middle: "(max-width: 1024px)",
 };
+
+export const FORM_LABELS = {
+  start_at: 'Дата начала',
+  end_at: 'Дата окончания',
+}
+
+export const FORM_FIELDS = {
+  start_at: 'start_at',
+  end_at: 'end_at',
+
+}
