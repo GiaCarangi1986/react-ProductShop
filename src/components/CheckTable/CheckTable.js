@@ -4,6 +4,7 @@ import { dataStates } from '@garpix/fetcher'
 import Table from './Table'
 import TableSettings from '../TableSettings'
 import { Button, Icon, PreloaderPage } from '../../views'
+import AddOrUpdateCheckModal from '../Modal';
 import {
   TABLE_EVENT_TYPES,
   WIDTH_COL,
@@ -141,6 +142,13 @@ const CheckTable = ({
         ) : null}
       </div>
       {statusLoading === dataStates.loading && eventType !== TABLE_EVENT_TYPES.scroll ? <PreloaderPage /> : null}
+      <AddOrUpdateCheckModal
+        results={results}
+        filterParams={filterParams}
+        setEventType={setEventType}
+      // updateElement={updateElement}
+      // loadData={loadData}
+      />
     </>
   )
 }

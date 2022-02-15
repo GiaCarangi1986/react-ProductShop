@@ -513,10 +513,13 @@ export const SCREENS = {
 export const FORM_LABELS = {
   start_at: 'Дата начала',
   end_at: 'Дата окончания',
+  product: 'Товар',
+  count: 'Кол-во',
 }
 
 export const FORM_FIELDS = {
   start_at: 'start_at',
   end_at: 'end_at',
-
+  product: 'product',
+  count: 'count',
 }

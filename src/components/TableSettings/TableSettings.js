@@ -40,9 +40,9 @@ const TableSettings = ({
       <div className={style['table-settings__left']}>
         <DateSearch />
         <div className={style['table-settings-filter-check']}>
-          <Switch text='Отложенные чеки' checked />
-          <Switch text='Удаленные чеки' checked />
-          <Switch text='Редактированные чеки' checked />
+          <Switch text='Отложенные чеки' />
+          <Switch text='Удаленные чеки' />
+          <Switch text='Редактированные чеки' />
         </div>
       </div>
 

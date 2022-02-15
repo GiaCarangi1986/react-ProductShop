@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useFormik } from 'formik'
 import { GxGrid, GxCol, GxRow } from '@garpix/garpix-web-components-react'
-import SelectAddOrUpdateService from '../SelectAddOrUpdateService'
 import { Button, ErrorText, Fieldset, Form, Icon, Input } from '../../views'
 import {
   handingErrors,
   deleteSpaces, checkValuesFields
 } from '../../utils'
+import { FORM_FIELDS, FORM_LABELS } from '../../const'
 import { addFrequencyInfo } from '../../schema'
 import api from '../../api'
 
@@ -14,7 +14,8 @@ import style from './modal.module.scss'
 
 const CheckModal = ({
   backToMainForm = () => { },
-  successAddElement = () => { }
+  successAddElement = () => { },
+  headerText = ''
 }) => {
   const [disabled, setDisabled] = useState(true)
 
@@ -63,58 +64,42 @@ const CheckModal = ({
       <GxGrid className={style['service-grid']}>
         <GxRow>
           <GxCol className={style['service-col']}>
-            <Button
-              disabled={formik.isSubmitting}
-              onClick={backToMainForm}
-              className='btn-back'
-              variant='text'
-              data-cy='btn'
-            >
-              <Icon icon='arrowBack' />
-              Добавление тарифа
-            </Button>
-          </GxCol>
-        </GxRow>
-        <GxRow>
-          <GxCol className={style['service-col']}>
-            <h2>Добавление частоты сбора информации</h2>
+            <h2>{headerText}</h2>
           </GxCol>
         </GxRow>
         <Form onGx-submit={formik.handleSubmit} data-cy='form'>
           <GxRow>
             <GxCol className={style['service-col']} size={6}>
               <Fieldset
-                errorClass='addOrUpdateService'
+                errorClass='addOrUpdateCheck'
                 error={formik.errors.freq}
                 touched={formik.touched.freq}>
                 <Input
                   value={formik.values.freq}
                   onGx-input={formik.handleChange}
                   onGx-blur={handleBlur}
-                  name='freq'
-                  label='Частота'
+                  name={FORM_FIELDS.product}
+                  label={FORM_LABELS.product}
                   data-cy='title'
                   type='number'
-                  min='0'
-                  max='32767'
                 />
               </Fieldset>
             </GxCol>
-            <GxCol className={style['service-col']}>
+            <GxCol className={style['service-col']} size={6}>
               <Fieldset
-                errorClass='addOrUpdateService'
-                error={formik.errors.base}
-                touched={formik.touched.base}>
-                <SelectAddOrUpdateService
-                  value={formik.values.base}
-                  err={formik.errors.base && formik.touched.base}
-                  setValue={(option) => changeValuesSelect({ option, selectKey: 'base' })}
-                  onBlur={handleBlurSelect}
-                  selectType='frequencyInfo'
-                  label='Временной промежуток для частоты'
-                  name='base'
-                  data-cy='select'
-                  onlyBase
+                errorClass='addOrUpdateCheck'
+                error={formik.errors.freq}
+                touched={formik.touched.freq}>
+                <Input
+                  value={formik.values.freq}
+                  onGx-input={formik.handleChange}
+                  onGx-blur={handleBlur}
+                  name={FORM_FIELDS.count}
+                  label={FORM_LABELS.count}
+                  data-cy='title'
+                  type='number'
+                  min='1'
+                  max='32767'
                 />
               </Fieldset>
             </GxCol>

@@ -174,7 +174,7 @@ const AddOrUpdateCheckModal = ({
 
   if (MODALS_TYPES[contentType]) {
     const Component = MODALS_TYPES[contentType];
-
+    const headerText = 'Добавление чека' // буду проверять входящие данные (есть id редакт чека или нет) и менять эту надпись
     return (
       <Modal setOpen={setOpen} variant='right' open={open}>
         <Component
@@ -186,6 +186,7 @@ const AddOrUpdateCheckModal = ({
           setEventType={setEventType}
           newElement={newElement}
           handleSubmitError={handleSubmitError}
+          headerText={headerText}
           {...props} />
       </Modal>
     )

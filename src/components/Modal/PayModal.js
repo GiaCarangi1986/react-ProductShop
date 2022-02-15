@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useFormik } from 'formik'
 import { GxGrid, GxCol, GxRow } from '@garpix/garpix-web-components-react'
-import SelectAddOrUpdateService from '../SelectAddOrUpdateService'
 import { Button, ErrorText, Fieldset, Form, Icon, Input } from '../../views'
 import {
   handingErrors,
@@ -97,24 +96,6 @@ const PayModal = ({
                   type='number'
                   min='0'
                   max='32767'
-                />
-              </Fieldset>
-            </GxCol>
-            <GxCol className={style['service-col']}>
-              <Fieldset
-                errorClass='addOrUpdateService'
-                error={formik.errors.base}
-                touched={formik.touched.base}>
-                <SelectAddOrUpdateService
-                  value={formik.values.base}
-                  err={formik.errors.base && formik.touched.base}
-                  setValue={(option) => changeValuesSelect({ option, selectKey: 'base' })}
-                  onBlur={handleBlurSelect}
-                  selectType='frequencyInfo'
-                  label='Временной промежуток для частоты'
-                  name='base'
-                  data-cy='select'
-                  onlyBase
                 />
               </Fieldset>
             </GxCol>
