@@ -1,0 +1,26 @@
+.switch{
+  --width: 36px;
+  --height: 18px;
+}
+
+.switch::part(control){
+  border: 2px solid var(--ps-border-color-default);
+  background-color: var(--ps-color-white);
+  --gx-input-border-width: 0;
+}
+
+.switch::part(thumb){
+  height: 16px;
+  width: 16px;
+  box-shadow: none;
+  background-color: var(--ps-border-color-default);
+}
+
+.switch:not([checked='false'])[checked]::part(thumb){
+  background-color: var(--ps-color-accent);
+}
+
+.wrap{
+  display: flex;
+  gap: 5px;
+}

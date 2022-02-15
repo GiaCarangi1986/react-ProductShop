@@ -16,12 +16,18 @@
   }
 }
 
-.table-settings-col {
+.table-settings-col,
+.table-settings-filter-check {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-right: 20px;
   margin-top: 26px;
+}
+
+.table-settings-filter-check{
+  align-items: flex-start;
+  gap: 10px;
 }
 
 .table-settings-col_none{
@@ -67,7 +73,7 @@
 }
 
 .service-form::part(base){
-  margin-right: 25px;
+  margin-right: 40px;
   display: flex;
   flex-direction: column;
   gap: 10px;

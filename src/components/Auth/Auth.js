@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import { useNavigate } from 'react-router';
 import { useStoreon } from 'storeon/react';
 import { Button, Fieldset, Form, Input, Logo, ErrorText, PreloaderPage } from '../../views';
-import { handingErrors, deleteSpaces, checkValuesFields } from '../../utils'
+import { handingErrors, deleteSpaces } from '../../utils'
 import * as schema from '../../schema';
 import { PATHS } from '../../const';
 import api from '../../api';
@@ -42,8 +42,8 @@ const Auth = () => {
     enableReinitialize: true,
     validationSchema: schema.signUp,
     initialValues: {
-      username: null,
-      password: null,
+      username: '',
+      password: '',
     },
     onSubmit
   })
@@ -57,11 +57,7 @@ const Auth = () => {
 
   useEffect(() => {
     if (formik.values) {
-      const errorsList = { ...formik.errors };
-      delete errorsList.non_field_errors;
-      const isFullValues = checkValuesFields(formik.values)
-      const disabled = !isFullValues || formik.isSubmitting || Object.keys(errorsList).length > 0
-      setDisabledBtn(disabled)
+      setDisabledBtn(formik.isSubmitting || !formik.dirty || !formik.isValid)
     }
   }, [formik])
 

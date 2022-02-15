@@ -4,7 +4,7 @@ import { useStoreon } from 'storeon/react'
 import {
   MODAL_TYPES,
 } from '../../const'
-import { Button, Icon, Input, Fieldset } from '../../views'
+import { Button, Switch } from '../../views'
 import { NAMES } from '../../const'
 import DateSearch from './DateSearch'
 import style from './table-settings.module.scss'
@@ -17,7 +17,6 @@ const TableSettings = ({
   // resultsLen = 0,
 }) => {
   const { dispatch } = useStoreon()
-  const [isShowResetBtn, setShowResetBtn] = useState(false) // мб потом сохранять фильтры (причем не на закрытие браузера, а вообще)
 
   const resetAllFilters = () => {
     dispatch('params/reset')
@@ -32,7 +31,7 @@ const TableSettings = ({
 
   const classes = classNames({
     [style['table-settings-col']]: true,
-    [style['table-settings-col_none']]: !isShowResetBtn,
+    // [style['table-settings-col_none']]: !isShowResetBtn,
     [style['table-settings__right_btn-second']]: true,
   })
 
@@ -40,20 +39,15 @@ const TableSettings = ({
     <div className={style['table-settings']}>
       <div className={style['table-settings__left']}>
         <DateSearch />
-        <div className={style['table-settings-col']}>
-          тут чекбоксы будут
+        <div className={style['table-settings-filter-check']}>
+          <Switch text='Отложенные чеки' checked />
+          <Switch text='Удаленные чеки' checked />
+          <Switch text='Редактированные чеки' checked />
         </div>
       </div>
 
       <div className={style['table-settings__right']}>
         {children}
-        <div className={classes}>
-          {isShowResetBtn && (
-            <Button variant='text' onClick={resetAllFilters} data-cy='btn'>
-              Сбросить все фильтры и/или поиск
-            </Button>
-          )}
-        </div>
         <div className={style['table-settings-col']}>
           <Button onClick={openCreateModal}>
             <span slot='icon-left'>+</span>

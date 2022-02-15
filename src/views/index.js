@@ -15,6 +15,7 @@ import PreloaderPage from './Preloader/PreloaderPage';
 import Select from './Select'
 import TextArea from './TextArea'
 import Menu from './Menu';
+import Switch from './Switch'
 
 export {
   Button,
@@ -35,4 +36,5 @@ export {
   Select,
   TextArea,
   Menu,
+  Switch
 }
