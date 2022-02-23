@@ -6,6 +6,7 @@ import {
   handingErrors,
   deleteSpaces, checkValuesFields
 } from '../../utils'
+import Select from '../Select'
 import { FORM_FIELDS, FORM_LABELS } from '../../const'
 import { addFrequencyInfo } from '../../schema'
 import api from '../../api'
@@ -31,7 +32,7 @@ const CheckModal = ({
     // validationSchema: addFrequencyInfo,
     onSubmit
   })
-
+  console.log('formik.values.product', formik.values.product)
   useEffect(() => {
     if (formik) {
       const { isSubmitting, values } = formik;
@@ -48,15 +49,12 @@ const CheckModal = ({
     formik.setFieldValue([name], value)
   }
 
-  const handleBlurSelect = (e) => {
-    const { name } = e.target;
-    formik.setFieldTouched([name], true)
+  const changeValuesSelect = (e, name) => {
+    formik.setFieldValue(name, e)
   }
 
-  const changeValuesSelect = ({ option, selectKey }) => {
-    const newValues = formik.values
-    newValues[selectKey] = option
-    formik.setValues(newValues)
+  const handleSelectBlur = (name = '') => {
+    formik.setFieldTouched([name], true)
   }
 
   return (
@@ -74,14 +72,15 @@ const CheckModal = ({
                 errorClass='addOrUpdateCheck'
                 error={formik.errors.freq}
                 touched={formik.touched.freq}>
-                <Input
-                  value={formik.values.freq}
-                  onGx-input={formik.handleChange}
-                  onGx-blur={handleBlur}
+                <Select
+                  value={formik.values.product}
                   name={FORM_FIELDS.product}
                   label={FORM_LABELS.product}
                   data-cy='title'
-                  type='number'
+                  func={api.getProductListForCreatingCheck}
+                  setValue={(e) => changeValuesSelect(e, FORM_FIELDS.product)}
+                  onBlur={() => handleSelectBlur(FORM_FIELDS.product)}
+                  err={formik.errors.product && formik.touched.product}
                 />
               </Fieldset>
             </GxCol>
@@ -91,15 +90,16 @@ const CheckModal = ({
                 error={formik.errors.freq}
                 touched={formik.touched.freq}>
                 <Input
-                  value={formik.values.freq}
+                  value={formik.values.unit}
                   onGx-input={formik.handleChange}
                   onGx-blur={handleBlur}
-                  name={FORM_FIELDS.count}
+                  name={FORM_FIELDS.unit}
                   label={FORM_LABELS.count}
                   data-cy='title'
                   type='number'
                   min='1'
                   max='32767'
+                  step={1}
                 />
               </Fieldset>
             </GxCol>

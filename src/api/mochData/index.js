@@ -1,7 +1,8 @@
 export const ERROR_MESSAGE = {
   uncorrect_login_data: 'Неверный логин и/или пароль',
-  uncorrect_getting_status: 'Список чеков не удалось получить',
+  uncorrect_getting_check_list: 'Список чеков не удалось получить',
   uncorrect_logout: 'Не удалось разлогинить пользователя',
+  uncorrect_getting_product_list: 'Список продуктов не удалось получить',
 }
 
 const CORRECT_USER_DATA = {
@@ -60,7 +61,56 @@ export const CheckList = (status = 2) => {
   }
   throw {
     response: {
-      data: { non_field_errors: [ERROR_MESSAGE.uncorrect_getting_status] },
+      data: { non_field_errors: [ERROR_MESSAGE.uncorrect_getting_check_list] },
+      status: 404,
+    }
+  }
+}
+
+export const ProductList = (status = 2) => {
+  if (status === 1) {
+    return { // лист продуктов
+      results: [
+        {
+          id: 1,
+          title: 'Чипсы',
+          category: 'Снеки',
+          count: 100,
+          price: 90,
+          unit: 'р',
+          sale: 0,
+        },
+        {
+          id: 3,
+          title: 'Мороженое',
+          category: 'Замороженные продукты',
+          count: 100,
+          price: 190,
+          unit: 'р',
+          sale: 0,
+        },
+      ],
+      count: 1,
+      next: [
+        {
+          id: 2,
+          title: 'Сухарики',
+          category: 'Снеки',
+          count: 50,
+          price: 50,
+          unit: 'р',
+          sale: 0,
+        },
+      ],
+      previous: [
+
+      ],
+      count_all: 2,
+    }
+  }
+  throw {
+    response: {
+      data: { non_field_errors: [ERROR_MESSAGE.uncorrect_getting_product_list] },
       status: 404,
     }
   }

@@ -1,0 +1,28 @@
+.select {
+  height: 40px;
+  font-size: 16px;
+  --gx-input-border-radius-medium: 6px;
+  --gx-input-color: var(--df-color-default);
+  --gx-input-font-family: var(--df-font-family);
+  --gx-input-border-width: 2px;
+  --gx-input-border-color: var(--df-border-color-default);
+  --gx-input-border-color-hover: var(--df-border-color-hover);
+  --gx-input-border-color-focus: var(--df-border-color-hover);  
+}
+
+.select-label {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--df-font-family);
+  font-size: 14px;
+  color: var(--ps-border-color-hover);
+  margin-bottom: 7px;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+@media (max-width: 1200px) {
+  .select {
+    height: 35px;
+  }
+}

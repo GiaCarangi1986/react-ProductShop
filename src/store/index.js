@@ -51,10 +51,21 @@ const checkFilters = (store) => {
   });
 }
 
+const catchErrorsApi = (store) => {
+  store.on('@init', () => ({ response: null }))
+  store.on('catch/api', ({ }, response) => {
+    const status = response?.status || null
+    if (status && status === 401) {
+      store.dispatch('user/reset')
+    }
+  })
+}
+
 const storeonParams = [
   errorFn,
   userInfo,
   modalFn,
+  catchErrorsApi,
   checkFilters,
   persistState([
     'currentUser',

@@ -515,11 +515,12 @@ export const FORM_LABELS = {
   end_at: 'Дата окончания',
   product: 'Товар',
   count: 'Кол-во',
+  weight: 'Вес'
 }
 
 export const FORM_FIELDS = {
   start_at: 'start_at',
   end_at: 'end_at',
   product: 'product',
-  count: 'count',
+  unit: 'unit',
 }

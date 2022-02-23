@@ -1,5 +1,5 @@
 import BaseApi from '@garpix/base-api'
-import { LoginUser, CheckList, LogoutUser } from './mochData'
+import { LoginUser, CheckList, LogoutUser, ProductList } from './mochData'
 import { checkSerializer } from './serializer'
 
 class Api extends BaseApi {
@@ -35,6 +35,16 @@ class Api extends BaseApi {
     }
     catch (err) {
       return LogoutUser(1) // 1 - норм, 2 - ошибка
+    }
+  }
+
+  async getProductListForCreatingCheck() {
+    try {
+      const res = await this.post('/api/product_list/')
+      return res.data
+    }
+    catch (err) {
+      return ProductList(1).results // 1 - норм, 2 - ошибка
     }
   }
 }
