@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useFormik } from 'formik'
+import classNames from 'classnames'
 import { GxGrid, GxCol, GxRow } from '@garpix/garpix-web-components-react'
 import { Button, ErrorText, Fieldset, Form, Icon, Input } from '../../views'
 import {
   handingErrors,
-  deleteSpaces, checkValuesFields
+  deleteSpaces
 } from '../../utils'
 import Select from '../Select'
-import { FORM_FIELDS, FORM_LABELS } from '../../const'
-import { addFrequencyInfo } from '../../schema'
+import { FORM_FIELDS, FORM_LABELS, UNITS } from '../../const'
+import { addLineOfCheck } from '../../schema'
 import api from '../../api'
 
 import style from './modal.module.scss'
@@ -19,6 +20,7 @@ const CheckModal = ({
   headerText = ''
 }) => {
   const [disabled, setDisabled] = useState(true)
+  const [unit, setUnit] = useState(UNITS[0])
 
   const onSubmit = (values, actions) => {
     console.log('values', values)
@@ -26,21 +28,12 @@ const CheckModal = ({
 
   const formik = useFormik({
     initialValues: {
-      freq: 0,
-      base: null,
+      product: null,
+      unit: 0,
     },
-    // validationSchema: addFrequencyInfo,
+    validationSchema: addLineOfCheck,
     onSubmit
   })
-  console.log('formik.values.product', formik.values.product)
-  useEffect(() => {
-    if (formik) {
-      const { isSubmitting, values } = formik;
-      const isFullFields = checkValuesFields(values);
-      const isDisabled = isSubmitting || !isFullFields
-      setDisabled(isDisabled)
-    }
-  }, [formik])
 
   const handleBlur = (e) => {
     const { name } = e.target;
@@ -57,6 +50,20 @@ const CheckModal = ({
     formik.setFieldTouched([name], true)
   }
 
+  useEffect(() => {
+    if (formik) {
+      const { isSubmitting, isValid } = formik;
+      const isDisabled = isSubmitting || !isValid
+      setDisabled(isDisabled)
+    }
+  }, [formik])
+
+  useEffect(() => {
+    if (formik.values.product) {
+      setUnit(formik.values.product.unit)
+    }
+  }, [formik.values.product])
+
   return (
     <div className={style['service-form']}>
       <GxGrid className={style['service-grid']}>
@@ -67,11 +74,11 @@ const CheckModal = ({
         </GxRow>
         <Form onGx-submit={formik.handleSubmit} data-cy='form'>
           <GxRow>
-            <GxCol className={style['service-col']} size={6}>
+            <GxCol className={style['service-col']}>
               <Fieldset
                 errorClass='addOrUpdateCheck'
-                error={formik.errors.freq}
-                touched={formik.touched.freq}>
+                error={formik.errors.product}
+                touched={formik.touched.product}>
                 <Select
                   value={formik.values.product}
                   name={FORM_FIELDS.product}
@@ -84,24 +91,34 @@ const CheckModal = ({
                 />
               </Fieldset>
             </GxCol>
-            <GxCol className={style['service-col']} size={6}>
+            <GxCol className={style['service-col']} >
               <Fieldset
                 errorClass='addOrUpdateCheck'
-                error={formik.errors.freq}
-                touched={formik.touched.freq}>
+                error={formik.errors.unit}
+                touched={formik.touched.unit}>
                 <Input
                   value={formik.values.unit}
                   onGx-input={formik.handleChange}
                   onGx-blur={handleBlur}
                   name={FORM_FIELDS.unit}
-                  label={FORM_LABELS.count}
+                  label={unit === UNITS[0] ? FORM_LABELS.count : FORM_LABELS.weight}
                   data-cy='title'
                   type='number'
                   min='1'
                   max='32767'
-                  step={1}
+                  step={unit === UNITS[0] ? 1 : 0.1}
                 />
               </Fieldset>
+            </GxCol>
+            <GxCol className={classNames(style['service-col'], style['service-col-add'])}  >
+              <Button
+                disabled={disabled}
+                className='btn_width-square'
+                data-cy='btn'
+                buttonDis
+              >
+                +
+              </Button>
             </GxCol>
           </GxRow>
           <GxRow>
@@ -113,9 +130,8 @@ const CheckModal = ({
               ) : null}
             </GxCol>
           </GxRow>
-
-          <GxRow>
-            <GxCol className={style['service-col']} offset={10} size={2}>
+          {/* <GxRow>
+            <GxCol className={style['service-col']}>
               <Button
                 type='submit'
                 disabled={disabled}
@@ -126,7 +142,7 @@ const CheckModal = ({
                 Добавить
               </Button>
             </GxCol>
-          </GxRow>
+          </GxRow> */}
         </Form>
       </GxGrid>
     </div>

@@ -120,17 +120,6 @@ export function formateFloat(number) {
   return Math.abs(number.replace(/[^\d](\.\d+)+/g, ''))
 }
 
-export function checkValuesFields(values = {}, exceptionKeys = []) {
-  const newVals = { ...values };
-  exceptionKeys.map(key => delete newVals[key])
-
-  const valsList = Object.values(newVals)
-  const index = valsList.findIndex(val => val === '' || val === null)
-  const isFull = index === -1
-
-  return isFull
-}
-
 export const addZeroAndRound = (val = 0) => {
   const resOfRound = (Math.round(val * 100) / 100)
   let stringRes = ''

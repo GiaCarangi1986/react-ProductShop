@@ -19,6 +19,7 @@ const Select = ({ setValue = () => { }, func = () => { }, ...props }) => {
           return ({
             label: `${elem.id} (${elem.title}, ${elem.category})`,
             value: elem.id,
+            unit: elem.unit
           })
         })
         setOptions(newRes)

@@ -23,10 +23,6 @@ const priceTemp = (val = 150, err = errorsMessenge.lardgeString) => Yup.string()
   })
   .required(errorsMessenge.requiredField);
 
-// const dateTempStart = Yup.string()
-//   .nullable()
-//   .required(errorsMessenge.requiredField);
-
 const dateTempEnd = Yup.mixed()
   .test('CorrectDates', errorsMessenge.correctDates, (value, context) => {
     if (context.parent.start_at && value) {
@@ -36,6 +32,10 @@ const dateTempEnd = Yup.mixed()
     }
     return true
   });
+
+const dateSearch = Yup.object().shape({
+  end_at: dateTempEnd,
+});
 
 const signUp = () => {
   return Yup.object().shape({
@@ -52,68 +52,13 @@ const signUp = () => {
   });
 };
 
-const dateSearch = Yup.object().shape({
-  end_at: dateTempEnd,
-});
-
-const addLineBussinessSchema = Yup.object().shape({
-  title: stringTemp,
-  code: numberTemp,
-  non_field_errors: Yup.string().notRequired()
-})
-
-const addLineServiceSchema = Yup.object().shape({
-  title: stringTemp,
-  code: numberTemp,
-  line_business: objectTemp,
-  non_field_errors: Yup.string().notRequired()
-})
-
-const addServiceSchema = Yup.object().shape({
-  title: stringTemp,
-  code: numberTemp,
-  line: Yup.object().nullable().required(errorsMessenge.requiredField),
-})
-
-const addElementServiceSchema = Yup.object().shape({
-  title: stringTemp,
-  code: numberTemp,
-  service: objectTemp,
-  non_field_errors: Yup.string().notRequired()
-})
-
-const addChargeType = Yup.object().shape({
-  charge_type: stringTemp,
-  non_field_errors: Yup.string().notRequired()
-})
-
-const addUnitTariff = Yup.object().shape({
-  unit: stringTemp,
-  non_field_errors: Yup.string().notRequired()
-})
-
-const addElementTariffSchema = Yup.object().shape({
-  title: stringTemp,
-  unit: objectTemp,
-  charge_type: objectTemp,
-  non_field_errors: Yup.string().notRequired()
-})
-
-const addFrequencyInfo = Yup.object().shape({
-  freq: numberTemp,
-  base: objectTemp,
-  non_field_errors: Yup.string().notRequired()
+const addLineOfCheck = Yup.object().shape({
+  product: objectTemp,
+  unit: numberTemp,
 })
 
 export {
   signUp,
-  addLineBussinessSchema,
-  addLineServiceSchema,
-  dateSearch,
-  addServiceSchema,
-  addElementServiceSchema,
-  addChargeType,
-  addUnitTariff,
-  addElementTariffSchema,
-  addFrequencyInfo
+  addLineOfCheck,
+  dateSearch
 }

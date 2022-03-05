@@ -4,7 +4,7 @@ import { GxGrid, GxCol, GxRow } from '@garpix/garpix-web-components-react'
 import { Button, ErrorText, Fieldset, Form, Icon, Input } from '../../views'
 import {
   handingErrors,
-  deleteSpaces, checkValuesFields
+  deleteSpaces
 } from '../../utils'
 import { addFrequencyInfo } from '../../schema'
 import api from '../../api'
@@ -32,9 +32,8 @@ const PayModal = ({
 
   useEffect(() => {
     if (formik) {
-      const { isSubmitting, values } = formik;
-      const isFullFields = checkValuesFields(values);
-      const isDisabled = isSubmitting || !isFullFields
+      const { isSubmitting, isValid } = formik;
+      const isDisabled = isSubmitting || !isValid
       setDisabled(isDisabled)
     }
   }, [formik])

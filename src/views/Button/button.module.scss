@@ -175,6 +175,11 @@
   min-width: 100%;
 }
 
+.btn_width-square::part(base) {
+  width: 40px;
+  min-width: 40px;
+}
+
 .btn-back {
   --gx-spacing-large: 0;
   --gx-input-height-medium: auto;
