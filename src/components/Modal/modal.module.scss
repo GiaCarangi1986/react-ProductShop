@@ -47,10 +47,14 @@
   max-width: 435px;
 }
 
-.settings-list {
-  counter-reset: counter;
+.product-list,
+.settings-list{
   overflow-y: auto;
   height: calc(100vh - 270px);
+}
+
+.settings-list {
+  counter-reset: counter;
   margin-right: -40px;
   margin-left: -25px;
 }

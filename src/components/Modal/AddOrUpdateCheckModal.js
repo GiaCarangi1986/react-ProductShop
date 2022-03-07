@@ -174,7 +174,7 @@ const AddOrUpdateCheckModal = ({
       setDiscountCard(null)
     }
   }, [open])
-  console.log('linesOfCheck', linesOfCheck)
+
   if (MODALS_TYPES[contentType]) {
     const Component = MODALS_TYPES[contentType];
     const headerText = MODALS_CHECK_TITLE[contentType] // буду проверять входящие данные (есть id редакт чека или нет) и менять эту надпись

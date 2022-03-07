@@ -15,6 +15,7 @@ const CheckModal = ({
   headerText = '',
   setContentType = () => { },
   linesOfCheck = [],
+  discountCard = {},
   setLinesOfCheck = () => { },
   setDiscountCard = () => { }
 }) => {
@@ -28,7 +29,7 @@ const CheckModal = ({
       product: null,
       count: '1',
       card: null,
-      bonus: 0,
+      bonus: '0',
     },
     validationSchema: addLineOfCheck,
   })
@@ -38,7 +39,7 @@ const CheckModal = ({
     setLinesOfCheck(productList)
 
     const cardInfo = formik.values.card ? {
-      id: formik.values.card.value,
+      card: formik.values.card,
       bonus: formik.values.bonus
     } : null
 
@@ -67,14 +68,19 @@ const CheckModal = ({
     for (let index = 0; index < lines.length; index++) {
       if (lines[index].id === formik.values.product.value) {
         lines[index].count += +formik.values.count
+        if (unit === UNITS[1]) {
+          lines[index].count = Math.round(lines[index].count * 100) / 100
+        }
         wasUpdate = true
         break
       }
     }
+
     if (!wasUpdate) {
       lines.push({
         id: formik.values.product.value,
         count: +formik.values.count,
+        label: formik.values.product.name
       })
     }
     updateProductList(lines)
@@ -82,6 +88,24 @@ const CheckModal = ({
     formik.setFieldValue(FORM_FIELDS.count, 1)
     formik.setFieldValue(FORM_FIELDS.product, null)
     formik.setFieldTouched(FORM_FIELDS.product, false)
+  }
+
+  const chooseProduct = (e, name) => {
+    changeValuesSelect(e, name)
+    formik.setFieldValue(FORM_FIELDS.count, 1)
+
+    setUnit(e.unit)
+  }
+
+  const chooseCard = (e, name) => {
+    changeValuesSelect(e, name)
+    if (!e.value) {
+      formik.setFieldValue(FORM_FIELDS.card, null)
+    }
+    else {
+      formik.setFieldValue(FORM_FIELDS.bonus, 0)
+      setMaxBonus(Math.floor(e.bonus))
+    }
   }
 
   useEffect(() => {
@@ -93,24 +117,11 @@ const CheckModal = ({
   }, [formik])
 
   useEffect(() => {
-    if (formik.values.product) {
-      formik.setFieldValue(FORM_FIELDS.count, 1)
-
-      setUnit(formik.values.product.unit)
+    if (discountCard && Object.keys(discountCard).length) {
+      formik.setFieldValue(FORM_FIELDS.card, discountCard.card || null)
+      formik.setFieldValue(FORM_FIELDS.bonus, discountCard.bonus || '0')
     }
-  }, [formik.values.product])
-
-  useEffect(() => {
-    if (formik.values.card) {
-      if (!formik.values.card.value) {
-        formik.setFieldValue(FORM_FIELDS.card, null)
-      }
-      else {
-        formik.setFieldValue(FORM_FIELDS.bonus, 0)
-        setMaxBonus(Math.floor(formik.values.card.bonus))
-      }
-    }
-  }, [formik.values.card])
+  }, [discountCard])
 
   return (
     <div className={style['service-form']}>
@@ -134,7 +145,7 @@ const CheckModal = ({
                   data-cy='title'
                   type={SELECT_TYPES.product}
                   func={api.getProductListForCreatingCheck}
-                  setValue={(e) => changeValuesSelect(e, FORM_FIELDS.product)}
+                  setValue={(e) => chooseProduct(e, FORM_FIELDS.product)}
                   onBlur={() => handleSelectBlur(FORM_FIELDS.product)}
                   err={formik.errors.product && formik.touched.product}
                 />
@@ -185,7 +196,7 @@ const CheckModal = ({
                   data-cy='title'
                   func={api.getCardListForCreatingCheck}
                   type={SELECT_TYPES.card}
-                  setValue={(e) => changeValuesSelect(e, FORM_FIELDS.card)}
+                  setValue={(e) => chooseCard(e, FORM_FIELDS.card)}
                   onBlur={() => handleSelectBlur(FORM_FIELDS.card)}
                   err={formik.errors.card && formik.touched.card}
                 />

@@ -22,7 +22,8 @@ const Select = ({ setValue = () => { }, func = () => { }, type, ...props }) => {
               return ({
                 label: `${elem.id} (${elem.title}, ${elem.category})`,
                 value: elem.id,
-                unit: elem.unit
+                unit: elem.unit,
+                name: elem.title
               })
 
             case SELECT_TYPES.card:

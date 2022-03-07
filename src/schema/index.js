@@ -11,7 +11,7 @@ const numberTemp = Yup.number()
 
 const countTemp = Yup.number()
   .nullable()
-  .min(1, errorsMessenge.positiveNumber)
+  .min(0.001, errorsMessenge.positiveNumber)
   .max(32767, errorsMessenge.bigNumber)
   .required(errorsMessenge.requiredField);
 

@@ -44,15 +44,37 @@ const CheckListModal = ({
             <h2>{headerText}</h2>
           </GxCol>
         </GxRow>
+        <div>
+        </div>
         <Form onGx-submit={() => console.log('submit')} data-cy='form'>
-          <GxRow>
+          <table>
+            <thead>
+              <tr>
+                <th>
+                  Наименование
+                </th>
+                <th>
+                  Кол-во
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {linesOfCheck.map(line => {
+                return (
+                  <tr key={line.id}>
+                    <td>
+                      {line.label}
+                    </td>
+                    <td>
+                      {line.count}
+                    </td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
 
-          </GxRow>
-          <GxRow>
-
-          </GxRow>
-
-          <GxRow>
+          {/* <GxRow>
             <GxCol className={style['service-col']} offset={10} size={2}>
               <Button
                 type='submit'
@@ -64,7 +86,7 @@ const CheckListModal = ({
                 Добавить
               </Button>
             </GxCol>
-          </GxRow>
+          </GxRow> */}
         </Form>
       </GxGrid>
     </div>
