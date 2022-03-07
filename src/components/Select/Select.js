@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useStoreon } from 'storeon/react'
 import BaseSelect from './BaseSelect'
 import { SELECT_TYPES } from '../../const'
+import { e } from '@garpix/fetcher/dataStates-3fdb48f5'
 
 const Select = ({ setValue = () => { }, func = () => { }, type, ...props }) => {
   const { dispatch } = useStoreon()
@@ -23,7 +24,8 @@ const Select = ({ setValue = () => { }, func = () => { }, type, ...props }) => {
                 label: `${elem.id} (${elem.title}, ${elem.category})`,
                 value: elem.id,
                 unit: elem.unit,
-                name: elem.title
+                name: elem.title,
+                price: elem.price
               })
 
             case SELECT_TYPES.card:

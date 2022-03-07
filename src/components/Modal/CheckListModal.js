@@ -54,7 +54,13 @@ const CheckListModal = ({
                   Наименование
                 </th>
                 <th>
-                  Кол-во
+                  Кол-во/вес
+                </th>
+                <th>
+                  Цена 1шт/1кг
+                </th>
+                <th>
+                  Общая стоимость
                 </th>
               </tr>
             </thead>
@@ -67,6 +73,12 @@ const CheckListModal = ({
                     </td>
                     <td>
                       {line.count}
+                    </td>
+                    <td>
+                      {line.price}
+                    </td>
+                    <td>
+                      {Math.round(line.price * line.count * 100) / 100}
                     </td>
                   </tr>
                 )

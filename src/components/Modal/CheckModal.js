@@ -80,7 +80,8 @@ const CheckModal = ({
       lines.push({
         id: formik.values.product.value,
         count: +formik.values.count,
-        label: formik.values.product.name
+        label: formik.values.product.name,
+        price: formik.values.product.price
       })
     }
     updateProductList(lines)
@@ -91,14 +92,13 @@ const CheckModal = ({
   }
 
   const chooseProduct = (e, name) => {
-    changeValuesSelect(e, name)
     formik.setFieldValue(FORM_FIELDS.count, 1)
-
     setUnit(e.unit)
+    handleSelectBlur(name)
+    changeValuesSelect(e, name)
   }
 
   const chooseCard = (e, name) => {
-    changeValuesSelect(e, name)
     if (!e.value) {
       formik.setFieldValue(FORM_FIELDS.card, null)
     }
@@ -106,15 +106,9 @@ const CheckModal = ({
       formik.setFieldValue(FORM_FIELDS.bonus, 0)
       setMaxBonus(Math.floor(e.bonus))
     }
+    handleSelectBlur(name)
+    changeValuesSelect(e, name)
   }
-
-  useEffect(() => {
-    if (formik) {
-      const { isSubmitting, isValid, dirty } = formik;
-      const isDisabled = isSubmitting || !isValid || !dirty
-      setDisabled(isDisabled)
-    }
-  }, [formik])
 
   useEffect(() => {
     if (discountCard && Object.keys(discountCard).length) {
@@ -122,6 +116,14 @@ const CheckModal = ({
       formik.setFieldValue(FORM_FIELDS.bonus, discountCard.bonus || '0')
     }
   }, [discountCard])
+
+  useEffect(() => {
+    if (formik) {
+      const { isValid, dirty } = formik;
+      const isDisabled = !isValid || !dirty
+      setDisabled(isDisabled)
+    }
+  }, [formik.values])
 
   return (
     <div className={style['service-form']}>
@@ -146,7 +148,6 @@ const CheckModal = ({
                   type={SELECT_TYPES.product}
                   func={api.getProductListForCreatingCheck}
                   setValue={(e) => chooseProduct(e, FORM_FIELDS.product)}
-                  onBlur={() => handleSelectBlur(FORM_FIELDS.product)}
                   err={formik.errors.product && formik.touched.product}
                 />
               </Fieldset>
@@ -197,7 +198,6 @@ const CheckModal = ({
                   func={api.getCardListForCreatingCheck}
                   type={SELECT_TYPES.card}
                   setValue={(e) => chooseCard(e, FORM_FIELDS.card)}
-                  onBlur={() => handleSelectBlur(FORM_FIELDS.card)}
                   err={formik.errors.card && formik.touched.card}
                 />
               </Fieldset>
