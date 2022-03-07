@@ -11,7 +11,7 @@ const Select = ({ setValue = () => { }, func = () => { }, type, ...props }) => {
   const handleChange = elem => {
     setValue(elem)
   }
-  console.log('type', type)
+
   useEffect(() => {
     setLoading(true)
     func()

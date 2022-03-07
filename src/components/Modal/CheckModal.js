@@ -17,6 +17,7 @@ const CheckModal = ({
   const [disabled, setDisabled] = useState(true)
   const [unit, setUnit] = useState(UNITS[0])
   const [maxBonus, setMaxBonus] = useState(0)
+  const [productList, updateProductList] = useState([])
 
   const onSubmit = (values, actions) => {
     console.log('values', values)
@@ -25,7 +26,7 @@ const CheckModal = ({
   const formik = useFormik({
     initialValues: {
       product: null,
-      unit: 1,
+      unit: '1',
       card: null,
       bonus: 0,
     },
@@ -48,10 +49,29 @@ const CheckModal = ({
     formik.setFieldTouched([name], true)
   }
 
+  const addLine = () => {
+    const lines = [...productList]
+    let wasUpdate = false
+    for (let index = 0; index < lines.length; index++) {
+      if (lines[index].id === formik.values.product.value) {
+        lines[index].unit += +formik.values.unit
+        wasUpdate = true
+        break
+      }
+    }
+    if (!wasUpdate) {
+      lines.push({
+        id: formik.values.product.value,
+        unit: +formik.values.unit,
+      })
+    }
+    updateProductList(lines)
+  }
+
   useEffect(() => {
     if (formik) {
-      const { isSubmitting, isValid } = formik;
-      const isDisabled = isSubmitting || !isValid
+      const { isSubmitting, isValid, dirty } = formik;
+      const isDisabled = isSubmitting || !isValid || !dirty
       setDisabled(isDisabled)
     }
   }, [formik])
@@ -129,6 +149,7 @@ const CheckModal = ({
                 className='btn_width-square'
                 data-cy='btn'
                 buttonDis
+                onClick={addLine}
               >
                 +
               </Button>
@@ -190,7 +211,7 @@ const CheckModal = ({
             <GxCol className={style['service-col_start']}>
               <Button
                 type='submit'
-                disabled={disabled}
+                disabled={!productList.length}
                 className='btn_width_single'
                 data-cy='btn'
                 buttonDis
