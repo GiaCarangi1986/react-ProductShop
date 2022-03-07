@@ -3,6 +3,7 @@ export const ERROR_MESSAGE = {
   uncorrect_getting_check_list: 'Список чеков не удалось получить',
   uncorrect_logout: 'Не удалось разлогинить пользователя',
   uncorrect_getting_product_list: 'Список продуктов не удалось получить',
+  uncorrect_getting_card_list: 'Список бонусынх карт не удалось получить',
 }
 
 const CORRECT_USER_DATA = {
@@ -114,12 +115,54 @@ export const ProductList = (status = 2) => {
       previous: [
 
       ],
-      count_all: 2,
+      count_all: 4,
     }
   }
   throw {
     response: {
       data: { non_field_errors: [ERROR_MESSAGE.uncorrect_getting_product_list] },
+      status: 404,
+    }
+  }
+}
+
+export const CardList = (status = 2) => {
+  if (status === 1) {
+    return { // лист бонусных карт
+      results: [
+        {
+          id: 1,
+          bonus: 4.2,
+          FIO: 'Курочкина Елизавета Сергеевна'
+        },
+        {
+          id: 3,
+          bonus: 63,
+          FIO: 'Иванов Николай Федорович'
+        },
+        {
+          id: 4,
+          bonus: 0,
+          FIO: 'Кузнецов Федор Андреевич'
+        },
+      ],
+      count: 1,
+      next: [
+        {
+          id: 2,
+          bonus: 10,
+          FIO: 'Максимова Юлия Александровна'
+        },
+      ],
+      previous: [
+
+      ],
+      count_all: 4,
+    }
+  }
+  throw {
+    response: {
+      data: { non_field_errors: [ERROR_MESSAGE.uncorrect_getting_card_list] },
       status: 404,
     }
   }

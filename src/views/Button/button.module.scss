@@ -166,6 +166,11 @@
   padding: 0;
 }
 
+.btn_width_single::part(base) {
+  width: 150px;
+  min-width: min-content;
+}
+
 .btn_width-100 {
   width: 100%;
 }

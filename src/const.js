@@ -515,7 +515,9 @@ export const FORM_LABELS = {
   end_at: 'Дата окончания',
   product: 'Товар',
   count: 'Кол-во, шт',
-  weight: 'Вес, кг'
+  weight: 'Вес, кг',
+  card: 'Бонусная карта',
+  bonus: 'Снять бонусов'
 }
 
 export const FORM_FIELDS = {
@@ -523,6 +525,13 @@ export const FORM_FIELDS = {
   end_at: 'end_at',
   product: 'product',
   unit: 'unit',
+  card: 'card',
+  bonus: 'bonus'
 }
 
 export const UNITS = ['шт', 'кг']
+
+export const SELECT_TYPES = {
+  product: 'product',
+  card: 'card',
+}

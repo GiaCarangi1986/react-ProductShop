@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useStoreon } from 'storeon/react'
 import BaseSelect from './BaseSelect'
+import { SELECT_TYPES } from '../../const'
 
-const Select = ({ setValue = () => { }, func = () => { }, ...props }) => {
+const Select = ({ setValue = () => { }, func = () => { }, type, ...props }) => {
   const { dispatch } = useStoreon()
   const [isLoading, setLoading] = useState(true)
   const [options, setOptions] = useState([])
@@ -10,18 +11,40 @@ const Select = ({ setValue = () => { }, func = () => { }, ...props }) => {
   const handleChange = elem => {
     setValue(elem)
   }
-
+  console.log('type', type)
   useEffect(() => {
     setLoading(true)
     func()
       .then((res) => {
         const newRes = res.map(elem => {
-          return ({
-            label: `${elem.id} (${elem.title}, ${elem.category})`,
-            value: elem.id,
-            unit: elem.unit
-          })
+          switch (type) {
+            case SELECT_TYPES.product:
+              return ({
+                label: `${elem.id} (${elem.title}, ${elem.category})`,
+                value: elem.id,
+                unit: elem.unit
+              })
+
+            case SELECT_TYPES.card:
+              return ({
+                label: `${elem.id} (${elem.FIO})`,
+                value: elem.id,
+                bonus: elem.bonus
+              })
+
+            default:
+              break;
+          }
         })
+
+        if (type === SELECT_TYPES.card) {
+          newRes.unshift({
+            label: 'без карты',
+            value: 0,
+            bonus: 0
+          })
+        }
+
         setOptions(newRes)
         setLoading(false)
       })
