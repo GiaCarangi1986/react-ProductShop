@@ -3,15 +3,17 @@ import { useFormik } from 'formik';
 import { useStoreon } from 'storeon/react';
 import CheckModal from './CheckModal';
 import PayModal from './PayModal';
+import CheckListModal from './CheckListModal'
 import { Modal } from '../../views';
 import { addOrUpdateTariffSchema } from '../../schema'
-import { MODAL_TYPES, TABLE_EVENT_TYPES } from '../../const';
+import { MODAL_TYPES, TABLE_EVENT_TYPES, MODALS_CHECK, MODALS_CHECK_TITLE } from '../../const';
 import { handingErrors, processingResult } from '../../utils'
 import api from '../../api'
 
 const MODALS_TYPES = {
   default: CheckModal,
-  payModal: PayModal
+  payModal: PayModal,
+  checkList: CheckListModal,
 }
 
 const AddOrUpdateCheckModal = ({
@@ -29,11 +31,11 @@ const AddOrUpdateCheckModal = ({
       // 'tariff'
     )
   const [open, setOpen] = useState(false)
-  const [contentType, setContentType] = useState('default')
-  const [newElement, setNewElement] = useState(false)
-  const [discount, setDiscount] = useState(0)
+  const [contentType, setContentType] = useState(MODALS_CHECK.default)
+  const [linesOfCheck, setLinesOfCheck] = useState([])
+  const [discountCard, setDiscountCard] = useState({})
 
-  const backToMainForm = () => setContentType('default')
+  const backToMainForm = () => setContentType(MODALS_CHECK.default)
 
   const addData = (actions = null) => {
     if (results.length) {
@@ -168,13 +170,14 @@ const AddOrUpdateCheckModal = ({
   useEffect(() => {
     if (!open) {
       backToMainForm()
-      setNewElement(false)
+      setLinesOfCheck([])
+      setDiscountCard(null)
     }
   }, [open])
-
+  console.log('linesOfCheck', linesOfCheck)
   if (MODALS_TYPES[contentType]) {
     const Component = MODALS_TYPES[contentType];
-    const headerText = 'Добавление чека' // буду проверять входящие данные (есть id редакт чека или нет) и менять эту надпись
+    const headerText = MODALS_CHECK_TITLE[contentType] // буду проверять входящие данные (есть id редакт чека или нет) и менять эту надпись
     return (
       <Modal setOpen={setOpen} variant='right' open={open}>
         <Component
@@ -184,7 +187,10 @@ const AddOrUpdateCheckModal = ({
           setOpen={setOpen}
           open={open}
           setEventType={setEventType}
-          newElement={newElement}
+          linesOfCheck={linesOfCheck}
+          setLinesOfCheck={setLinesOfCheck}
+          discountCard={discountCard}
+          setDiscountCard={setDiscountCard}
           handleSubmitError={handleSubmitError}
           headerText={headerText}
           {...props} />

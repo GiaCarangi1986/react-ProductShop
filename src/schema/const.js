@@ -11,6 +11,7 @@ const number = 'Допускаются только цифры';
 const lardgeString = 'Допускается не более 150 символов'
 // const lardgeTextarea = 'Допускается не более 300 символов'
 const zeroNumber = 'Значение не может быть отрицательным'
+const positiveNumber = 'Кол-во должно быть больше 0'
 const bigNumber = 'Значение не должно превышать 32767'
 const price = 'Число должно содержать не более 10 символов'
 const priceZero = 'Цена должна быть больше 0'
@@ -28,6 +29,7 @@ export {
   number,
   lardgeString,
   zeroNumber,
+  positiveNumber,
   bigNumber,
   price,
   priceZero,

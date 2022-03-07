@@ -524,7 +524,7 @@ export const FORM_FIELDS = {
   start_at: 'start_at',
   end_at: 'end_at',
   product: 'product',
-  unit: 'unit',
+  count: 'count',
   card: 'card',
   bonus: 'bonus'
 }
@@ -534,4 +534,17 @@ export const UNITS = ['шт', 'кг']
 export const SELECT_TYPES = {
   product: 'product',
   card: 'card',
+}
+
+export const MODALS_CHECK = {
+  default: 'default',
+  payModal: 'payModal',
+  checkList: 'checkList',
+}
+
+export const MODALS_CHECK_TITLE = {
+  default: 'Добавление чека',
+  update: 'Редактирование чека',
+  payModal: 'Информация о совершении покупки',
+  checkList: 'Подготовка к оплате',
 }

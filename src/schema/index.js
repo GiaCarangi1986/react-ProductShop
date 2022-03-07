@@ -9,6 +9,12 @@ const numberTemp = Yup.number()
   .max(32767, errorsMessenge.bigNumber)
   .required(errorsMessenge.requiredField);
 
+const countTemp = Yup.number()
+  .nullable()
+  .min(1, errorsMessenge.positiveNumber)
+  .max(32767, errorsMessenge.bigNumber)
+  .required(errorsMessenge.requiredField);
+
 const stringTemp = Yup.string()
   .nullable()
   .max(150, errorsMessenge.lardgeString)
@@ -54,7 +60,7 @@ const signUp = () => {
 
 const addLineOfCheck = Yup.object().shape({
   product: objectTemp,
-  unit: numberTemp,
+  count: countTemp,
 })
 
 export {

@@ -5,34 +5,46 @@ import { GxGrid, GxCol, GxRow } from '@garpix/garpix-web-components-react'
 import { Button, ErrorText, Fieldset, Form, Input } from '../../views'
 import { deleteSpaces } from '../../utils'
 import Select from '../Select'
-import { FORM_FIELDS, FORM_LABELS, UNITS, SELECT_TYPES } from '../../const'
+import { FORM_FIELDS, FORM_LABELS, UNITS, SELECT_TYPES, MODALS_CHECK } from '../../const'
 import { addLineOfCheck } from '../../schema'
 import api from '../../api'
 
 import style from './modal.module.scss'
 
 const CheckModal = ({
-  headerText = ''
+  headerText = '',
+  setContentType = () => { },
+  linesOfCheck = [],
+  setLinesOfCheck = () => { },
+  setDiscountCard = () => { }
 }) => {
   const [disabled, setDisabled] = useState(true)
   const [unit, setUnit] = useState(UNITS[0])
   const [maxBonus, setMaxBonus] = useState(0)
-  const [productList, updateProductList] = useState([])
-
-  const onSubmit = (values, actions) => {
-    console.log('values', values)
-  }
+  const [productList, updateProductList] = useState(linesOfCheck)
 
   const formik = useFormik({
     initialValues: {
       product: null,
-      unit: '1',
+      count: '1',
       card: null,
       bonus: 0,
     },
     validationSchema: addLineOfCheck,
-    onSubmit
   })
+
+  const onClickSubmit = () => {
+    formik.resetForm();
+    setLinesOfCheck(productList)
+
+    const cardInfo = formik.values.card ? {
+      id: formik.values.card.value,
+      bonus: formik.values.bonus
+    } : null
+
+    setDiscountCard(cardInfo)
+    setContentType(MODALS_CHECK.checkList)
+  }
 
   const handleBlur = (e) => {
     const { name } = e.target;
@@ -54,7 +66,7 @@ const CheckModal = ({
     let wasUpdate = false
     for (let index = 0; index < lines.length; index++) {
       if (lines[index].id === formik.values.product.value) {
-        lines[index].unit += +formik.values.unit
+        lines[index].count += +formik.values.count
         wasUpdate = true
         break
       }
@@ -62,10 +74,14 @@ const CheckModal = ({
     if (!wasUpdate) {
       lines.push({
         id: formik.values.product.value,
-        unit: +formik.values.unit,
+        count: +formik.values.count,
       })
     }
     updateProductList(lines)
+
+    formik.setFieldValue(FORM_FIELDS.count, 1)
+    formik.setFieldValue(FORM_FIELDS.product, null)
+    formik.setFieldTouched(FORM_FIELDS.product, false)
   }
 
   useEffect(() => {
@@ -78,7 +94,7 @@ const CheckModal = ({
 
   useEffect(() => {
     if (formik.values.product) {
-      formik.setFieldValue(FORM_FIELDS.unit, 1)
+      formik.setFieldValue(FORM_FIELDS.count, 1)
 
       setUnit(formik.values.product.unit)
     }
@@ -104,7 +120,7 @@ const CheckModal = ({
             <h2>{headerText}</h2>
           </GxCol>
         </GxRow>
-        <Form onGx-submit={formik.handleSubmit} data-cy='form'>
+        <Form data-cy='form'>
           <GxRow>
             <GxCol className={style['service-col']}>
               <Fieldset
@@ -127,13 +143,13 @@ const CheckModal = ({
             <GxCol className={style['service-col']} >
               <Fieldset
                 errorClass='addOrUpdateCheck'
-                error={formik.errors.unit}
-                touched={formik.touched.unit}>
+                error={formik.errors.count}
+                touched={formik.touched.count}>
                 <Input
-                  value={formik.values.unit}
+                  value={formik.values.count}
                   onGx-input={formik.handleChange}
                   onGx-blur={handleBlur}
-                  name={FORM_FIELDS.unit}
+                  name={FORM_FIELDS.count}
                   label={unit === UNITS[0] ? FORM_LABELS.count : FORM_LABELS.weight}
                   data-cy='title'
                   type='number'
@@ -207,20 +223,20 @@ const CheckModal = ({
               ) : null}
             </GxCol>
           </GxRow>
-          <GxRow>
-            <GxCol className={style['service-col_start']}>
-              <Button
-                type='submit'
-                disabled={!productList.length}
-                className='btn_width_single'
-                data-cy='btn'
-                buttonDis
-              >
-                Перейти к чеку
-              </Button>
-            </GxCol>
-          </GxRow>
         </Form>
+        <GxRow>
+          <GxCol className={style['service-col_start']}>
+            <Button
+              disabled={!productList.length}
+              className='btn_width_single'
+              data-cy='btn'
+              buttonDis
+              onClick={onClickSubmit}
+            >
+              Перейти к чеку
+            </Button>
+          </GxCol>
+        </GxRow>
       </GxGrid>
     </div>
   )
