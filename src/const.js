@@ -548,3 +548,8 @@ export const MODALS_CHECK_TITLE = {
   payModal: 'Информация о совершении покупки',
   checkList: 'Подготовка к оплате',
 }
+
+export const CHECK_LINES_HEADER = {
+  delete_line: 'delete_line',
+
+}

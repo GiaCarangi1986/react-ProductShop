@@ -17,20 +17,23 @@ const CheckModal = ({
   linesOfCheck = [],
   discountCard = {},
   setLinesOfCheck = () => { },
-  setDiscountCard = () => { }
+  setDiscountCard = () => { },
+  open = false
 }) => {
   const [disabled, setDisabled] = useState(true)
   const [unit, setUnit] = useState(UNITS[0])
   const [maxBonus, setMaxBonus] = useState(0)
   const [productList, updateProductList] = useState(linesOfCheck)
 
+  const initialValues = {
+    product: null,
+    count: '1',
+    card: null,
+    bonus: '0',
+  }
+
   const formik = useFormik({
-    initialValues: {
-      product: null,
-      count: '1',
-      card: null,
-      bonus: '0',
-    },
+    initialValues,
     validationSchema: addLineOfCheck,
   })
 
@@ -54,11 +57,8 @@ const CheckModal = ({
     formik.setFieldValue([name], value)
   }
 
-  const changeValuesSelect = (e, name) => {
-    formik.setFieldValue(name, e)
-  }
-
   const handleSelectBlur = (name = '') => {
+    console.log('handleSelectBlur', name);
     formik.setFieldTouched([name], true)
   }
 
@@ -92,13 +92,14 @@ const CheckModal = ({
   }
 
   const chooseProduct = (e, name) => {
-    formik.setFieldValue(FORM_FIELDS.count, 1)
+    formik.setFieldValue(name, e)
+    console.log('chooseProduct');
     setUnit(e.unit)
-    handleSelectBlur(name)
-    changeValuesSelect(e, name)
   }
 
   const chooseCard = (e, name) => {
+    formik.setFieldValue(name, e)
+    console.log('chooseCard');
     if (!e.value) {
       formik.setFieldValue(FORM_FIELDS.card, null)
     }
@@ -106,8 +107,6 @@ const CheckModal = ({
       formik.setFieldValue(FORM_FIELDS.bonus, 0)
       setMaxBonus(Math.floor(e.bonus))
     }
-    handleSelectBlur(name)
-    changeValuesSelect(e, name)
   }
 
   const blurFloor = (e) => {
@@ -128,7 +127,13 @@ const CheckModal = ({
       const isDisabled = !isValid || !dirty
       setDisabled(isDisabled)
     }
-  }, [formik.values])
+  }, [formik])
+
+  useEffect(() => {
+    if (!open) {
+      formik.setValues(initialValues)
+    }
+  }, [open])
 
   return (
     <div className={style['service-form']}>
@@ -152,7 +157,8 @@ const CheckModal = ({
                   data-cy='title'
                   type={SELECT_TYPES.product}
                   func={api.getProductListForCreatingCheck}
-                  setValue={(e) => chooseProduct(e, FORM_FIELDS.product)}
+                  onBlur={() => handleSelectBlur(FORM_FIELDS.product)}
+                  onChange={(e) => chooseProduct(e, FORM_FIELDS.product)}
                   err={formik.errors.product && formik.touched.product}
                 />
               </Fieldset>
@@ -202,7 +208,8 @@ const CheckModal = ({
                   data-cy='title'
                   func={api.getCardListForCreatingCheck}
                   type={SELECT_TYPES.card}
-                  setValue={(e) => chooseCard(e, FORM_FIELDS.card)}
+                  onBlur={() => handleSelectBlur(FORM_FIELDS.card)}
+                  onChange={(e) => chooseCard(e, FORM_FIELDS.card)}
                   err={formik.errors.card && formik.touched.card}
                 />
               </Fieldset>

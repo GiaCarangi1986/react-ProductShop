@@ -4,14 +4,10 @@ import BaseSelect from './BaseSelect'
 import { SELECT_TYPES } from '../../const'
 import { e } from '@garpix/fetcher/dataStates-3fdb48f5'
 
-const Select = ({ setValue = () => { }, func = () => { }, type, ...props }) => {
+const Select = ({ func = () => { }, type, ...props }) => {
   const { dispatch } = useStoreon()
   const [isLoading, setLoading] = useState(true)
   const [options, setOptions] = useState([])
-
-  const handleChange = elem => {
-    setValue(elem)
-  }
 
   useEffect(() => {
     setLoading(true)
@@ -64,7 +60,6 @@ const Select = ({ setValue = () => { }, func = () => { }, type, ...props }) => {
       id='line-bussiness-select'
       isLoading={isLoading}
       options={options}
-      onChange={handleChange}
       {...props}
     />
   )
