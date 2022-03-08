@@ -47,9 +47,9 @@ const CheckModal = ({
     setContentType(MODALS_CHECK.checkList)
   }
 
-  const handleBlur = (e) => {
+  const handleBlur = (e, floorValue = null) => {
     const { name } = e.target;
-    const value = deleteSpaces(formik.values[name])
+    const value = deleteSpaces(floorValue || formik.values[name])
     formik.handleBlur(e)
     formik.setFieldValue([name], value)
   }
@@ -108,6 +108,11 @@ const CheckModal = ({
     }
     handleSelectBlur(name)
     changeValuesSelect(e, name)
+  }
+
+  const blurFloor = (e) => {
+    const floorValue = Math.floor(e.target.value)
+    handleBlur(e, floorValue)
   }
 
   useEffect(() => {
@@ -211,7 +216,7 @@ const CheckModal = ({
                   <Input
                     value={formik.values.bonus}
                     onGx-input={formik.handleChange}
-                    onGx-blur={handleBlur}
+                    onGx-blur={blurFloor}
                     name={FORM_FIELDS.bonus}
                     label={`${FORM_LABELS.bonus} (макс. ${maxBonus})`}
                     data-cy='title'
