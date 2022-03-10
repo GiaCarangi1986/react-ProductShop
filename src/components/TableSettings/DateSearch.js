@@ -51,9 +51,14 @@ const DateSearch = () => {
           />
         </Fieldset>
       </div>
-      <Button type='submit' disabled={disabledSubmit}>
-        Поиск
-      </Button>
+      <div className={style['table-search_block']}>
+        <Button type='submit' disabled={disabledSubmit} className='search_ok'>
+          Поиск
+        </Button>
+        <Button disabled={disabledSubmit} className='search_cancel' outline>
+          Отмена
+        </Button>
+      </div>
     </Form>
   )
 }
