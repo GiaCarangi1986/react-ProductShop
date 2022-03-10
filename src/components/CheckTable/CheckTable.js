@@ -33,6 +33,17 @@ const CheckTable = ({
   }, [status])
 
   useEffect(() => {
+    let newVals = []
+    if (cols) {
+      Object.keys(cols).map((elem) => {
+        newVals = [...newVals, elem]
+        return newVals
+      })
+    }
+    setColsTrue(newVals)
+  }, [cols])
+
+  useEffect(() => {
     setCols(otherData?.cols_names || null)
   }, [otherData])
 
@@ -69,7 +80,7 @@ const CheckTable = ({
               const key = `service-row-${elem.id}`;
               const classesRow = classNames({
                 [style['table-row']]: true,
-                [style['table-row_archive']]: !elem.is_available
+                // [style['table-row_archive']]: !elem.is_available
               })
               return (
                 <tr data-test={key} key={key} className={classesRow}>
@@ -97,15 +108,12 @@ const CheckTable = ({
                   {cols && colsTrue.map((col) => {
                     const keyCol = `${col}`
                     let colValue = elem[col]
-                    if (col === 'flat_rate') {
-                      colValue = elem[col] ? 'да' : 'нет'
-                    }
                     const leftOrCenter = Number.isNaN(Number(`${elem[col]}`));
                     const tdClasses = classNames({
                       [style['table-col']]: true,
                       [style['table-col_left']]: leftOrCenter
                     })
-                    const w = WIDTH_COL[col] ? WIDTH_COL[col] : undefined
+                    const w = WIDTH_COL[col] || ''
                     const m = leftOrCenter ? '' : 'auto'
                     return (
                       <td key={keyCol} className={tdClasses}>

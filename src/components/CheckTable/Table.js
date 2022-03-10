@@ -6,6 +6,7 @@ import classNames from 'classnames'
 import { dataStates } from '@garpix/fetcher'
 import {
   TABLE_EVENT_TYPES,
+  WIDTH_COL
 } from '../../const'
 
 import style from './check_table.module.scss'
@@ -54,11 +55,6 @@ const Table = ({
     [style['table_scroll-vertical-noResults']]: status === dataStates.loaded && !resultsLen,
   })
 
-  const classesTable = classNames({
-    [style.table]: true,
-    [style.table_mb]: resultsLen === count
-  })
-
   return (
     <div
       className={classesScroll}
@@ -66,21 +62,23 @@ const Table = ({
       onScroll={tableScroll}
     >
       <div className={style['table-layout']}>
-        <table className={classesTable}>
+        <table className={style.table}>
           <thead
             className={style['table-head']}>
             <tr className={style['table-row']}>
               <th key='action_colunm' className={style['table-col']}>
                 <div style={{ width: '50px' }} />
               </th>
-              {/* <FiltersDropdown
-                filterParams={filterParams}
-                resultsLen={resultsLen}
-                cols={cols}
-                colsTrue={colsTrue}
-                filtersList={filtersList}
-                {...props}
-              /> */}
+              {cols && colsTrue.map((key) => {
+                const w = WIDTH_COL[key] || 100
+                return (
+                  <th key={`column-${key}`} className={style['table-col']}>
+                    <div style={{ width: `${w}px`, margin: 'auto' }}>
+                      {cols[key]}
+                    </div>
+                  </th>
+                )
+              })}
             </tr>
           </thead>
           {children}

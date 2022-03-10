@@ -96,7 +96,7 @@ function dateFotmattedForModal(date) {
 export function processingResult(item) { // use
   return {
     id: item?.id || '', // id чека
-    date_time: item?.date_time || '', // дата и время совершения покупки
+    date_time: dateFotmattedForTable(item?.date_time) || '', // дата и время совершения покупки
     sum: item?.sum || 0, // итоговая сумма
     kassir: item?.kassir || '', // ФИО кассир
     bonus_add: item?.bonus_add || 0, // сколько начислено бонусов

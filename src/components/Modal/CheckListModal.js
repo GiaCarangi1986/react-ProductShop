@@ -3,7 +3,7 @@ import { GxGrid, GxCol, GxRow } from '@garpix/garpix-web-components-react'
 import { Button, ErrorText, Fieldset, Form, Icon, Input } from '../../views'
 import { handingErrors, deleteSpaces } from '../../utils'
 import { addFrequencyInfo } from '../../schema'
-import { FORM_LABELS, FORM_FIELDS, MODALS_CHECK } from '../../const'
+import { FORM_LABELS, FORM_FIELDS, MODALS_CHECK, CHECK_LINES_HEADER } from '../../const'
 import api from '../../api'
 
 import style from './modal.module.scss'
@@ -50,18 +50,13 @@ const CheckListModal = ({
           <table>
             <thead>
               <tr>
-                <th>
-                  Наименование
-                </th>
-                <th>
-                  Кол-во/вес
-                </th>
-                <th>
-                  Цена 1шт/1кг
-                </th>
-                <th>
-                  Общая стоимость
-                </th>
+                {Object.keys(CHECK_LINES_HEADER).map(header => {
+                  return (
+                    <th key={header}>
+                      {CHECK_LINES_HEADER[header]}
+                    </th>
+                  )
+                })}
               </tr>
             </thead>
             <tbody>

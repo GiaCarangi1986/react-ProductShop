@@ -58,7 +58,6 @@ const CheckModal = ({
   }
 
   const handleSelectBlur = (name = '') => {
-    console.log('handleSelectBlur', name);
     formik.setFieldTouched([name], true)
   }
 
@@ -93,13 +92,11 @@ const CheckModal = ({
 
   const chooseProduct = (e, name) => {
     formik.setFieldValue(name, e)
-    console.log('chooseProduct');
     setUnit(e.unit)
   }
 
   const chooseCard = (e, name) => {
     formik.setFieldValue(name, e)
-    console.log('chooseCard');
     if (!e.value) {
       formik.setFieldValue(FORM_FIELDS.card, null)
     }

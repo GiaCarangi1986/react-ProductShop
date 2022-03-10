@@ -76,41 +76,6 @@ export const DROPDOWN_TYPES = {
   readable_freq: 'readable_freq',
 }
 
-export const WIDTH_COL = {
-  concated_code: 230,
-
-  line_business: 250,
-  line_business_code: 90,
-
-  service_element: 250,
-  service_element_code: 150,
-
-  service_line: 250,
-  service_line_code: 110,
-
-  service: 350,
-  service_code: 90,
-
-  tariff: 210,
-  tariff_code: 95,
-
-  tariff_element: 190,
-  tariff_unit: 290,
-  tariff_type: 290,
-  flat_rate: 375,
-  price: 190,
-
-  created_at: 170,
-  archived_at: 170,
-  start_at: 170,
-  end_at: 170,
-
-  price_code: 150,
-  cost_price: 150,
-  max_discount: 250,
-  readable_freq: 220,
-}
-
 export const SETTINGS_ITEMS = [
   {
     value: true,
@@ -263,9 +228,6 @@ export const FILTERS_KEYS = {
   end_at: 'end_at',
 
   price_code: 'price_code',
-  // cost_price: 'cost_price',
-  // max_discount: 'max_discount',
-  // readable_freq: 'readable_freq',
 }
 
 export const FILTERS = {
@@ -296,11 +258,6 @@ export const FILTERS = {
   readable_freq: 'element__update_frequency__readable_freq'
 }
 
-export const FILTER_FLAT_RATE_INIT = [
-  { label: 'Да', value: ['flat-rate-true'], key: 'flat-rate-true' },
-  { label: 'Нет', value: ['flat-rate-false'], key: 'flat-rate-false' }
-]
-
 export const FILTERS_TITLE = {
   line_business: 'service__service__line__line_business__title',
   service: 'service__service__title',
@@ -320,8 +277,6 @@ export const FILTERS_TITLE = {
   tariff_unit: 'element__unit__unit',
   created_at: 'created_at',
   archived_at: 'archived_at',
-  // start_at: 'start_at',
-  // end_at: 'end_at',
   max_discount: 'element__max_discount',
   cost_price: 'element__cost_price',
   readable_freq: 'element__update_frequency__readable_freq'
@@ -440,8 +395,6 @@ export const SORT_TYPES = {
 };
 
 export const NAMES = { // примерная структура столбцов
-  action_colunm: '',
-
   id: 'ID',
   date_time: 'Дата и время',
   sum: 'Итоговая сумма',
@@ -450,6 +403,16 @@ export const NAMES = { // примерная структура столбцов
   bonus_pop: 'Кол-во снятых бонусов',
   product_count: 'Кол-во продуктов',
 };
+
+export const WIDTH_COL = {
+  id: 100,
+  date_time: 150,
+  sum: 150,
+  kassir: 300,
+  bonus_add: 150,
+  bonus_pop: 150,
+  product_count: 150,
+}
 
 export const TABLE_EVENT_TYPES = {
   search: 'search',
@@ -550,6 +513,8 @@ export const MODALS_CHECK_TITLE = {
 }
 
 export const CHECK_LINES_HEADER = {
-  delete_line: 'delete_line',
-
+  name: 'Наименование',
+  quantity_or_Weight: 'Кол-во/вес',
+  price_piece_or_kg: 'Цена 1шт/1кг',
+  total_cost: 'Общая стоимость'
 }
