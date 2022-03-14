@@ -7,15 +7,24 @@ import { formatDateToInput } from '../../utils/date'
 import style from './table-settings.module.scss'
 
 const DateSearch = () => {
+  const initialValues = {
+    start_at: null,
+    end_at: null
+  }
+
   const onSubmit = (values, actions) => {
     console.log('values', values)
   }
 
   const formik = useFormik({
-    initialValues: {},
+    initialValues,
     validationSchema: dateSearch,
     onSubmit
   })
+
+  const cancelAction = () => {
+    formik.setValues(initialValues)
+  }
 
   const dateNow = formatDateToInput()
   const disabledSubmit = !formik.isValid
@@ -55,7 +64,7 @@ const DateSearch = () => {
         <Button type='submit' disabled={disabledSubmit} className='search_ok'>
           Поиск
         </Button>
-        <Button disabled={disabledSubmit} className='search_cancel' outline>
+        <Button disabled={!formik.dirty} className='search_cancel' outline onClick={cancelAction}>
           Отмена
         </Button>
       </div>

@@ -470,7 +470,7 @@ export const BASE_TIME = [
 ]
 
 export const SCREENS = {
-  middle: "(max-width: 1024px)",
+  middle: "(max-width: 1200px)",
 };
 
 export const FORM_LABELS = {

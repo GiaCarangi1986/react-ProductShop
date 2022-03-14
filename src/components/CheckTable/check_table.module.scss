@@ -176,20 +176,14 @@ td.table-col-full-rights div {
 }
 
 .grid-rows {
-  grid-template-rows: calc(100% - 150px) minmax(0, 50px);
+  grid-template-rows: calc(100% - 125px) minmax(0, 50px);
   gap: 10px;
   height: calc(100vh - 175px);
   @media (max-width: 1200px) {
-    height: calc(100vh - 145px);
-  }
-  @media (max-width: 1100px) {
-    margin-top: 10px;
+    height: calc(100vh - 142px);
   }
   @media (max-width: 1020px) {
-    height: calc(100vh - 185px);
-  }
-  @media (max-width: 660px) {
-    height: calc(100vh - 220px);
+    height: calc(100vh - 249px);
   }
 }
 

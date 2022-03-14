@@ -23,4 +23,11 @@
 .wrap{
   display: flex;
   gap: 5px;
+  width: max-content;
+}
+
+@media (max-width: 1200px) {
+  .wrap{
+    font-size: 15px;
+  }
 }

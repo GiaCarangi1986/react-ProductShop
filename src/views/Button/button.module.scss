@@ -10,7 +10,7 @@
   --gx-color-danger-50: var(--ps-color-red);
   font-family: var(--ps-font-family);
   position: static;
-  @media (max-width: 1024px) {
+  @media (max-width: 1200px) {
     --gx-button-font-size-medium: 15px;
     --gx-spacing-large: 1rem;
   }
@@ -237,7 +237,7 @@
   position: relative;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
   .button {
     --gx-input-height-medium: 35px;
   }
