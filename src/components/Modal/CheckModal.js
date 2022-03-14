@@ -24,6 +24,7 @@ const CheckModal = ({
   const [unit, setUnit] = useState(UNITS[0])
   const [maxBonus, setMaxBonus] = useState(0)
   const [productList, updateProductList] = useState(linesOfCheck)
+  const [wasAddProduct, setWasAddProduct] = useState(false)
 
   const initialValues = {
     product: null,
@@ -88,11 +89,15 @@ const CheckModal = ({
     formik.setFieldValue(FORM_FIELDS.count, 1)
     formik.setFieldValue(FORM_FIELDS.product, null)
     formik.setFieldTouched(FORM_FIELDS.product, false)
+
+    setWasAddProduct(true)
   }
 
   const chooseProduct = (e, name) => {
     formik.setFieldValue(name, e)
     setUnit(e.unit)
+
+    setWasAddProduct(false)
   }
 
   const chooseCard = (e, name) => {
@@ -121,7 +126,7 @@ const CheckModal = ({
   useEffect(() => {
     if (formik) {
       const { isValid, dirty } = formik;
-      const isDisabled = !isValid || !dirty
+      const isDisabled = !isValid || !dirty || wasAddProduct
       setDisabled(isDisabled)
     }
   }, [formik])

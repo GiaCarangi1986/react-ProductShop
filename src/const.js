@@ -416,6 +416,13 @@ export const WIDTH_COL = {
   kassir: 300,
 }
 
+export const WIDTH_COL_CHECK = {
+  name: 100,
+  quantity_or_weight: 30,
+  price_piece_or_kg: 30,
+  total_cost: 30
+}
+
 export const TABLE_EVENT_TYPES = {
   search: 'search',
   settings: 'settings',
@@ -516,7 +523,7 @@ export const MODALS_CHECK_TITLE = {
 
 export const CHECK_LINES_HEADER = {
   name: 'Наименование',
-  quantity_or_Weight: 'Кол-во/вес',
+  quantity_or_weight: 'Кол-во/вес',
   price_piece_or_kg: 'Цена 1шт/1кг',
   total_cost: 'Общая стоимость'
 }
