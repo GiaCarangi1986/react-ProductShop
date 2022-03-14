@@ -21,7 +21,7 @@ class Api extends BaseApi {
         search,
         ...params,
       })
-      return res.data
+      return checkSerializer(res.data)
     }
     catch (err) {
       return checkSerializer(CheckList(1)) // 1 - норм, 2 - ошибка

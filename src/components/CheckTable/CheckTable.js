@@ -85,7 +85,7 @@ const CheckTable = ({
               return (
                 <tr data-test={key} key={key} className={classesRow}>
                   <td className={classNames(style['table-col'], style['table-col-full-rights'])}>
-                    <div style={{ width: '49px', margin: 'auto' }}>
+                    <div style={{ width: '50px', margin: 'auto' }}>
                       <Button
                         className='button-edit-copy'
                         title='Копировать'
@@ -106,8 +106,6 @@ const CheckTable = ({
                     </div>
                   </td>
                   {cols && colsTrue.map((col) => {
-                    const keyCol = `${col}`
-                    let colValue = elem[col]
                     const leftOrCenter = Number.isNaN(Number(`${elem[col]}`));
                     const tdClasses = classNames({
                       [style['table-col']]: true,
@@ -116,8 +114,8 @@ const CheckTable = ({
                     const w = WIDTH_COL[col] || ''
                     const m = leftOrCenter ? '' : 'auto'
                     return (
-                      <td key={keyCol} className={tdClasses}>
-                        <div style={{ width: `${w - 1}px`, margin: m }}>{colValue}</div>
+                      <td key={`${col}`} className={tdClasses}>
+                        <div style={{ width: `${w - 1}px`, margin: m }}>{elem[col]}</div>
                       </td>
                     )
                   })}

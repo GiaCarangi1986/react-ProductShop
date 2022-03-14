@@ -397,21 +397,23 @@ export const SORT_TYPES = {
 export const NAMES = { // примерная структура столбцов
   id: 'ID',
   date_time: 'Дата и время',
-  sum: 'Итоговая сумма',
   kassir: 'ФИО кассира',
+  product_count: 'Кол-во продуктов',
   bonus_add: 'Кол-во начисленных бонусов',
   bonus_pop: 'Кол-во снятых бонусов',
-  product_count: 'Кол-во продуктов',
+  sum_without_bonus: 'Сумма без бонусов',
+  sum: 'Итоговая сумма',
 };
 
 export const WIDTH_COL = {
   id: 100,
   date_time: 150,
   sum: 150,
-  kassir: 300,
+  product_count: 150,
   bonus_add: 150,
   bonus_pop: 150,
-  product_count: 150,
+  sum_without_bonus: 150,
+  kassir: 300,
 }
 
 export const TABLE_EVENT_TYPES = {

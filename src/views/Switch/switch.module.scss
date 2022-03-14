@@ -17,6 +17,10 @@
 }
 
 .switch:not([checked='false'])[checked]::part(thumb){
+  background-color: var(--ps-color-white);
+}
+
+.switch:not([checked='false'])[checked]::part(control){
   background-color: var(--ps-color-accent);
 }
 
