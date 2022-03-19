@@ -180,3 +180,11 @@
   height: 2px;
   background-color: var(--ps-background-color);
 }
+
+.container{
+  height: calc(100vh - 280px);
+}
+
+.table_scroll-horizontal:hover{
+  width: 100%;
+}

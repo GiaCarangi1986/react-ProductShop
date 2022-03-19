@@ -20,6 +20,8 @@ import {
   copyIcon,
   archiveIcon,
   exportExcel,
+  plus,
+  minus
 } from '../../images';
 
 const ICON_SRCS = {
@@ -40,6 +42,8 @@ const ICON_SRCS = {
   copyIcon,
   archiveIcon,
   exportExcel,
+  plus,
+  minus
 }
 
 const Icon = ({ children, icon = 'default', nameOfStyle = null, slot = 'icon-left' }) => {
@@ -48,7 +52,7 @@ const Icon = ({ children, icon = 'default', nameOfStyle = null, slot = 'icon-lef
     [style[`icon_${nameOfStyle}`]]: nameOfStyle,
   })
 
-  if(ICON_SRCS[icon]) {
+  if (ICON_SRCS[icon]) {
     return (
       <GxIcon src={ICON_SRCS[icon]} slot={slot} className={classes}>{children}</GxIcon>
     )

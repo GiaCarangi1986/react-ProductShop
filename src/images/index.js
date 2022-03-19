@@ -15,6 +15,8 @@ import trash from './trash.svg';
 import user from './user.svg';
 import write from './write.svg';
 import exportExcel from './export_excel.svg'
+import plus from './plus.svg'
+import minus from './minus.svg'
 
 export {
   archiveIcon,
@@ -34,4 +36,6 @@ export {
   user,
   write,
   exportExcel,
+  plus,
+  minus
 }
