@@ -183,13 +183,30 @@
   min-width: min-content;
 }
 
-.btn_width-100 {
+.btn_width-100,
+.btn_width-100-red {
   width: 100%;
 }
 
-.btn_width-100::part(base) {
+.btn_width-100::part(base),
+.btn_width-100-red::part(base) {
   width: 100%;
   min-width: 100%;
+}
+
+.btn_width-100-red::part(base){
+  --gx-color-primary-50: var(--ps-color-red);
+}
+
+.btn_width-100-red::part(base):hover {
+  --gx-color-primary-60: var(--ps-color-red-hover);
+}
+
+.btn_width-100-red:active,
+.btn_width-100-red::part(base):focus {
+  --gx-color-primary-40: var(--ps-color-red-active);
+  --gx-color-primary-60: var(--ps-color-red-hover);
+  box-shadow: none;
 }
 
 .btn_width-square::part(base) {

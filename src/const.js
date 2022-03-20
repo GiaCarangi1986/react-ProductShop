@@ -420,14 +420,14 @@ export const WIDTH_COL_CHECK = {
   name: 250,
   quantity_or_weight: 120,
   price_piece_or_kg: 120,
-  total_cost: 130
+  total_cost: 120
 }
 
 export const WIDTH_COL_CHECK_TBODY = {
   label: 250,
   count: 120,
   price: 120,
-  total_cost: 130
+  total_cost: 120
 }
 
 export const TABLE_EVENT_TYPES = {

@@ -21,9 +21,9 @@ const CheckListModal = ({
 }) => {
   const [disabled, setDisabled] = useState(true)
   const [linesOfCheckWithTotalSum, setNewCheckFields] = useState([])
-  console.log('linesOfCheck', linesOfCheck)
-  const onSubmit = (values, actions) => {
-    console.log('values', values)
+
+  const onSubmit = (e) => {
+    console.log('e', e)
   }
 
   const classesScroll = classNames({
@@ -87,9 +87,7 @@ const CheckListModal = ({
             <h2>{headerText}</h2>
           </GxCol>
         </GxRow>
-        <div>
-        </div>
-        <Form onGx-submit={() => console.log('submit')} data-cy='form'>
+        <Form onGx-submit={onSubmit} data-cy='form'>
           <div className={classNames(table_style['table-grid'], style.container)}>
             <div className={classesScroll}>
               <div className={table_style['table-layout']}>
@@ -185,19 +183,35 @@ const CheckListModal = ({
               </div>
             </div>
           </div>
-          {/* <GxRow>
-            <GxCol className={style['service-col']} offset={10} size={2}>
-              <Button
-                type='submit'
-                disabled={disabled}
-                className='btn_width-100'
-                data-cy='btn'
-                buttonDis
-              >
-                Добавить
-              </Button>
-            </GxCol>
-          </GxRow> */}
+          <div className={style.wrap_row}>
+            <div className={style.wrap_col}>
+              <span className={style.text}>Итого без бонусов: 555</span>
+              <span className={style.text}>Итого с бонусами: 555</span>
+            </div>
+            <GxRow className={style.gxrow}>
+              <GxCol className={style['service-col']} />
+              <GxCol className={style['service-col']} size={3}>
+                <Button
+                  className='btn_width-100-red'
+                  data-cy='btn'
+                  buttonDis
+                  outline
+                >
+                  Отложить чек
+                </Button>
+              </GxCol>
+              <GxCol className={style['service-col']} size={3}>
+                <Button
+                  type='submit'
+                  className='btn_width-100'
+                  data-cy='btn'
+                  buttonDis
+                >
+                  Добавить
+                </Button>
+              </GxCol>
+            </GxRow>
+          </div>
         </Form>
       </GxGrid>
     </div >

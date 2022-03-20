@@ -183,8 +183,29 @@
 
 .container{
   height: calc(100vh - 280px);
+  margin-bottom: 20px;
 }
 
 .table_scroll-horizontal:hover{
+  width: 100%;
+}
+
+.wrap_col{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.wrap_row{
+  display: flex;
+  justify-content: space-between;
+}
+
+.text{
+  width: 300px;
+  word-break: break-all;
+}
+
+.gxrow {
   width: 100%;
 }
