@@ -98,14 +98,17 @@ const CheckListModal = ({
                           <td className={classNames(table_style['table-col'], table_style['table-col-full-rights'])}>
                             <div style={{ width: '50px', margin: 'auto' }}>
                               <Button
-                                className='button-edit-copy'
+                                className='button-edit_action'
+                                title='Убавить кол-во'
+                                disabled={line.count === 1}
                                 variant='text'
                                 data-cy='btn'
                               >
                                 <Icon slot='icon-left' icon='minus' />
                               </Button>
                               <Button
-                                className='button-edit-edit'
+                                className='button-edit_action'
+                                title='Прибавить кол-во'
                                 // disabled={!elem.is_available || elem.num_clients > 0}
                                 variant='text'
                                 data-cy='btn'
@@ -118,7 +121,6 @@ const CheckListModal = ({
                             const leftOrCenter = Number.isNaN(Number(`${line[check_line_key]}`));
                             const tdClasses = classNames({
                               [table_style['table-col']]: true,
-                              [table_style['table-col-full-rights']]: true,
                               [table_style['table-col_left']]: leftOrCenter
                             })
                             const w = WIDTH_COL_CHECK_TBODY[check_line_key] || ''
@@ -129,6 +131,17 @@ const CheckListModal = ({
                               </td>
                             )
                           })}
+                          <td className={table_style['table-col']}>
+                            <div style={{ width: '25px', margin: 'auto' }}>
+                              <Button
+                                className='button-delete_action'
+                                variant='text'
+                                data-cy='btn'
+                              >
+                                <Icon slot='icon-left' icon='deleteIcon' />
+                              </Button>
+                            </div>
+                          </td>
                         </tr>
                       )
                     })}

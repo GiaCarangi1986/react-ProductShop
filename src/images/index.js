@@ -17,6 +17,7 @@ import write from './write.svg';
 import exportExcel from './export_excel.svg'
 import plus from './plus.svg'
 import minus from './minus.svg'
+import deleteIcon from './delete_icon.svg'
 
 export {
   archiveIcon,
@@ -37,5 +38,6 @@ export {
   write,
   exportExcel,
   plus,
-  minus
+  minus,
+  deleteIcon
 }

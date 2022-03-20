@@ -87,15 +87,15 @@ const CheckTable = ({
                   <td className={classNames(style['table-col'], style['table-col-full-rights'])}>
                     <div style={{ width: '50px', margin: 'auto' }}>
                       <Button
-                        className='button-edit-copy'
-                        title='Копировать'
+                        className='button-delete_action'
+                        title='Удалить'
                         variant='text'
                         data-cy='btn'
                       >
-                        <Icon slot='icon-left' icon='copyIcon' />
+                        <Icon slot='icon-left' icon='deleteIcon' />
                       </Button>
                       <Button
-                        className='button-edit-edit'
+                        className='button-edit_action'
                         title='Редактировать'
                         disabled={!elem.is_available || elem.num_clients > 0}
                         variant='text'

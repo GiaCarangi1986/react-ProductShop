@@ -119,14 +119,14 @@
   color: var(--ps-color-accent);
 }
 
-.button-edit-copy,
-.button-edit-edit {
+.button-edit_action,
+.button-delete_action {
   width: 18px;
   height: 18px;
 }
 
-.button-edit-copy::part(base),
-.button-edit-edit::part(base) {
+.button-edit_action::part(base),
+.button-delete_action::part(base) {
   --gx-color-primary-50: var(--ps-color-disabled);
   min-width: 18px;
   width: 18px;
@@ -134,23 +134,35 @@
   padding: 0;
 }
 
-.button-edit-copy gx-icon,
-.button-edit-edit gx-icon {
+.button-delete_action::part(base) {
+  --gx-color-primary-50: var(--ps-color-red);
+}
+
+.button-edit_action gx-icon,
+.button-delete_action gx-icon{
   margin-left: 0;
   margin-right: 0;
 }
 
-.button-edit-copy::part(base):hover,
-.button-edit-edit::part(base):hover {
+.button-edit_action::part(base):hover {
   --gx-color-primary-60: var(--ps-color-accent);
 }
 
-.button-edit-copy:active,
-.button-edit-copy::part(base):focus,
-.button-edit-edit:active,
-.button-edit-edit::part(base):focus {
+.button-delete_action::part(base):hover {
+  --gx-color-primary-60: var(--ps-color-red-hover);
+}
+
+.button-edit_action:active,
+.button-edit_action::part(base):focus {
   --gx-color-primary-40: var(--ps-color-accent-active);
   --gx-color-primary-60: var(--ps-color-accent-hover);
+  box-shadow: none;
+}
+
+.button-delete_action:active,
+.button-delete_action::part(base):focus {
+  --gx-color-primary-40: var(--ps-color-red-active);
+  --gx-color-primary-60: var(--ps-color-red-hover);
   box-shadow: none;
 }
 

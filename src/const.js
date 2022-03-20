@@ -418,15 +418,15 @@ export const WIDTH_COL = {
 
 export const WIDTH_COL_CHECK = {
   name: 250,
-  quantity_or_weight: 130,
-  price_piece_or_kg: 130,
+  quantity_or_weight: 120,
+  price_piece_or_kg: 120,
   total_cost: 130
 }
 
 export const WIDTH_COL_CHECK_TBODY = {
   label: 250,
-  count: 130,
-  price: 130,
+  count: 120,
+  price: 120,
   total_cost: 130
 }
 
