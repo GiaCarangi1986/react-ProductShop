@@ -85,6 +85,9 @@ const CheckListModal = ({
                           </th>
                         )
                       })}
+                      <th key='action_colunm-delete' className={table_style['table-col']}>
+                        <div style={{ width: '25px' }} />
+                      </th>
                     </tr>
                   </thead>
                   <tbody className={table_style['table-body']}>

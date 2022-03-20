@@ -22,7 +22,8 @@ import {
   exportExcel,
   plus,
   minus,
-  deleteIcon
+  deleteIcon,
+  info
 } from '../../images';
 
 const ICON_SRCS = {
@@ -45,7 +46,8 @@ const ICON_SRCS = {
   exportExcel,
   plus,
   minus,
-  deleteIcon
+  deleteIcon,
+  info
 }
 
 const Icon = ({ children, icon = 'default', nameOfStyle = null, slot = 'icon-left' }) => {

@@ -87,12 +87,12 @@ const CheckTable = ({
                   <td className={classNames(style['table-col'], style['table-col-full-rights'])}>
                     <div style={{ width: '50px', margin: 'auto' }}>
                       <Button
-                        className='button-delete_action'
-                        title='Удалить'
+                        className='button-edit_action'
+                        title='Посмотреть'
                         variant='text'
                         data-cy='btn'
                       >
-                        <Icon slot='icon-left' icon='deleteIcon' />
+                        <Icon slot='icon-left' icon='info' />
                       </Button>
                       <Button
                         className='button-edit_action'
@@ -119,6 +119,17 @@ const CheckTable = ({
                       </td>
                     )
                   })}
+                  <td className={style['table-col']}>
+                    <div style={{ width: '25px', margin: 'auto' }}>
+                      <Button
+                        className='button-delete_action'
+                        variant='text'
+                        data-cy='btn'
+                      >
+                        <Icon slot='icon-left' icon='deleteIcon' />
+                      </Button>
+                    </div>
+                  </td>
                 </tr>
               )
             })}
