@@ -26,6 +26,8 @@ const CheckListModal = ({
   discountCard = {},
   setLinesOfCheck = () => { },
   setDiscountCard = () => { },
+  maxBonus = 0,
+  setMaxBonus = () => { },
   headerText = '',
 }) => {
   const [disabled, setDisabled] = useState(true)
@@ -66,6 +68,15 @@ const CheckListModal = ({
       sum += line.total_cost
     })
     setTotalSum(sum)
+
+    if (sum) {
+      if (discountCard.bonus > sum) {
+        const card = { ...discountCard }
+        card.bonus = sum
+        setDiscountCard(card)
+      }
+      setMaxBonus(maxBonus > sum ? sum : maxBonus)
+    }
   }, [linesOfCheckWithTotalSum])
 
   useEffect(() => {

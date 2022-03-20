@@ -104,7 +104,7 @@ export const ProductList = (status = 2) => {
           title: 'Мороженое',
           category: 'Замороженные продукты',
           count: 100,
-          price: 190,
+          price: 19,
           unit: 'шт',
           sale: 0,
         },

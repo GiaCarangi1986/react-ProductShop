@@ -18,14 +18,15 @@ const CheckModal = ({
   discountCard = {},
   setLinesOfCheck = () => { },
   setDiscountCard = () => { },
+  maxBonus = 0,
+  setMaxBonus = () => { },
   open = false
 }) => {
   const [disabled, setDisabled] = useState(true)
   const [unit, setUnit] = useState(UNITS[0])
-  const [maxBonus, setMaxBonus] = useState(0)
   const [productList, updateProductList] = useState(linesOfCheck)
   const [wasAddProduct, setWasAddProduct] = useState(false)
-  const [bonusErr, setBonusErr] = useState(false)
+  const [bonusErr, setBonusErr] = useState('')
 
   const initialValues = {
     product: null,
@@ -266,7 +267,7 @@ const CheckModal = ({
         <GxRow>
           <GxCol className={style['service-col_start']}>
             <Button
-              disabled={!productList.length}
+              disabled={!productList.length || bonusErr !== ''}
               className='btn_width_single'
               data-cy='btn'
               buttonDis

@@ -34,6 +34,7 @@ const AddOrUpdateCheckModal = ({
   const [contentType, setContentType] = useState(MODALS_CHECK.default)
   const [linesOfCheck, setLinesOfCheck] = useState([])
   const [discountCard, setDiscountCard] = useState({})
+  const [maxBonus, setMaxBonus] = useState(0)
 
   const backToMainForm = () => setContentType(MODALS_CHECK.default)
 
@@ -193,6 +194,8 @@ const AddOrUpdateCheckModal = ({
           setDiscountCard={setDiscountCard}
           handleSubmitError={handleSubmitError}
           headerText={headerText}
+          maxBonus={maxBonus}
+          setMaxBonus={setMaxBonus}
           {...props} />
       </Modal>
     )
