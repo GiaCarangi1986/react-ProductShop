@@ -4,7 +4,16 @@ import { GxGrid, GxCol, GxRow } from '@garpix/garpix-web-components-react'
 import { Button, ErrorText, Fieldset, Form, Icon, Input } from '../../views'
 import { handingErrors, deleteSpaces } from '../../utils'
 import { addFrequencyInfo } from '../../schema'
-import { FORM_LABELS, FORM_FIELDS, MODALS_CHECK, CHECK_LINES_HEADER, WIDTH_COL_CHECK, CHECK_LINE_ADDING, WIDTH_COL_CHECK_TBODY } from '../../const'
+import {
+  FORM_LABELS,
+  FORM_FIELDS,
+  MODALS_CHECK,
+  CHECK_LINES_HEADER,
+  WIDTH_COL_CHECK,
+  CHECK_LINE_ADDING,
+  WIDTH_COL_CHECK_TBODY,
+  UNITS
+} from '../../const'
 import api from '../../api'
 
 import table_style from '../CheckTable/check_table.module.scss'
@@ -21,6 +30,7 @@ const CheckListModal = ({
 }) => {
   const [disabled, setDisabled] = useState(true)
   const [linesOfCheckWithTotalSum, setNewCheckFields] = useState([])
+  const [total_sum, setTotalSum] = useState(0)
 
   const onSubmit = (e) => {
     console.log('e', e)
@@ -49,6 +59,14 @@ const CheckListModal = ({
     const updateProduct = [...linesOfCheckWithTotalSum].filter(line => line.id !== +btnData.name)
     setLinesOfCheck(updateProduct)
   }
+
+  useEffect(() => {
+    let sum = 0
+    linesOfCheckWithTotalSum.forEach(line => {
+      sum += line.total_cost
+    })
+    setTotalSum(sum)
+  }, [linesOfCheckWithTotalSum])
 
   useEffect(() => {
     const newArr = []
@@ -128,7 +146,7 @@ const CheckListModal = ({
                                 name={line.id}
                                 value={-1}
                                 onClick={changeProductCount}
-                                disabled={line.count === 1}
+                                disabled={line.count === 1 || line.unit === UNITS[1]}
                                 variant='text'
                                 data-cy='btn'
                               >
@@ -137,7 +155,7 @@ const CheckListModal = ({
                               <Button
                                 className='button-edit_action'
                                 title='Прибавить кол-во'
-                                // disabled={!elem.is_available || elem.num_clients > 0}
+                                disabled={line.unit === UNITS[1]}
                                 name={line.id}
                                 value={1}
                                 onClick={changeProductCount}
@@ -185,8 +203,8 @@ const CheckListModal = ({
           </div>
           <div className={style.wrap_row}>
             <div className={style.wrap_col}>
-              <span className={style.text}>Итого без бонусов: 555</span>
-              <span className={style.text}>Итого с бонусами: 555</span>
+              <span className={style.text}>{`Итого без бонусов: ${total_sum}`}</span>
+              <span className={style.text}>{`Итого с бонусами: ${total_sum - (discountCard?.bonus || 0)}`}</span>
             </div>
             <GxRow className={style.gxrow}>
               <GxCol className={style['service-col']} />

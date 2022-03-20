@@ -25,6 +25,7 @@ const CheckModal = ({
   const [maxBonus, setMaxBonus] = useState(0)
   const [productList, updateProductList] = useState(linesOfCheck)
   const [wasAddProduct, setWasAddProduct] = useState(false)
+  const [bonusErr, setBonusErr] = useState(false)
 
   const initialValues = {
     product: null,
@@ -81,7 +82,8 @@ const CheckModal = ({
         id: formik.values.product.value,
         count: +formik.values.count,
         label: formik.values.product.name,
-        price: formik.values.product.price
+        price: formik.values.product.price,
+        unit: formik.values.product.unit
       })
     }
     updateProductList(lines)
@@ -114,6 +116,17 @@ const CheckModal = ({
   const blurFloor = (e) => {
     const floorValue = Math.floor(e.target.value)
     handleBlur(e, floorValue)
+  }
+
+  const onInput = e => {
+    const floorValue = Math.floor(e.target.value)
+    formik.setFieldValue(e.target.name, floorValue)
+    if (floorValue > maxBonus) {
+      setBonusErr('Превышено возможное кол-во бонусов для списания')
+    }
+    else {
+      setBonusErr('')
+    }
   }
 
   useEffect(() => {
@@ -221,11 +234,11 @@ const CheckModal = ({
               {formik.values.card && (
                 <Fieldset
                   errorClass='addOrUpdateCheck'
-                  error={formik.errors.bonus}
+                  error={bonusErr}
                   touched={formik.touched.bonus}>
                   <Input
                     value={formik.values.bonus}
-                    onGx-input={formik.handleChange}
+                    onGx-input={onInput}
                     onGx-blur={blurFloor}
                     name={FORM_FIELDS.bonus}
                     label={`${FORM_LABELS.bonus} (макс. ${maxBonus})`}
