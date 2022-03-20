@@ -71,7 +71,7 @@ const CheckListModal = ({
     setTotalSum(sum)
 
     if (sum) {
-      if (discountCard.bonus > sum) {
+      if (discountCard?.bonus > sum) {
         const card = { ...discountCard }
         card.bonus = sum
         setDiscountCard(card)
