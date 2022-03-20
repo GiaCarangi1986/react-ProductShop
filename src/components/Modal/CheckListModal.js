@@ -21,7 +21,7 @@ const CheckListModal = ({
 }) => {
   const [disabled, setDisabled] = useState(true)
   const [linesOfCheckWithTotalSum, setNewCheckFields] = useState([])
-
+  console.log('linesOfCheck', linesOfCheck)
   const onSubmit = (values, actions) => {
     console.log('values', values)
   }
@@ -31,6 +31,18 @@ const CheckListModal = ({
     [table_style['table_scroll-vertical']]: true,
     [style['table_scroll-horizontal']]: true,
   })
+
+  const changeProductCount = e => {
+    const btnData = e.target
+    const updateProduct = [...linesOfCheckWithTotalSum]
+    for (let index = 0; index < updateProduct.length; index++) {
+      if (updateProduct[index].id === +btnData.name) {
+        updateProduct[index].count += +btnData.value
+        break
+      }
+    }
+    setLinesOfCheck(updateProduct)
+  }
 
   useEffect(() => {
     const newArr = []
@@ -103,6 +115,9 @@ const CheckListModal = ({
                               <Button
                                 className='button-edit_action'
                                 title='Убавить кол-во'
+                                name={line.id}
+                                value={-1}
+                                onClick={changeProductCount}
                                 disabled={line.count === 1}
                                 variant='text'
                                 data-cy='btn'
@@ -113,6 +128,9 @@ const CheckListModal = ({
                                 className='button-edit_action'
                                 title='Прибавить кол-во'
                                 // disabled={!elem.is_available || elem.num_clients > 0}
+                                name={line.id}
+                                value={1}
+                                onClick={changeProductCount}
                                 variant='text'
                                 data-cy='btn'
                               >
@@ -129,7 +147,7 @@ const CheckListModal = ({
                             const w = WIDTH_COL_CHECK_TBODY[check_line_key] || ''
                             const m = leftOrCenter ? '' : 'auto'
                             return (
-                              <td className={tdClasses}>
+                              <td className={tdClasses} key={check_line_key}>
                                 <div style={{ width: `${w - 1}px`, margin: m }}>{line[check_line_key]}</div>
                               </td>
                             )
