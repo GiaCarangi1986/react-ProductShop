@@ -134,6 +134,7 @@ const CheckModal = ({
   useEffect(() => {
     if (!open) {
       formik.setValues(initialValues)
+      formik.setTouched({})
     }
   }, [open])
 

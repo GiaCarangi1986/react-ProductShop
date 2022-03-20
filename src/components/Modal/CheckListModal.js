@@ -44,6 +44,12 @@ const CheckListModal = ({
     setLinesOfCheck(updateProduct)
   }
 
+  const deleteProduct = e => {
+    const btnData = e.target
+    const updateProduct = [...linesOfCheckWithTotalSum].filter(line => line.id !== +btnData.name)
+    setLinesOfCheck(updateProduct)
+  }
+
   useEffect(() => {
     const newArr = []
     linesOfCheck.forEach(line => {
@@ -52,6 +58,12 @@ const CheckListModal = ({
       newArr.push(newLine)
     })
     setNewCheckFields(newArr)
+  }, [linesOfCheck])
+
+  useEffect(() => {
+    if (!linesOfCheck.length) {
+      setContentType(MODALS_CHECK.default)
+    }
   }, [linesOfCheck])
 
   return (
@@ -158,6 +170,8 @@ const CheckListModal = ({
                                 className='button-delete_action'
                                 variant='text'
                                 data-cy='btn'
+                                name={line.id}
+                                onClick={deleteProduct}
                               >
                                 <Icon slot='icon-left' icon='deleteIcon' />
                               </Button>
