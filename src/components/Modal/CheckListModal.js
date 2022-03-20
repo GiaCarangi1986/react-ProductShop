@@ -30,6 +30,7 @@ const CheckListModal = ({
   maxBonus = 0,
   setMaxBonus = () => { },
   headerText = '',
+  btnText = ''
 }) => {
   const [disabled, setDisabled] = useState(true)
   const [linesOfCheckWithTotalSum, setNewCheckFields] = useState([])
@@ -220,7 +221,7 @@ const CheckListModal = ({
             </div>
             <GxRow className={style.gxrow}>
               <GxCol className={style['service-col']} />
-              <GxCol className={style['service-col']} size={3}>
+              <GxCol className={style['service-col']} size={3.5}>
                 <Button
                   className='btn_width-100-red'
                   data-cy='btn'
@@ -230,14 +231,14 @@ const CheckListModal = ({
                   Отложить чек
                 </Button>
               </GxCol>
-              <GxCol className={style['service-col']} size={3}>
+              <GxCol className={style['service-col']} size={3.5}>
                 <Button
                   type='submit'
                   className='btn_width-100'
                   data-cy='btn'
                   buttonDis
                 >
-                  Добавить
+                  {btnText}
                 </Button>
               </GxCol>
             </GxRow>

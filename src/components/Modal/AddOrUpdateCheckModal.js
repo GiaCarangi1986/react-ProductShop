@@ -180,6 +180,7 @@ const AddOrUpdateCheckModal = ({
   if (MODALS_TYPES[contentType]) {
     const Component = MODALS_TYPES[contentType];
     const headerText = MODALS_CHECK_TITLE[contentType] // буду проверять входящие данные (есть id редакт чека или нет) и менять эту надпись
+    const btnText = 'Составить чек' // || 'Отредактировать чек'
     return (
       <Modal setOpen={setOpen} variant='right' open={open}>
         <Component
@@ -199,6 +200,7 @@ const AddOrUpdateCheckModal = ({
           setMaxBonus={setMaxBonus}
           carMaxBonus={carMaxBonus}
           setCardMaxBonus={setCardMaxBonus}
+          btnText={btnText}
           {...props} />
       </Modal>
     )
