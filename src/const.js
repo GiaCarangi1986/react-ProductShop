@@ -395,7 +395,7 @@ export const SORT_TYPES = {
 };
 
 export const NAMES = { // примерная структура столбцов
-  id: 'ID',
+  id: 'ID (штрих-код)',
   date_time: 'Дата и время',
   kassir: 'ФИО кассира',
   product_count: 'Кол-во продуктов',
@@ -406,12 +406,12 @@ export const NAMES = { // примерная структура столбцов
 };
 
 export const WIDTH_COL = {
-  id: 100,
+  id: 220,
   date_time: 150,
   sum: 150,
-  product_count: 150,
-  bonus_add: 150,
-  bonus_pop: 150,
+  product_count: 110,
+  bonus_add: 140,
+  bonus_pop: 110,
   sum_without_bonus: 150,
   kassir: 300,
 }

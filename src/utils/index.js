@@ -80,7 +80,7 @@ export function cods(code, results, value = 'pk') {
 function dateFotmattedForTable(date) {
   let currentDate = ''
   if (dayjs(date).isValid()) {
-    currentDate = dayjs(date).format('DD.MM.YYYY')
+    currentDate = dayjs(date).format('DD.MM.YYYY HH:mm:ss')
   }
   return currentDate
 }
