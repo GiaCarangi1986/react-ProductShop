@@ -423,6 +423,13 @@ export const WIDTH_COL_CHECK = {
   total_cost: 130
 }
 
+export const WIDTH_COL_CHECK_TBODY = {
+  label: 250,
+  count: 130,
+  price: 130,
+  total_cost: 130
+}
+
 export const TABLE_EVENT_TYPES = {
   search: 'search',
   settings: 'settings',
@@ -532,4 +539,5 @@ export const CHECK_LINE_ADDING = {
   label: 'label',
   count: 'count',
   price: 'price',
+  total_cost: 'total_cost'
 }

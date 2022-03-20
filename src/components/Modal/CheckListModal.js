@@ -4,7 +4,7 @@ import { GxGrid, GxCol, GxRow } from '@garpix/garpix-web-components-react'
 import { Button, ErrorText, Fieldset, Form, Icon, Input } from '../../views'
 import { handingErrors, deleteSpaces } from '../../utils'
 import { addFrequencyInfo } from '../../schema'
-import { FORM_LABELS, FORM_FIELDS, MODALS_CHECK, CHECK_LINES_HEADER, WIDTH_COL_CHECK, CHECK_LINE_ADDING } from '../../const'
+import { FORM_LABELS, FORM_FIELDS, MODALS_CHECK, CHECK_LINES_HEADER, WIDTH_COL_CHECK, CHECK_LINE_ADDING, WIDTH_COL_CHECK_TBODY } from '../../const'
 import api from '../../api'
 
 import table_style from '../CheckTable/check_table.module.scss'
@@ -20,6 +20,7 @@ const CheckListModal = ({
   headerText = '',
 }) => {
   const [disabled, setDisabled] = useState(true)
+  const [linesOfCheckWithTotalSum, setNewCheckFields] = useState([])
 
   const onSubmit = (values, actions) => {
     console.log('values', values)
@@ -30,6 +31,16 @@ const CheckListModal = ({
     [table_style['table_scroll-vertical']]: true,
     [style['table_scroll-horizontal']]: true,
   })
+
+  useEffect(() => {
+    const newArr = []
+    linesOfCheck.forEach(line => {
+      const newLine = { ...line }
+      newLine.total_cost = Math.round(line.price * line.count * 100) / 100
+      newArr.push(newLine)
+    })
+    setNewCheckFields(newArr)
+  }, [linesOfCheck])
 
   return (
     <div className={style['service-form']}>
@@ -77,7 +88,7 @@ const CheckListModal = ({
                     </tr>
                   </thead>
                   <tbody className={table_style['table-body']}>
-                    {linesOfCheck.map(line => {
+                    {linesOfCheckWithTotalSum.map(line => {
                       const classesRow = classNames({
                         [table_style['table-row']]: true,
                         // [style['table-row_archive']]: !elem.is_available - тут будет 50% акция, если заметит покупатель - красный цвет, а ппри добавлении продукта еще сделать пимпочку - 50% (будет атрибут такой у продукта)
@@ -104,16 +115,20 @@ const CheckListModal = ({
                             </div>
                           </td>
                           {Object.keys(CHECK_LINE_ADDING).map(check_line_key => {
-                            console.log('line[check_line_key]', line[check_line_key])
+                            const leftOrCenter = Number.isNaN(Number(`${line[check_line_key]}`));
+                            const tdClasses = classNames({
+                              [table_style['table-col']]: true,
+                              [table_style['table-col-full-rights']]: true,
+                              [table_style['table-col_left']]: leftOrCenter
+                            })
+                            const w = WIDTH_COL_CHECK_TBODY[check_line_key] || ''
+                            const m = leftOrCenter ? '' : 'auto'
                             return (
-                              <td className={classNames(table_style['table-col'], table_style['table-col-full-rights'])}>
-                                {line[check_line_key]}
+                              <td className={tdClasses}>
+                                <div style={{ width: `${w - 1}px`, margin: m }}>{line[check_line_key]}</div>
                               </td>
                             )
                           })}
-                          <td className={classNames(table_style['table-col'], table_style['table-col-full-rights'])}>
-                            {Math.round(line.price * line.count * 100) / 100}
-                          </td>
                         </tr>
                       )
                     })}
