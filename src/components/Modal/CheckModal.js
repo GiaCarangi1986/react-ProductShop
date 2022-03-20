@@ -19,6 +19,7 @@ const CheckModal = ({
   setLinesOfCheck = () => { },
   setDiscountCard = () => { },
   maxBonus = 0,
+  setCardMaxBonus = () => { },
   setMaxBonus = () => { },
   open = false
 }) => {
@@ -110,7 +111,9 @@ const CheckModal = ({
     }
     else {
       formik.setFieldValue(FORM_FIELDS.bonus, 0)
-      setMaxBonus(Math.floor(e.bonus))
+      const maxBonus = Math.floor(e.bonus)
+      setCardMaxBonus(maxBonus)
+      setMaxBonus(maxBonus)
     }
   }
 
