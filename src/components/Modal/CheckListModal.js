@@ -26,14 +26,15 @@ const CheckListModal = ({
   setMaxBonus = () => { },
   headerText = '',
   btnText = '',
-  postponeCheck = () => { }
+  postponeCheck = () => { },
+  addOrUpdateCheck = () => { },
 }) => {
   const [disabled, setDisabled] = useState(true)
   const [linesOfCheckWithTotalSum, setNewCheckFields] = useState([])
   const [total_sum, setTotalSum] = useState(0)
 
-  const onSubmit = (e) => {
-    console.log('e', e)
+  const onSubmit = () => {
+    addOrUpdateCheck()
   }
 
   const classesScroll = classNames({

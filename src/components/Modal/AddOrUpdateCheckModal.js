@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useFormik } from 'formik';
 import { useStoreon } from 'storeon/react';
 import CheckModal from './CheckModal';
@@ -39,27 +39,35 @@ const AddOrUpdateCheckModal = ({
 
   const backToMainForm = () => setContentType(MODALS_CHECK.default)
 
-  const addData = (actions = null) => {
-    if (results.length) {
-      setEventType(TABLE_EVENT_TYPES.changeData)
-    }
-    dispatch('modal/close')
-    actions.setSubmitting(false)
-  }
+  // const addData = (actions = null) => {
+  //   if (results.length) {
+  //     setEventType(TABLE_EVENT_TYPES.changeData)
+  //   }
+  //   dispatch('modal/close')
+  //   actions.setSubmitting(false)
+  // }
 
-  const updateData = (res = [], actions = null, id = 0) => {
-    const index = results.findIndex(elem => elem.id === id)
-    const val = processingResult(res)
-    actions.setSubmitting(false)
-    dispatch('modal/close')
-    updateElement(index, val)
-  }
+  // const updateData = (res = [], actions = null, id = 0) => {
+  //   const index = results.findIndex(elem => elem.id === id)
+  //   const val = processingResult(res)
+  //   actions.setSubmitting(false)
+  //   dispatch('modal/close')
+  //   updateElement(index, val)
+  // }
+
+  const check = useMemo(
+    () => generatCheck(discountCard, linesOfCheck),
+    [discountCard, linesOfCheck]
+  );
 
   const postponeCheck = () => {
-    const check = generatCheck(discountCard, linesOfCheck, true)
-    console.log('check', check)
+    console.log('postponeCheck', check)
   }
 
+  const addOrUpdateCheck = () => {
+    console.log('addOrUpdateCheck', check)
+  }
+  //paid = true, - добавить поле после отлаты
   const handleSubmitError = ({ response, actions }) => {
     if (response) {
       const errResponse = handingErrors(response);
@@ -207,6 +215,7 @@ const AddOrUpdateCheckModal = ({
           setCardMaxBonus={setCardMaxBonus}
           btnText={btnText}
           postponeCheck={postponeCheck}
+          addOrUpdateCheck={addOrUpdateCheck}
           {...props} />
       </Modal>
     )

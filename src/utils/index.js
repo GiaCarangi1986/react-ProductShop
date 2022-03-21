@@ -106,7 +106,7 @@ export function processingResult(item) {
   };
 }
 
-export function generatCheck(discountCard = {}, linesOfCheck = [], paid = false, childCheckId = '') {
+export function generatCheck(discountCard = {}, linesOfCheck = [], childCheckId = '') {
   let totalCost = 0
   linesOfCheck.forEach(line => {
     totalCost += line.count * line.price
@@ -127,7 +127,7 @@ export function generatCheck(discountCard = {}, linesOfCheck = [], paid = false,
     date_time: dateFotmattedForTable(new Date()), // время покупки/отложенного чека
     bonus_count: +discountCard?.bonus || 0, // кол-во использованных бонусов
     totalCost, // итоговая стоимость (без бонусов)
-    paid, // оплачен чек или нет (составлен или отложен)
+    paid: false, // оплачен чек или нет (на данном этапе только false, ибо он тут отложен или только подготовлен к оплате)
     cardId: discountCard?.card?.value || null, // id карты
     childCheckId, // ссылка на ребенка (для редактированного чека)
     linesCheckList, // строки чека
