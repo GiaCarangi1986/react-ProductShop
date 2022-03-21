@@ -135,8 +135,6 @@ const CheckModal = ({
       setBonusErr('')
     }
   }
-  console.log('formik.values', formik.values)
-  console.log('product', productList)
 
   const handleChangeSwitch = (e) => {
     formik.setFieldValue(e.target.name, e.target.checked)
@@ -259,7 +257,6 @@ const CheckModal = ({
               </Fieldset>
             </GxCol>
             <GxCol className={style['service-col']}>
-              {/* {formik.values.card && ( */}
               <Fieldset
                 errorClass='addOrUpdateCheck'
                 error={bonusErr}
@@ -278,7 +275,6 @@ const CheckModal = ({
                   disabled={!formik.values.card}
                 />
               </Fieldset>
-              {/* )} */}
             </GxCol>
             <GxCol className={classNames(style['service-col'], style['service-col-add'])} />
           </GxRow>

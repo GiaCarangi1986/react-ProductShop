@@ -8,7 +8,8 @@ import {
   WIDTH_COL_CHECK,
   CHECK_LINE_ADDING,
   WIDTH_COL_CHECK_TBODY,
-  UNITS
+  UNITS,
+  FORM_FIELDS
 } from '../../const'
 
 import table_style from '../CheckTable/check_table.module.scss'
@@ -147,7 +148,7 @@ const CheckListModal = ({
                         // [style['table-row_archive']]: !elem.is_available - тут будет 50% акция, если заметит покупатель - красный цвет, а ппри добавлении продукта еще сделать пимпочку - 50% (будет атрибут такой у продукта)
                       })
                       return (
-                        <tr key={line.id} className={classesRow}>
+                        <tr key={`${line.id}-${line.old_product}`} className={classesRow}>
                           <td className={classNames(table_style['table-col'], table_style['table-col-full-rights'])} key='action_colunm'>
                             <div style={{ width: '50px', margin: 'auto' }}>
                               <Button
@@ -192,7 +193,14 @@ const CheckListModal = ({
                           })}
                           <td className={table_style['table-col']} key='action_colunm-old-product'>
                             <div style={{ width: '35px', margin: 'auto' }}>
-                              <Switch />
+                              <Switch
+                                text={line.old_product}
+                                // disabled={!formik.values.product}
+                                // onGx-change={handleChangeSwitch}
+                                name={FORM_FIELDS.old_product}
+                                value={`${line.old_product}`}
+                                checked={line.old_product}
+                              />
                             </div>
                           </td>
                           <td className={table_style['table-col']} key='action_colunm-delete'>
