@@ -48,7 +48,7 @@ const CheckListModal = ({
     const btnData = e.target
     const updateProduct = [...linesOfCheckWithTotalSum]
     for (let index = 0; index < updateProduct.length; index++) {
-      if (updateProduct[index].id === +btnData.name) {
+      if (updateProduct[index].id === +btnData.name.id && updateProduct[index].old_product === btnData.name.old_product) {
         updateProduct[index].count += +btnData.value
         break
       }
@@ -152,7 +152,7 @@ const CheckListModal = ({
                               <Button
                                 className='button-edit_action'
                                 title='Убавить кол-во'
-                                name={line.id}
+                                name={{ id: line.id, old_product: line.old_product }}
                                 value={-1}
                                 onClick={changeProductCount}
                                 disabled={line.count === 1 || line.unit === UNITS[1]}
@@ -165,7 +165,7 @@ const CheckListModal = ({
                                 className='button-edit_action'
                                 title='Прибавить кол-во'
                                 disabled={line.unit === UNITS[1]}
-                                name={line.id}
+                                name={{ id: line.id, old_product: line.old_product }}
                                 value={1}
                                 onClick={changeProductCount}
                                 variant='text'
