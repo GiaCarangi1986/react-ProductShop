@@ -544,5 +544,5 @@ export const CHECK_LINE_ADDING = {
   label: 'label',
   count: 'count',
   price: 'price',
-  total_cost: 'total_cost'
+  total_cost: 'total_cost',
 }

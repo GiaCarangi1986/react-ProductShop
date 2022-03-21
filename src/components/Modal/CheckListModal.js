@@ -87,9 +87,7 @@ const CheckListModal = ({
       newArr.push(newLine)
     })
     setNewCheckFields(newArr)
-  }, [linesOfCheck])
 
-  useEffect(() => {
     if (!linesOfCheck.length) {
       setContentType(MODALS_CHECK.default)
     }
@@ -184,10 +182,13 @@ const CheckListModal = ({
                               [table_style['table-col_left']]: leftOrCenter
                             })
                             const w = WIDTH_COL_CHECK_TBODY[check_line_key] || ''
-                            const m = leftOrCenter ? '' : 'auto'
+                            const margin = leftOrCenter ? '' : 'auto'
+                            const color = line.old_product && (
+                              check_line_key === CHECK_LINE_ADDING.total_cost || check_line_key === CHECK_LINE_ADDING.price) ?
+                              'red' : 'black'
                             return (
                               <td className={tdClasses} key={check_line_key}>
-                                <div style={{ width: `${w - 1}px`, margin: m }}>{line[check_line_key]}</div>
+                                <div style={{ width: `${w - 1}px`, margin, color }}>{line[check_line_key]}</div>
                               </td>
                             )
                           })}
