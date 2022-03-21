@@ -34,6 +34,7 @@ const CheckModal = ({
     count: '1',
     card: null,
     bonus: '0',
+    old_product: false
   }
 
   const formik = useFormik({
@@ -69,7 +70,7 @@ const CheckModal = ({
     const lines = [...productList]
     let wasUpdate = false
     for (let index = 0; index < lines.length; index++) {
-      if (lines[index].id === formik.values.product.value) {
+      if (lines[index].id === formik.values.product.value && lines[index].old_product === formik.values.old_product) {
         lines[index].count += +formik.values.count
         if (unit === UNITS[1]) {
           lines[index].count = Math.round(lines[index].count * 100) / 100
@@ -85,12 +86,14 @@ const CheckModal = ({
         count: +formik.values.count,
         label: formik.values.product.name,
         price: formik.values.product.price,
-        unit: formik.values.product.unit
+        unit: formik.values.product.unit,
+        old_product: formik.values.old_product
       })
     }
     updateProductList(lines)
 
     formik.setFieldValue(FORM_FIELDS.count, 1)
+    formik.setFieldValue(FORM_FIELDS.old_product, false)
     formik.setFieldValue(FORM_FIELDS.product, null)
     formik.setFieldTouched(FORM_FIELDS.product, false)
 
@@ -131,6 +134,12 @@ const CheckModal = ({
     else {
       setBonusErr('')
     }
+  }
+  console.log('formik.values', formik.values)
+  console.log('product', productList)
+
+  const handleChangeSwitch = (e) => {
+    formik.setFieldValue(e.target.name, e.target.checked)
   }
 
   useEffect(() => {
@@ -201,6 +210,7 @@ const CheckModal = ({
                   min='1'
                   max='32767'
                   step={unit === UNITS[0] ? 1 : 0.1}
+                  disabled={!formik.values.product}
                 />
               </Fieldset>
             </GxCol>
@@ -218,7 +228,14 @@ const CheckModal = ({
           </GxRow>
           <GxRow className={style['row-margin-big']}>
             <GxCol className={style['service-col']} >
-              <Switch text='На этот товар распространяется скидка 50%' />
+              <Switch
+                text={FORM_LABELS.old_product}
+                disabled={!formik.values.product}
+                onGx-change={handleChangeSwitch}
+                name={FORM_FIELDS.old_product}
+                value={`${formik.values.old_product}`}
+                checked={formik.values.old_product}
+              />
             </GxCol>
           </GxRow>
           <span className={style.line} />

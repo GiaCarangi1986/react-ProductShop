@@ -498,7 +498,8 @@ export const FORM_LABELS = {
   count: 'Кол-во, шт',
   weight: 'Вес, кг',
   card: 'Бонусная карта',
-  bonus: 'Снять бонусы'
+  bonus: 'Снять бонусы',
+  old_product: 'На этот товар распространяется скидка 50%',
 }
 
 export const FORM_FIELDS = {
@@ -507,7 +508,8 @@ export const FORM_FIELDS = {
   product: 'product',
   count: 'count',
   card: 'card',
-  bonus: 'bonus'
+  bonus: 'bonus',
+  old_product: 'old_product',
 }
 
 export const UNITS = ['шт', 'кг']
