@@ -164,7 +164,7 @@ const CheckModal = ({
           </GxCol>
         </GxRow>
         <Form data-cy='form' onGx-submit={onSubmit}>
-          <GxRow>
+          <GxRow className={style['row-margin-big']}>
             <GxCol className={style['service-col']}>
               <Fieldset
                 errorClass='addOrUpdateCheck'
