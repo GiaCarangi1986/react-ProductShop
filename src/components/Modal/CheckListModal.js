@@ -57,8 +57,8 @@ const CheckListModal = ({
   }
 
   const deleteProduct = (e) => {
-    const btnData = e.target
-    const updateProduct = [...linesOfCheckWithTotalSum].filter(line => line.id !== +btnData.name)
+    const btnData = e.target.name
+    const updateProduct = [...linesOfCheckWithTotalSum].filter(line => !(line.id === +btnData.id && line.old_product === btnData.old_product))
     setLinesOfCheck(updateProduct)
   }
 
@@ -255,7 +255,7 @@ const CheckListModal = ({
                                 className='button-delete_action'
                                 variant='text'
                                 data-cy='btn'
-                                name={line.id}
+                                name={{ id: line.id, old_product: line.old_product }}
                                 onClick={deleteProduct}
                               >
                                 <Icon slot='icon-left' icon='deleteIcon' />

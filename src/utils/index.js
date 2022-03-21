@@ -118,7 +118,7 @@ export function generatCheck(discountCard = {}, linesOfCheck = [], childCheckId 
       id: line?.count || 0, // id продукта (штрих-код)
       count: line?.count || 0, // кол-во продктов в одной строке,
       price: line?.price || 0, // цена за 1 штуку/кг
-      oldProduct: line?.old || false, // 50% за продуктый, который завтра испортится? (предупреждают на кассе)
+      old_product: line?.old_product || false // 50% за продуктый, который завтра испортится? (предупреждают на кассе)
     }
     linesCheckList.push(productLine)
   })
