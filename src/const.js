@@ -499,7 +499,8 @@ export const FORM_LABELS = {
   weight: 'Вес, кг',
   card: 'Бонусная карта',
   bonus: 'Снять бонусы',
-  old_product: 'На этот товар распространяется скидка 50%',
+  old_product: 'Применить скидку 50% по сроку годности',
+  old_product_err: 'НЕВОЗМОЖНО ПРИМЕНИТЬ ДЛЯ АКЦИОННОГО ТОВАРА',
 }
 
 export const FORM_FIELDS = {

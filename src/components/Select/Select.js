@@ -21,7 +21,8 @@ const Select = ({ func = () => { }, type, ...props }) => {
                 value: elem.id,
                 unit: elem.unit,
                 name: elem.title,
-                price: elem.price
+                price: elem.price,
+                sale: elem.sale
               })
 
             case SELECT_TYPES.card:

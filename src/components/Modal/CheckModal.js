@@ -87,7 +87,8 @@ const CheckModal = ({
         label: formik.values.product.name,
         price: formik.values.old_product ? formik.values.product.price / 2 : formik.values.product.price,
         unit: formik.values.product.unit,
-        old_product: formik.values.old_product
+        old_product: formik.values.old_product,
+        sale: formik.values.product.sale,
       })
     }
     updateProductList(lines)
@@ -163,6 +164,7 @@ const CheckModal = ({
   }, [open])
 
   const bonusLabel = formik.values.card ? `${FORM_LABELS.bonus} (макс. ${maxBonus})` : `${FORM_LABELS.bonus} (макс. НЕОПРЕДЕЛЕНО)`
+  const oldProductLabel = formik.values.product?.sale ? `${FORM_LABELS.old_product} (${FORM_LABELS.old_product_err})` : FORM_LABELS.old_product
 
   return (
     <div className={style['service-form']}>
@@ -227,8 +229,8 @@ const CheckModal = ({
           <GxRow className={style['row-margin-big']}>
             <GxCol className={style['service-col']} >
               <Switch
-                text={FORM_LABELS.old_product}
-                disabled={!formik.values.product}
+                text={oldProductLabel}
+                disabled={!formik.values.product || formik.values.product.sale}
                 onGx-change={handleChangeSwitch}
                 name={FORM_FIELDS.old_product}
                 value={`${formik.values.old_product}`}

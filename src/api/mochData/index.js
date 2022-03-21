@@ -97,7 +97,7 @@ export const ProductList = (status = 2) => {
           count: 100,
           price: 90,
           unit: 'шт',
-          sale: 0,
+          sale: false,
         },
         {
           id: 3,
@@ -106,7 +106,7 @@ export const ProductList = (status = 2) => {
           count: 100,
           price: 19,
           unit: 'шт',
-          sale: 0,
+          sale: true,
         },
         {
           id: 4,
@@ -115,7 +115,7 @@ export const ProductList = (status = 2) => {
           count: 100,
           price: 130,
           unit: 'кг',
-          sale: 0,
+          sale: false,
         },
       ],
       count: 1,
@@ -127,7 +127,7 @@ export const ProductList = (status = 2) => {
           count: 50,
           price: 50,
           unit: 'шт',
-          sale: 0,
+          sale: true,
         },
       ],
       previous: [
