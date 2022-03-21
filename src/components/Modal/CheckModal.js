@@ -41,7 +41,7 @@ const CheckModal = ({
     validationSchema: addLineOfCheck,
   })
 
-  const onClickSubmit = () => {
+  const onSubmit = () => {
     formik.resetForm();
     setLinesOfCheck(productList)
 
@@ -163,7 +163,7 @@ const CheckModal = ({
             <h2>{headerText}</h2>
           </GxCol>
         </GxRow>
-        <Form data-cy='form'>
+        <Form data-cy='form' onGx-submit={onSubmit}>
           <GxRow>
             <GxCol className={style['service-col']}>
               <Fieldset
@@ -266,22 +266,22 @@ const CheckModal = ({
               ) : null}
             </GxCol>
           </GxRow>
+          <GxRow>
+            <GxCol className={style['service-col_start']}>
+              <Button
+                disabled={!productList.length || bonusErr !== ''}
+                className='btn_width_single'
+                data-cy='btn'
+                buttonDis
+                type='submit'
+              >
+                Перейти к чеку
+              </Button>
+            </GxCol>
+          </GxRow>
         </Form>
-        <GxRow>
-          <GxCol className={style['service-col_start']}>
-            <Button
-              disabled={!productList.length || bonusErr !== ''}
-              className='btn_width_single'
-              data-cy='btn'
-              buttonDis
-              onClick={onClickSubmit}
-            >
-              Перейти к чеку
-            </Button>
-          </GxCol>
-        </GxRow>
-      </GxGrid>
-    </div>
+      </GxGrid >
+    </div >
   )
 }
 

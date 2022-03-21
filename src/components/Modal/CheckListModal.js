@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import classNames from 'classnames'
 import { GxGrid, GxCol, GxRow } from '@garpix/garpix-web-components-react'
-import { Button, ErrorText, Fieldset, Form, Icon, Input } from '../../views'
-import { handingErrors, deleteSpaces } from '../../utils'
-import { addFrequencyInfo } from '../../schema'
+import { Button, Form, Icon } from '../../views'
 import {
-  FORM_LABELS,
-  FORM_FIELDS,
   MODALS_CHECK,
   CHECK_LINES_HEADER,
   WIDTH_COL_CHECK,
@@ -14,7 +10,6 @@ import {
   WIDTH_COL_CHECK_TBODY,
   UNITS
 } from '../../const'
-import api from '../../api'
 
 import table_style from '../CheckTable/check_table.module.scss'
 import style from './modal.module.scss'
@@ -30,7 +25,8 @@ const CheckListModal = ({
   maxBonus = 0,
   setMaxBonus = () => { },
   headerText = '',
-  btnText = ''
+  btnText = '',
+  postponeCheck = () => { }
 }) => {
   const [disabled, setDisabled] = useState(true)
   const [linesOfCheckWithTotalSum, setNewCheckFields] = useState([])
@@ -227,6 +223,7 @@ const CheckListModal = ({
                   data-cy='btn'
                   buttonDis
                   outline
+                  onClick={postponeCheck}
                 >
                   Отложить чек
                 </Button>

@@ -106,6 +106,34 @@ export function processingResult(item) {
   };
 }
 
+export function generatCheck(discountCard = {}, linesOfCheck = [], paid = false, childCheckId = '') {
+  let totalCost = 0
+  linesOfCheck.forEach(line => {
+    totalCost += line.count * line.price
+  })
+
+  const linesCheckList = [];
+  linesOfCheck.forEach(line => {
+    const productLine = {
+      id: line?.count || 0, // id продукта (штрих-код)
+      count: line?.count || 0, // кол-во продктов в одной строке,
+      price: line?.price || 0, // цена за 1 штуку/кг
+      oldProduct: line?.old || false, // 50% за продуктый, который завтра испортится? (предупреждают на кассе)
+    }
+    linesCheckList.push(productLine)
+  })
+
+  return {
+    date_time: dateFotmattedForTable(new Date()), // время покупки/отложенного чека
+    bonus_count: +discountCard?.bonus || 0, // кол-во использованных бонусов
+    totalCost, // итоговая стоимость (без бонусов)
+    paid, // оплачен чек или нет (составлен или отложен)
+    cardId: discountCard?.card?.value || null, // id карты
+    childCheckId, // ссылка на ребенка (для редактированного чека)
+    linesCheckList, // строки чека
+  };
+}
+
 export function deleteSpaces(value) {
   if (value) {
     return value.toString().trimStart().trimEnd()

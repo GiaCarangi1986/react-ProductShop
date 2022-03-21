@@ -5,7 +5,7 @@ import CheckModal from './CheckModal';
 import PayModal from './PayModal';
 import CheckListModal from './CheckListModal'
 import { Modal } from '../../views';
-import { addOrUpdateTariffSchema } from '../../schema'
+import { generatCheck } from '../../utils'
 import { MODAL_TYPES, TABLE_EVENT_TYPES, MODALS_CHECK, MODALS_CHECK_TITLE } from '../../const';
 import { handingErrors, processingResult } from '../../utils'
 import api from '../../api'
@@ -53,6 +53,11 @@ const AddOrUpdateCheckModal = ({
     actions.setSubmitting(false)
     dispatch('modal/close')
     updateElement(index, val)
+  }
+
+  const postponeCheck = () => {
+    const check = generatCheck(discountCard, linesOfCheck, true)
+    console.log('check', check)
   }
 
   const handleSubmitError = ({ response, actions }) => {
@@ -201,6 +206,7 @@ const AddOrUpdateCheckModal = ({
           carMaxBonus={carMaxBonus}
           setCardMaxBonus={setCardMaxBonus}
           btnText={btnText}
+          postponeCheck={postponeCheck}
           {...props} />
       </Modal>
     )
