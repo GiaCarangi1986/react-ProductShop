@@ -56,15 +56,20 @@ const CheckListModal = ({
     setLinesOfCheck(updateProduct)
   }
 
-  const deleteProduct = e => {
+  const deleteProduct = (e) => {
     const btnData = e.target
     const updateProduct = [...linesOfCheckWithTotalSum].filter(line => line.id !== +btnData.name)
     setLinesOfCheck(updateProduct)
   }
 
-  useEffect(() => {
+  const deleteOldProduct = (lineInfo = null, listLines) => {
+    const updateProducts = [...listLines].filter(line => !(line.id === lineInfo.id && line.old_product === lineInfo.old_product))
+    return updateProducts
+  }
+
+  const recalculateLines = (arrlines = []) => {
     let sum = 0
-    linesOfCheckWithTotalSum.forEach(line => {
+    arrlines.forEach(line => {
       sum += line.total_cost
     })
     setTotalSum(sum)
@@ -77,7 +82,46 @@ const CheckListModal = ({
       }
       setMaxBonus(maxBonus > sum ? sum : carMaxBonus > maxBonus ? carMaxBonus : maxBonus)
     }
-  }, [linesOfCheckWithTotalSum])
+  }
+
+  const handleChangeSwitch = (line) => {
+    const productData = line
+    let updateProductLines = [...linesOfCheckWithTotalSum]
+
+    let updateOtherLine = false
+
+    for (let index = 0; index < updateProductLines.length; index++) {
+      const line = updateProductLines[index];
+      if (line.id === productData.id && line.old_product !== productData.old_product) {
+        updateOtherLine = true
+        updateProductLines[index].count += productData.count
+        break
+      }
+    }
+
+    if (updateOtherLine) {
+      updateProductLines = [...deleteOldProduct(productData, updateProductLines)]
+    }
+    else {
+      const index = updateProductLines.indexOf(productData)
+      productData.old_product = !productData.old_product
+      if (productData.old_product) {
+        productData.price /= 2
+      }
+      else {
+        productData.price *= 2
+      }
+      updateProductLines[index] = productData
+    }
+
+    setNewCheckFields(updateProductLines)
+    recalculateLines(updateProductLines)
+    setLinesOfCheck(updateProductLines)
+    /*
+      если есть продукт с той же id, но другой old_product, то прибавляем к нему и удаляем текущую строку
+      если нет, то просто меняем checked на противоположный
+    */
+  }
 
   useEffect(() => {
     const newArr = []
@@ -87,6 +131,7 @@ const CheckListModal = ({
       newArr.push(newLine)
     })
     setNewCheckFields(newArr)
+    recalculateLines(newArr)
 
     if (!linesOfCheck.length) {
       setContentType(MODALS_CHECK.default)
@@ -196,9 +241,9 @@ const CheckListModal = ({
                             <div style={{ width: '35px', margin: 'auto' }}>
                               <Switch
                                 text={line.old_product}
-                                // disabled={!formik.values.product}
-                                // onGx-change={handleChangeSwitch}
-                                name={FORM_FIELDS.old_product}
+                                disabled={line.sale}
+                                onGx-change={() => handleChangeSwitch(line)}
+                                name={`${line.id}-${line.old_product}`}
                                 value={`${line.old_product}`}
                                 checked={line.old_product}
                               />
