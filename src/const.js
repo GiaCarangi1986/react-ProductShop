@@ -418,16 +418,18 @@ export const WIDTH_COL = {
 
 export const WIDTH_COL_CHECK = {
   name: 250,
-  quantity_or_weight: 120,
-  price_piece_or_kg: 120,
-  total_cost: 120
+  quantity_or_weight: 90,
+  price_piece_or_kg: 90,
+  total_cost: 90,
+  old_product: 80,
 }
 
 export const WIDTH_COL_CHECK_TBODY = {
   label: 250,
-  count: 120,
-  price: 120,
-  total_cost: 120
+  count: 90,
+  price: 90,
+  total_cost: 90,
+  old_product: 80,
 }
 
 export const TABLE_EVENT_TYPES = {
@@ -532,7 +534,8 @@ export const CHECK_LINES_HEADER = {
   name: 'Наименование',
   quantity_or_weight: 'Кол-во/вес',
   price_piece_or_kg: 'Цена 1шт/1кг',
-  total_cost: 'Общая стоимость'
+  total_cost: 'Общая стоимость',
+  old_product: 'Старый продукт'
 }
 
 export const CHECK_LINE_ADDING = {

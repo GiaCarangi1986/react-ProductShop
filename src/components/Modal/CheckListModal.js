@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import classNames from 'classnames'
 import { GxGrid, GxCol, GxRow } from '@garpix/garpix-web-components-react'
-import { Button, Form, Icon } from '../../views'
+import { Button, Form, Icon, Switch } from '../../views'
 import {
   MODALS_CHECK,
   CHECK_LINES_HEADER,
@@ -147,7 +147,7 @@ const CheckListModal = ({
                       })
                       return (
                         <tr key={line.id} className={classesRow}>
-                          <td className={classNames(table_style['table-col'], table_style['table-col-full-rights'])}>
+                          <td className={classNames(table_style['table-col'], table_style['table-col-full-rights'])} key='action_colunm'>
                             <div style={{ width: '50px', margin: 'auto' }}>
                               <Button
                                 className='button-edit_action'
@@ -189,7 +189,12 @@ const CheckListModal = ({
                               </td>
                             )
                           })}
-                          <td className={table_style['table-col']}>
+                          <td className={table_style['table-col']} key='action_colunm-old-product'>
+                            <div style={{ width: '35px', margin: 'auto' }}>
+                              <Switch />
+                            </div>
+                          </td>
+                          <td className={table_style['table-col']} key='action_colunm-delete'>
                             <div style={{ width: '25px', margin: 'auto' }}>
                               <Button
                                 className='button-delete_action'

@@ -5,7 +5,7 @@ import {
   MODAL_TYPES,
 } from '../../const'
 import { Button, Switch } from '../../views'
-import { NAMES } from '../../const'
+// import { NAMES } from '../../const'
 import DateSearch from './DateSearch'
 import style from './table-settings.module.scss'
 
@@ -29,11 +29,11 @@ const TableSettings = ({
     })
   }
 
-  const classes = classNames({
-    [style['table-settings-col']]: true,
-    // [style['table-settings-col_none']]: !isShowResetBtn,
-    [style['table-settings__right_btn-second']]: true,
-  })
+  // const classes = classNames({
+  //   [style['table-settings-col']]: true,
+  //   // [style['table-settings-col_none']]: !isShowResetBtn,
+  //   [style['table-settings__right_btn-second']]: true,
+  // })
 
   return (
     <div className={style['table-settings']}>
