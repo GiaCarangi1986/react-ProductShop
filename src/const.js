@@ -498,7 +498,7 @@ export const FORM_LABELS = {
   count: 'Кол-во, шт',
   weight: 'Вес, кг',
   card: 'Бонусная карта',
-  bonus: 'Снять бонусов'
+  bonus: 'Снять бонусы'
 }
 
 export const FORM_FIELDS = {

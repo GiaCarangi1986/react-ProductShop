@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useFormik } from 'formik'
 import classNames from 'classnames'
 import { GxGrid, GxCol, GxRow } from '@garpix/garpix-web-components-react'
-import { Button, ErrorText, Fieldset, Form, Input } from '../../views'
+import { Button, ErrorText, Fieldset, Form, Input, Switch } from '../../views'
 import { deleteSpaces } from '../../utils'
 import Select from '../Select'
 import { FORM_FIELDS, FORM_LABELS, UNITS, SELECT_TYPES, MODALS_CHECK } from '../../const'
@@ -155,6 +155,8 @@ const CheckModal = ({
     }
   }, [open])
 
+  const bonusLabel = formik.values.card ? `${FORM_LABELS.bonus} (макс. ${maxBonus})` : `${FORM_LABELS.bonus} (макс. НЕОПРЕДЕЛЕНО)`
+
   return (
     <div className={style['service-form']}>
       <GxGrid className={style['service-grid']}>
@@ -164,7 +166,7 @@ const CheckModal = ({
           </GxCol>
         </GxRow>
         <Form data-cy='form' onGx-submit={onSubmit}>
-          <GxRow className={style['row-margin-big']}>
+          <GxRow>
             <GxCol className={style['service-col']}>
               <Fieldset
                 errorClass='addOrUpdateCheck'
@@ -214,6 +216,11 @@ const CheckModal = ({
               </Button>
             </GxCol>
           </GxRow>
+          <GxRow className={style['row-margin-big']}>
+            <GxCol className={style['service-col']} >
+              <Switch text='На этот товар распространяется скидка 50%' />
+            </GxCol>
+          </GxRow>
           <span className={style.line} />
           <GxRow>
             <GxCol className={style['service-col']}>
@@ -235,25 +242,26 @@ const CheckModal = ({
               </Fieldset>
             </GxCol>
             <GxCol className={style['service-col']}>
-              {formik.values.card && (
-                <Fieldset
-                  errorClass='addOrUpdateCheck'
-                  error={bonusErr}
-                  touched={formik.touched.bonus}>
-                  <Input
-                    value={formik.values.bonus}
-                    onGx-input={onInput}
-                    onGx-blur={blurFloor}
-                    name={FORM_FIELDS.bonus}
-                    label={`${FORM_LABELS.bonus} (макс. ${maxBonus})`}
-                    data-cy='title'
-                    type='number'
-                    min='0'
-                    max='32767'
-                    step={1}
-                  />
-                </Fieldset>
-              )}
+              {/* {formik.values.card && ( */}
+              <Fieldset
+                errorClass='addOrUpdateCheck'
+                error={bonusErr}
+                touched={formik.touched.bonus}>
+                <Input
+                  value={formik.values.bonus}
+                  onGx-input={onInput}
+                  onGx-blur={blurFloor}
+                  name={FORM_FIELDS.bonus}
+                  label={bonusLabel}
+                  data-cy='title'
+                  type='number'
+                  min='0'
+                  max='32767'
+                  step={1}
+                  disabled={!formik.values.card}
+                />
+              </Fieldset>
+              {/* )} */}
             </GxCol>
             <GxCol className={classNames(style['service-col'], style['service-col-add'])} />
           </GxRow>
