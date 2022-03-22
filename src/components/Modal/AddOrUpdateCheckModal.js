@@ -55,19 +55,6 @@ const AddOrUpdateCheckModal = ({
   //   updateElement(index, val)
   // }
 
-  const check = useMemo(
-    () => generatCheck(discountCard, linesOfCheck),
-    [discountCard, linesOfCheck]
-  );
-
-  const postponeCheck = () => {
-    console.log('postponeCheck', check)
-  }
-
-  const addOrUpdateCheck = () => {
-    console.log('addOrUpdateCheck', check)
-  }
-  //paid = true, - добавить поле после отлаты
   const handleSubmitError = ({ response, actions }) => {
     if (response) {
       const errResponse = handingErrors(response);
@@ -109,6 +96,23 @@ const AddOrUpdateCheckModal = ({
     // validationSchema: addOrUpdateTariffSchema,
     onSubmit
   })
+
+
+  const check = useMemo(
+    () => generatCheck(discountCard, linesOfCheck),
+    [discountCard, linesOfCheck]
+  );
+
+  const postponeCheck = () => {
+    console.log('postponeCheck', check)
+    dispatch('modal/close')
+    checkFormik.setSubmitting(false)
+  }
+
+  const addOrUpdateCheck = () => {
+    console.log('addOrUpdateCheck', check)
+  }
+  //paid = true, - добавить поле после отлаты
 
   // useEffect(() => {
   //   const values = {
