@@ -18,7 +18,7 @@ const HeaderNavigation = () => {
     <ul className={style.navigation}>
       <li>
         <NavLink
-          to={PATHS.check_operations.path}
+          to={PATHS.check_list.path}
           className={setStyle}
         >
           Операции с чеками

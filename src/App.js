@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router';
 import { Routes, Route } from 'react-router-dom'
 import { useStoreon } from 'storeon/react'
-import { AuthPage, CheckOperationsPage, CrudOperationsPage, ReportPage } from './pages'
+import { AuthPage, CheckOperationsPage, CrudOperationsPage, ReportPage, ChangeCheckPage } from './pages'
 import { ERROR_TYPES, PATHS } from './const'
 import { useNetwork } from './utils'
 import { ErrorPopup } from './views';
@@ -36,8 +36,8 @@ const App = () => {
         />
         <Route
           strict
-          path={PATHS.check_operations.path}
-          exact={PATHS.check_operations.exact}
+          path={PATHS.check_list.path}
+          exact={PATHS.check_list.exact}
           element={<CheckOperationsPage />}
         />
         <Route
@@ -51,6 +51,12 @@ const App = () => {
           path={PATHS.reports.path}
           exact={PATHS.reports.exact}
           element={<ReportPage />}
+        />
+        <Route
+          strict
+          path={PATHS.check_operations.path}
+          exact={PATHS.check_operations.exact}
+          element={<ChangeCheckPage />}
         />
       </Routes>
       <ModalLogout />

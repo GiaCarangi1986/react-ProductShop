@@ -1,0 +1,25 @@
+.wrap{
+  padding: 20px;
+  height: 100vh;
+}
+
+.wrap_parts{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 85vh;
+}
+
+.header{
+  text-align: center;
+}
+
+.part{
+  width: 50%;
+}
+
+.line {
+  display: block;
+  width: 20px;
+  background-color: var(--ps-background-color);
+}

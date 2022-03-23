@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import classNames from 'classnames'
+import { useNavigate } from 'react-router';
 import { useStoreon } from 'storeon/react'
 import {
   MODAL_TYPES,
@@ -7,6 +8,7 @@ import {
 import { Button, Switch } from '../../views'
 // import { NAMES } from '../../const'
 import DateSearch from './DateSearch'
+import { PATHS } from '../../const';
 import style from './table-settings.module.scss'
 
 const TableSettings = ({
@@ -17,16 +19,21 @@ const TableSettings = ({
   // resultsLen = 0,
 }) => {
   const { dispatch } = useStoreon()
+  const navigate = useNavigate();
 
   const resetAllFilters = () => {
     dispatch('params/reset')
   }
 
-  const openCreateModal = () => {
-    dispatch('modal/toggle', {
-      modal: MODAL_TYPES.service,
-      tariff: { data: null, type: 'create' },
-    })
+  // const openCreateModal = () => {
+  //   dispatch('modal/toggle', {
+  //     modal: MODAL_TYPES.service,
+  //     tariff: { data: null, type: 'create' },
+  //   })
+  // }
+
+  const openCreateCheckPage = () => {
+    navigate(PATHS.check_operations.path)
   }
 
   // const classes = classNames({
@@ -49,7 +56,7 @@ const TableSettings = ({
       <div className={style['table-settings__right']}>
         {children}
         <div className={style['table-settings-col']}>
-          <Button onClick={openCreateModal}>
+          <Button onClick={openCreateCheckPage}>
             <span slot='icon-left'>+</span>
             Добавить
           </Button>

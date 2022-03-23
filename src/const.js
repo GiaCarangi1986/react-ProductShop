@@ -1,5 +1,5 @@
 export const PATHS = {
-  check_operations: { // табл со всеми чеками (для кассира доступны ток отложенные, для остальных - полный список), будет кнопка добавить и т п
+  check_list: { // табл со всеми чеками (для кассира доступны ток отложенные, для остальных - полный список), будет кнопка добавить и т п
     path: '/',
     exact: false,
   },
@@ -13,6 +13,14 @@ export const PATHS = {
   },
   reports: { // вкладка с отчетами
     path: '/reports',
+    exact: false,
+  },
+  reports: { // вкладка с отчетами
+    path: '/reports',
+    exact: false,
+  },
+  check_operations: { // страница для операция с чеками (создать, редактировать, посмотреть)
+    path: '/check_operations',
     exact: false,
   },
 }
