@@ -23,7 +23,8 @@ import {
   plus,
   minus,
   deleteIcon,
-  info
+  info,
+  close
 } from '../../images';
 
 const ICON_SRCS = {
@@ -47,7 +48,8 @@ const ICON_SRCS = {
   plus,
   minus,
   deleteIcon,
-  info
+  info,
+  close
 }
 
 const Icon = ({ children, icon = 'default', nameOfStyle = null, slot = 'icon-left' }) => {

@@ -16,10 +16,16 @@
 
 .part{
   width: 50%;
+  background-color: var(--ps-color-white);
 }
 
 .line {
   display: block;
   width: 20px;
   background-color: var(--ps-background-color);
+}
+
+.close{
+  display: flex;
+  justify-content: flex-end;
 }
