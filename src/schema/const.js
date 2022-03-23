@@ -16,6 +16,8 @@ const bigNumber = 'Значение не должно превышать 32767'
 const price = 'Число должно содержать не более 10 символов'
 const priceZero = 'Цена должна быть больше 0'
 const correctDates = 'Дата окончания не может быть больше даты начала'
+const correctBonus = 'Превышено возможное кол-во бонусов для списания'
+const maxCount = 'Превышено максимальное кол-во данного продукта'
 
 export {
   login,
@@ -33,5 +35,7 @@ export {
   bigNumber,
   price,
   priceZero,
-  correctDates
+  correctDates,
+  correctBonus,
+  maxCount
 }

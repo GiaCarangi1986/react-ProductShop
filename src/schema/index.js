@@ -43,6 +43,16 @@ const dateSearch = Yup.object().shape({
   end_at: dateTempEnd,
 });
 
+const maxCount = Yup.mixed()
+  .test('setMaxCount', errorsMessenge.maxCount, (value, context) => {
+    if (context.parent.product && value) {
+      const productMaxCount = context.parent.product?.count;
+      const curCount = value;
+      return curCount <= productMaxCount;
+    }
+    return true
+  });
+
 const signUp = () => {
   return Yup.object().shape({
     username: Yup.string()
@@ -61,6 +71,7 @@ const signUp = () => {
 const addLineOfCheck = Yup.object().shape({
   product: objectTemp,
   count: countTemp,
+  count: maxCount,
 })
 
 export {

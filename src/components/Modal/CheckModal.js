@@ -7,6 +7,7 @@ import { deleteSpaces } from '../../utils'
 import Select from '../Select'
 import { FORM_FIELDS, FORM_LABELS, UNITS, SELECT_TYPES, MODALS_CHECK } from '../../const'
 import { addLineOfCheck } from '../../schema'
+import { correctBonus } from '../../schema/const'
 import api from '../../api'
 
 import style from './modal.module.scss'
@@ -130,7 +131,7 @@ const CheckModal = ({
     const floorValue = Math.floor(e.target.value)
     formik.setFieldValue(e.target.name, floorValue)
     if (floorValue > maxBonus) {
-      setBonusErr('Превышено возможное кол-во бонусов для списания')
+      setBonusErr(correctBonus)
     }
     else {
       setBonusErr('')

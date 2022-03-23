@@ -9,7 +9,6 @@ import {
   CHECK_LINE_ADDING,
   WIDTH_COL_CHECK_TBODY,
   UNITS,
-  FORM_FIELDS
 } from '../../const'
 
 import table_style from '../CheckTable/check_table.module.scss'
@@ -30,7 +29,6 @@ const CheckListModal = ({
   postponeCheck = () => { },
   addOrUpdateCheck = () => { },
 }) => {
-  const [disabled, setDisabled] = useState(true)
   const [linesOfCheckWithTotalSum, setNewCheckFields] = useState([])
   const [total_sum, setTotalSum] = useState(0)
 
