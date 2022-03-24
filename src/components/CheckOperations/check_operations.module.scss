@@ -14,9 +14,14 @@
   text-align: center;
 }
 
-.part{
-  width: 50%;
+.part_left,
+.part_right{
+  width: 39%;
   background-color: var(--ps-color-white);
+}
+
+.part_right{
+  width: 61%;
 }
 
 .line {
@@ -32,7 +37,7 @@
 
 .settings-form,
 .service-form {
-  margin: 0 20px;
+  margin: 20px;
 }
 
 .settings-form {
@@ -204,4 +209,19 @@
 
 .row-margin-big{
   margin-bottom: 40px;
+}
+
+.row_position{
+  display: flex;
+  align-items: flex-end;
+}
+
+.row_free{
+  display: flex;
+}
+
+.header_text{
+  font-size: 20px;
+  margin: 0;
+  color: var(--ps-border-color-hover);
 }

@@ -168,7 +168,7 @@ const LeftPart = ({
 
   return (
     <>
-      <section className={style.part}>
+      <section className={style.part_left}>
         <div className={style['service-form']}>
           <GxGrid className={style['service-grid']}>
             <GxRow>
@@ -228,7 +228,7 @@ const LeftPart = ({
                   </Button>
                 </GxCol>
               </GxRow>
-              <GxRow className={style['row-margin-big']}>
+              <GxRow className={classNames(style['row-margin-big'], style.row_free)}>
                 <GxCol className={style['service-col']}>
                   <Switch
                     text={oldProductLabel}
@@ -241,7 +241,7 @@ const LeftPart = ({
                 </GxCol>
               </GxRow>
               <span className={style.line} />
-              <GxRow>
+              <GxRow className={style.row_position}>
                 <GxCol className={style['service-col']} size={5}>
                   <Fieldset
                     errorClass='addOrUpdateCheck'
