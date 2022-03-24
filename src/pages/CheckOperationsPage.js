@@ -4,9 +4,11 @@ import CheckOptions from '../components/CheckOptions'
 
 const CheckOptionsPage = () => {
   return (
-    <Layout>
-      <CheckOptions />
-    </Layout>
+    <>
+      <Layout>
+        <CheckOptions />
+      </Layout>
+    </>
   )
 }
 

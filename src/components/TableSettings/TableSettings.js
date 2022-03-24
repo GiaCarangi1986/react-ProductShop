@@ -33,6 +33,9 @@ const TableSettings = ({
   // }
 
   const openCreateCheckPage = () => {
+    dispatch('modal/toggle', {
+      headers: { main: 'Добавление чека', left: 'Составляющие чека', right: 'Чек-лист' },
+    })
     navigate(PATHS.check_operations.path)
   }
 

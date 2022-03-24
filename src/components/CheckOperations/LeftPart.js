@@ -281,7 +281,7 @@ const LeftPart = ({
                 </ErrorText>
               ) : null}
             </Form>
-          </GxGrid >
+          </GxGrid>
         </div >
       </section>
     </>

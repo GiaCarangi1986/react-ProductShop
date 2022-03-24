@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router';
+import { useStoreon } from 'storeon/react';
 import RightPart from './RightPart'
 import LeftPart from './LeftPart'
 import { Button, Icon } from '../../views';
@@ -9,13 +10,15 @@ import style from './check_operations.module.scss';
 
 import api from '../../api'
 
-const CheckOperations = ({ headerText = 'Операции над чеком', leftHeader = 'Составляющие чека', rightHeader = 'Чек-лист' }) => {
+const CheckOperations = () => {
   const navigate = useNavigate();
+  const { headers } = useStoreon('headers');
 
   const [linesOfCheck, setLinesOfCheck] = useState([])
   const [discountCard, setDiscountCard] = useState({})
   const [maxBonus, setMaxBonus] = useState(0)
   const [carMaxBonus, setCardMaxBonus] = useState(0)
+  const [pageHeaders, setHeaders] = useState({})
 
   const handleSubmitError = ({ response, actions }) => { // пока не используется
     if (response) {
@@ -42,6 +45,12 @@ const CheckOperations = ({ headerText = 'Операции над чеком', le
     console.log('addOrUpdateCheck', check)
   }
 
+  useEffect(() => {
+    if (headers && Object.keys(headers).length > 0) {
+      setHeaders(headers)
+    }
+  }, [headers])
+
   return (
     <section className={style.wrap}>
       <div className={style.close}>
@@ -53,7 +62,7 @@ const CheckOperations = ({ headerText = 'Операции над чеком', le
           <Icon slot='icon-left' icon='close' />
         </Button>
       </div>
-      <h1 className={style.header}>{headerText}</h1>
+      <h1 className={style.header}>{pageHeaders?.main}</h1>
       <div className={style.wrap_parts}>
         <LeftPart
           linesOfCheck={linesOfCheck}
@@ -63,7 +72,7 @@ const CheckOperations = ({ headerText = 'Операции над чеком', le
           maxBonus={maxBonus}
           setMaxBonus={setMaxBonus}
           setCardMaxBonus={setCardMaxBonus}
-          leftHeader={leftHeader}
+          leftHeader={pageHeaders?.left}
         />
         <span className={style.line} />
         <RightPart
@@ -76,7 +85,7 @@ const CheckOperations = ({ headerText = 'Операции над чеком', le
           carMaxBonus={carMaxBonus}
           postponeCheck={postponeCheck}
           addOrUpdateCheck={addOrUpdateCheck}
-          rightHeader={rightHeader}
+          rightHeader={pageHeaders?.right}
         />
       </div>
     </section>
