@@ -181,6 +181,7 @@
 .container{
   height: calc(100vh - 280px);
   margin-bottom: 20px;
+  background-color: var(--ps-background-color);
 }
 
 .table_scroll-horizontal:hover{
@@ -234,6 +235,17 @@
 .grid_row_special{
   align-items: flex-start;
   height: 100%;
+  position: relative;
+  &::after {
+    position: absolute;
+    content: '';
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--ps-background-color);
+    bottom: -20px;
+    left: 0;
+  }
 }
 
 .btn_add_line{
