@@ -79,6 +79,9 @@ const Table = ({
                   </th>
                 )
               })}
+              <th key='action_colunm-delete' className={style['table-col']}>
+                <div style={{ width: '25px' }} />
+              </th>
             </tr>
           </thead>
           {children}

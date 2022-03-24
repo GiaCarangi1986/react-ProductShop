@@ -60,6 +60,7 @@ const CheckTable = ({
         settingsDisabled={results.length === 0}
         isLoaded={status === dataStates.loaded}
         resultsLen={results.length}
+        displayLoadBtn={count > 0 && results.length !== count && eventType !== TABLE_EVENT_TYPES.allLoaded}
       />
       <div className={overlayClasses}>
         <Table
@@ -139,21 +140,6 @@ const CheckTable = ({
           <div className={style['notresult-block']}>
             <div className={style['notresult-text']}>
               <span>Данные не найдены</span>
-            </div>
-          </div>
-        ) : null}
-        {count > 0 && results.length !== count && eventType !== TABLE_EVENT_TYPES.allLoaded ? (
-          <div className={style['download-all-btn']}>
-            <div className={style['download-all-btn-else']}>
-              <Button
-                type='button'
-                onClick={() => {
-                  setEventType(TABLE_EVENT_TYPES.allLoaded)
-                }}
-                outline
-              >
-                Отобразить все
-              </Button>
             </div>
           </div>
         ) : null}

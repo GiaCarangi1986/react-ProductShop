@@ -406,7 +406,6 @@ export const NAMES = { // примерная структура столбцов
   id: 'ID (штрих-код)',
   date_time: 'Дата и время',
   kassir: 'ФИО кассира',
-  product_count: 'Кол-во продуктов',
   bonus_add: 'Кол-во начисленных бонусов',
   bonus_pop: 'Кол-во снятых бонусов',
   sum_without_bonus: 'Сумма без бонусов',
@@ -415,13 +414,12 @@ export const NAMES = { // примерная структура столбцов
 
 export const WIDTH_COL = {
   id: 220,
-  date_time: 150,
-  sum: 150,
-  product_count: 110,
+  date_time: 135,
+  kassir: 300,
   bonus_add: 140,
   bonus_pop: 110,
-  sum_without_bonus: 150,
-  kassir: 300,
+  sum_without_bonus: 140,
+  sum: 140,
 }
 
 export const WIDTH_COL_CHECK = {

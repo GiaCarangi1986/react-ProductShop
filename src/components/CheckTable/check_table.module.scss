@@ -181,14 +181,14 @@ td.table-col-full-rights div {
 }
 
 .grid-rows {
-  grid-template-rows: calc(100% - 125px) minmax(0, 50px);
+  grid-template-rows: calc(100% - 70px) minmax(0, 50px);
   gap: 10px;
-  height: calc(100vh - 175px);
+  height: calc(100vh - 185px);
   @media (max-width: 1200px) {
-    height: calc(100vh - 142px);
+    height: calc(100vh - 157px);
   }
   @media (max-width: 1020px) {
-    height: calc(100vh - 249px);
+    height: calc(100vh - 264px);
   }
 }
 

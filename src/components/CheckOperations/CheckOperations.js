@@ -64,8 +64,7 @@ const CheckOperations = () => {
       </div>
       <h1 className={style.header}>{pageHeaders?.main}</h1>
       <div className={style.wrap_parts}>
-        <LeftPart
-          linesOfCheck={linesOfCheck}
+        <LeftPart // затем тут сделаю addCheckProps={...} и т д + компонет буду передавать нужный
           setLinesOfCheck={setLinesOfCheck}
           discountCard={discountCard}
           setDiscountCard={setDiscountCard}

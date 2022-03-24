@@ -214,8 +214,12 @@
   min-width: 40px;
 }
 
-.search_ok{
-  width: 140px;
+.search_ok, .search_cancel{
+  width: 100px;
+}
+
+.search_ok::part(base), .search_cancel::part(base){
+  min-width: 100px;
 }
 
 .btn-back {

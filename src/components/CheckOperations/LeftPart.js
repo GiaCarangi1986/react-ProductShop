@@ -13,7 +13,6 @@ import style from './check_operations.module.scss';
 
 const LeftPart = ({
   leftHeader = '',
-  linesOfCheck = [],
   discountCard = {},
   setLinesOfCheck = () => { },
   setDiscountCard = () => { },
@@ -24,7 +23,7 @@ const LeftPart = ({
 }) => {
   const [disabled, setDisabled] = useState(true)
   const [unit, setUnit] = useState(UNITS[0])
-  const [productList, updateProductList] = useState(linesOfCheck)
+  const [productList, updateProductList] = useState([])
   const [wasAddProduct, setWasAddProduct] = useState(false)
   const [bonusErr, setBonusErr] = useState('')
   const [bonusText, setBonusText] = useState('')
@@ -42,18 +41,6 @@ const LeftPart = ({
     validationSchema: addLineOfCheck,
   })
 
-  const onSubmit = () => {
-    formik.resetForm();
-    setLinesOfCheck(productList)
-
-    const cardInfo = formik.values.card ? {
-      card: formik.values.card,
-      bonus: formik.values.bonus
-    } : null
-
-    setDiscountCard(cardInfo)
-  }
-
   const handleBlur = (e, floorValue = null) => {
     const { name } = e.target;
     const value = deleteSpaces(floorValue || formik.values[name])
@@ -65,7 +52,7 @@ const LeftPart = ({
     formik.setFieldTouched([name], true)
   }
 
-  const addLine = () => {
+  const onSubmit = () => {
     const lines = [...productList]
     let wasUpdate = false
     for (let index = 0; index < lines.length; index++) {
@@ -101,7 +88,9 @@ const LeftPart = ({
 
     formik.resetForm();
     setLinesOfCheck(lines)
+  }
 
+  const applyCard = () => {
     const cardInfo = formik.values.card ? {
       card: formik.values.card,
       bonus: formik.values.bonus
@@ -228,7 +217,7 @@ const LeftPart = ({
                       className='btn_width-square'
                       data-cy='btn'
                       buttonDis
-                      onClick={addLine}
+                      type='submit'
                     >
                       +
                     </Button>
@@ -281,6 +270,17 @@ const LeftPart = ({
                       disabled={!formik.values.card}
                     />
                   </Fieldset>
+                  <div className={style.btn_add_line}>
+                    <Button
+                      // disabled={disabled} // сравнить это состояние и то, что в чеке
+                      className='btn_width-square'
+                      data-cy='btn'
+                      buttonDis
+                      onClick={applyCard}
+                    >
+                      Ок
+                    </Button>
+                  </div>
                 </div>
                 {formik.values?.card && (
                   <div className={classNames(style.grid_row, style.grid_row_special)}>
