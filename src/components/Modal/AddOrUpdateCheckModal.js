@@ -33,7 +33,7 @@ const AddOrUpdateCheckModal = ({
   const [linesOfCheck, setLinesOfCheck] = useState([])
   const [discountCard, setDiscountCard] = useState({})
   const [maxBonus, setMaxBonus] = useState(0)
-  const [carMaxBonus, setCardMaxBonus] = useState(0)
+  const [cardMaxBonus, setCardMaxBonus] = useState(0)
 
   const backToMainForm = () => setContentType(MODALS_CHECK.default)
 
@@ -200,7 +200,7 @@ const AddOrUpdateCheckModal = ({
           headerText={headerText}
           maxBonus={maxBonus}
           setMaxBonus={setMaxBonus}
-          carMaxBonus={carMaxBonus}
+          cardMaxBonus={cardMaxBonus}
           setCardMaxBonus={setCardMaxBonus}
           btnText={btnText}
           postponeCheck={postponeCheck}

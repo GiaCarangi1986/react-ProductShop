@@ -3,7 +3,7 @@ import { useFormik } from 'formik'
 import classNames from 'classnames'
 import { GxGrid, GxCol, GxRow } from '@garpix/garpix-web-components-react'
 import { Button, ErrorText, Fieldset, Form, Input, Switch } from '../../views'
-import { deleteSpaces } from '../../utils'
+import { deleteSpaces, declensionBonusNumber } from '../../utils'
 import Select from '../Select'
 import { FORM_FIELDS, FORM_LABELS, UNITS, SELECT_TYPES } from '../../const'
 import { addLineOfCheck } from '../../schema'
@@ -18,7 +18,7 @@ const LeftPart = ({
   setLinesOfCheck = () => { },
   setDiscountCard = () => { },
   maxBonus = 0,
-  carMaxBonus = 0,
+  cardMaxBonus = 0,
   setCardMaxBonus = () => { },
   setMaxBonus = () => { },
 }) => {
@@ -27,6 +27,7 @@ const LeftPart = ({
   const [productList, updateProductList] = useState(linesOfCheck)
   const [wasAddProduct, setWasAddProduct] = useState(false)
   const [bonusErr, setBonusErr] = useState('')
+  const [bonusText, setBonusText] = useState('')
 
   const initialValues = {
     product: null,
@@ -164,6 +165,10 @@ const LeftPart = ({
     }
   }, [formik])
 
+  useEffect(() => {
+    setBonusText(`бонус${declensionBonusNumber(cardMaxBonus)}`)
+  }, [cardMaxBonus])
+
   const unitForCount = unit === UNITS[0] ? FORM_LABELS.count : FORM_LABELS.weight
   const countLabel = formik.values.product ? `${unitForCount} (макс. ${formik.values.product?.count})` : `${unitForCount} (макс. НЕОПРЕДЕЛЕНО)`
   const bonusLabel = formik.values.card ? `${FORM_LABELS.bonus} (макс. ${maxBonus})` : `${FORM_LABELS.bonus} (макс. НЕОПРЕДЕЛЕНО)`
@@ -279,7 +284,7 @@ const LeftPart = ({
                 </div>
                 {formik.values?.card && (
                   <div className={classNames(style.grid_row, style.grid_row_special)}>
-                    На карте {carMaxBonus} бонусов
+                    На карте {cardMaxBonus} {bonusText}
                   </div>
                 )}
               </div>

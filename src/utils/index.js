@@ -189,4 +189,17 @@ export function useNetwork() {
   return isOffline;
 };
 
+export function declensionBonusNumber(digital = 0) {
+  const ost = +digital % 10
+  if (ost === 1) {
+    return ''
+  }
+  if (ost >= 2 && ost <= 4) {
+    return 'а'
+  }
+  if (!ost || ost > 4) {
+    return 'ов'
+  }
+};
+
 export default handlingBoolean

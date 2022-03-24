@@ -14,7 +14,7 @@ import table_style from '../CheckTable/check_table.module.scss'
 import style from './check_operations.module.scss';
 
 const RightPart = ({
-  carMaxBonus = 0,
+  cardMaxBonus = 0,
   linesOfCheck = [],
   discountCard = {},
   setLinesOfCheck = () => { },
@@ -75,7 +75,7 @@ const RightPart = ({
         card.bonus = sum
         setDiscountCard(card)
       }
-      setMaxBonus(maxBonus > sum ? sum : carMaxBonus > maxBonus ? carMaxBonus : maxBonus)
+      setMaxBonus(maxBonus > sum ? sum : cardMaxBonus > maxBonus ? cardMaxBonus : maxBonus)
     }
   }
 

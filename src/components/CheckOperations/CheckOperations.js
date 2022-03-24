@@ -17,7 +17,7 @@ const CheckOperations = () => {
   const [linesOfCheck, setLinesOfCheck] = useState([])
   const [discountCard, setDiscountCard] = useState({})
   const [maxBonus, setMaxBonus] = useState(0)
-  const [carMaxBonus, setCardMaxBonus] = useState(0)
+  const [cardMaxBonus, setCardMaxBonus] = useState(0)
   const [pageHeaders, setHeaders] = useState({})
 
   const handleSubmitError = ({ response, actions }) => { // пока не используется
@@ -71,7 +71,7 @@ const CheckOperations = () => {
           setDiscountCard={setDiscountCard}
           maxBonus={maxBonus}
           setMaxBonus={setMaxBonus}
-          carMaxBonus={carMaxBonus}
+          cardMaxBonus={cardMaxBonus}
           setCardMaxBonus={setCardMaxBonus}
           leftHeader={pageHeaders?.left}
         />
@@ -83,7 +83,7 @@ const CheckOperations = () => {
           setDiscountCard={setDiscountCard}
           maxBonus={maxBonus}
           setMaxBonus={setMaxBonus}
-          carMaxBonus={carMaxBonus}
+          cardMaxBonus={cardMaxBonus}
           postponeCheck={postponeCheck}
           addOrUpdateCheck={addOrUpdateCheck}
           rightHeader={pageHeaders?.right}

@@ -17,7 +17,7 @@ import style from './modal.module.scss'
 const CheckListModal = ({
   backToMainForm = () => { },
   setContentType = () => { },
-  carMaxBonus = 0,
+  cardMaxBonus = 0,
   linesOfCheck = [],
   discountCard = {},
   setLinesOfCheck = () => { },
@@ -78,7 +78,7 @@ const CheckListModal = ({
         card.bonus = sum
         setDiscountCard(card)
       }
-      setMaxBonus(maxBonus > sum ? sum : carMaxBonus > maxBonus ? carMaxBonus : maxBonus)
+      setMaxBonus(maxBonus > sum ? sum : cardMaxBonus > maxBonus ? cardMaxBonus : maxBonus)
     }
   }
 
