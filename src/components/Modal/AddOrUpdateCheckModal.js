@@ -1,13 +1,11 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { useFormik } from 'formik';
 import { useStoreon } from 'storeon/react';
 import CheckModal from './CheckModal';
 import PayModal from './PayModal';
 import CheckListModal from './CheckListModal'
 import { Modal } from '../../views';
-import { generatCheck } from '../../utils'
+import { generatCheck, handingErrors } from '../../utils'
 import { MODAL_TYPES, TABLE_EVENT_TYPES, MODALS_CHECK, MODALS_CHECK_TITLE } from '../../const';
-import { handingErrors, processingResult } from '../../utils'
 import api from '../../api'
 
 const MODALS_TYPES = {
@@ -87,17 +85,6 @@ const AddOrUpdateCheckModal = ({
   //     .catch(({ response }) => handleSubmitError({ response, actions }))
   // }
 
-  const onSubmit = (values, actions) => {
-    console.log('values', values)
-  }
-
-  const checkFormik = useFormik({
-    initialValues: {},
-    // validationSchema: addOrUpdateTariffSchema,
-    onSubmit
-  })
-
-
   const check = useMemo(
     () => generatCheck(discountCard, linesOfCheck),
     [discountCard, linesOfCheck]
@@ -106,7 +93,6 @@ const AddOrUpdateCheckModal = ({
   const postponeCheck = () => {
     console.log('postponeCheck', check)
     dispatch('modal/close')
-    checkFormik.setSubmitting(false)
   }
 
   const addOrUpdateCheck = () => {
@@ -203,7 +189,6 @@ const AddOrUpdateCheckModal = ({
         <Component
           backToMainForm={backToMainForm}
           setContentType={setContentType}
-          checkFormik={checkFormik}
           setOpen={setOpen}
           open={open}
           setEventType={setEventType}
