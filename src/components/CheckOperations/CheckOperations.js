@@ -9,7 +9,7 @@ import style from './check_operations.module.scss';
 
 import api from '../../api'
 
-const CheckOperations = ({ headerText = 'Операции над чеком' }) => {
+const CheckOperations = ({ headerText = 'Операции над чеком', leftHeader = 'Составляющие чека', rightHeader = 'Чек-лист' }) => {
   const navigate = useNavigate();
 
   const [linesOfCheck, setLinesOfCheck] = useState([])
@@ -63,6 +63,7 @@ const CheckOperations = ({ headerText = 'Операции над чеком' }) 
           maxBonus={maxBonus}
           setMaxBonus={setMaxBonus}
           setCardMaxBonus={setCardMaxBonus}
+          leftHeader={leftHeader}
         />
         <span className={style.line} />
         <RightPart
@@ -75,6 +76,7 @@ const CheckOperations = ({ headerText = 'Операции над чеком' }) 
           carMaxBonus={carMaxBonus}
           postponeCheck={postponeCheck}
           addOrUpdateCheck={addOrUpdateCheck}
+          rightHeader={rightHeader}
         />
       </div>
     </section>

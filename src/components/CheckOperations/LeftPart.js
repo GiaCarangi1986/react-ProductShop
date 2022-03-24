@@ -12,7 +12,7 @@ import api from '../../api'
 import style from './check_operations.module.scss';
 
 const LeftPart = ({
-  headerText = '',
+  leftHeader = '',
   linesOfCheck = [],
   discountCard = {},
   setLinesOfCheck = () => { },
@@ -173,14 +173,15 @@ const LeftPart = ({
           <GxGrid className={style['service-grid']}>
             <GxRow>
               <GxCol className={style['service-col']}>
-                <h2>{headerText}</h2>
+                <h2 className={style.header_part}>{leftHeader}</h2>
               </GxCol>
             </GxRow>
             <Form data-cy='form' onGx-submit={onSubmit}>
-              <GxRow>
-                <GxCol className={style['service-col']} size={5}>
+              <div className={style.grid_table}>
+                <div className={style.grid_row}>
                   <Fieldset
                     errorClass='addOrUpdateCheck'
+                    containerClass='pressed_bottom'
                     error={formik.errors.product}
                     touched={formik.touched.product}>
                     <Select
@@ -195,8 +196,6 @@ const LeftPart = ({
                       err={formik.errors.product && formik.touched.product}
                     />
                   </Fieldset>
-                </GxCol>
-                <GxCol className={style['service-col']} size={5}>
                   <Fieldset
                     errorClass='addOrUpdateCheck'
                     error={formik.errors.count}
@@ -215,21 +214,19 @@ const LeftPart = ({
                       disabled={!formik.values.product}
                     />
                   </Fieldset>
-                </GxCol>
-                <GxCol className={classNames(style['service-col'], style['service-col-add'])} size={2}>
-                  <Button
-                    disabled={disabled}
-                    className='btn_width-square'
-                    data-cy='btn'
-                    buttonDis
-                    onClick={addLine}
-                  >
-                    +
-                  </Button>
-                </GxCol>
-              </GxRow>
-              <GxRow className={classNames(style['row-margin-big'], style.row_free)}>
-                <GxCol className={style['service-col']}>
+                  <div className={style.btn_add_line}>
+                    <Button
+                      disabled={disabled}
+                      className='btn_width-square'
+                      data-cy='btn'
+                      buttonDis
+                      onClick={addLine}
+                    >
+                      +
+                    </Button>
+                  </div>
+                </div>
+                <div className={classNames(style.grid_row, style.grid_row_special)}>
                   <Switch
                     text={oldProductLabel}
                     disabled={!formik.values.product || formik.values.product.sale}
@@ -237,14 +234,13 @@ const LeftPart = ({
                     name={FORM_FIELDS.old_product}
                     value={`${formik.values.old_product}`}
                     checked={formik.values.old_product}
+                    containerClass='old_product_left'
                   />
-                </GxCol>
-              </GxRow>
-              <span className={style.line} />
-              <GxRow className={style.row_position}>
-                <GxCol className={style['service-col']} size={5}>
+                </div>
+                <div className={style.grid_row}>
                   <Fieldset
                     errorClass='addOrUpdateCheck'
+                    containerClass='pressed_bottom'
                     error={formik.errors.card}
                     touched={formik.touched.card}>
                     <Select
@@ -259,8 +255,6 @@ const LeftPart = ({
                       err={formik.errors.card && formik.touched.card}
                     />
                   </Fieldset>
-                </GxCol>
-                <GxCol className={style['service-col']} size={5}>
                   <Fieldset
                     errorClass='addOrUpdateCheck'
                     error={bonusErr}
@@ -279,31 +273,13 @@ const LeftPart = ({
                       disabled={!formik.values.card}
                     />
                   </Fieldset>
-                </GxCol>
-                <GxCol className={classNames(style['service-col'], style['service-col-add'])} size={2} />
-              </GxRow>
-              <GxRow>
-                <GxCol className={style['service-col']}>
-                  {formik.errors.non_field_errors ? (
-                    <ErrorText errorClass='form'>
-                      {formik.errors.non_field_errors}
-                    </ErrorText>
-                  ) : null}
-                </GxCol>
-              </GxRow>
-              <GxRow>
-                <GxCol className={style['service-col_start']}>
-                  <Button
-                    disabled={!productList.length || bonusErr !== ''}
-                    className='btn_width_single'
-                    data-cy='btn'
-                    buttonDis
-                    type='submit'
-                  >
-                    Перейти к чеку
-                  </Button>
-                </GxCol>
-              </GxRow>
+                </div>
+              </div>
+              {formik.errors.non_field_errors ? (
+                <ErrorText errorClass='form'>
+                  {formik.errors.non_field_errors}
+                </ErrorText>
+              ) : null}
             </Form>
           </GxGrid >
         </div >

@@ -21,7 +21,7 @@ const RightPart = ({
   setDiscountCard = () => { },
   maxBonus = 0,
   setMaxBonus = () => { },
-  headerText = 'Чек-лист',
+  rightHeader = 'Чек-лист',
   btnText = '',
   postponeCheck = () => { },
   addOrUpdateCheck = () => { },
@@ -136,7 +136,7 @@ const RightPart = ({
           <GxGrid className={style['service-grid']}>
             <GxRow>
               <GxCol className={style['service-col']}>
-                <h2 className={style.header_text}>{headerText}</h2>
+                <h2 className={style.header_part}>{rightHeader}</h2>
               </GxCol>
             </GxRow>
             <Form onGx-submit={onSubmit} data-cy='form'>

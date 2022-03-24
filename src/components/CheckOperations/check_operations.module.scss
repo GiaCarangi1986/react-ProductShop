@@ -203,25 +203,37 @@
   word-break: break-all;
 }
 
-.gxrow {
-  width: 100%;
-}
-
-.row-margin-big{
-  margin-bottom: 40px;
-}
-
-.row_position{
-  display: flex;
-  align-items: flex-end;
-}
-
-.row_free{
-  display: flex;
-}
-
-.header_text{
+.header_part{
   font-size: 20px;
   margin: 0;
   color: var(--ps-border-color-hover);
+}
+
+.header{
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+.grid_table{
+  display: grid;  
+  grid-template-rows: repeat(3, 100px);
+  align-items: flex-end;
+  row-gap: 20px;
+}
+
+.grid_row{
+  display: grid;  
+  grid-template-columns: repeat(2, minmax(130px, 1fr)) minmax(auto, 0.5fr);
+  column-gap: 5%;
+}
+
+.grid_row_special{
+  align-items: flex-start;
+  height: 100%;
+}
+
+.btn_add_line{
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
 }

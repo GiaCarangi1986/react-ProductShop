@@ -2,7 +2,7 @@ import React from 'react'
 import Select from 'react-select'
 import style from './select.module.scss'
 
-const baseCustomStyles = (error = false) => {
+const baseCustomStyles = (error = false, otherStyle = {}) => {
   return {
     control: (base) => {
       return {
@@ -18,6 +18,7 @@ const baseCustomStyles = (error = false) => {
         '&:focus': {
           borderColor: error ? '#E72525' : 'hsla(201, 100%, 13%, 0.5)',
         },
+        ...otherStyle
       }
     },
     indicatorSeparator: () => ({
@@ -75,6 +76,7 @@ const BaseSelect = ({
   label = '',
   value = null,
   err = false,
+  otherStyle = {},
   ...props
 }) => {
   return (
@@ -85,7 +87,7 @@ const BaseSelect = ({
       <Select
         id={id}
         className={style.select}
-        styles={baseCustomStyles(err)}
+        styles={baseCustomStyles(err, otherStyle)}
         placeholder=''
         components={{ DropdownIndicator }}
         isSearchable

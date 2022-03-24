@@ -10,3 +10,9 @@
     --gx-input-border-color-hover: var(--ps-color-red-hover);
     --gx-input-border-color-focus: var(--ps-color-red-hover);
 }
+
+.pressed_bottom{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}

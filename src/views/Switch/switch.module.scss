@@ -30,6 +30,11 @@
   width: max-content;
 }
 
+.old_product_left{
+  width: auto;
+  grid-column: 1 / 3;
+}
+
 @media (max-width: 1200px) {
   .wrap{
     font-size: 15px;
