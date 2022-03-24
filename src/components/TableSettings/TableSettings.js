@@ -30,7 +30,7 @@ const TableSettings = ({
   // }
 
   const openCreateCheckPage = () => {
-    dispatch('modal/toggle', {
+    dispatch('page/toggle', {
       headers: { main: 'Добавление чека', left: 'Составляющие чека', right: 'Чек-лист', btnText: 'Перейти к оплате' },
       // для редактир. чека альтернатива - перейти к выплате
     })

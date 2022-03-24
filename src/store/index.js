@@ -30,6 +30,15 @@ const modalFn = store => {
   store.on('modal/close', () => ({ modal: null }));
 };
 
+const pageCheckProps = store => {
+  store.on('@init', () => ({ page: null }));
+  store.on('page/toggle', ({ }, { page, ...params }) => ({
+    page,
+    ...params
+  }));
+  store.on('page/close', () => ({ page: null }));
+};
+
 const checkFilters = (store) => {
   store.on('@init', () => ({ filters: { page: 1, pageSize: PAGE_SIZE, search: '', ordering: '' } }))
   store.on('params/save', ({ }, { ...params }) => ({ filters: { ...params } }));
@@ -67,6 +76,7 @@ const storeonParams = [
   modalFn,
   catchErrorsApi,
   checkFilters,
+  pageCheckProps,
   persistState([
     'currentUser',
   ]),

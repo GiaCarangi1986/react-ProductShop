@@ -14,6 +14,7 @@ import style from './check_operations.module.scss';
 const LeftPart = ({
   leftHeader = '',
   discountCard = {},
+  linesOfCheck = [],
   setLinesOfCheck = () => { },
   setDiscountCard = () => { },
   maxBonus = 0,
@@ -23,7 +24,7 @@ const LeftPart = ({
 }) => {
   const [disabled, setDisabled] = useState(true)
   const [unit, setUnit] = useState(UNITS[0])
-  const [productList, updateProductList] = useState([])
+  const [productList, updateProductList] = useState(linesOfCheck)
   const [wasAddProduct, setWasAddProduct] = useState(false)
   const [bonusErr, setBonusErr] = useState('')
   const [bonusText, setBonusText] = useState('')
@@ -77,13 +78,6 @@ const LeftPart = ({
         sale: formik.values.product.sale,
       })
     }
-    updateProductList(lines)
-
-    // formik.setFieldValue(FORM_FIELDS.count, 1)
-    // formik.setFieldValue(FORM_FIELDS.old_product, false)
-    // formik.setFieldValue(FORM_FIELDS.product, null)
-    // formik.setFieldTouched(FORM_FIELDS.product, false)
-
     setWasAddProduct(true)
 
     formik.resetForm();
@@ -153,6 +147,10 @@ const LeftPart = ({
       setDisabled(isDisabled)
     }
   }, [formik])
+
+  useEffect(() => {
+    updateProductList(linesOfCheck)
+  }, [linesOfCheck])
 
   useEffect(() => {
     setBonusText(`бонус${declensionBonusNumber(cardMaxBonus)}`)

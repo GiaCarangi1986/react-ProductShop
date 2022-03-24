@@ -49,6 +49,7 @@
   --ps-preload: rgba(white, 0);
   --ps-preload-vis: rgba(white, 0.7);
   --ps-table-hover: rgba(0, 155, 164, 0.07);
+  --ps-scroll-ligth: rgba(0,0,0,.1)
 }
 
 *,
@@ -56,7 +57,7 @@
 *::before {
   box-sizing: border-box;
   outline: none !important;
-  scrollbar-color: var(--ps-color-accent) rgba(0,0,0,.1);
+  scrollbar-color: var(--ps-color-accent) var(--ps-scroll-ligth);
   scrollbar-width: thin;
 }
 
@@ -119,7 +120,7 @@ strong {
     height: 5px;
   }
   &::-webkit-scrollbar-track {
-    background: rgba(0,0,0,.1);
+    background: var(--ps-scroll-ligth);
     margin: 5px;
   }
 
@@ -131,7 +132,7 @@ strong {
 gx-modal {
   --gx-scrollbar-width: 5px;
   --gx-scrollbar-height: 5px;
-  --gx-scrollbar-track-color: rgba(0,0,0,.1);
+  --gx-scrollbar-track-color: var(--ps-scroll-ligth);
   --gx-scrollbar-thumb-color: var(--ps-color-accent);
 }
 

@@ -12,7 +12,7 @@ import api from '../../api'
 
 const CheckOperations = () => {
   const navigate = useNavigate();
-  const { headers } = useStoreon('headers');
+  const { headers, dispatch } = useStoreon('headers');
 
   const [linesOfCheck, setLinesOfCheck] = useState([])
   const [discountCard, setDiscountCard] = useState({})
@@ -39,10 +39,12 @@ const CheckOperations = () => {
 
   const postponeCheck = () => {
     console.log('postponeCheck', check)
+    dispatch('page/close')
   }
 
   const addOrUpdateCheck = () => {
     console.log('addOrUpdateCheck', check)
+    dispatch('page/close')
   }
 
   useEffect(() => {
@@ -65,6 +67,7 @@ const CheckOperations = () => {
       <h1 className={style.header}>{pageHeaders?.main}</h1>
       <div className={style.wrap_parts}>
         <LeftPart // затем тут сделаю addCheckProps={...} и т д + компонет буду передавать нужный
+          linesOfCheck={linesOfCheck}
           setLinesOfCheck={setLinesOfCheck}
           discountCard={discountCard}
           setDiscountCard={setDiscountCard}
