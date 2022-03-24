@@ -87,6 +87,7 @@ const CheckOperations = () => {
           postponeCheck={postponeCheck}
           addOrUpdateCheck={addOrUpdateCheck}
           rightHeader={pageHeaders?.right}
+          btnText={pageHeaders?.btnText}
         />
       </div>
     </section>

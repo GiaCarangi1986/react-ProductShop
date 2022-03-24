@@ -255,29 +255,25 @@ const RightPart = ({
                   <span className={style.text}>{`Итого без бонусов: ${total_sum}`}</span>
                   <span className={style.text}>{`Итого с бонусами: ${total_sum - (discountCard?.bonus || 0)}`}</span>
                 </div>
-                <GxRow className={style.gxrow}>
-                  <GxCol className={style['service-col']} offset={4} size={4}>
-                    <Button
-                      className='btn_width-100-red'
-                      data-cy='btn'
-                      buttonDis
-                      outline
-                      onClick={postponeCheck}
-                    >
-                      Отложить чек
-                    </Button>
-                  </GxCol>
-                  <GxCol className={style['service-col']} size={4}>
-                    <Button
-                      type='submit'
-                      className='btn_width-100'
-                      data-cy='btn'
-                      buttonDis
-                    >
-                      {btnText}
-                    </Button>
-                  </GxCol>
-                </GxRow>
+                <div className={style.wrap_btn}>
+                  <Button
+                    className='btn_width-100-red'
+                    data-cy='btn'
+                    buttonDis
+                    outline
+                    onClick={postponeCheck}
+                  >
+                    Отложить чек
+                  </Button>
+                  <Button
+                    type='submit'
+                    className='btn_width-100'
+                    data-cy='btn'
+                    buttonDis
+                  >
+                    {btnText}
+                  </Button>
+                </div>
               </div>
             </Form>
           </GxGrid>

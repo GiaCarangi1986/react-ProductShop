@@ -21,10 +21,6 @@ const TableSettings = ({
   const { dispatch } = useStoreon()
   const navigate = useNavigate();
 
-  const resetAllFilters = () => {
-    dispatch('params/reset')
-  }
-
   // const openCreateModal = () => {
   //   dispatch('modal/toggle', {
   //     modal: MODAL_TYPES.service,
@@ -34,7 +30,8 @@ const TableSettings = ({
 
   const openCreateCheckPage = () => {
     dispatch('modal/toggle', {
-      headers: { main: 'Добавление чека', left: 'Составляющие чека', right: 'Чек-лист' },
+      headers: { main: 'Добавление чека', left: 'Составляющие чека', right: 'Чек-лист', btnText: 'Перейти к оплате' },
+      // для редактир. чека альтернатива - перейти к выплате
     })
     navigate(PATHS.check_operations.path)
   }

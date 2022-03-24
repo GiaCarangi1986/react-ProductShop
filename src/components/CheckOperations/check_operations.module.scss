@@ -196,11 +196,15 @@
 .wrap_row{
   display: flex;
   justify-content: space-between;
+  gap: 10px;
 }
 
 .text{
   width: 300px;
   word-break: break-all;
+  @media (max-width: 1200px) {
+    width: 260px;
+  }
 }
 
 .header_part{
@@ -236,4 +240,10 @@
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
+}
+
+.wrap_btn{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
 }
