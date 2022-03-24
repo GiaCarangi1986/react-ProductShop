@@ -18,6 +18,7 @@ const LeftPart = ({
   setLinesOfCheck = () => { },
   setDiscountCard = () => { },
   maxBonus = 0,
+  carMaxBonus = 0,
   setCardMaxBonus = () => { },
   setMaxBonus = () => { },
 }) => {
@@ -163,6 +164,8 @@ const LeftPart = ({
     }
   }, [formik])
 
+  const unitForCount = unit === UNITS[0] ? FORM_LABELS.count : FORM_LABELS.weight
+  const countLabel = formik.values.product ? `${unitForCount} (макс. ${formik.values.product?.count})` : `${unitForCount} (макс. НЕОПРЕДЕЛЕНО)`
   const bonusLabel = formik.values.card ? `${FORM_LABELS.bonus} (макс. ${maxBonus})` : `${FORM_LABELS.bonus} (макс. НЕОПРЕДЕЛЕНО)`
   const oldProductLabel = formik.values.product?.sale ? `${FORM_LABELS.old_product} (${FORM_LABELS.old_product_err})` : FORM_LABELS.old_product
 
@@ -205,7 +208,7 @@ const LeftPart = ({
                       onGx-input={formik.handleChange}
                       onGx-blur={handleBlur}
                       name={FORM_FIELDS.count}
-                      label={unit === UNITS[0] ? FORM_LABELS.count : FORM_LABELS.weight}
+                      label={countLabel}
                       data-cy='title'
                       type='number'
                       min='1'
@@ -274,6 +277,11 @@ const LeftPart = ({
                     />
                   </Fieldset>
                 </div>
+                {formik.values?.card && (
+                  <div className={classNames(style.grid_row, style.grid_row_special)}>
+                    На карте {carMaxBonus} бонусов
+                  </div>
+                )}
               </div>
               {formik.errors.non_field_errors ? (
                 <ErrorText errorClass='form'>

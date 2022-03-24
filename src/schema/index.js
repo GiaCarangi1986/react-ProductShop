@@ -69,7 +69,7 @@ const signUp = () => {
 };
 
 const addLineOfCheck = Yup.object().shape({
-  product: objectTemp,
+  product: objectTemp.required(''),
   count: countTemp,
   count: maxCount,
 })

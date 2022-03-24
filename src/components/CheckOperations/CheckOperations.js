@@ -71,6 +71,7 @@ const CheckOperations = () => {
           setDiscountCard={setDiscountCard}
           maxBonus={maxBonus}
           setMaxBonus={setMaxBonus}
+          carMaxBonus={carMaxBonus}
           setCardMaxBonus={setCardMaxBonus}
           leftHeader={pageHeaders?.left}
         />
