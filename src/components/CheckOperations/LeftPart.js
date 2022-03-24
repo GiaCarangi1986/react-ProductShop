@@ -5,7 +5,7 @@ import { GxGrid, GxCol, GxRow } from '@garpix/garpix-web-components-react'
 import { Button, ErrorText, Fieldset, Form, Input, Switch } from '../../views'
 import { deleteSpaces } from '../../utils'
 import Select from '../Select'
-import { FORM_FIELDS, FORM_LABELS, UNITS, SELECT_TYPES, MODALS_CHECK } from '../../const'
+import { FORM_FIELDS, FORM_LABELS, UNITS, SELECT_TYPES } from '../../const'
 import { addLineOfCheck } from '../../schema'
 import { correctBonus } from '../../schema/const'
 import api from '../../api'
@@ -13,7 +13,6 @@ import style from './check_operations.module.scss';
 
 const LeftPart = ({
   headerText = '',
-  setContentType = () => { },
   linesOfCheck = [],
   discountCard = {},
   setLinesOfCheck = () => { },
@@ -21,7 +20,6 @@ const LeftPart = ({
   maxBonus = 0,
   setCardMaxBonus = () => { },
   setMaxBonus = () => { },
-  open = false
 }) => {
   const [disabled, setDisabled] = useState(true)
   const [unit, setUnit] = useState(UNITS[0])
@@ -52,7 +50,6 @@ const LeftPart = ({
     } : null
 
     setDiscountCard(cardInfo)
-    setContentType(MODALS_CHECK.checkList)
   }
 
   const handleBlur = (e, floorValue = null) => {
@@ -93,12 +90,22 @@ const LeftPart = ({
     }
     updateProductList(lines)
 
-    formik.setFieldValue(FORM_FIELDS.count, 1)
-    formik.setFieldValue(FORM_FIELDS.old_product, false)
-    formik.setFieldValue(FORM_FIELDS.product, null)
-    formik.setFieldTouched(FORM_FIELDS.product, false)
+    // formik.setFieldValue(FORM_FIELDS.count, 1)
+    // formik.setFieldValue(FORM_FIELDS.old_product, false)
+    // formik.setFieldValue(FORM_FIELDS.product, null)
+    // formik.setFieldTouched(FORM_FIELDS.product, false)
 
     setWasAddProduct(true)
+
+    formik.resetForm();
+    setLinesOfCheck(lines)
+
+    const cardInfo = formik.values.card ? {
+      card: formik.values.card,
+      bonus: formik.values.bonus
+    } : null
+
+    setDiscountCard(cardInfo)
   }
 
   const chooseProduct = (e, name) => {
@@ -155,13 +162,6 @@ const LeftPart = ({
       setDisabled(isDisabled)
     }
   }, [formik])
-
-  useEffect(() => {
-    if (!open) {
-      formik.setValues(initialValues)
-      formik.setTouched({})
-    }
-  }, [open])
 
   const bonusLabel = formik.values.card ? `${FORM_LABELS.bonus} (макс. ${maxBonus})` : `${FORM_LABELS.bonus} (макс. НЕОПРЕДЕЛЕНО)`
   const oldProductLabel = formik.values.product?.sale ? `${FORM_LABELS.old_product} (${FORM_LABELS.old_product_err})` : FORM_LABELS.old_product

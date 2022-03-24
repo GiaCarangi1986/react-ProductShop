@@ -3,7 +3,6 @@ import classNames from 'classnames'
 import { GxGrid, GxCol, GxRow } from '@garpix/garpix-web-components-react'
 import { Button, Form, Icon, Switch } from '../../views'
 import {
-  MODALS_CHECK,
   CHECK_LINES_HEADER,
   WIDTH_COL_CHECK,
   CHECK_LINE_ADDING,
@@ -15,7 +14,6 @@ import table_style from '../CheckTable/check_table.module.scss'
 import style from './check_operations.module.scss';
 
 const RightPart = ({
-  setContentType = () => { },
   carMaxBonus = 0,
   linesOfCheck = [],
   discountCard = {},
@@ -129,10 +127,6 @@ const RightPart = ({
     })
     setNewCheckFields(newArr)
     recalculateLines(newArr)
-
-    if (!linesOfCheck.length) {
-      setContentType(MODALS_CHECK.default)
-    }
   }, [linesOfCheck])
 
   return (
