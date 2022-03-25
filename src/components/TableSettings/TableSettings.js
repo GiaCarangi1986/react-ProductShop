@@ -31,7 +31,7 @@ const TableSettings = ({
 
   const openCreateCheckPage = () => {
     dispatch('page/toggle', {
-      headers: { main: 'Добавление чека', left: 'Составляющие чека', right: 'Чек-лист', btnText: 'Перейти к оплате' },
+      headers: { main: 'Добавление чека', left: 'Составляющие чека', right: 'Чек-лист', btnText: 'Перейти к оплате', type: MODAL_TYPES.addCheck, },
       // для редактир. чека альтернатива - перейти к выплате
     })
     navigate(PATHS.check_operations.path)

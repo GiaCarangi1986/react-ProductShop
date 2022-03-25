@@ -19,20 +19,18 @@ const CheckOptions = () => {
   }, [currentUser])
 
   return (
-    <>
-      <section className={style.services}>
-        <FetcherList
-          isScrollTop={false}
-          isHistoryPush={false}
-          api={api.getCheckList}
-          initFilter={{ page_size: 10 }}
-        >
-          {(props) => {
-            return <CheckTable {...props} />
-          }}
-        </FetcherList>
-      </section>
-    </>
+    <section className={style.services}>
+      <FetcherList
+        isScrollTop={false}
+        isHistoryPush={false}
+        api={api.getCheckList}
+        initFilter={{ page_size: 10 }}
+      >
+        {(props) => {
+          return <CheckTable {...props} />
+        }}
+      </FetcherList>
+    </section>
   )
 }
 

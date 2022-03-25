@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useFormik } from 'formik'
 import classNames from 'classnames'
-import { GxGrid, GxCol, GxRow } from '@garpix/garpix-web-components-react'
 import { Button, ErrorText, Fieldset, Form, Input, Switch } from '../../views'
 import { deleteSpaces, declensionBonusNumber } from '../../utils'
 import Select from '../Select'
@@ -11,14 +10,17 @@ import { correctBonus } from '../../schema/const'
 import api from '../../api'
 import style from './check_operations.module.scss';
 
-const LeftPart = ({
-  leftHeader = '',
-  discountCard = {},
-  setDiscountCard = () => { },
-  linesOfCheck = [],
-  setLinesOfCheck = () => { },
-  total_sum = 0
+const AddCheckParams = ({
+  addCheck
 }) => {
+  const {
+    discountCard = {},
+    setDiscountCard = () => { },
+    linesOfCheck = [],
+    setLinesOfCheck = () => { },
+    total_sum = 0
+  } = addCheck
+
   const [disabled, setDisabled] = useState(true)
   const [unit, setUnit] = useState(UNITS[0])
   const [productList, updateProductList] = useState(linesOfCheck)
@@ -197,141 +199,128 @@ const LeftPart = ({
   const disabledCardAdd = digitalCard === +formik.values.bonus && discountCard?.card?.value === formik.values.card?.value || !formik.values.card && discountCard && Object.keys(discountCard).length === 0
 
   return (
-    <>
-      <section className={style.part_left}>
-        <div className={style['service-form']}>
-          <GxGrid className={style['service-grid']}>
-            <GxRow>
-              <GxCol className={style['service-col']}>
-                <h2 className={style.header_part}>{leftHeader}</h2>
-              </GxCol>
-            </GxRow>
-            <Form data-cy='form'>
-              <div className={style.grid_table}>
-                <div className={style.grid_row}>
-                  <Fieldset
-                    errorClass='addOrUpdateCheck'
-                    containerClass='pressed_bottom'
-                    error={formik.errors.product}
-                    touched={formik.touched.product}>
-                    <Select
-                      value={formik.values.product}
-                      name={FORM_FIELDS.product}
-                      label={FORM_LABELS.product}
-                      data-cy='title'
-                      type={SELECT_TYPES.product}
-                      func={api.getProductListForCreatingCheck}
-                      onBlur={() => handleSelectBlur(FORM_FIELDS.product)}
-                      onChange={(e) => chooseProduct(e, FORM_FIELDS.product)}
-                      err={formik.errors.product && formik.touched.product}
-                    />
-                  </Fieldset>
-                  <Fieldset
-                    errorClass='addOrUpdateCheck'
-                    error={formik.errors.count}
-                    touched={formik.touched.count}>
-                    <Input
-                      value={formik.values.count}
-                      onGx-input={formik.handleChange}
-                      onGx-blur={blurPositiveValue}
-                      name={FORM_FIELDS.count}
-                      label={countLabel}
-                      data-cy='title'
-                      type='number'
-                      min='1'
-                      max='32767'
-                      step={unit === UNITS[0] ? 1 : 0.1}
-                      disabled={!formik.values.product}
-                    />
-                  </Fieldset>
-                  <div className={style.btn_add_line}>
-                    <Button
-                      disabled={disabled}
-                      className='btn_width-square'
-                      data-cy='btn'
-                      buttonDis
-                      onClick={addLine}
-                    >
-                      +
-                    </Button>
-                  </div>
-                </div>
-                <div className={classNames(style.grid_row, style.grid_row_special)}>
-                  <Switch
-                    text={oldProductLabel}
-                    disabled={!formik.values.product || formik.values.product.sale}
-                    onGx-change={handleChangeSwitch}
-                    name={FORM_FIELDS.old_product}
-                    value={`${formik.values.old_product}`}
-                    checked={formik.values.old_product}
-                    containerClass='old_product_left'
-                  />
-                </div>
-                <div className={style.grid_row}>
-                  <Fieldset
-                    errorClass='addOrUpdateCheck'
-                    containerClass='pressed_bottom'
-                    error={formik.errors.card}
-                    touched={formik.touched.card}>
-                    <Select
-                      value={formik.values.card}
-                      name={FORM_FIELDS.card}
-                      label={FORM_LABELS.card}
-                      data-cy='title'
-                      func={api.getCardListForCreatingCheck}
-                      type={SELECT_TYPES.card}
-                      onBlur={() => handleSelectBlur(FORM_FIELDS.card)}
-                      onChange={(e) => chooseCard(e, FORM_FIELDS.card)}
-                      err={formik.errors.card && formik.touched.card}
-                    />
-                  </Fieldset>
-                  <Fieldset
-                    errorClass='addOrUpdateCheck'
-                    error={bonusErr}
-                    touched={formik.touched.bonus}>
-                    <Input
-                      value={formik.values.bonus}
-                      onGx-input={onInput}
-                      onGx-blur={blurFloor}
-                      name={FORM_FIELDS.bonus}
-                      label={bonusLabel}
-                      data-cy='title'
-                      type='number'
-                      min='0'
-                      max='32767'
-                      step={1}
-                      disabled={!formik.values.card || !linesOfCheck.length}
-                    />
-                  </Fieldset>
-                  <div className={style.btn_add_line}>
-                    <Button
-                      disabled={disabledCardAdd}
-                      className='btn_width-square'
-                      data-cy='btn'
-                      buttonDis
-                      onClick={applyCard}
-                    >
-                      Ок
-                    </Button>
-                  </div>
-                </div>
-                {formik.values?.card && (
-                  <div className={classNames(style.grid_row, style.grid_row_special)}>
-                    <p className={style.container_special}>На карте {cardMaxBonus} {bonusText}</p>
-                  </div>
-                )}
-              </div>
-              {formik.errors.non_field_errors ? (
-                <ErrorText errorClass='form'>
-                  {formik.errors.non_field_errors}
-                </ErrorText>
-              ) : null}
-            </Form>
-          </GxGrid>
-        </div >
-      </section>
-    </>
+    <Form data-cy='form'>
+      <div className={style.grid_table}>
+        <div className={style.grid_row}>
+          <Fieldset
+            errorClass='addOrUpdateCheck'
+            containerClass='pressed_bottom'
+            error={formik.errors.product}
+            touched={formik.touched.product}>
+            <Select
+              value={formik.values.product}
+              name={FORM_FIELDS.product}
+              label={FORM_LABELS.product}
+              data-cy='title'
+              type={SELECT_TYPES.product}
+              func={api.getProductListForCreatingCheck}
+              onBlur={() => handleSelectBlur(FORM_FIELDS.product)}
+              onChange={(e) => chooseProduct(e, FORM_FIELDS.product)}
+              err={formik.errors.product && formik.touched.product}
+            />
+          </Fieldset>
+          <Fieldset
+            errorClass='addOrUpdateCheck'
+            error={formik.errors.count}
+            touched={formik.touched.count}>
+            <Input
+              value={formik.values.count}
+              onGx-input={formik.handleChange}
+              onGx-blur={blurPositiveValue}
+              name={FORM_FIELDS.count}
+              label={countLabel}
+              data-cy='title'
+              type='number'
+              min='1'
+              max='32767'
+              step={unit === UNITS[0] ? 1 : 0.1}
+              disabled={!formik.values.product}
+            />
+          </Fieldset>
+          <div className={style.btn_add_line}>
+            <Button
+              disabled={disabled}
+              className='btn_width-square'
+              data-cy='btn'
+              buttonDis
+              onClick={addLine}
+            >
+              +
+            </Button>
+          </div>
+        </div>
+        <div className={classNames(style.grid_row, style.grid_row_special)}>
+          <Switch
+            text={oldProductLabel}
+            disabled={!formik.values.product || formik.values.product.sale}
+            onGx-change={handleChangeSwitch}
+            name={FORM_FIELDS.old_product}
+            value={`${formik.values.old_product}`}
+            checked={formik.values.old_product}
+            containerClass='old_product_left'
+          />
+        </div>
+        <div className={style.grid_row}>
+          <Fieldset
+            errorClass='addOrUpdateCheck'
+            containerClass='pressed_bottom'
+            error={formik.errors.card}
+            touched={formik.touched.card}>
+            <Select
+              value={formik.values.card}
+              name={FORM_FIELDS.card}
+              label={FORM_LABELS.card}
+              data-cy='title'
+              func={api.getCardListForCreatingCheck}
+              type={SELECT_TYPES.card}
+              onBlur={() => handleSelectBlur(FORM_FIELDS.card)}
+              onChange={(e) => chooseCard(e, FORM_FIELDS.card)}
+              err={formik.errors.card && formik.touched.card}
+            />
+          </Fieldset>
+          <Fieldset
+            errorClass='addOrUpdateCheck'
+            error={bonusErr}
+            touched={formik.touched.bonus}>
+            <Input
+              value={formik.values.bonus}
+              onGx-input={onInput}
+              onGx-blur={blurFloor}
+              name={FORM_FIELDS.bonus}
+              label={bonusLabel}
+              data-cy='title'
+              type='number'
+              min='0'
+              max='32767'
+              step={1}
+              disabled={!formik.values.card || !linesOfCheck.length}
+            />
+          </Fieldset>
+          <div className={style.btn_add_line}>
+            <Button
+              disabled={disabledCardAdd}
+              className='btn_width-square'
+              data-cy='btn'
+              buttonDis
+              onClick={applyCard}
+            >
+              Ок
+            </Button>
+          </div>
+        </div>
+        {formik.values?.card && (
+          <div className={classNames(style.grid_row, style.grid_row_special)}>
+            <p className={style.container_special}>На карте {cardMaxBonus} {bonusText}</p>
+          </div>
+        )}
+      </div>
+      {formik.errors.non_field_errors ? (
+        <ErrorText errorClass='form'>
+          {formik.errors.non_field_errors}
+        </ErrorText>
+      ) : null}
+    </Form>
   )
 }
 
-export default LeftPart;
+export default AddCheckParams;

@@ -28,10 +28,8 @@ export const PATHS = {
 export const MODAL_TYPES = {
   logout: 'logout',
   settings: 'settings',
-  service: 'service',
-  service_archive: 'service-archive',
-  service_delete: 'service-delete',
   payModal: 'payModal',
+  addCheck: 'addCheck'
 }
 
 export const ERROR_TYPES = {
