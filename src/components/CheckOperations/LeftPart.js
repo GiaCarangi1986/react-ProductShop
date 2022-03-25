@@ -53,7 +53,7 @@ const LeftPart = ({
     formik.setFieldTouched([name], true)
   }
 
-  const onSubmit = () => {
+  const addLine = () => {
     const lines = [...productList]
     let wasUpdate = false
     for (let index = 0; index < lines.length; index++) {
@@ -80,7 +80,11 @@ const LeftPart = ({
     }
     setWasAddProduct(true)
 
-    formik.resetForm();
+    formik.setFieldValue(FORM_FIELDS.count, 1)
+    formik.setFieldValue(FORM_FIELDS.old_product, false)
+    formik.setFieldValue(FORM_FIELDS.product, null)
+    formik.setFieldTouched(FORM_FIELDS.product, false)
+
     setLinesOfCheck(lines)
   }
 
@@ -102,11 +106,11 @@ const LeftPart = ({
 
   const chooseCard = (e, name) => {
     formik.setFieldValue(name, e)
+    formik.setFieldValue(FORM_FIELDS.bonus, 0)
     if (!e.value) {
       formik.setFieldValue(FORM_FIELDS.card, null)
     }
     else {
-      formik.setFieldValue(FORM_FIELDS.bonus, 0)
       const maxBonus = Math.floor(e.bonus)
       setCardMaxBonus(maxBonus)
       setMaxBonus(maxBonus)
@@ -156,11 +160,13 @@ const LeftPart = ({
     setBonusText(`бонус${declensionBonusNumber(cardMaxBonus)}`)
   }, [cardMaxBonus])
 
+  const digitalCard = +(discountCard?.bonus || 0)
   const unitForCount = unit === UNITS[0] ? FORM_LABELS.count : FORM_LABELS.weight
   const countLabel = formik.values.product ? `${unitForCount} (макс. ${formik.values.product?.count})` : `${unitForCount} (макс. НЕОПРЕДЕЛЕНО)`
   const bonusLabel = formik.values.card ? `${FORM_LABELS.bonus} (макс. ${maxBonus})` : `${FORM_LABELS.bonus} (макс. НЕОПРЕДЕЛЕНО)`
   const oldProductLabel = formik.values.product?.sale ? `${FORM_LABELS.old_product} (${FORM_LABELS.old_product_err})` : FORM_LABELS.old_product
-
+  const disabledCardAdd = digitalCard === +formik.values.bonus && discountCard?.card?.value === formik.values.card?.value || !formik.values.card && discountCard && Object.keys(discountCard).length === 0 || !linesOfCheck.length
+  // продумать про сброс в 0 при linesOfCheck.length === 0
   return (
     <>
       <section className={style.part_left}>
@@ -171,7 +177,7 @@ const LeftPart = ({
                 <h2 className={style.header_part}>{leftHeader}</h2>
               </GxCol>
             </GxRow>
-            <Form data-cy='form' onGx-submit={onSubmit}>
+            <Form data-cy='form'>
               <div className={style.grid_table}>
                 <div className={style.grid_row}>
                   <Fieldset
@@ -215,7 +221,7 @@ const LeftPart = ({
                       className='btn_width-square'
                       data-cy='btn'
                       buttonDis
-                      type='submit'
+                      onClick={addLine}
                     >
                       +
                     </Button>
@@ -270,7 +276,7 @@ const LeftPart = ({
                   </Fieldset>
                   <div className={style.btn_add_line}>
                     <Button
-                      // disabled={disabled} // сравнить это состояние и то, что в чеке
+                      disabled={disabledCardAdd}
                       className='btn_width-square'
                       data-cy='btn'
                       buttonDis
@@ -282,7 +288,7 @@ const LeftPart = ({
                 </div>
                 {formik.values?.card && (
                   <div className={classNames(style.grid_row, style.grid_row_special)}>
-                    На карте {cardMaxBonus} {bonusText}
+                    <p className={style.container_special}>На карте {cardMaxBonus} {bonusText}</p>
                   </div>
                 )}
               </div>
