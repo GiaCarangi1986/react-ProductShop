@@ -14,13 +14,10 @@ import style from './check_operations.module.scss';
 const LeftPart = ({
   leftHeader = '',
   discountCard = {},
+  setDiscountCard = () => { },
   linesOfCheck = [],
   setLinesOfCheck = () => { },
-  setDiscountCard = () => { },
-  maxBonus = 0,
-  cardMaxBonus = 0,
-  setCardMaxBonus = () => { },
-  setMaxBonus = () => { },
+  total_sum = 0
 }) => {
   const [disabled, setDisabled] = useState(true)
   const [unit, setUnit] = useState(UNITS[0])
@@ -28,6 +25,8 @@ const LeftPart = ({
   const [wasAddProduct, setWasAddProduct] = useState(false)
   const [bonusErr, setBonusErr] = useState('')
   const [bonusText, setBonusText] = useState('')
+  const [maxBonus, setMaxBonus] = useState(0)
+  const [cardMaxBonus, setCardMaxBonus] = useState(0)
 
   const initialValues = {
     product: null,
@@ -43,10 +42,10 @@ const LeftPart = ({
   })
 
   const handleBlur = (e, floorValue = null) => {
-    const { name } = e.target;
-    const value = deleteSpaces(floorValue || formik.values[name])
+    const { name, value } = e.target;
+    const clearValue = deleteSpaces(floorValue || value)
     formik.handleBlur(e)
-    formik.setFieldValue([name], value)
+    formik.setFieldValue([name], clearValue)
   }
 
   const handleSelectBlur = (name = '') => {
@@ -104,17 +103,37 @@ const LeftPart = ({
     setWasAddProduct(false)
   }
 
+  const validMaxBonus = (_maxBonus = 0) => {
+    const bonusValue = _maxBonus || cardMaxBonus
+    if (bonusValue >= total_sum) {
+      return total_sum
+    }
+    else {
+      return bonusValue
+    }
+  }
+
   const chooseCard = (e, name) => {
     formik.setFieldValue(name, e)
     formik.setFieldValue(FORM_FIELDS.bonus, 0)
     if (!e.value) {
       formik.setFieldValue(FORM_FIELDS.card, null)
+      setCardMaxBonus(0)
+      setMaxBonus(0)
     }
     else {
-      const maxBonus = Math.floor(e.bonus)
-      setCardMaxBonus(maxBonus)
-      setMaxBonus(maxBonus)
+      const _maxBonus = Math.floor(e.bonus)
+      setCardMaxBonus(_maxBonus)
+      setMaxBonus(validMaxBonus(_maxBonus))
     }
+  }
+
+  const blurPositiveValue = (e) => {
+    const obj = e
+    if (obj.target.value <= 0) {
+      obj.target.value = 1
+    }
+    handleBlur(obj)
   }
 
   const blurFloor = (e) => {
@@ -157,16 +176,26 @@ const LeftPart = ({
   }, [linesOfCheck])
 
   useEffect(() => {
+    const maxValue = validMaxBonus()
+    setMaxBonus(maxValue)
+
+    if (discountCard?.bonus > maxValue) {
+      setDiscountCard({ ...discountCard, bonus: maxValue })
+      formik.setFieldValue(FORM_FIELDS.bonus, maxValue)
+    }
+  }, [total_sum])
+
+  useEffect(() => {
     setBonusText(`бонус${declensionBonusNumber(cardMaxBonus)}`)
   }, [cardMaxBonus])
 
   const digitalCard = +(discountCard?.bonus || 0)
   const unitForCount = unit === UNITS[0] ? FORM_LABELS.count : FORM_LABELS.weight
   const countLabel = formik.values.product ? `${unitForCount} (макс. ${formik.values.product?.count})` : `${unitForCount} (макс. НЕОПРЕДЕЛЕНО)`
-  const bonusLabel = formik.values.card ? `${FORM_LABELS.bonus} (макс. ${maxBonus})` : `${FORM_LABELS.bonus} (макс. НЕОПРЕДЕЛЕНО)`
+  const bonusLabel = linesOfCheck.length && formik.values.card?.value ? `${FORM_LABELS.bonus} (макс. ${maxBonus})` : `${FORM_LABELS.bonus} (макс. НЕОПРЕДЕЛЕНО)`
   const oldProductLabel = formik.values.product?.sale ? `${FORM_LABELS.old_product} (${FORM_LABELS.old_product_err})` : FORM_LABELS.old_product
-  const disabledCardAdd = digitalCard === +formik.values.bonus && discountCard?.card?.value === formik.values.card?.value || !formik.values.card && discountCard && Object.keys(discountCard).length === 0 || !linesOfCheck.length
-  // продумать про сброс в 0 при linesOfCheck.length === 0
+  const disabledCardAdd = digitalCard === +formik.values.bonus && discountCard?.card?.value === formik.values.card?.value || !formik.values.card && discountCard && Object.keys(discountCard).length === 0
+
   return (
     <>
       <section className={style.part_left}>
@@ -204,7 +233,7 @@ const LeftPart = ({
                     <Input
                       value={formik.values.count}
                       onGx-input={formik.handleChange}
-                      onGx-blur={handleBlur}
+                      onGx-blur={blurPositiveValue}
                       name={FORM_FIELDS.count}
                       label={countLabel}
                       data-cy='title'
@@ -271,7 +300,7 @@ const LeftPart = ({
                       min='0'
                       max='32767'
                       step={1}
-                      disabled={!formik.values.card}
+                      disabled={!formik.values.card || !linesOfCheck.length}
                     />
                   </Fieldset>
                   <div className={style.btn_add_line}>

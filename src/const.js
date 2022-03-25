@@ -419,7 +419,7 @@ export const WIDTH_COL = {
   bonus_add: 140,
   bonus_pop: 110,
   sum_without_bonus: 140,
-  sum: 140,
+  sum: 135,
 }
 
 export const WIDTH_COL_CHECK = {

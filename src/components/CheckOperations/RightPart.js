@@ -14,20 +14,17 @@ import table_style from '../CheckTable/check_table.module.scss'
 import style from './check_operations.module.scss';
 
 const RightPart = ({
-  cardMaxBonus = 0,
   linesOfCheck = [],
   discountCard = {},
   setLinesOfCheck = () => { },
-  setDiscountCard = () => { },
-  maxBonus = 0,
-  setMaxBonus = () => { },
   rightHeader = 'Чек-лист',
   btnText = '',
   postponeCheck = () => { },
   addOrUpdateCheck = () => { },
+  total_sum = 0,
+  setTotalSum = () => { }
 }) => {
   const [linesOfCheckWithTotalSum, setNewCheckFields] = useState([])
-  const [total_sum, setTotalSum] = useState(0)
 
   const onSubmit = () => {
     addOrUpdateCheck()
@@ -68,15 +65,6 @@ const RightPart = ({
       sum += line.total_cost
     })
     setTotalSum(sum)
-
-    if (sum) {
-      if (discountCard?.bonus > sum) {
-        const card = { ...discountCard }
-        card.bonus = sum
-        setDiscountCard(card)
-      }
-      setMaxBonus(maxBonus > sum ? sum : cardMaxBonus > maxBonus ? cardMaxBonus : maxBonus)
-    }
   }
 
   const handleChangeSwitch = (line) => {
@@ -262,6 +250,7 @@ const RightPart = ({
                     buttonDis
                     outline
                     onClick={postponeCheck}
+                    disabled={!linesOfCheck.length}
                   >
                     Отложить чек
                   </Button>
@@ -270,6 +259,7 @@ const RightPart = ({
                     className='btn_width-100'
                     data-cy='btn'
                     buttonDis
+                    disabled={!linesOfCheck.length}
                   >
                     {btnText}
                   </Button>

@@ -298,7 +298,7 @@ export const CardList = (status = 2) => {
         },
         {
           id: 4,
-          bonus: 0,
+          bonus: 1000,
           FIO: 'Кузнецов Федор Андреевич'
         },
       ],

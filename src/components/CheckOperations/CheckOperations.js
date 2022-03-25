@@ -16,9 +16,8 @@ const CheckOperations = () => {
 
   const [linesOfCheck, setLinesOfCheck] = useState([])
   const [discountCard, setDiscountCard] = useState({})
-  const [maxBonus, setMaxBonus] = useState(0)
-  const [cardMaxBonus, setCardMaxBonus] = useState(0)
   const [pageHeaders, setHeaders] = useState({})
+  const [total_sum, setTotalSum] = useState(0)
 
   const handleSubmitError = ({ response, actions }) => { // пока не используется
     if (response) {
@@ -71,25 +70,20 @@ const CheckOperations = () => {
           setLinesOfCheck={setLinesOfCheck}
           discountCard={discountCard}
           setDiscountCard={setDiscountCard}
-          maxBonus={maxBonus}
-          setMaxBonus={setMaxBonus}
-          cardMaxBonus={cardMaxBonus}
-          setCardMaxBonus={setCardMaxBonus}
           leftHeader={pageHeaders?.left}
+          total_sum={total_sum}
         />
         <span className={style.line} />
         <RightPart
           linesOfCheck={linesOfCheck}
           setLinesOfCheck={setLinesOfCheck}
           discountCard={discountCard}
-          setDiscountCard={setDiscountCard}
-          maxBonus={maxBonus}
-          setMaxBonus={setMaxBonus}
-          cardMaxBonus={cardMaxBonus}
           postponeCheck={postponeCheck}
           addOrUpdateCheck={addOrUpdateCheck}
           rightHeader={pageHeaders?.right}
           btnText={pageHeaders?.btnText}
+          total_sum={total_sum}
+          setTotalSum={setTotalSum}
         />
       </div>
     </section>

@@ -51,7 +51,8 @@ const maxCount = Yup.mixed()
       return curCount <= productMaxCount;
     }
     return true
-  });
+  })
+  .test('min', errorsMessenge.positiveNumber, (value) => value > 0);
 
 const signUp = () => {
   return Yup.object().shape({
@@ -70,7 +71,6 @@ const signUp = () => {
 
 const addLineOfCheck = Yup.object().shape({
   product: objectTemp.required(''),
-  count: countTemp,
   count: maxCount,
 })
 
