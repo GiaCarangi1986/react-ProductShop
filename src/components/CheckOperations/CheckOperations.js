@@ -3,9 +3,10 @@ import { useNavigate } from 'react-router';
 import { useStoreon } from 'storeon/react';
 import RightPart from './RightPart'
 import LeftPart from './LeftPart'
-import { Button, Icon } from '../../views';
+import { Button, Icon, PreloaderPage } from '../../views';
+import { PayModal } from '../Modal';
 import { generatCheck, handingErrors } from '../../utils';
-import { PATHS } from '../../const';
+import { PATHS, MODAL_TYPES } from '../../const';
 import style from './check_operations.module.scss';
 
 import api from '../../api'
@@ -18,6 +19,8 @@ const CheckOperations = () => {
   const [discountCard, setDiscountCard] = useState({})
   const [pageHeaders, setHeaders] = useState({})
   const [total_sum, setTotalSum] = useState(0)
+  const [compiledCheck, setCompiledCheck] = useState({})
+  const [loading, setLoading] = useState(false)
 
   const handleSubmitError = ({ response, actions }) => { // пока не используется
     if (response) {
@@ -36,14 +39,34 @@ const CheckOperations = () => {
     [discountCard, linesOfCheck]
   );
 
+  const createCheck = () => { // этот запрос и на редакт/отложен, ибо одинаково все
+    setLoading(true)
+    api.setCheck(compiledCheck)
+      .then((res) => {
+        console.log('res', res)
+        setLoading(false)
+        redirectToCheckList()
+      })
+      .catch((err) => {
+        console.log('err', err)
+        setLoading(false)
+      })
+  }
+
   const postponeCheck = () => {
     console.log('postponeCheck', check)
     dispatch('page/close')
+    createCheck()
   }
 
   const addOrUpdateCheck = () => {
-    console.log('addOrUpdateCheck', check)
+    const _check = check
+    console.log('addOrUpdateCheck', _check)
     dispatch('page/close')
+    setCompiledCheck(_check)
+    dispatch('modal/toggle', {
+      modal: MODAL_TYPES.payModal,
+    })
   }
 
   useEffect(() => {
@@ -53,40 +76,52 @@ const CheckOperations = () => {
   }, [headers])
 
   return (
-    <section className={style.wrap}>
-      <div className={style.close}>
-        <Button
-          variant='text'
-          className='button-edit_action'
-          onClick={redirectToCheckList}
-        >
-          <Icon slot='icon-left' icon='close' />
-        </Button>
-      </div>
-      <h1 className={style.header}>{pageHeaders?.main}</h1>
-      <div className={style.wrap_parts}>
-        <LeftPart // затем тут сделаю addCheckProps={...} и т д + компонет буду передавать нужный
-          linesOfCheck={linesOfCheck}
-          setLinesOfCheck={setLinesOfCheck}
-          discountCard={discountCard}
-          setDiscountCard={setDiscountCard}
-          leftHeader={pageHeaders?.left}
-          total_sum={total_sum}
-        />
-        <span className={style.line} />
-        <RightPart
-          linesOfCheck={linesOfCheck}
-          setLinesOfCheck={setLinesOfCheck}
-          discountCard={discountCard}
-          postponeCheck={postponeCheck}
-          addOrUpdateCheck={addOrUpdateCheck}
-          rightHeader={pageHeaders?.right}
-          btnText={pageHeaders?.btnText}
-          total_sum={total_sum}
-          setTotalSum={setTotalSum}
-        />
-      </div>
-    </section>
+    <>
+      <section className={style.wrap}>
+        <div className={style.close}>
+          <Button
+            variant='text'
+            className='button-edit_action'
+            onClick={redirectToCheckList}
+          >
+            <Icon slot='icon-left' icon='close' />
+          </Button>
+        </div>
+        <h1 className={style.header}>{pageHeaders?.main}</h1>
+        <div className={style.wrap_parts}>
+          <LeftPart // затем тут сделаю addCheckProps={...} и т д + компонет буду передавать нужный
+            linesOfCheck={linesOfCheck}
+            setLinesOfCheck={setLinesOfCheck}
+            discountCard={discountCard}
+            setDiscountCard={setDiscountCard}
+            leftHeader={pageHeaders?.left}
+            total_sum={total_sum}
+          />
+          <span className={style.line} />
+          <RightPart
+            linesOfCheck={linesOfCheck}
+            setLinesOfCheck={setLinesOfCheck}
+            discountCard={discountCard}
+            postponeCheck={postponeCheck}
+            addOrUpdateCheck={addOrUpdateCheck}
+            rightHeader={pageHeaders?.right}
+            btnText={pageHeaders?.btnText}
+            total_sum={total_sum}
+            setTotalSum={setTotalSum}
+          />
+        </div>
+      </section>
+      <PayModal
+        func={createCheck}
+        headers={{
+          main: 'Покупка',
+          text: `Ожидается оплата в размере ${compiledCheck.totalCost - compiledCheck.bonus_count} руб.`,
+          btnCancel: 'Отмена',
+          btnOk: 'Оплатить',
+        }}
+      />
+      {loading && <PreloaderPage loaderClass='layout_full' />}
+    </>
   )
 }
 

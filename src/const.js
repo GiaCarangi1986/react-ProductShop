@@ -31,6 +31,7 @@ export const MODAL_TYPES = {
   service: 'service',
   service_archive: 'service-archive',
   service_delete: 'service-delete',
+  payModal: 'payModal',
 }
 
 export const ERROR_TYPES = {
@@ -524,12 +525,6 @@ export const UNITS = ['шт', 'кг']
 export const SELECT_TYPES = {
   product: 'product',
   card: 'card',
-}
-
-export const MODALS_CHECK = {
-  default: 'default',
-  payModal: 'payModal',
-  checkList: 'checkList',
 }
 
 export const MODALS_CHECK_TITLE = {

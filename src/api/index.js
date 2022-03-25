@@ -15,7 +15,7 @@ class Api extends BaseApi {
 
   async getCheckList({ page = 1, pageSize = 30, search = '', ...params }) {
     try {
-      const res = await this.post('/api/check_list/', {
+      const res = await this.get('/api/check_list/', {
         page,
         page_size: pageSize,
         search,
@@ -30,7 +30,7 @@ class Api extends BaseApi {
 
   async logoutUser() {
     try {
-      const res = await this.post('/api/logout/')
+      const res = await this.get('/api/logout/')
       return res.data
     }
     catch (err) {
@@ -40,7 +40,7 @@ class Api extends BaseApi {
 
   async getProductListForCreatingCheck() {
     try {
-      const res = await this.post('/api/product_list/')
+      const res = await this.get('/api/product_list/')
       return res.data
     }
     catch (err) {
@@ -50,11 +50,21 @@ class Api extends BaseApi {
 
   async getCardListForCreatingCheck() {
     try {
-      const res = await this.post('/api/card_list/')
+      const res = await this.get('/api/card_list/')
       return res.data
     }
     catch (err) {
       return CardList(1).results // 1 - норм, 2 - ошибка
+    }
+  }
+
+  async setCheck(check = {}) {
+    try {
+      const res = await this.post('/api/create_check/', check)
+      return res.data
+    }
+    catch (err) {
+      return ''
     }
   }
 }

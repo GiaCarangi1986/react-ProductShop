@@ -1,131 +1,42 @@
 import React, { useEffect, useState } from 'react'
-import { useFormik } from 'formik'
-import { GxGrid, GxCol, GxRow } from '@garpix/garpix-web-components-react'
-import { Button, ErrorText, Fieldset, Form, Icon, Input } from '../../views'
-import {
-  handingErrors,
-  deleteSpaces
-} from '../../utils'
-import { addFrequencyInfo } from '../../schema'
-import api from '../../api'
-
+import { useStoreon } from 'storeon/react'
+import { Button, Modal, PreloaderPage } from '../../views'
+import { MODAL_TYPES } from '../../const'
 import style from './modal.module.scss'
 
-const PayModal = ({
-  backToMainForm = () => { },
-  successAddElement = () => { }
-}) => {
-  const [disabled, setDisabled] = useState(true)
+const PayModal = ({ func = () => { }, headers = {} }) => {
+  const { modal, dispatch } = useStoreon('modal')
+  const [open, setOpen] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
 
-  const onSubmit = (values, actions) => {
-    console.log('values', values)
+  const closeModal = () => dispatch('modal/close')
+
+  const positiveAction = () => {
+    closeModal()
+    func()
   }
-
-  const formik = useFormik({
-    initialValues: {
-      freq: 0,
-      base: null,
-    },
-    // validationSchema: addFrequencyInfo,
-    onSubmit
-  })
 
   useEffect(() => {
-    if (formik) {
-      const { isSubmitting, isValid } = formik;
-      const isDisabled = isSubmitting || !isValid
-      setDisabled(isDisabled)
-    }
-  }, [formik])
-
-  const handleBlur = (e) => {
-    const { name } = e.target;
-    const value = deleteSpaces(formik.values[name])
-    formik.handleBlur(e)
-    formik.setFieldValue([name], value)
-  }
-
-  const handleBlurSelect = (e) => {
-    const { name } = e.target;
-    formik.setFieldTouched([name], true)
-  }
-
-  const changeValuesSelect = ({ option, selectKey }) => {
-    const newValues = formik.values
-    newValues[selectKey] = option
-    formik.setValues(newValues)
-  }
+    setOpen(modal === MODAL_TYPES.payModal)
+  }, [modal])
 
   return (
-    <div className={style['service-form']}>
-      <GxGrid className={style['service-grid']}>
-        <GxRow>
-          <GxCol className={style['service-col']}>
-            <Button
-              disabled={formik.isSubmitting}
-              onClick={backToMainForm}
-              className='btn-back'
-              variant='text'
-              data-cy='btn'
-            >
-              <Icon icon='arrowBack' />
-              Добавление тарифа
-            </Button>
-          </GxCol>
-        </GxRow>
-        <GxRow>
-          <GxCol className={style['service-col']}>
-            <h2>Добавление частоты сбора информации</h2>
-          </GxCol>
-        </GxRow>
-        <Form onGx-submit={formik.handleSubmit} data-cy='form'>
-          <GxRow>
-            <GxCol className={style['service-col']} size={6}>
-              <Fieldset
-                errorClass='addOrUpdateService'
-                error={formik.errors.freq}
-                touched={formik.touched.freq}>
-                <Input
-                  value={formik.values.freq}
-                  onGx-input={formik.handleChange}
-                  onGx-blur={handleBlur}
-                  name='freq'
-                  label='Частота'
-                  data-cy='title'
-                  type='number'
-                  min='0'
-                  max='32767'
-                />
-              </Fieldset>
-            </GxCol>
-          </GxRow>
-          <GxRow>
-            <GxCol className={style['service-col']}>
-              {formik.errors.non_field_errors ? (
-                <ErrorText errorClass='form'>
-                  {formik.errors.non_field_errors}
-                </ErrorText>
-              ) : null}
-            </GxCol>
-          </GxRow>
-
-          <GxRow>
-            <GxCol className={style['service-col']} offset={10} size={2}>
-              <Button
-                type='submit'
-                disabled={disabled}
-                className='btn_width-100'
-                data-cy='btn'
-                buttonDis
-              >
-                Добавить
-              </Button>
-            </GxCol>
-          </GxRow>
-        </Form>
-      </GxGrid>
-    </div>
+    <Modal setOpen={setOpen} variant='centered' open={open}>
+      <h2 className={style['modal-centered__title']}>{headers.main}</h2>
+      <p>{headers.text}</p>
+      <div className={style['modal-btns']}>
+        <Button onClick={closeModal} outline>
+          {headers.btnCancel}
+        </Button>
+        <Button buttonDis onClick={positiveAction} className='btn_choose_logout'>
+          {submitting && (
+            <PreloaderPage loaderClass='indicator' slot='icon-left' />
+          )}
+          {headers.btnOk}
+        </Button>
+      </div>
+    </Modal>
   )
 }
-
+// ожидается возврат
 export default PayModal

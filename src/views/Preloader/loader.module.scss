@@ -12,6 +12,13 @@
   background-color: var(--ps-preload-vis);
 }
 
+.loader-layout_full{
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur(1px);
+}
+
 .loader-layout gx-spinner::part(base) {
   width: 2em;
   height: 2em;
