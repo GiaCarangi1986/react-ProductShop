@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useStoreon } from 'storeon/react';
 import { GxGrid, GxCol, GxRow } from '@garpix/garpix-web-components-react'
 import RightPart from './RightPart'
 // import LeftPart from './LeftPart'
 import { Button, Icon, PreloaderPage } from '../../views';
-import { PayModal } from '../Modal';
+import { PayModal, SureExit } from '../Modal';
 import { generatCheck, handingErrors } from '../../utils';
 import { PATHS, MODAL_TYPES, PAGES_TYPES } from '../../const';
 import style from './check_operations.module.scss';
@@ -64,6 +64,12 @@ const CheckOperations = () => {
     navigate(PATHS.check_list.path)
   }
 
+  const sureForExit = () => {
+    dispatch('modal/toggle', {
+      modal: MODAL_TYPES.sureExit,
+    })
+  }
+
   const createCheck = () => { // этот запрос и на редакт/отложен, ибо одинаково все
     setLoading(true)
     const check = generatCheck(discountCard, linesOfCheck, null, currentUser, true)
@@ -86,10 +92,7 @@ const CheckOperations = () => {
   }
 
   const addOrUpdateCheck = () => {
-    // const _check = check
-    // console.log('addOrUpdateCheck', _check)
     dispatch('page/close')
-    // setCompiledCheck(_check)
     dispatch('modal/toggle', {
       modal: MODAL_TYPES.payModal,
     })
@@ -100,7 +103,6 @@ const CheckOperations = () => {
       setHeaders(headers)
       setTypePage(headers.type)
       if (headers.id) {
-        console.log('headers.id', headers.id)
         getHistoryCheck(headers.id)
       }
     }
@@ -116,7 +118,7 @@ const CheckOperations = () => {
             <Button
               variant='text'
               className='button-edit_action'
-              onClick={redirectToCheckList}
+              onClick={sureForExit}
             >
               <Icon slot='icon-left' icon='close' />
             </Button>
@@ -170,6 +172,9 @@ const CheckOperations = () => {
             btnCancel: 'Отмена',
             btnOk: 'Оплатить',
           }}
+        />
+        <SureExit
+          func={redirectToCheckList}
         />
         {loading && <PreloaderPage loaderClass='layout_full' />}
       </>

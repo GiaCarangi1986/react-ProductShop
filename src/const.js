@@ -29,7 +29,8 @@ export const MODAL_TYPES = {
   logout: 'logout',
   settings: 'settings',
   payModal: 'payModal',
-  addCheck: 'addCheck'
+  addCheck: 'addCheck',
+  sureExit: 'sureExit'
 }
 
 export const PAGES_TYPES = {
