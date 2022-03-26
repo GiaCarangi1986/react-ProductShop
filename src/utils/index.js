@@ -106,31 +106,42 @@ export function processingResult(item) {
   };
 }
 
-export function generatCheck(discountCard = {}, linesOfCheck = [], childCheckId = null) {
-  let totalCost = 0
-  linesOfCheck.forEach(line => {
-    totalCost += line.count * line.price
-  })
-
+const arrCorrectProductLines = (linesOfCheck = []) => {
   const linesCheckList = [];
   linesOfCheck.forEach(line => {
     const productLine = {
-      id: line?.count || 0, // id продукта (штрих-код)
+      id: line?.id || 0, // id продукта (штрих-код)
       count: line?.count || 0, // кол-во продктов в одной строке,
       price: line?.price || 0, // цена за 1 штуку/кг
       old_product: line?.old_product || false // 50% за продуктый, который завтра испортится? (предупреждают на кассе)
     }
     linesCheckList.push(productLine)
   })
+  return linesCheckList
+}
+
+function totalCostFunc(linesOfCheck) {
+  let totalCost = 0
+  linesOfCheck.forEach(line => {
+    totalCost += line.count * line.price
+  })
+  return totalCost
+}
+
+export function generatCheck(discountCard = {}, linesOfCheck = [], childCheckId = null, currentUser = {}, paid = false) {
+  let totalCost = totalCostFunc(linesOfCheck)
+
+  const linesCheckList = arrCorrectProductLines(linesOfCheck)
 
   return {
     date_time: dateFotmattedForTable(new Date()), // время покупки/отложенного чека
     bonus_count: +discountCard?.bonus || 0, // кол-во использованных бонусов
     totalCost, // итоговая стоимость (без бонусов)
-    paid: false, // оплачен чек или нет (на данном этапе только false, ибо он тут отложен или только подготовлен к оплате)
+    paid, // оплачен чек или нет (на данном этапе только false, ибо он тут отложен или только подготовлен к оплате)
     cardId: discountCard?.card?.value || null, // id карты
     childCheckId, // ссылка на ребенка (для редактированного чека)
-    linesCheckList, // строки чека
+    linesCheckList, // строки чека,
+    kassirId: currentUser.id // id кассира, пробившего чек
   };
 }
 

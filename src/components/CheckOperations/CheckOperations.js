@@ -15,13 +15,12 @@ import api from '../../api'
 
 const CheckOperations = () => {
   const navigate = useNavigate();
-  const { headers, dispatch } = useStoreon('headers');
+  const { headers, dispatch, currentUser } = useStoreon('headers', 'currentUser');
 
   const [linesOfCheck, setLinesOfCheck] = useState([])
   const [discountCard, setDiscountCard] = useState({})
   const [pageHeaders, setHeaders] = useState({})
   const [total_sum, setTotalSum] = useState(0)
-  const [compiledCheck, setCompiledCheck] = useState({})
   const [loading, setLoading] = useState(false)
   const [typePage, setTypePage] = useState(null)
 
@@ -65,16 +64,12 @@ const CheckOperations = () => {
     navigate(PATHS.check_list.path)
   }
 
-  const check = useMemo(
-    () => generatCheck(discountCard, linesOfCheck),
-    [discountCard, linesOfCheck]
-  );
-
   const createCheck = () => { // этот запрос и на редакт/отложен, ибо одинаково все
     setLoading(true)
-    api.setCheck(compiledCheck)
-      .then((res) => {
-        console.log('res', res)
+    const check = generatCheck(discountCard, linesOfCheck, null, currentUser, true)
+    api.setCheck(check)
+      .then(() => {
+        console.log('check', check)
         setLoading(false)
         redirectToCheckList()
       })
@@ -85,16 +80,16 @@ const CheckOperations = () => {
   }
 
   const postponeCheck = () => {
-    console.log('postponeCheck', check)
+    console.log('postponeCheck', generatCheck(discountCard, linesOfCheck, null, currentUser))
     dispatch('page/close')
     createCheck()
   }
 
   const addOrUpdateCheck = () => {
-    const _check = check
-    console.log('addOrUpdateCheck', _check)
+    // const _check = check
+    // console.log('addOrUpdateCheck', _check)
     dispatch('page/close')
-    setCompiledCheck(_check)
+    // setCompiledCheck(_check)
     dispatch('modal/toggle', {
       modal: MODAL_TYPES.payModal,
     })
@@ -171,7 +166,7 @@ const CheckOperations = () => {
           func={createCheck}
           headers={{
             main: 'Покупка',
-            text: `Ожидается оплата в размере ${compiledCheck.totalCost - compiledCheck.bonus_count} руб.`,
+            text: `Ожидается оплата в размере ${total_sum - (+discountCard?.bonus || 0)} руб.`,
             btnCancel: 'Отмена',
             btnOk: 'Оплатить',
           }}
