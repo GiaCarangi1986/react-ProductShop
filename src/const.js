@@ -32,6 +32,11 @@ export const MODAL_TYPES = {
   addCheck: 'addCheck'
 }
 
+export const PAGES_TYPES = {
+  addCheck: 'addCheck',
+  viewCheck: 'viewCheck'
+}
+
 export const ERROR_TYPES = {
   excel: 'excel',
   default: 'default',

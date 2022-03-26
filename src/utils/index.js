@@ -106,7 +106,7 @@ export function processingResult(item) {
   };
 }
 
-export function generatCheck(discountCard = {}, linesOfCheck = [], childCheckId = '') {
+export function generatCheck(discountCard = {}, linesOfCheck = [], childCheckId = null) {
   let totalCost = 0
   linesOfCheck.forEach(line => {
     totalCost += line.count * line.price

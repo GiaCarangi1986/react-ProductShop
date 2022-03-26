@@ -2,13 +2,9 @@ import React, { useState } from 'react'
 import classNames from 'classnames'
 import { useNavigate } from 'react-router';
 import { useStoreon } from 'storeon/react'
-import {
-  MODAL_TYPES,
-} from '../../const'
 import { Button, Switch } from '../../views'
-// import { NAMES } from '../../const'
 import DateSearch from './DateSearch'
-import { PATHS } from '../../const';
+import { PATHS, PAGES_TYPES } from '../../const';
 import style from './table-settings.module.scss'
 
 const TableSettings = ({
@@ -31,7 +27,7 @@ const TableSettings = ({
 
   const openCreateCheckPage = () => {
     dispatch('page/toggle', {
-      headers: { main: 'Добавление чека', left: 'Составляющие чека', right: 'Чек-лист', btnText: 'Перейти к оплате', type: MODAL_TYPES.addCheck, },
+      headers: { main: 'Добавление чека', left: 'Составляющие чека', right: 'Чек-лист', btnText: 'Перейти к оплате', type: PAGES_TYPES.addCheck, },
       // для редактир. чека альтернатива - перейти к выплате
     })
     navigate(PATHS.check_operations.path)

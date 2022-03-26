@@ -7,9 +7,10 @@ import RightPart from './RightPart'
 import { Button, Icon, PreloaderPage } from '../../views';
 import { PayModal } from '../Modal';
 import { generatCheck, handingErrors } from '../../utils';
-import { PATHS, MODAL_TYPES } from '../../const';
+import { PATHS, MODAL_TYPES, PAGES_TYPES } from '../../const';
 import style from './check_operations.module.scss';
 import AddCheckParams from './AddCheckParams';
+import HistoryChanges from './HistoryChanges';
 import api from '../../api'
 
 const CheckOperations = () => {
@@ -24,9 +25,16 @@ const CheckOperations = () => {
   const [loading, setLoading] = useState(false)
   const [typePage, setTypePage] = useState(null)
 
+  const [activeLine, setActiveLine] = useState(-1)
+  const [historyDatesList, setHistoryDatesList] = useState([])
+
   const PARTS_VIEWS = {
     addCheck: {
       left: AddCheckParams,
+      rigth: null
+    },
+    viewCheck: {
+      left: HistoryChanges,
       rigth: null
     }
   }
@@ -37,6 +45,20 @@ const CheckOperations = () => {
       actions.setFieldError([errResponse.key], errResponse.val)
     }
     actions.setSubmitting(false)
+  }
+
+  const getHistoryCheck = (id) => {
+    setLoading(true)
+    api.getHistoryCheck(id)
+      .then(res => {
+        console.log('res', res)
+        setHistoryDatesList(res)
+        setLoading(false)
+      })
+      .catch(err => {
+        console.log('err', err)
+        setLoading(false)
+      })
   }
 
   const redirectToCheckList = () => {
@@ -82,6 +104,10 @@ const CheckOperations = () => {
     if (headers && Object.keys(headers).length > 0) {
       setHeaders(headers)
       setTypePage(headers.type)
+      if (headers.id) {
+        console.log('headers.id', headers.id)
+        getHistoryCheck(headers.id)
+      }
     }
   }, [headers])
 
@@ -117,6 +143,11 @@ const CheckOperations = () => {
                       discountCard,
                       setDiscountCard,
                       total_sum
+                    }}
+                    viewCheck={{
+                      activeLine,
+                      setActiveLine,
+                      historyDatesList
                     }}
                   />
                 </GxGrid>

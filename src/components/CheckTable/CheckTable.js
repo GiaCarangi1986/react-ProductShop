@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import classNames from 'classnames'
+import { useNavigate } from 'react-router';
+import { useStoreon } from 'storeon/react'
 import { dataStates } from '@garpix/fetcher'
 import Table from './Table'
 import TableSettings from '../TableSettings'
@@ -7,6 +9,8 @@ import { Button, Icon, PreloaderPage } from '../../views'
 import {
   TABLE_EVENT_TYPES,
   WIDTH_COL,
+  PATHS,
+  PAGES_TYPES
 } from '../../const'
 
 import style from './check_table.module.scss'
@@ -20,12 +24,20 @@ const CheckTable = ({
   otherData = {},
   isNext,
 }) => {
+  const { dispatch } = useStoreon()
+  const navigate = useNavigate();
 
-  /* TODO: медиа запросы поправить сворачивание шапки */
   const [eventType, setEventType] = useState(null)
   const [colsTrue, setColsTrue] = useState([])
   const [cols, setCols] = useState(null)
   const [statusLoading, setStatusLoading] = useState(status)
+
+  const viewCheck = (e) => {
+    dispatch('page/toggle', {
+      headers: { main: 'Просмотр чека', left: 'История изменений', right: 'Чек-лист', btnText: '', type: PAGES_TYPES.viewCheck, id: e.target.name },
+    })
+    navigate(PATHS.check_operations.path)
+  }
 
   useEffect(() => { // ok
     setStatusLoading(status)
@@ -91,6 +103,8 @@ const CheckTable = ({
                         title='Посмотреть'
                         variant='text'
                         data-cy='btn'
+                        onClick={viewCheck}
+                        name={elem.id}
                       >
                         <Icon slot='icon-left' icon='info' />
                       </Button>
@@ -100,6 +114,7 @@ const CheckTable = ({
                         disabled={!elem.is_available || elem.num_clients > 0}
                         variant='text'
                         data-cy='btn'
+                        name={elem.id}
                       >
                         <Icon slot='icon-left' icon='write' />
                       </Button>

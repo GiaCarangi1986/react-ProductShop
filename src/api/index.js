@@ -1,5 +1,5 @@
 import BaseApi from '@garpix/base-api'
-import { LoginUser, CheckList, LogoutUser, ProductList, CardList } from './mochData'
+import { LoginUser, CheckList, LogoutUser, ProductList, CardList, HistoryCheck } from './mochData'
 import { checkSerializer } from './serializer'
 
 class Api extends BaseApi {
@@ -65,6 +65,16 @@ class Api extends BaseApi {
     }
     catch (err) {
       return ''
+    }
+  }
+
+  async getHistoryCheck(id = '') {
+    try {
+      const res = await this.post('/api/history_check/', id)
+      return res.data
+    }
+    catch (err) {
+      return HistoryCheck(1).results // 1 - норм, 2 - ошибка
     }
   }
 }

@@ -4,6 +4,7 @@ export const ERROR_MESSAGE = {
   uncorrect_logout: 'Не удалось разлогинить пользователя',
   uncorrect_getting_product_list: 'Список продуктов не удалось получить',
   uncorrect_getting_card_list: 'Список бонусынх карт не удалось получить',
+  uncorrect_getting_history_check_list: 'Список историй изменений чека не удалось получить',
 }
 
 const CORRECT_USER_DATA = {
@@ -314,6 +315,84 @@ export const CardList = (status = 2) => {
 
       ],
       count_all: 4,
+    }
+  }
+  throw {
+    response: {
+      data: { non_field_errors: [ERROR_MESSAGE.uncorrect_getting_card_list] },
+      status: 404,
+    }
+  }
+}
+
+export const HistoryCheck = (status = 2) => {
+  if (status === 1) {
+    return { // лист бонусных карт
+      results: [
+        {
+          id: '1',
+          date_time: '26.03.2022 10:16:31', // новый чек создастся по этому с те ми полями, но заменим list, date, price
+          bonus_count: 1, // новая цена с бонусами - если <0 -> 0
+          cardId: '1',
+          childCheckId: null,
+          linesCheckList: [
+            {
+              count: 12,
+              id: 1,
+              title: 'Сухарики', // здесь отдавать еще название продукта!
+              old_product: false,
+              price: 20
+            },
+            {
+              count: 5,
+              id: 2,
+              title: 'Макароны', // здесь отдавать еще название продукта!
+              old_product: false,
+              price: 201
+            },
+          ]
+        },
+        {
+          id: '2',
+          date_time: '26.03.2022 15:16:31',
+          bonus_count: 1,
+          cardId: '1',
+          childCheckId: '1',
+          linesCheckList: [
+            {
+              count: 2,
+              id: 1,
+              title: 'Сухарики', // здесь отдавать еще название продукта!
+              old_product: false,
+              price: 20
+            },
+            {
+              count: 5,
+              id: 2,
+              title: 'Макароны', // здесь отдавать еще название продукта!
+              old_product: false,
+              price: 201
+            },
+          ]
+        },
+        {
+          id: '3',
+          date_time: '26.03.2022 16:16:31',
+          bonus_count: 1,
+          cardId: '1',
+          childCheckId: '2',
+          linesCheckList: [
+            {
+              count: 4,
+              id: 2,
+              title: 'Макароны', // здесь отдавать еще название продукта!
+              old_product: false,
+              price: 201
+            },
+          ]
+        },
+      ],
+      count: 1,
     }
   }
   throw {
