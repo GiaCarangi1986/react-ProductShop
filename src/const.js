@@ -552,3 +552,9 @@ export const CHECK_LINE_ADDING = {
   price: 'price',
   total_cost: 'total_cost',
 }
+
+export const USER_ROLE = {
+  admin: 1,
+  main_kassir: 2,
+  kassir: 3
+}

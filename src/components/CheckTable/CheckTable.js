@@ -10,7 +10,8 @@ import {
   TABLE_EVENT_TYPES,
   WIDTH_COL,
   PATHS,
-  PAGES_TYPES
+  PAGES_TYPES,
+  USER_ROLE
 } from '../../const'
 
 import style from './check_table.module.scss'
@@ -24,9 +25,10 @@ const CheckTable = ({
   otherData = {},
   isNext,
 }) => {
-  const { dispatch } = useStoreon()
+  const { dispatch, currentUser } = useStoreon('currentUser')
   const navigate = useNavigate();
 
+  const [userRole, setUserRole] = useState(0)
   const [eventType, setEventType] = useState(null)
   const [colsTrue, setColsTrue] = useState([])
   const [cols, setCols] = useState(null)
@@ -57,6 +59,12 @@ const CheckTable = ({
   useEffect(() => {
     setCols(otherData?.cols_names || null)
   }, [otherData])
+
+  useEffect(() => {
+    if (currentUser) {
+      setUserRole(currentUser.roleId)
+    }
+  }, [currentUser])
 
   const overlayClasses = classNames({
     [style['table-grid']]: true,
@@ -111,7 +119,7 @@ const CheckTable = ({
                       <Button
                         className='button-edit_action'
                         title='Редактировать'
-                        disabled={!elem.is_available || elem.num_clients > 0}
+                        disabled={userRole === USER_ROLE.kassir}
                         variant='text'
                         data-cy='btn'
                         name={elem.id}

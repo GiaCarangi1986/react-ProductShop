@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router';
 import { useStoreon } from 'storeon/react';
 import { GxGrid, GxCol, GxRow } from '@garpix/garpix-web-components-react'
 import RightPart from './RightPart'
-// import LeftPart from './LeftPart'
 import { Button, Icon, PreloaderPage } from '../../views';
 import { PayModal, SureExit } from '../Modal';
 import { generatCheck, handingErrors } from '../../utils';

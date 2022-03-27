@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import classNames from 'classnames'
+import React from 'react'
 import { Button } from '../../views'
 import style from './check_operations.module.scss';
-import table_style from '../CheckTable/check_table.module.scss'
 
 const HistoryChanges = ({
   viewCheck
