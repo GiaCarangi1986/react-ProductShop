@@ -34,7 +34,7 @@ const CheckTable = ({
 
   const viewCheck = (e) => {
     dispatch('page/toggle', {
-      headers: { main: 'Просмотр чека', left: 'История изменений', right: 'Чек-лист', btnText: '', type: PAGES_TYPES.viewCheck, id: e.target.name },
+      headers: { main: 'Просмотр чека', left: 'История изменений', right: 'Чек-лист', type: PAGES_TYPES.viewCheck, id: e.target.name },
     })
     navigate(PATHS.check_operations.path)
   }

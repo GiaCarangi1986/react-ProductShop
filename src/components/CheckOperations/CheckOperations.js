@@ -176,6 +176,7 @@ const CheckOperations = () => {
               btnText={pageHeaders?.btnText}
               total_sum={total_sum}
               setTotalSum={setTotalSum}
+              typePage={typePage}
             />
           </div>
         </section>

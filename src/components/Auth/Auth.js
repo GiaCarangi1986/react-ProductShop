@@ -76,7 +76,7 @@ const Auth = () => {
           onGx-submit={formik.handleSubmit}
           novalidate
         >
-          <Fieldset error={formik.errors.username} touched={formik.touched.username}>
+          <Fieldset error={formik.errors.username} touched={formik.touched.username} errorClass='auth'>
             <Input
               label='Логин'
               type='email'
@@ -87,7 +87,7 @@ const Auth = () => {
               onGx-blur={handleBlur}
             />
           </Fieldset>
-          <Fieldset error={formik.errors.password} touched={formik.touched.password}>
+          <Fieldset error={formik.errors.password} touched={formik.touched.password} errorClass='auth'>
             <Input
               label='Пароль'
               type='password'

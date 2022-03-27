@@ -8,6 +8,7 @@ import {
   CHECK_LINE_ADDING,
   WIDTH_COL_CHECK_TBODY,
   UNITS,
+  PAGES_TYPES
 } from '../../const'
 
 import table_style from '../CheckTable/check_table.module.scss'
@@ -22,7 +23,8 @@ const RightPart = ({
   postponeCheck = () => { },
   addOrUpdateCheck = () => { },
   total_sum = 0,
-  setTotalSum = () => { }
+  setTotalSum = () => { },
+  typePage = ''
 }) => {
   const [linesOfCheckWithTotalSum, setNewCheckFields] = useState([])
 
@@ -117,6 +119,8 @@ const RightPart = ({
     recalculateLines(newArr)
   }, [linesOfCheck])
 
+  const hiddenActions = typePage === PAGES_TYPES.viewCheck
+
   return (
     <>
       <section className={style.part_right}>
@@ -134,9 +138,11 @@ const RightPart = ({
                     <table className={table_style.table}>
                       <thead className={table_style['table-head']}>
                         <tr className={table_style['table-row']}>
-                          <th key='action_colunm' className={table_style['table-col']}>
-                            <div style={{ width: '50px' }} />
-                          </th>
+                          {!hiddenActions && (
+                            <th key='action_colunm' className={table_style['table-col']}>
+                              <div style={{ width: '50px' }} />
+                            </th>
+                          )}
                           {Object.keys(CHECK_LINES_HEADER).map(header => {
                             const w = WIDTH_COL_CHECK[header] || 30
                             return (
@@ -147,47 +153,50 @@ const RightPart = ({
                               </th>
                             )
                           })}
-                          <th key='action_colunm-delete' className={table_style['table-col']}>
-                            <div style={{ width: '25px' }} />
-                          </th>
+                          {!hiddenActions && (
+                            <th key='action_colunm-delete' className={table_style['table-col']}>
+                              <div style={{ width: '25px' }} />
+                            </th>
+                          )}
                         </tr>
                       </thead>
                       <tbody className={table_style['table-body']}>
                         {linesOfCheckWithTotalSum.map(line => {
                           const classesRow = classNames({
                             [table_style['table-row']]: true,
-                            // [style['table-row_archive']]: !elem.is_available - тут будет 50% акция, если заметит покупатель - красный цвет, а ппри добавлении продукта еще сделать пимпочку - 50% (будет атрибут такой у продукта)
                           })
                           return (
                             <tr key={`${line.id}-${line.old_product}`} className={classesRow}>
-                              <td className={classNames(table_style['table-col'], table_style['table-col-full-rights'])} key='action_colunm'>
-                                <div style={{ width: '50px', margin: 'auto' }}>
-                                  <Button
-                                    className='button-edit_action'
-                                    title='Убавить кол-во'
-                                    name={{ id: line.id, old_product: line.old_product }}
-                                    value={-1}
-                                    onClick={changeProductCount}
-                                    disabled={line.count === 1 || line.unit === UNITS[1]}
-                                    variant='text'
-                                    data-cy='btn'
-                                  >
-                                    <Icon slot='icon-left' icon='minus' />
-                                  </Button>
-                                  <Button
-                                    className='button-edit_action'
-                                    title='Прибавить кол-во'
-                                    disabled={line.unit === UNITS[1]}
-                                    name={{ id: line.id, old_product: line.old_product }}
-                                    value={1}
-                                    onClick={changeProductCount}
-                                    variant='text'
-                                    data-cy='btn'
-                                  >
-                                    <Icon slot='icon-left' icon='plus' />
-                                  </Button>
-                                </div>
-                              </td>
+                              {!hiddenActions && (
+                                <td className={classNames(table_style['table-col'], table_style['table-col-full-rights'])} key='action_colunm'>
+                                  <div style={{ width: '50px', margin: 'auto' }}>
+                                    <Button
+                                      className='button-edit_action'
+                                      title='Убавить кол-во'
+                                      name={{ id: line.id, old_product: line.old_product }}
+                                      value={-1}
+                                      onClick={changeProductCount}
+                                      disabled={line.count === 1 || line.unit === UNITS[1]}
+                                      variant='text'
+                                      data-cy='btn'
+                                    >
+                                      <Icon slot='icon-left' icon='minus' />
+                                    </Button>
+                                    <Button
+                                      className='button-edit_action'
+                                      title='Прибавить кол-во'
+                                      disabled={line.unit === UNITS[1]}
+                                      name={{ id: line.id, old_product: line.old_product }}
+                                      value={1}
+                                      onClick={changeProductCount}
+                                      variant='text'
+                                      data-cy='btn'
+                                    >
+                                      <Icon slot='icon-left' icon='plus' />
+                                    </Button>
+                                  </div>
+                                </td>
+                              )}
                               {Object.keys(CHECK_LINE_ADDING).map(check_line_key => {
                                 const leftOrCenter = Number.isNaN(Number(`${line[check_line_key]}`));
                                 const tdClasses = classNames({
@@ -209,7 +218,7 @@ const RightPart = ({
                                 <div style={{ width: '35px', margin: 'auto' }}>
                                   <Switch
                                     text={line.old_product}
-                                    disabled={line.sale}
+                                    disabled={line.sale || hiddenActions}
                                     onGx-change={() => handleChangeSwitch(line)}
                                     name={`${line.id}-${line.old_product}`}
                                     value={`${line.old_product}`}
@@ -217,19 +226,21 @@ const RightPart = ({
                                   />
                                 </div>
                               </td>
-                              <td className={table_style['table-col']} key='action_colunm-delete'>
-                                <div style={{ width: '25px', margin: 'auto' }}>
-                                  <Button
-                                    className='button-delete_action'
-                                    variant='text'
-                                    data-cy='btn'
-                                    name={{ id: line.id, old_product: line.old_product }}
-                                    onClick={deleteProduct}
-                                  >
-                                    <Icon slot='icon-left' icon='deleteIcon' />
-                                  </Button>
-                                </div>
-                              </td>
+                              {!hiddenActions && (
+                                <td className={table_style['table-col']} key='action_colunm-delete'>
+                                  <div style={{ width: '25px', margin: 'auto' }}>
+                                    <Button
+                                      className='button-delete_action'
+                                      variant='text'
+                                      data-cy='btn'
+                                      name={{ id: line.id, old_product: line.old_product }}
+                                      onClick={deleteProduct}
+                                    >
+                                      <Icon slot='icon-left' icon='deleteIcon' />
+                                    </Button>
+                                  </div>
+                                </td>
+                              )}
                             </tr>
                           )
                         })}
@@ -243,27 +254,29 @@ const RightPart = ({
                   <span className={style.text}>{`Итого без бонусов: ${total_sum}`}</span>
                   <span className={style.text}>{`Итого с бонусами: ${total_sum - (discountCard?.bonus || 0)}`}</span>
                 </div>
-                <div className={style.wrap_btn}>
-                  <Button
-                    className='btn_width-100-red'
-                    data-cy='btn'
-                    buttonDis
-                    outline
-                    onClick={postponeCheck}
-                    disabled={!linesOfCheck.length}
-                  >
-                    Отложить чек
-                  </Button>
-                  <Button
-                    type='submit'
-                    className='btn_width-100'
-                    data-cy='btn'
-                    buttonDis
-                    disabled={!linesOfCheck.length}
-                  >
-                    {btnText}
-                  </Button>
-                </div>
+                {typePage !== PAGES_TYPES.viewCheck && (
+                  <div className={style.wrap_btn}>
+                    <Button
+                      className='btn_width-100-red'
+                      data-cy='btn'
+                      buttonDis
+                      outline
+                      onClick={postponeCheck}
+                      disabled={!linesOfCheck.length}
+                    >
+                      Отложить чек
+                    </Button>
+                    <Button
+                      type='submit'
+                      className='btn_width-100'
+                      data-cy='btn'
+                      buttonDis
+                      disabled={!linesOfCheck.length}
+                    >
+                      {btnText}
+                    </Button>
+                  </div>
+                )}
               </div>
             </Form>
           </GxGrid>

@@ -2,37 +2,19 @@
   display: block;
   width: max-content;
   background-color: var(--ps-background-color);
+  margin: auto;
 }
 
 .table_scroll-horizontal {
   overflow-x: auto;
   height: 100%;
   width: 100%;
-  padding-bottom: 9px;
-  padding-right: 9px;
   &::-webkit-scrollbar {
-    height: 5px;
-    width: 5px;
+    height: 9px;
+    width: 9px;
     margin-top: 4px;
     background-color: var(--ps-background-color);
   }
-}
-
-.table_scroll-horizontal:hover::-webkit-scrollbar,
-.table_scroll-vertical:hover::-webkit-scrollbar{
-  height: 9px;
-  width: 9px;
-}
-
-.table_scroll-vertical:hover,
-.table_scroll-horizontal:hover {
-  width: calc(100vw - 35px);
-  margin-right: -9px;
-}
-
-.table_scroll-horizontal:hover {
-  padding-bottom: 0;
-  padding-right: 0;
 }
 
 .table_scroll-horizontal-noResults:hover {
@@ -43,8 +25,8 @@
   overflow-y: auto;
   width: 100%;
   &::-webkit-scrollbar {
-    height: 5px;
-    width: 5px;
+    height: 9px;
+    width: 9px;
     background-color: var(--ps-background-color);
   }
   &::-webkit-scrollbar-track {
