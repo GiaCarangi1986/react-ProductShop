@@ -209,6 +209,22 @@
   box-shadow: none;
 }
 
+.item-btn-active::part(base){
+  font-weight: bold;
+}
+
+.item-btn-active:after{
+  position: absolute;
+  content: '';
+  display: block;
+  width: 60px;
+  height: 5px;
+  background: var(--ps-color-accent-active);
+  top: 50%;
+  left: 0;
+  transform: translate(-50%,-50%);
+}
+
 .btn_width-square::part(base) {
   width: 40px;
   min-width: 40px;
