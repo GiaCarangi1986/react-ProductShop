@@ -6,7 +6,7 @@ const HistoryChanges = ({
   viewCheck
 }) => {
   const {
-    historyDatesList = [],
+    addedChecks = [],
     activeLine = -1,
     setActiveLine = () => { },
     setLinesOfCheck = () => { },
@@ -20,7 +20,7 @@ const HistoryChanges = ({
 
   return (
     <ul className={style.histoty_btns_container}>
-      {historyDatesList.map(line => {
+      {addedChecks.map(line => {
         const activeStyle = activeLine === line.id ? 'item-btn-active' : ''
         return (
           <li key={line.id} className={style.history_item}>

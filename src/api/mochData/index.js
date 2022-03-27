@@ -337,6 +337,7 @@ export const HistoryCheck = (status = 2) => {
           childCheckId: null,
           kassirId: 1,
           kassirName: 'Курочкина Е. С.', // только при получении, при отправке - id
+          paid: true,
           linesCheckList: [
             {
               count: 12,
@@ -362,6 +363,7 @@ export const HistoryCheck = (status = 2) => {
           childCheckId: '1',
           kassirId: 1,
           kassirName: 'Курочкина Е. С.', // только при получении, при отправке - id
+          paid: true,
           linesCheckList: [
             {
               count: 2,
@@ -387,6 +389,8 @@ export const HistoryCheck = (status = 2) => {
           childCheckId: '2',
           kassirId: 2,
           kassirName: 'Петрова А. А.', // только при получении, при отправке - id
+          paid: true, // false в случае отложенного чека - тогда показываем оплатить и отложить, но там поставится старое время!
+          // этот атрибут для того, чтобы понимать, что редачить, если фалсе, то оплатить и если делаем строки в 0 кол-во, то типо оплатить 0 и прост удаляется, то есть не новый, а в этот добавим атрибут
           linesCheckList: [
             {
               count: 4,

@@ -24,17 +24,12 @@ const CheckOperations = () => {
   const [typePage, setTypePage] = useState(null)
 
   const [activeLine, setActiveLine] = useState(-1)
-  const [historyDatesList, setHistoryDatesList] = useState([])
+  const [addedChecks, setAddedChecks] = useState([])
 
   const PARTS_VIEWS = {
-    addCheck: {
-      left: AddCheckParams,
-      rigth: null
-    },
-    viewCheck: {
-      left: HistoryChanges,
-      rigth: null
-    }
+    addCheck: AddCheckParams,
+    viewCheck: HistoryChanges,
+    editCheck: HistoryChanges
   }
 
   const handleSubmitError = ({ response, actions }) => { // пока не используется
@@ -50,7 +45,7 @@ const CheckOperations = () => {
     api.getHistoryCheck(id)
       .then(res => {
         console.log('res', res)
-        setHistoryDatesList(res)
+        setAddedChecks(res)
         setLoading(false)
 
         const lastElement = res[res.length - 1]
@@ -83,9 +78,9 @@ const CheckOperations = () => {
     }
   }
 
-  const createCheck = () => { // этот запрос и на редакт/отложен, ибо одинаково все
+  const createCheck = (paid = true) => { // этот запрос и на редакт/отложен, ибо одинаково все
     setLoading(true)
-    const check = generatCheck(discountCard, linesOfCheck, null, currentUser, true)
+    const check = generatCheck(discountCard, linesOfCheck, null, currentUser, paid)
     api.setCheck(check)
       .then(() => {
         console.log('check', check)
@@ -101,7 +96,7 @@ const CheckOperations = () => {
   const postponeCheck = () => {
     console.log('postponeCheck', generatCheck(discountCard, linesOfCheck, null, currentUser))
     dispatch('page/close')
-    createCheck()
+    createCheck(false)
   }
 
   const addOrUpdateCheck = () => {
@@ -121,7 +116,7 @@ const CheckOperations = () => {
     }
   }, [headers])
 
-  const LeftPart = PARTS_VIEWS[typePage]?.left || null
+  const LeftPart = PARTS_VIEWS[typePage] || null
 
   if (LeftPart) {
     return (
@@ -157,7 +152,7 @@ const CheckOperations = () => {
                     viewCheck={{
                       activeLine,
                       setActiveLine,
-                      historyDatesList,
+                      addedChecks,
                       setLinesOfCheck
                     }}
                   />
@@ -176,6 +171,8 @@ const CheckOperations = () => {
               total_sum={total_sum}
               setTotalSum={setTotalSum}
               typePage={typePage}
+              activeLine={activeLine}
+              addedChecks={addedChecks}
             />
           </div>
         </section>

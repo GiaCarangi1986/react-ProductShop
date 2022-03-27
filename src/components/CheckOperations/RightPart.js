@@ -24,7 +24,9 @@ const RightPart = ({
   addOrUpdateCheck = () => { },
   total_sum = 0,
   setTotalSum = () => { },
-  typePage = ''
+  typePage = '',
+  activeLine = '',
+  addedChecks = []
 }) => {
   const [linesOfCheckWithTotalSum, setNewCheckFields] = useState([])
 
@@ -119,7 +121,8 @@ const RightPart = ({
     recalculateLines(newArr)
   }, [linesOfCheck])
 
-  const hiddenActions = typePage === PAGES_TYPES.viewCheck
+  const changeNotLastEntry = activeLine !== addedChecks[addedChecks.length - 1]?.id
+  const hiddenActions = typePage === PAGES_TYPES.viewCheck || changeNotLastEntry
 
   return (
     <>
@@ -185,7 +188,7 @@ const RightPart = ({
                                     <Button
                                       className='button-edit_action'
                                       title='Прибавить кол-во'
-                                      disabled={line.unit === UNITS[1]}
+                                      disabled={line.unit === UNITS[1] || typePage === PAGES_TYPES.editCheck}
                                       name={{ id: line.id, old_product: line.old_product }}
                                       value={1}
                                       onClick={changeProductCount}
@@ -254,18 +257,20 @@ const RightPart = ({
                   <span className={style.text}>{`Итого без бонусов: ${total_sum}`}</span>
                   <span className={style.text}>{`Итого с бонусами: ${total_sum - (discountCard?.bonus || 0)}`}</span>
                 </div>
-                {typePage !== PAGES_TYPES.viewCheck && (
+                {!hiddenActions && (
                   <div className={style.wrap_btn}>
-                    <Button
-                      className='btn_width-100-red'
-                      data-cy='btn'
-                      buttonDis
-                      outline
-                      onClick={postponeCheck}
-                      disabled={!linesOfCheck.length}
-                    >
-                      Отложить чек
-                    </Button>
+                    {typePage !== PAGES_TYPES.editCheck && (
+                      <Button
+                        className='btn_width-100-red'
+                        data-cy='btn'
+                        buttonDis
+                        outline
+                        onClick={postponeCheck}
+                        disabled={!linesOfCheck.length}
+                      >
+                        Отложить чек
+                      </Button>
+                    )}
                     <Button
                       type='submit'
                       className='btn_width-100'

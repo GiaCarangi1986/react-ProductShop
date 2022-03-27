@@ -34,11 +34,22 @@ const CheckTable = ({
   const [cols, setCols] = useState(null)
   const [statusLoading, setStatusLoading] = useState(status)
 
+  const redirectToCheckPage = () => {
+    navigate(PATHS.check_operations.path)
+  }
+
   const viewCheck = (e) => {
     dispatch('page/toggle', {
       headers: { main: 'Просмотр чека', left: 'История изменений', right: 'Чек-лист', type: PAGES_TYPES.viewCheck, id: e.target.name },
     })
-    navigate(PATHS.check_operations.path)
+    redirectToCheckPage()
+  }
+
+  const editCheck = (e) => {
+    dispatch('page/toggle', {
+      headers: { main: 'Редактирование чека', left: 'История изменений', right: 'Чек-лист', type: PAGES_TYPES.editCheck, id: e.target.name, btnText: 'Выплатить' },
+    })
+    redirectToCheckPage()
   }
 
   useEffect(() => { // ok
@@ -122,6 +133,7 @@ const CheckTable = ({
                         disabled={userRole === USER_ROLE.kassir}
                         variant='text'
                         data-cy='btn'
+                        onClick={editCheck}
                         name={elem.id}
                       >
                         <Icon slot='icon-left' icon='write' />
