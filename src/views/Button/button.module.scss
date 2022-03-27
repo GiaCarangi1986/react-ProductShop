@@ -209,10 +209,6 @@
   box-shadow: none;
 }
 
-.item-btn-active::part(base){
-  font-weight: bold;
-}
-
 .item-btn-active:after{
   position: absolute;
   content: '';

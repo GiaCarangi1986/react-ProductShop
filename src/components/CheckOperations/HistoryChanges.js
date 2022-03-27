@@ -10,11 +10,14 @@ const HistoryChanges = ({
   const {
     historyDatesList = [],
     activeLine = -1,
-    setActiveLine = () => { }
+    setActiveLine = () => { },
+    setLinesOfCheck = () => { },
   } = viewCheck
 
   const setActiveBtn = (e) => {
-    setActiveLine(e.target.name)
+    const lineProps = e.target.name
+    setActiveLine(lineProps?.id)
+    setLinesOfCheck(lineProps?.lines)
   }
 
   return (
@@ -25,11 +28,14 @@ const HistoryChanges = ({
           <li key={line.id} className={style.history_item}>
             <Button
               variant='text'
-              name={line.id}
+              name={{
+                id: line.id,
+                lines: line.linesCheckList
+              }}
               onClick={setActiveBtn}
               className={activeStyle}
             >
-              {line.date_time}
+              {`${line.date_time}, ${line.kassirName}`}
             </Button>
           </li>
         )

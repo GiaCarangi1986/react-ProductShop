@@ -53,6 +53,15 @@ const CheckOperations = () => {
         console.log('res', res)
         setHistoryDatesList(res)
         setLoading(false)
+
+        const lastElement = res[res.length - 1]
+        setActiveLine(lastElement.id)
+        setLinesOfCheck(lastElement.linesCheckList)
+        if (lastElement.bonus_count) {
+          setDiscountCard({
+            bonus: lastElement.bonus_count,
+          })
+        }
       })
       .catch(err => {
         console.log('err', err)
@@ -65,9 +74,14 @@ const CheckOperations = () => {
   }
 
   const sureForExit = () => {
-    dispatch('modal/toggle', {
-      modal: MODAL_TYPES.sureExit,
-    })
+    if (typePage !== PAGES_TYPES.viewCheck) {
+      dispatch('modal/toggle', {
+        modal: MODAL_TYPES.sureExit,
+      })
+    }
+    else {
+      redirectToCheckList()
+    }
   }
 
   const createCheck = () => { // этот запрос и на редакт/отложен, ибо одинаково все
@@ -144,7 +158,8 @@ const CheckOperations = () => {
                     viewCheck={{
                       activeLine,
                       setActiveLine,
-                      historyDatesList
+                      historyDatesList,
+                      setLinesOfCheck
                     }}
                   />
                 </GxGrid>

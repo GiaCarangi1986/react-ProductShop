@@ -17,7 +17,7 @@ export const LoginUser = (data) => {
     return {
       first_name: 'Елизавета',
       last_name: 'Курочкина',
-      type: 1, // 1 - обычный кассир, 2- старший кассир, 3- админ
+      roleId: 1, // 1 - обычный кассир, 2- старший кассир, 3- админ
       id: 1, // на беке буду проверять id и type
     }
   }
@@ -335,6 +335,8 @@ export const HistoryCheck = (status = 2) => {
           bonus_count: 1, // новая цена с бонусами - если <0 -> 0
           cardId: '1',
           childCheckId: null,
+          kassirId: 1,
+          kassirName: 'Курочкина Е. С.', // только при получении, при отправке - id
           linesCheckList: [
             {
               count: 12,
@@ -358,6 +360,8 @@ export const HistoryCheck = (status = 2) => {
           bonus_count: 1,
           cardId: '1',
           childCheckId: '1',
+          kassirId: 1,
+          kassirName: 'Курочкина Е. С.', // только при получении, при отправке - id
           linesCheckList: [
             {
               count: 2,
@@ -381,6 +385,8 @@ export const HistoryCheck = (status = 2) => {
           bonus_count: 1,
           cardId: '1',
           childCheckId: '2',
+          kassirId: 2,
+          kassirName: 'Петрова А. А.', // только при получении, при отправке - id
           linesCheckList: [
             {
               count: 4,
