@@ -24,7 +24,7 @@ const CheckOptions = () => {
         isScrollTop={false}
         isHistoryPush={false}
         api={api.getCheckList}
-        initFilter={{ page_size: 10 }}
+        initFilter={{ page_size: 50 }}
       >
         {(props) => {
           return <CheckTable {...props} />

@@ -21,6 +21,7 @@ const CheckTable = ({
   results = [],
   filterParams = {},
   showMore = () => { },
+  loadData = () => { },
   status,
   otherData = {},
   isNext,
@@ -33,6 +34,7 @@ const CheckTable = ({
   const [colsTrue, setColsTrue] = useState([])
   const [cols, setCols] = useState(null)
   const [statusLoading, setStatusLoading] = useState(status)
+  const [filters, setFilters] = useState({})
 
   const redirectToCheckPage = () => {
     navigate(PATHS.check_operations.path)
@@ -77,6 +79,10 @@ const CheckTable = ({
     }
   }, [currentUser])
 
+  useEffect(() => {
+    loadData(1, { ...filterParams, ...filters });
+  }, [filters])
+
   const overlayClasses = classNames({
     [style['table-grid']]: true,
     [style['grid-rows']]: count > 0 && results.length !== count,
@@ -91,10 +97,11 @@ const CheckTable = ({
         isLoaded={status === dataStates.loaded}
         resultsLen={results.length}
         displayLoadBtn={count > 0 && results.length !== count && eventType !== TABLE_EVENT_TYPES.allLoaded}
+        filters={filters}
+        setFilters={setFilters}
       />
       <div className={overlayClasses}>
         <Table
-          filterParams={filterParams}
           isNext={isNext}
           status={status}
           colsTrue={colsTrue}

@@ -18,7 +18,6 @@ const Table = ({
   isNext,
   children = null,
   status,
-  filterParams = {},
   setEventType = () => { },
   eventType,
   filtersList = {},
