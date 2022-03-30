@@ -24,7 +24,12 @@ const CheckOptions = () => {
         isScrollTop={false}
         isHistoryPush={false}
         api={api.getCheckList}
-        initFilter={{ page_size: 50 }}
+        initFilter={{
+          page_size: 50,
+          paided_show: true, // показывать оплаченные чеки
+          changed_show: true, // был ли чек редактирован
+          delayed_show: true // был ли чек отложен
+        }}
       >
         {(props) => {
           return <CheckTable {...props} />

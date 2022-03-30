@@ -34,7 +34,11 @@ const CheckTable = ({
   const [colsTrue, setColsTrue] = useState([])
   const [cols, setCols] = useState(null)
   const [statusLoading, setStatusLoading] = useState(status)
-  const [filters, setFilters] = useState({})
+  const [filters, setFilters] = useState({
+    paided_show: true, // показывать оплаченные чеки
+    changed_show: true, // был ли чек редактирован
+    delayed_show: true // был ли чек отложен
+  })
 
   const redirectToCheckPage = () => {
     navigate(PATHS.check_operations.path)

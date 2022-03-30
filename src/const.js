@@ -445,6 +445,7 @@ export const WIDTH_COL_CHECK_TBODY = {
 }
 
 export const TABLE_EVENT_TYPES = {
+  checksVisable: 'checksVisable',
   search: 'search',
   settings: 'settings',
   scroll: 'scroll',
@@ -523,6 +524,9 @@ export const FORM_FIELDS = {
   card: 'card',
   bonus: 'bonus',
   old_product: 'old_product',
+  paided_show: 'paided_show',
+  delayed_show: 'delayed_show',
+  changed_show: 'changed_show'
 }
 
 export const UNITS = ['шт', 'кг']

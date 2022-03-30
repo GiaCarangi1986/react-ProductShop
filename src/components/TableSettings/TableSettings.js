@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import classNames from 'classnames'
 import { useNavigate } from 'react-router';
 import { useStoreon } from 'storeon/react'
-import { Button, Switch } from '../../views'
+import { Button } from '../../views'
 import DateSearch from './DateSearch'
+import SwitchBlock from './SwitchBlock';
 import { PATHS, PAGES_TYPES } from '../../const';
 import style from './table-settings.module.scss'
 
@@ -29,11 +30,7 @@ const TableSettings = ({
     <div className={style['table-settings']}>
       <div className={style['table-settings__left']}>
         <DateSearch settingsDisabled={settingsDisabled} setEventType={setEventType} setFilters={setFilters} filters={filters} />
-        <div className={style['table-settings-filter-check']}>
-          <Switch text='Оплаченные чеки' checked disabled={settingsDisabled} />
-          <Switch text='Отложенные чеки' checked disabled={settingsDisabled} />
-          <Switch text='Редактированные чеки' checked disabled={settingsDisabled} />
-        </div>
+        <SwitchBlock settingsDisabled={settingsDisabled} setEventType={setEventType} setFilters={setFilters} filters={filters} />
       </div>
 
       <div className={style['table-settings__right']}>
