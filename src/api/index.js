@@ -23,7 +23,8 @@ class Api extends BaseApi {
       return checkSerializer(res.data)
     }
     catch (err) {
-      return checkSerializer(CheckList(1, params)) // 1 - норм, 2 - ошибка
+      console.log('params', params)
+      return checkSerializer(CheckList(1)) // 1 - норм, 2 - ошибка
     }
   }
 

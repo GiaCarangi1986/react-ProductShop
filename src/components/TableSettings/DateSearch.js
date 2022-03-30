@@ -1,36 +1,22 @@
 import React, { useState } from 'react'
 import { useFormik } from 'formik'
 import { Form, Input, Fieldset, Button } from '../../views'
-import { FORM_LABELS, FORM_FIELDS } from '../../const'
+import { FORM_LABELS, FORM_FIELDS, TABLE_EVENT_TYPES } from '../../const'
 import { dateSearch } from '../../schema'
 import { formatDateToInput } from '../../utils/date'
 import style from './table-settings.module.scss'
 
 const DateSearch = ({ settingsDisabled = false, setEventType = () => { }, setFilters = () => { }, filters = {} }) => {
-  const [isNotInputEmpty, setInputNotEmpty] = useState(false)
-
   const initialValues = {
     start_at: null,
     end_at: null
   }
 
   const onSubmit = (values, actions) => {
-    console.log('values', values)
-    // if (isNotInputEmpty) {
-    //   if (!history) {
-    //     dispatch('params/update', { search: values.search })
-    //   }
-    //   else {
-    //     dispatch('paramsHistory/update', { search: values.search })
-    //     loadData(1, { ...filtersHistory, search: values.search });
-    //   }
+    setFilters({ ...filters, date_search: { start_at: values.start_at, end_at: values.end_at } });
 
-    //   setEventType(TABLE_EVENT_TYPES.search)
-    //   actions.setSubmitting(false)
-    //   if (values.search === '') {
-    //     setInputNotEmpty(false)
-    //   }
-    // }
+    setEventType(TABLE_EVENT_TYPES.search)
+    actions.setSubmitting(false)
   }
 
   const formik = useFormik({
@@ -40,7 +26,12 @@ const DateSearch = ({ settingsDisabled = false, setEventType = () => { }, setFil
   })
 
   const cancelAction = () => {
+    if (filters?.date_search?.start_at) {
+      formik.submitForm()
+    }
     formik.setValues(initialValues)
+    formik.setTouched({})
+    setEventType(null)
   }
 
   const dateNow = formatDateToInput()
