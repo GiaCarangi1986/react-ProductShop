@@ -138,7 +138,7 @@ export function generatCheck(discountCard = {}, linesOfCheck = [], childCheckId 
     bonus_count: +discountCard?.bonus || 0, // кол-во использованных бонусов
     totalCost, // итоговая стоимость (без бонусов)
     paid, // оплачен чек или нет (на данном этапе только false, ибо он тут отложен или только подготовлен к оплате)
-    cardId: discountCard?.card?.value || null, // id карты
+    cardId: discountCard?.card?.value || discountCard?.id || null, // id карты (через id обращаемся при редактировании)
     childCheckId, // ссылка на ребенка (для редактированного чека)
     linesCheckList, // строки чека,
     kassirId: currentUser.id // id кассира, пробившего чек

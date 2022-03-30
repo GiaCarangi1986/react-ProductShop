@@ -23,7 +23,7 @@ const CheckOperations = () => {
   const [loading, setLoading] = useState(false)
   const [typePage, setTypePage] = useState(null)
 
-  const [activeLine, setActiveLine] = useState(-1)
+  const [activeLine, setActiveLine] = useState(null)
   const [addedChecks, setAddedChecks] = useState([])
   const [prevTotalSum, setPrevTotalSum] = useState(0)
   const [linesOfGeneratedCheck, setLinesOfGeneratedCheck] = useState([])
@@ -49,6 +49,7 @@ const CheckOperations = () => {
     if (element.bonus_count) {
       setDiscountCard({
         bonus: element.bonus_count,
+        id: element.cardId
       })
     }
     setPrevTotalSum(element.totalCost)
@@ -88,7 +89,7 @@ const CheckOperations = () => {
 
   const createCheck = (paid = true) => { // этот запрос и на редакт/отложен, ибо одинаково все
     setLoading(true)
-    const check = generatCheck(discountCard, linesOfCheck, null, currentUser, paid)
+    const check = generatCheck(discountCard, linesOfCheck, activeLine, currentUser, paid)
     api.setCheck(check)
       .then(() => {
         console.log('check', check)
@@ -107,11 +108,23 @@ const CheckOperations = () => {
     createCheck(false)
   }
 
-  const addOrUpdateCheck = (noNeedWarn = false) => {
+  const addOrUpdateCheck = () => {
     dispatch('page/close')
     dispatch('modal/toggle', {
       modal: MODAL_TYPES.payModal,
     })
+  }
+
+  const headersForPayModal = typePage === PAGES_TYPES.addCheck ? {
+    main: 'Покупка',
+    text: `Ожидается оплата в размере ${total_sum - (+discountCard?.bonus || 0)} руб.`,
+    btnCancel: 'Отмена',
+    btnOk: 'Оплатить',
+  } : {
+    main: 'Возврат',
+    text: `Ожидается возврат в размере ${prevTotalSum - total_sum} руб.`,
+    btnCancel: 'Отмена',
+    btnOk: 'Выплатить',
   }
 
   useEffect(() => {
@@ -187,13 +200,8 @@ const CheckOperations = () => {
           </div>
         </section>
         <PayModal
-          func={createCheck}
-          headers={{
-            main: 'Покупка',
-            text: `Ожидается оплата в размере ${total_sum - (+discountCard?.bonus || 0)} руб.`,
-            btnCancel: 'Отмена',
-            btnOk: 'Оплатить',
-          }}
+          func={createCheck} // проверять на наличие строк и если что другую передать (удаление)
+          headers={headersForPayModal}
         />
         <SureExit
           func={redirectToCheckList}

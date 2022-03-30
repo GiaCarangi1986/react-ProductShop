@@ -16,7 +16,8 @@ const HistoryChanges = ({
     updateCheckInfo({
       id: lineProps?.id,
       linesCheckList: lineProps?.linesCheckList,
-      totalCost: lineProps?.totalCost
+      totalCost: lineProps?.totalCost,
+      cardId: lineProps?.cardId
     })
   }
 
@@ -31,7 +32,8 @@ const HistoryChanges = ({
               name={{
                 id: line.id,
                 linesCheckList: line.linesCheckList,
-                totalCost: line.totalCost
+                totalCost: line.totalCost,
+                cardId: line.cardId
               }}
               onClick={setActiveBtn}
               className={activeStyle}
