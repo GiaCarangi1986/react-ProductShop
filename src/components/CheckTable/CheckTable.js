@@ -172,13 +172,13 @@ const CheckTable = ({
             })}
           </tbody>
         </Table>
-        {status === dataStates.loaded && results.length === 0 ? (
+        {status === dataStates.loaded && results.length === 0 && (
           <div className={style['notresult-block']}>
             <div className={style['notresult-text']}>
               <span>Данные не найдены</span>
             </div>
           </div>
-        ) : null}
+        )}
       </div>
       {statusLoading === dataStates.loading && eventType !== TABLE_EVENT_TYPES.scroll ? <PreloaderPage /> : null}
     </>

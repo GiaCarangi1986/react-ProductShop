@@ -146,11 +146,12 @@ td.table-col-full-rights div {
 }
 
 .notresult-block {
-  width: calc(100vw - 35px);
-  padding: 20px 0;
+  width: calc(100vw - 40px);
   display: flex;
   align-items: center;
   justify-content: center;
+  position: absolute;
+  height: 90%;
 }
 
 .notresult-text {
