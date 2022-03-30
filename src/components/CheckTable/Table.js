@@ -61,7 +61,7 @@ const Table = ({
       ref={refContainer}
       onScroll={tableScroll}
     >
-      <div className={style['table-layout']}>
+      <div className={classNames(style['table-layout'], style['table-layout_left'])}>
         <table className={style.table}>
           <thead
             className={style['table-head']}>

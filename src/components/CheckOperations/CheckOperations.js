@@ -25,6 +25,8 @@ const CheckOperations = () => {
 
   const [activeLine, setActiveLine] = useState(-1)
   const [addedChecks, setAddedChecks] = useState([])
+  const [prevTotalSum, setPrevTotalSum] = useState(0)
+  const [linesOfGeneratedCheck, setLinesOfGeneratedCheck] = useState([])
 
   const PARTS_VIEWS = {
     addCheck: AddCheckParams,
@@ -40,6 +42,18 @@ const CheckOperations = () => {
     actions.setSubmitting(false)
   }
 
+  const updateCheckInfo = (element = {}) => {
+    setActiveLine(element.id)
+    setLinesOfCheck(element.linesCheckList)
+    setLinesOfGeneratedCheck([])
+    if (element.bonus_count) {
+      setDiscountCard({
+        bonus: element.bonus_count,
+      })
+    }
+    setPrevTotalSum(element.totalCost)
+  }
+
   const getHistoryCheck = (id) => {
     setLoading(true)
     api.getHistoryCheck(id)
@@ -49,13 +63,7 @@ const CheckOperations = () => {
         setLoading(false)
 
         const lastElement = res[res.length - 1]
-        setActiveLine(lastElement.id)
-        setLinesOfCheck(lastElement.linesCheckList)
-        if (lastElement.bonus_count) {
-          setDiscountCard({
-            bonus: lastElement.bonus_count,
-          })
-        }
+        updateCheckInfo(lastElement)
       })
       .catch(err => {
         console.log('err', err)
@@ -151,9 +159,8 @@ const CheckOperations = () => {
                     }}
                     viewCheck={{
                       activeLine,
-                      setActiveLine,
                       addedChecks,
-                      setLinesOfCheck
+                      updateCheckInfo
                     }}
                   />
                 </GxGrid>
@@ -173,6 +180,9 @@ const CheckOperations = () => {
               typePage={typePage}
               activeLine={activeLine}
               addedChecks={addedChecks}
+              prevTotalSum={prevTotalSum}
+              setLinesOfGeneratedCheck={setLinesOfGeneratedCheck}
+              linesOfGeneratedCheck={linesOfGeneratedCheck}
             />
           </div>
         </section>

@@ -8,14 +8,16 @@ const HistoryChanges = ({
   const {
     addedChecks = [],
     activeLine = -1,
-    setActiveLine = () => { },
-    setLinesOfCheck = () => { },
+    updateCheckInfo = () => { },
   } = viewCheck
 
   const setActiveBtn = (e) => {
     const lineProps = e.target.name
-    setActiveLine(lineProps?.id)
-    setLinesOfCheck(lineProps?.lines)
+    updateCheckInfo({
+      id: lineProps?.id,
+      linesCheckList: lineProps?.linesCheckList,
+      totalCost: lineProps?.totalCost
+    })
   }
 
   return (
@@ -28,7 +30,8 @@ const HistoryChanges = ({
               variant='text'
               name={{
                 id: line.id,
-                lines: line.linesCheckList
+                linesCheckList: line.linesCheckList,
+                totalCost: line.totalCost
               }}
               onClick={setActiveBtn}
               className={activeStyle}

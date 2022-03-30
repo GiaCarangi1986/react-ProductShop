@@ -159,6 +159,7 @@ const CheckTable = ({
                       <Button
                         className='button-delete_action'
                         variant='text'
+                        disabled={userRole === USER_ROLE.kassir} // позже добавить условие, что если чеки отложенные, то можно
                         data-cy='btn'
                       >
                         <Icon slot='icon-left' icon='deleteIcon' />

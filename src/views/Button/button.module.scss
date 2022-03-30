@@ -128,10 +128,10 @@
 .button-edit_action::part(base),
 .button-delete_action::part(base) {
   --gx-color-primary-50: var(--ps-color-disabled);
-  min-width: 18px;
   width: 18px;
   height: 18px;
   padding: 0;
+  min-width: 0;
 }
 
 .button-delete_action::part(base) {

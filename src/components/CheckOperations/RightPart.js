@@ -26,7 +26,10 @@ const RightPart = ({
   setTotalSum = () => { },
   typePage = '',
   activeLine = '',
-  addedChecks = []
+  addedChecks = [],
+  prevTotalSum = 0,
+  setLinesOfGeneratedCheck = () => { },
+  linesOfGeneratedCheck = []
 }) => {
   const [linesOfCheckWithTotalSum, setNewCheckFields] = useState([])
 
@@ -69,6 +72,16 @@ const RightPart = ({
       sum += line.total_cost
     })
     setTotalSum(sum)
+  }
+
+  const uncorrectValue = (id = '-1', count = 0) => {
+    let dis = true
+    linesOfGeneratedCheck.forEach(line => {
+      if (+line.id === +id && line.count > count) {
+        dis = false
+      }
+    })
+    return dis
   }
 
   const handleChangeSwitch = (line) => {
@@ -119,10 +132,21 @@ const RightPart = ({
     })
     setNewCheckFields(newArr)
     recalculateLines(newArr)
+
+    if (!linesOfGeneratedCheck.length) {
+      console.log('linesOfCheck', linesOfCheck)
+      setLinesOfGeneratedCheck(linesOfCheck)
+    }
   }, [linesOfCheck])
 
+  const viewPage = typePage === PAGES_TYPES.viewCheck
   const changeNotLastEntry = activeLine !== addedChecks[addedChecks.length - 1]?.id
-  const hiddenActions = typePage === PAGES_TYPES.viewCheck || changeNotLastEntry
+  const hiddenActions = viewPage || changeNotLastEntry
+  const editCheck = typePage === PAGES_TYPES.editCheck
+  const sumWithBonus = total_sum - (discountCard?.bonus || 0)
+  const correctSumWithBonus = sumWithBonus > 0 ? sumWithBonus : 0
+  const totalInfo = editCheck ? [`Итоговая стоимость предыдущая: ${prevTotalSum}`, `Итоговая стоимость текущая: ${correctSumWithBonus}`] :
+    [`Итого без бонусов: ${total_sum}`, `Итого с бонусами: ${correctSumWithBonus}`]
 
   return (
     <>
@@ -188,7 +212,7 @@ const RightPart = ({
                                     <Button
                                       className='button-edit_action'
                                       title='Прибавить кол-во'
-                                      disabled={line.unit === UNITS[1] || typePage === PAGES_TYPES.editCheck}
+                                      disabled={line.unit === UNITS[1] || uncorrectValue(line.id, line.count) && editCheck}
                                       name={{ id: line.id, old_product: line.old_product }}
                                       value={1}
                                       onClick={changeProductCount}
@@ -254,12 +278,12 @@ const RightPart = ({
               </div>
               <div className={style.wrap_row}>
                 <div className={style.wrap_col}>
-                  <span className={style.text}>{`Итого без бонусов: ${total_sum}`}</span>
-                  <span className={style.text}>{`Итого с бонусами: ${total_sum - (discountCard?.bonus || 0)}`}</span>
+                  <span className={style.text}>{totalInfo[0]}</span>
+                  <span className={style.text}>{totalInfo[1]}</span>
                 </div>
-                {!hiddenActions && (
+                {!viewPage && (
                   <div className={style.wrap_btn}>
-                    {typePage !== PAGES_TYPES.editCheck && (
+                    {!editCheck && (
                       <Button
                         className='btn_width-100-red'
                         data-cy='btn'
@@ -276,7 +300,7 @@ const RightPart = ({
                       className='btn_width-100'
                       data-cy='btn'
                       buttonDis
-                      disabled={!linesOfCheck.length}
+                      disabled={!linesOfCheck.length && !editCheck}
                     >
                       {btnText}
                     </Button>
