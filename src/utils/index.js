@@ -128,7 +128,7 @@ function totalCostFunc(linesOfCheck) {
   return totalCost
 }
 
-export function generatCheck(discountCard = {}, linesOfCheck = [], childCheckId = null, currentUser = {}, paid = false) {
+export function generatCheck(discountCard = {}, linesOfCheck = [], currentUser = {}, paid = false) {
   let totalCost = totalCostFunc(linesOfCheck)
 
   const linesCheckList = arrCorrectProductLines(linesOfCheck)
@@ -139,9 +139,9 @@ export function generatCheck(discountCard = {}, linesOfCheck = [], childCheckId 
     totalCost, // итоговая стоимость (без бонусов)
     paid, // оплачен чек или нет (на данном этапе только false, ибо он тут отложен или только подготовлен к оплате)
     cardId: discountCard?.card?.value || discountCard?.id || null, // id карты (через id обращаемся при редактировании)
-    childCheckId, // ссылка на ребенка (для редактированного чека)
     linesCheckList, // строки чека,
-    kassirId: currentUser.id // id кассира, пробившего чек
+    kassirId: currentUser.id, // id кассира, пробившего чек
+    parentCheckId: null, // id чека-родителя (для отредактированного чека)
   };
 }
 

@@ -327,7 +327,7 @@ export const CardList = (status = 2) => {
 
 export const HistoryCheck = (status = 2) => { // когда сервер буду писать у запросов сделать все camelCase
   if (status === 1) {
-    return { // лист бонусных карт
+    return {
       // results: [
       //   {
       //     id: '1',
@@ -363,7 +363,7 @@ export const HistoryCheck = (status = 2) => { // когда сервер буд�
           date_time: '26.03.2022 10:16:31', // новый чек создастся по этому с те ми полями, но заменим list, date, price
           bonus_count: 1, // новая цена с бонусами - если <0 -> 0
           cardId: '1',
-          childCheckId: null,
+          parentCheckId: '2',
           kassirId: 1,
           kassirName: 'Курочкина Е. С.', // только при получении, при отправке - id
           paid: true,
@@ -397,7 +397,7 @@ export const HistoryCheck = (status = 2) => { // когда сервер буд�
           date_time: '26.03.2022 15:16:31',
           bonus_count: 1,
           cardId: '1',
-          childCheckId: '1',
+          parentCheckId: '3',
           kassirId: 1,
           kassirName: 'Курочкина Е. С.', // только при получении, при отправке - id
           totalCost: 1345,
@@ -431,7 +431,7 @@ export const HistoryCheck = (status = 2) => { // когда сервер буд�
           date_time: '26.03.2022 16:16:31',
           bonus_count: 1,
           cardId: '1',
-          childCheckId: '2',
+          parentCheckId: null,
           kassirId: 2,
           totalCost: 1144,
           kassirName: 'Петрова А. А.', // только при получении, при отправке - id

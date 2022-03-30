@@ -64,7 +64,7 @@ class Api extends BaseApi {
       return res.data
     }
     catch (err) {
-      return ''
+      return '2222' // вернется id созданного чека
     }
   }
 
@@ -78,13 +78,23 @@ class Api extends BaseApi {
     }
   }
 
-  async deleteCheck(id = {}) {
+  async deleteCheck(id = '') {
     try {
-      const res = await this.delete(`/api/create_check/${id}`)
+      const res = await this.delete(`/api/delete_check/${id}`)
       return res.data
     }
     catch (err) {
-      return ''
+      return 'deleteCheck'
+    }
+  }
+
+  async updateCheck(parentId = '', id = '') {
+    try {
+      const res = await this.put(`/api/update_check/${id}`, parentId)
+      return res.data
+    }
+    catch (err) {
+      return `updateCheck, в предыдущий чек с id=${id} в качестве id-родителя был указан созданный ${parentId}`
     }
   }
 }

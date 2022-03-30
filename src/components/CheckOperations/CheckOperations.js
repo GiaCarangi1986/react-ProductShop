@@ -90,8 +90,8 @@ const CheckOperations = () => {
   const deleteCheck = () => {
     setLoading(true)
     api.deleteCheck(activeLine)
-      .then(() => {
-        console.log('delete_check')
+      .then((res) => {
+        console.log('delete_check', res)
         setLoading(false)
         redirectToCheckList()
       })
@@ -103,12 +103,21 @@ const CheckOperations = () => {
 
   const createCheck = (paid = true) => { // этот запрос и на редакт/отложен, ибо одинаково все
     setLoading(true)
-    const check = generatCheck(discountCard, linesOfCheck, activeLine, currentUser, paid)
+    const check = generatCheck(discountCard, linesOfCheck, currentUser, paid)
     api.setCheck(check)
-      .then(() => {
-        console.log('check', check)
-        setLoading(false)
-        redirectToCheckList()
+      .then((id) => {
+        console.log('createCheck', id)
+        if (activeLine) {
+          api.updateCheck(id, addedChecks[addedChecks.length - 2].id)
+            .then(res => {
+              console.log('update_check', res)
+              setLoading(false)
+              redirectToCheckList()
+            })
+            .catch(err => {
+              console.log('err', err)
+            })
+        }
       })
       .catch((err) => {
         console.log('err', err)
@@ -117,7 +126,7 @@ const CheckOperations = () => {
   }
 
   const postponeCheck = () => {
-    console.log('postponeCheck', generatCheck(discountCard, linesOfCheck, null, currentUser))
+    console.log('postponeCheck', generatCheck(discountCard, linesOfCheck, currentUser))
     dispatch('page/close')
     createCheck(false)
   }
