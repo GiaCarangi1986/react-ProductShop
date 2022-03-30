@@ -13,6 +13,7 @@ import {
   PAGES_TYPES,
   USER_ROLE
 } from '../../const'
+import api from '../../api';
 
 import style from './check_table.module.scss'
 
@@ -39,6 +40,21 @@ const CheckTable = ({
     changed_show: true, // был ли чек редактирован
     delayed_show: true // был ли чек отложен
   })
+
+  const deleteCheck = (e) => {
+    const activeLine = e.target.name
+    setStatusLoading(dataStates.loading)
+    setEventType(TABLE_EVENT_TYPES.changeData)
+    api.deleteCheck(activeLine)
+      .then((res) => {
+        console.log('delete_check', res)
+        setStatusLoading(dataStates.loaded)
+      })
+      .catch((err) => {
+        console.log('err', err)
+        setStatusLoading(dataStates.loaded)
+      })
+  }
 
   const redirectToCheckPage = () => {
     navigate(PATHS.check_operations.path)
@@ -142,7 +158,7 @@ const CheckTable = ({
                       <Button
                         className='button-edit_action'
                         title='Редактировать'
-                        disabled={userRole === USER_ROLE.kassir}
+                        disabled={userRole === USER_ROLE.kassir && !elem.delayed_check}
                         variant='text'
                         data-cy='btn'
                         onClick={editCheck}
@@ -171,8 +187,10 @@ const CheckTable = ({
                       <Button
                         className='button-delete_action'
                         variant='text'
-                        disabled={userRole === USER_ROLE.kassir} // позже добавить условие, что если чеки отложенные, то можно
+                        disabled={userRole === USER_ROLE.kassir && !elem.delayed_check}
                         data-cy='btn'
+                        name={elem.id}
+                        onClick={deleteCheck}
                       >
                         <Icon slot='icon-left' icon='deleteIcon' />
                       </Button>
