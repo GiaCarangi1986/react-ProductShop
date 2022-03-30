@@ -33,10 +33,6 @@ const RightPart = ({
 }) => {
   const [linesOfCheckWithTotalSum, setNewCheckFields] = useState([])
 
-  const onSubmit = () => {
-    addOrUpdateCheck()
-  }
-
   const classesScroll = classNames({
     [table_style['table_scroll-horizontal']]: true,
     [table_style['table_scroll-vertical']]: true,
@@ -158,6 +154,11 @@ const RightPart = ({
   const prevCorrectSumWithBonus = prevSumWithBonus > 0 ? prevSumWithBonus : 0
   const totalInfo = editCheck ? [`Итоговая стоимость предыдущая: ${prevCorrectSumWithBonus}`, `Итоговая стоимость текущая: ${correctSumWithBonus}`] :
     [`Итого без бонусов: ${total_sum}`, `Итого с бонусами: ${correctSumWithBonus}`]
+  const noNeedWarn = prevCorrectSumWithBonus === correctSumWithBonus
+
+  const onSubmit = () => {
+    addOrUpdateCheck()
+  }
 
   return (
     <>
@@ -256,7 +257,7 @@ const RightPart = ({
                                 <div style={{ width: '35px', margin: 'auto' }}>
                                   <Switch
                                     text={line.old_product}
-                                    disabled={line.sale || hiddenActions || (editCheck && uncorrectSwitch(line.id))}
+                                    disabled={line.sale || hiddenActions || editCheck && uncorrectSwitch(line.id)}
                                     onGx-change={() => handleChangeSwitch(line)}
                                     name={`${line.id}-${line.old_product}`}
                                     value={`${line.old_product}`}
@@ -311,7 +312,7 @@ const RightPart = ({
                       className='btn_width-100'
                       data-cy='btn'
                       buttonDis
-                      disabled={!linesOfCheck.length && !editCheck}
+                      disabled={!linesOfCheck.length || editCheck && noNeedWarn}
                     >
                       {btnText}
                     </Button>

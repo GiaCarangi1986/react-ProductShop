@@ -76,7 +76,7 @@ const CheckOperations = () => {
   }
 
   const sureForExit = () => {
-    if (typePage !== PAGES_TYPES.viewCheck) {
+    if (typePage !== PAGES_TYPES.viewCheck && total_sum !== prevTotalSum) {
       dispatch('modal/toggle', {
         modal: MODAL_TYPES.sureExit,
       })
@@ -107,7 +107,7 @@ const CheckOperations = () => {
     createCheck(false)
   }
 
-  const addOrUpdateCheck = () => {
+  const addOrUpdateCheck = (noNeedWarn = false) => {
     dispatch('page/close')
     dispatch('modal/toggle', {
       modal: MODAL_TYPES.payModal,
