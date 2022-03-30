@@ -29,6 +29,8 @@ const priceTemp = (val = 150, err = errorsMessenge.lardgeString) => Yup.string()
   })
   .required(errorsMessenge.requiredField);
 
+const dateTemp = Yup.mixed().nullable().required(errorsMessenge.requiredField)
+
 const dateTempEnd = Yup.mixed()
   .test('CorrectDates', errorsMessenge.correctDates, (value, context) => {
     if (context.parent.start_at && value) {
@@ -40,7 +42,8 @@ const dateTempEnd = Yup.mixed()
   });
 
 const dateSearch = Yup.object().shape({
-  end_at: dateTempEnd,
+  start_at: dateTemp,
+  end_at: dateTempEnd.nullable().required(errorsMessenge.requiredField),
 });
 
 const maxCount = Yup.mixed()

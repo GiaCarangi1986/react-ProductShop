@@ -12,8 +12,8 @@ const TableSettings = ({
   settingsDisabled = false,
   setEventType = () => { },
   displayLoadBtn = false,
-  // isLoaded = false,
-  // resultsLen = 0,
+  filters = {},
+  setFilters = () => { }
 }) => {
   const { dispatch } = useStoreon()
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ const TableSettings = ({
   return (
     <div className={style['table-settings']}>
       <div className={style['table-settings__left']}>
-        <DateSearch settingsDisabled={settingsDisabled} />
+        <DateSearch settingsDisabled={settingsDisabled} setEventType={setEventType} setFilters={setFilters} filters={filters} />
         <div className={style['table-settings-filter-check']}>
           <Switch text='Оплаченные чеки' checked disabled={settingsDisabled} />
           <Switch text='Отложенные чеки' checked disabled={settingsDisabled} />
