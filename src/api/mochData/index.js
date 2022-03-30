@@ -40,7 +40,8 @@ export const CheckList = (status = 2) => {
           sum: 1000,
           bonus_add: 10,
           bonus_pop: 2,
-          changedCheck: false // был ли чек редактирован
+          changedCheck: true, // был ли чек редактирован
+          delayedCheck: false // был ли чек отложен
         },
         {
           id: 3,
@@ -49,6 +50,8 @@ export const CheckList = (status = 2) => {
           sum: 4000,
           bonus_add: 8,
           bonus_pop: 21,
+          changedCheck: false, // был ли чек редактирован
+          delayedCheck: false // был ли чек отложен
         },
         {
           id: 4,
@@ -57,6 +60,8 @@ export const CheckList = (status = 2) => {
           sum: 130,
           bonus_add: 0,
           bonus_pop: 2,
+          changedCheck: false, // был ли чек редактирован
+          delayedCheck: true // был ли чек отложен
         },
         {
           id: 5,

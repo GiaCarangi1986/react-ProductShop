@@ -111,7 +111,8 @@ const CheckTable = ({
               const key = `service-row-${elem.id}`;
               const classesRow = classNames({
                 [style['table-row']]: true,
-                // [style['table-row_archive']]: !elem.is_available
+                [style['table-row_archive']]: elem.delayed_check,
+                [style['table-row_edited']]: elem.changed_check
               })
               return (
                 <tr data-test={key} key={key} className={classesRow}>

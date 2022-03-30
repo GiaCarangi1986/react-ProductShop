@@ -89,6 +89,11 @@
   color: var(--ps-color-red);
 }
 
+.table-row_edited {
+  background-color: var(--ps-color-row-edited);
+  color: var(--ps-color-yellow);
+}
+
 .table-col {
   padding: 5px 10px;
   height: 100%;
