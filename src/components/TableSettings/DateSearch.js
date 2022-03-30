@@ -6,7 +6,7 @@ import { dateSearch } from '../../schema'
 import { formatDateToInput } from '../../utils/date'
 import style from './table-settings.module.scss'
 
-const DateSearch = () => {
+const DateSearch = ({ settingsDisabled = false }) => {
   const initialValues = {
     start_at: null,
     end_at: null
@@ -41,6 +41,7 @@ const DateSearch = () => {
           type='datetime-local'
           max={dateNow}
           nameOfStyle='input_date'
+          disabled={settingsDisabled}
         />
         <Fieldset
           error={formik.errors.end_at}
@@ -57,11 +58,12 @@ const DateSearch = () => {
             min={formik.values.start_at}
             max={dateNow}
             nameOfStyle='input_date'
+            disabled={settingsDisabled}
           />
         </Fieldset>
       </div>
       <div className={style['table-search_block']}>
-        <Button type='submit' disabled={disabledSubmit} className='search_ok'>
+        <Button type='submit' disabled={disabledSubmit || settingsDisabled} className='search_ok'>
           Поиск
         </Button>
         <Button disabled={!formik.dirty} className='search_cancel' outline onClick={cancelAction}>

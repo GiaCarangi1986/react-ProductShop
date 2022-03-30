@@ -18,35 +18,21 @@ const TableSettings = ({
   const { dispatch } = useStoreon()
   const navigate = useNavigate();
 
-  // const openCreateModal = () => {
-  //   dispatch('modal/toggle', {
-  //     modal: MODAL_TYPES.service,
-  //     tariff: { data: null, type: 'create' },
-  //   })
-  // }
-
   const openCreateCheckPage = () => {
     dispatch('page/toggle', {
       headers: { main: 'Добавление чека', left: 'Составляющие чека', right: 'Чек-лист', btnText: 'Перейти к оплате', type: PAGES_TYPES.addCheck, },
-      // для редактир. чека альтернатива - перейти к выплате
     })
     navigate(PATHS.check_operations.path)
   }
 
-  // const classes = classNames({
-  //   [style['table-settings-col']]: true,
-  //   // [style['table-settings-col_none']]: !isShowResetBtn,
-  //   [style['table-settings__right_btn-second']]: true,
-  // })
-
   return (
     <div className={style['table-settings']}>
       <div className={style['table-settings__left']}>
-        <DateSearch />
+        <DateSearch settingsDisabled={settingsDisabled} />
         <div className={style['table-settings-filter-check']}>
-          <Switch text='Оплаченные чеки' checked />
-          <Switch text='Отложенные чеки' checked />
-          <Switch text='Редактированные чеки' checked />
+          <Switch text='Оплаченные чеки' checked disabled={settingsDisabled} />
+          <Switch text='Отложенные чеки' checked disabled={settingsDisabled} />
+          <Switch text='Редактированные чеки' checked disabled={settingsDisabled} />
         </div>
       </div>
 
@@ -59,7 +45,7 @@ const TableSettings = ({
               Добавить
             </Button>
           </div>
-          {displayLoadBtn && (
+          {displayLoadBtn && !settingsDisabled && (
             <Button
               type='button'
               onClick={() => {
