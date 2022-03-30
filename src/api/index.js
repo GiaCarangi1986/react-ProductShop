@@ -77,6 +77,16 @@ class Api extends BaseApi {
       return HistoryCheck(1).results // 1 - норм, 2 - ошибка
     }
   }
+
+  async deleteCheck(id = {}) {
+    try {
+      const res = await this.delete(`/api/create_check/${id}`)
+      return res.data
+    }
+    catch (err) {
+      return ''
+    }
+  }
 }
 
 export const MAIN_URL = 'http://localhost:8010'

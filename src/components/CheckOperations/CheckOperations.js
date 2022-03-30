@@ -87,6 +87,20 @@ const CheckOperations = () => {
     }
   }
 
+  const deleteCheck = () => {
+    setLoading(true)
+    api.deleteCheck(activeLine)
+      .then(() => {
+        console.log('delete_check')
+        setLoading(false)
+        redirectToCheckList()
+      })
+      .catch((err) => {
+        console.log('err', err)
+        setLoading(false)
+      })
+  }
+
   const createCheck = (paid = true) => { // этот запрос и на редакт/отложен, ибо одинаково все
     setLoading(true)
     const check = generatCheck(discountCard, linesOfCheck, activeLine, currentUser, paid)
@@ -200,7 +214,7 @@ const CheckOperations = () => {
           </div>
         </section>
         <PayModal
-          func={createCheck} // проверять на наличие строк и если что другую передать (удаление)
+          func={linesOfCheck.length ? createCheck : deleteCheck} // проверять на наличие строк и если что другую передать (удаление)
           headers={headersForPayModal}
         />
         <SureExit
