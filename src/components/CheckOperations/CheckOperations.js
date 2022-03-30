@@ -103,21 +103,22 @@ const CheckOperations = () => {
 
   const createCheck = (paid = true) => { // этот запрос и на редакт/отложен, ибо одинаково все
     setLoading(true)
-    const check = generatCheck(discountCard, linesOfCheck, currentUser, paid)
+    const check = generatCheck(discountCard, linesOfCheck, currentUser, paid, activeLine)
     api.setCheck(check)
       .then((id) => {
         console.log('createCheck', id)
+        console.log('check', check)
         if (activeLine) {
           api.updateCheck(id, addedChecks[addedChecks.length - 2].id)
             .then(res => {
               console.log('update_check', res)
-              setLoading(false)
-              redirectToCheckList()
             })
             .catch(err => {
               console.log('err', err)
             })
         }
+        setLoading(false)
+        redirectToCheckList()
       })
       .catch((err) => {
         console.log('err', err)
@@ -126,7 +127,7 @@ const CheckOperations = () => {
   }
 
   const postponeCheck = () => {
-    console.log('postponeCheck', generatCheck(discountCard, linesOfCheck, currentUser))
+    console.log('postponeCheck', generatCheck(discountCard, linesOfCheck, currentUser, false, false, true))
     dispatch('page/close')
     createCheck(false)
   }

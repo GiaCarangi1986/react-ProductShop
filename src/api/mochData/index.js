@@ -40,6 +40,7 @@ export const CheckList = (status = 2) => {
           sum: 1000,
           bonus_add: 10,
           bonus_pop: 2,
+          changedCheck: false // был ли чек редактирован
         },
         {
           id: 3,
