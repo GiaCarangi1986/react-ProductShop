@@ -419,13 +419,13 @@ export const NAMES = { // примерная структура столбцов
 };
 
 export const WIDTH_COL = {
-  id: 220,
-  date_time: 135,
+  id: 250,
+  date_time: 180,
   kassir: 300,
-  bonus_add: 140,
-  bonus_pop: 110,
-  sum_without_bonus: 140,
-  sum: 135,
+  bonus_add: 150,
+  bonus_pop: 150,
+  sum_without_bonus: 150,
+  sum: 150,
 }
 
 export const WIDTH_COL_CHECK = {
