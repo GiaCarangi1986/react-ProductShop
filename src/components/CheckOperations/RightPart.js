@@ -134,18 +134,19 @@ const RightPart = ({
     recalculateLines(newArr)
 
     if (!linesOfGeneratedCheck.length) {
-      console.log('linesOfCheck', linesOfCheck)
       setLinesOfGeneratedCheck(linesOfCheck)
     }
   }, [linesOfCheck])
 
   const viewPage = typePage === PAGES_TYPES.viewCheck
   const changeNotLastEntry = activeLine !== addedChecks[addedChecks.length - 1]?.id
-  const hiddenActions = viewPage || changeNotLastEntry
   const editCheck = typePage === PAGES_TYPES.editCheck
+  const hiddenActions = viewPage || (changeNotLastEntry && editCheck)
   const sumWithBonus = total_sum - (discountCard?.bonus || 0)
   const correctSumWithBonus = sumWithBonus > 0 ? sumWithBonus : 0
-  const totalInfo = editCheck ? [`Итоговая стоимость предыдущая: ${prevTotalSum}`, `Итоговая стоимость текущая: ${correctSumWithBonus}`] :
+  const prevSumWithBonus = prevTotalSum - (discountCard?.bonus || 0)
+  const prevCorrectSumWithBonus = prevSumWithBonus > 0 ? prevSumWithBonus : 0
+  const totalInfo = editCheck ? [`Итоговая стоимость предыдущая: ${prevCorrectSumWithBonus}`, `Итоговая стоимость текущая: ${correctSumWithBonus}`] :
     [`Итого без бонусов: ${total_sum}`, `Итого с бонусами: ${correctSumWithBonus}`]
 
   return (
