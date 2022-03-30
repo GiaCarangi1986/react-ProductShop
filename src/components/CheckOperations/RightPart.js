@@ -84,6 +84,16 @@ const RightPart = ({
     return dis
   }
 
+  const uncorrectSwitch = (id = '-1') => {
+    let dis = true
+    linesOfGeneratedCheck.forEach(line => {
+      if (+line.id === +id && line.old_product) {
+        dis = false
+      }
+    })
+    return dis
+  }
+
   const handleChangeSwitch = (line) => {
     const productData = line
     let updateProductLines = [...linesOfCheckWithTotalSum]
@@ -246,7 +256,7 @@ const RightPart = ({
                                 <div style={{ width: '35px', margin: 'auto' }}>
                                   <Switch
                                     text={line.old_product}
-                                    disabled={line.sale || hiddenActions}
+                                    disabled={line.sale || hiddenActions || (editCheck && uncorrectSwitch(line.id))}
                                     onGx-change={() => handleChangeSwitch(line)}
                                     name={`${line.id}-${line.old_product}`}
                                     value={`${line.old_product}`}
