@@ -87,7 +87,7 @@ const RightPart = ({
   const uncorrectSwitch = (id = '-1') => {
     let dis = true
     linesOfGeneratedCheck.forEach(line => {
-      if (+line.id === +id && line.old_product) {
+      if (+line.id === +id && !line.old_product) {
         dis = false
       }
     })
