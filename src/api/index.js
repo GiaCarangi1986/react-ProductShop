@@ -97,6 +97,17 @@ class Api extends BaseApi {
       return `updateCheck, в предыдущий чек с id=${id} в качестве id-родителя был указан созданный ${parentId}`
     }
   }
+
+  async paidCheck(id = '', data = '') {
+    try {
+      const res = await this.put(`/api/paid_check/${id}`, data)
+      return res.data
+    }
+    catch (err) {
+      console.log('data', data)
+      return `paidCheck, чек с id=${id} был изменен данными`
+    }
+  }
 }
 
 export const MAIN_URL = 'http://localhost:8010'

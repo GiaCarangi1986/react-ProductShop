@@ -29,7 +29,8 @@ const RightPart = ({
   addedChecks = [],
   prevTotalSum = 0,
   setLinesOfGeneratedCheck = () => { },
-  linesOfGeneratedCheck = []
+  linesOfGeneratedCheck = [],
+  delayCheck = () => { }
 }) => {
   const [linesOfCheckWithTotalSum, setNewCheckFields] = useState([])
 
@@ -152,7 +153,8 @@ const RightPart = ({
   const correctSumWithBonus = sumWithBonus > 0 ? sumWithBonus : 0
   const prevSumWithBonus = prevTotalSum - (discountCard?.bonus || 0)
   const prevCorrectSumWithBonus = prevSumWithBonus > 0 ? prevSumWithBonus : 0
-  const totalInfo = editCheck ? [`Итоговая стоимость предыдущая: ${prevCorrectSumWithBonus}`, `Итоговая стоимость текущая: ${correctSumWithBonus}`] :
+  const totalInfo = editCheck && !delayCheck ?
+    [`Итоговая стоимость предыдущая: ${prevCorrectSumWithBonus}`, `Итоговая стоимость текущая: ${correctSumWithBonus}`] :
     [`Итого без бонусов: ${total_sum}`, `Итого с бонусами: ${correctSumWithBonus}`]
   const noNeedWarn = prevCorrectSumWithBonus === correctSumWithBonus
 

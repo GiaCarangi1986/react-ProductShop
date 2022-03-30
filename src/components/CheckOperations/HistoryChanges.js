@@ -17,7 +17,8 @@ const HistoryChanges = ({
       id: lineProps?.id,
       linesCheckList: lineProps?.linesCheckList,
       totalCost: lineProps?.totalCost,
-      cardId: lineProps?.cardId
+      cardId: lineProps?.cardId,
+      paid: lineProps?.paid
     })
   }
 
@@ -33,7 +34,8 @@ const HistoryChanges = ({
                 id: line.id,
                 linesCheckList: line.linesCheckList,
                 totalCost: line.totalCost,
-                cardId: line.cardId
+                cardId: line.cardId,
+                paid: line.paid
               }}
               onClick={setActiveBtn}
               className={activeStyle}

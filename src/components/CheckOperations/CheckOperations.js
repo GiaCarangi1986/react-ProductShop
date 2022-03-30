@@ -27,6 +27,7 @@ const CheckOperations = () => {
   const [addedChecks, setAddedChecks] = useState([])
   const [prevTotalSum, setPrevTotalSum] = useState(0)
   const [linesOfGeneratedCheck, setLinesOfGeneratedCheck] = useState([])
+  const [delayCheck, setDelayCheck] = useState(false)
 
   const PARTS_VIEWS = {
     addCheck: AddCheckParams,
@@ -44,6 +45,7 @@ const CheckOperations = () => {
 
   const updateCheckInfo = (element = {}) => {
     setActiveLine(element.id)
+    setDelayCheck(!element.paid)
     setLinesOfCheck(element.linesCheckList)
     setLinesOfGeneratedCheck([])
     if (element.bonus_count) {
@@ -109,7 +111,7 @@ const CheckOperations = () => {
         console.log('createCheck', id)
         console.log('check', check)
         if (activeLine) {
-          api.updateCheck(id, addedChecks[addedChecks.length - 2].id)
+          api.updateCheck(id, addedChecks[addedChecks.length - 1].id)
             .then(res => {
               console.log('update_check', res)
             })
@@ -121,6 +123,19 @@ const CheckOperations = () => {
         redirectToCheckList()
       })
       .catch((err) => {
+        console.log('err', err)
+        setLoading(false)
+      })
+  }
+
+  const payDelayCheck = () => {
+    setLoading(true)
+    api.paidCheck(activeLine, generatCheck(discountCard, linesOfCheck, currentUser, true))
+      .then(res => {
+        console.log('payDelayCheck', res)
+        setLoading(false)
+      })
+      .catch(err => {
         console.log('err', err)
         setLoading(false)
       })
@@ -139,7 +154,7 @@ const CheckOperations = () => {
     })
   }
 
-  const headersForPayModal = typePage === PAGES_TYPES.addCheck ? {
+  const headersForPayModal = typePage === PAGES_TYPES.addCheck || delayCheck ? {
     main: 'Покупка',
     text: `Ожидается оплата в размере ${total_sum - (+discountCard?.bonus || 0)} руб.`,
     btnCancel: 'Отмена',
@@ -149,6 +164,20 @@ const CheckOperations = () => {
     text: `Ожидается возврат в размере ${prevTotalSum - total_sum} руб.`,
     btnCancel: 'Отмена',
     btnOk: 'Выплатить',
+  }
+
+  const funcAfterOk = () => {
+    if (linesOfCheck.length) {
+      if (delayCheck) {
+        payDelayCheck()
+      }
+      else {
+        createCheck()
+      }
+    }
+    else {
+      deleteCheck()
+    }
   }
 
   useEffect(() => {
@@ -220,11 +249,12 @@ const CheckOperations = () => {
               prevTotalSum={prevTotalSum}
               setLinesOfGeneratedCheck={setLinesOfGeneratedCheck}
               linesOfGeneratedCheck={linesOfGeneratedCheck}
+              delayCheck={delayCheck}
             />
           </div>
         </section>
         <PayModal
-          func={linesOfCheck.length ? createCheck : deleteCheck} // проверять на наличие строк и если что другую передать (удаление)
+          func={funcAfterOk}
           headers={headersForPayModal}
         />
         <SureExit

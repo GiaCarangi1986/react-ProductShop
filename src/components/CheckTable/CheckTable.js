@@ -69,7 +69,14 @@ const CheckTable = ({
 
   const editCheck = (e) => {
     dispatch('page/toggle', {
-      headers: { main: 'Редактирование чека', left: 'История изменений', right: 'Чек-лист', type: PAGES_TYPES.editCheck, id: e.target.name, btnText: 'Выплатить' },
+      headers: {
+        main: 'Редактирование чека',
+        left: 'История изменений',
+        right: 'Чек-лист',
+        type: PAGES_TYPES.editCheck,
+        id: e.target.name.id,
+        btnText: e.target.name.delayed_check ? 'Оплатить' : 'Выплатить'
+      },
     })
     redirectToCheckPage()
   }
@@ -161,8 +168,11 @@ const CheckTable = ({
                         disabled={userRole === USER_ROLE.kassir && !elem.delayed_check}
                         variant='text'
                         data-cy='btn'
-                        onClick={editCheck}
-                        name={elem.id}
+                        onClick={editCheck} delayCheck
+                        name={{
+                          id: elem.id,
+                          delayed_check: elem.delayed_check
+                        }}
                       >
                         <Icon slot='icon-left' icon='write' />
                       </Button>
