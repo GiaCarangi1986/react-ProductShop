@@ -274,6 +274,7 @@ const RightPart = ({
                                       className='button-delete_action'
                                       variant='text'
                                       data-cy='btn'
+                                      title='Удалить строку'
                                       name={{ id: line.id, old_product: line.old_product }}
                                       onClick={deleteProduct}
                                     >

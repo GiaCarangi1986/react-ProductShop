@@ -122,6 +122,7 @@ const AddCheckParams = ({
       formik.setFieldValue(FORM_FIELDS.card, null)
       setCardMaxBonus(0)
       setMaxBonus(0)
+      setBonusErr('')
     }
     else {
       const _maxBonus = Math.floor(e.bonus)
@@ -196,7 +197,7 @@ const AddCheckParams = ({
   const countLabel = formik.values.product ? `${unitForCount} (макс. ${formik.values.product?.count})` : `${unitForCount} (макс. НЕОПРЕДЕЛЕНО)`
   const bonusLabel = linesOfCheck.length && formik.values.card?.value ? `${FORM_LABELS.bonus} (макс. ${maxBonus})` : `${FORM_LABELS.bonus} (макс. НЕОПРЕДЕЛЕНО)`
   const oldProductLabel = formik.values.product?.sale ? `${FORM_LABELS.old_product} (${FORM_LABELS.old_product_err})` : FORM_LABELS.old_product
-  const disabledCardAdd = digitalCard === +formik.values.bonus && discountCard?.card?.value === formik.values.card?.value || !formik.values.card && discountCard && Object.keys(discountCard).length === 0
+  const disabledCardAdd = bonusErr || digitalCard === +formik.values.bonus && discountCard?.card?.value === formik.values.card?.value || !formik.values.card && discountCard && Object.keys(discountCard).length === 0
 
   return (
     <Form data-cy='form'>

@@ -203,6 +203,7 @@ const CheckTable = ({
                     <div style={{ width: '25px', margin: 'auto' }}>
                       <Button
                         className='button-delete_action'
+                        title='Удалить'
                         variant='text'
                         disabled={userRole === USER_ROLE.kassir && !elem.delayed_check}
                         data-cy='btn'

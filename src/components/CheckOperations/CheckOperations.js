@@ -79,7 +79,7 @@ const CheckOperations = () => {
   }
 
   const sureForExit = () => {
-    if (typePage !== PAGES_TYPES.viewCheck && total_sum !== prevTotalSum) {
+    if (typePage !== PAGES_TYPES.viewCheck && total_sum !== prevTotalSum || discountCard) {
       dispatch('modal/toggle', {
         modal: MODAL_TYPES.sureExit,
       })
