@@ -41,14 +41,14 @@ const ModalLogout = () => {
       <h2 className={style['modal-centered__title']}>Выход</h2>
       <p>Вы действительно хотите выйти?</p>
       <div className={style['modal-btns']}>
-        <Button onClick={closeModal} outline>
-          Отмена
-        </Button>
-        <Button buttonDis onClick={logout} className='btn_choose_logout'>
+        <Button buttonDis onClick={logout} className='btn_choose_logout' outline>
           {submitting && (
             <PreloaderPage loaderClass='indicator' slot='icon-left' />
           )}
           Выйти
+        </Button>
+        <Button onClick={closeModal}>
+          Отмена
         </Button>
       </div>
     </Modal>
