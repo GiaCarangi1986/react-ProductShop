@@ -79,7 +79,7 @@ const DateSearch = ({ settingsDisabled = false, setEventType = () => { }, setFil
         <Button type='submit' disabled={!formik.isValid || !formik.dirty || settingsDisabled} className='search_ok'>
           Поиск
         </Button>
-        <Button disabled={!formik.dirty} className='search_cancel' outline onClick={cancelAction}>
+        <Button disabled={!formik.dirty && !Object.keys(formik.touched).length} className='search_cancel' outline onClick={cancelAction}>
           Отмена
         </Button>
       </div>

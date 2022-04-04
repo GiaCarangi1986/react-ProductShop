@@ -103,7 +103,7 @@ export function processingResult(item) {
     product_count: item?.product_count || 0, // кол-во продуктов в чеке
     sum_without_bonus: item?.sum + item?.bonus_pop || 0, // сумма без бонусов
     sum: item?.sum || 0, // итоговая сумма,
-    delayed_check: item?.delayedCheck || false,  // отложен ли чек
+    delayed_check: item?.paid || false,  // отложен ли чек
     changed_check: item?.changedCheck || false // редактированный ли чек
   };
 }
@@ -130,7 +130,7 @@ function totalCostFunc(linesOfCheck) {
   return totalCost
 }
 
-export function generatCheck(discountCard = {}, linesOfCheck = [], currentUser = {}, paid = false, changedCheck = false, delayedCheck = false) {
+export function generatCheck(discountCard = {}, linesOfCheck = [], currentUser = {}, paid = false, changedCheck = false) {
   let totalCost = totalCostFunc(linesOfCheck)
 
   const linesCheckList = arrCorrectProductLines(linesOfCheck)
@@ -145,7 +145,6 @@ export function generatCheck(discountCard = {}, linesOfCheck = [], currentUser =
     kassirId: currentUser.id, // id кассира, пробившего чек
     parentCheckId: null, // id чека-родителя (для отредактированного чека)
     changedCheck: Boolean(changedCheck), // пометка, что чек был редактирован - нужна для отображения в табл другим цветом
-    delayedCheck: delayedCheck // пометка, что чек был отложен - нужна для отображения в табл другим цветом
   };
 }
 

@@ -445,7 +445,6 @@ export const WIDTH_COL_CHECK_TBODY = {
 }
 
 export const TABLE_EVENT_TYPES = {
-  checksVisable: 'checksVisable',
   search: 'search',
   settings: 'settings',
   scroll: 'scroll',

@@ -142,7 +142,7 @@ const CheckOperations = () => {
   }
 
   const postponeCheck = () => {
-    console.log('postponeCheck', generatCheck(discountCard, linesOfCheck, currentUser, false, false, true))
+    console.log('postponeCheck', generatCheck(discountCard, linesOfCheck, currentUser, false, false))
     dispatch('page/close')
     createCheck(false)
   }

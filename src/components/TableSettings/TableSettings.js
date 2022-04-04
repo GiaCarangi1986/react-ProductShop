@@ -30,7 +30,7 @@ const TableSettings = ({
     <div className={style['table-settings']}>
       <div className={style['table-settings__left']}>
         <DateSearch settingsDisabled={settingsDisabled} setEventType={setEventType} setFilters={setFilters} filters={filters} />
-        <SwitchBlock settingsDisabled={settingsDisabled} setEventType={setEventType} setFilters={setFilters} filters={filters} />
+        <SwitchBlock settingsDisabled={settingsDisabled} setFilters={setFilters} filters={filters} />
       </div>
 
       <div className={style['table-settings__right']}>

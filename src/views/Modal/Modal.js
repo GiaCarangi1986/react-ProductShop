@@ -11,7 +11,7 @@ const Modal = ({
   variant = null,
   ...props
 }) => {
-  const {dispatch} = useStoreon('')
+  const { dispatch } = useStoreon('')
   const classes = classNames({
     [style.modal]: true,
     [style[`modal-${variant}`]]: variant
