@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import { useNavigate } from 'react-router';
 import { useStoreon } from 'storeon/react'
 import { dataStates } from '@garpix/fetcher'
+import { SureDelete } from '../Modal';
 import Table from './Table'
 import TableSettings from '../TableSettings'
 import { Button, Icon, PreloaderPage } from '../../views'
@@ -11,7 +12,8 @@ import {
   WIDTH_COL,
   PATHS,
   PAGES_TYPES,
-  USER_ROLE
+  USER_ROLE,
+  MODAL_TYPES
 } from '../../const'
 import api from '../../api';
 
@@ -36,9 +38,10 @@ const CheckTable = ({
   const [cols, setCols] = useState(null)
   const [statusLoading, setStatusLoading] = useState(status)
   const [filters, setFilters] = useState({})
+  const [dataForDelete, setDataForDelete] = useState({})
 
-  const deleteCheck = (e) => {
-    const activeLine = e.target.name
+  const deleteCheck = (id) => {
+    const activeLine = id
     setStatusLoading(dataStates.loading)
     setEventType(TABLE_EVENT_TYPES.changeData)
     api.deleteCheck(activeLine)
@@ -75,6 +78,13 @@ const CheckTable = ({
       },
     })
     redirectToCheckPage()
+  }
+
+  const openSureForDelete = (e) => {
+    dispatch('modal/toggle', {
+      modal: MODAL_TYPES.sureDelete,
+    })
+    setDataForDelete(e.target.name)
   }
 
   useEffect(() => { // ok
@@ -197,7 +207,7 @@ const CheckTable = ({
                         disabled={userRole === USER_ROLE.kassir && !elem.delayed_check}
                         data-cy='btn'
                         name={elem.id}
-                        onClick={deleteCheck}
+                        onClick={openSureForDelete}
                       >
                         <Icon slot='icon-left' icon='deleteIcon' />
                       </Button>
@@ -217,6 +227,7 @@ const CheckTable = ({
         )}
       </div>
       {statusLoading === dataStates.loading && eventType !== TABLE_EVENT_TYPES.scroll ? <PreloaderPage /> : null}
+      <SureDelete func={deleteCheck} data={dataForDelete} />
     </>
   )
 }

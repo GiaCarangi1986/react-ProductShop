@@ -84,7 +84,7 @@ class Api extends BaseApi {
       return res.data
     }
     catch (err) {
-      return 'deleteCheck'
+      return id
     }
   }
 
