@@ -17,7 +17,7 @@ export const LoginUser = (data) => {
     return {
       first_name: 'Елизавета',
       last_name: 'Курочкина',
-      roleId: 3, // 1 - админ, 2- старший кассир, 3- обычный кассир
+      roleId: 2, // 1 - админ, 2- старший кассир, 3- обычный кассир
       id: 1, // на беке буду проверять id и type
     }
   }
@@ -188,6 +188,7 @@ export const CheckList = (status = 2) => {
           paid: false // был ли чек отложен
         },
       ],
+      // results: [],
       count: 1,
       isNext: false,
     }
