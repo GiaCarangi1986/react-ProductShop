@@ -514,6 +514,7 @@ export const FORM_LABELS = {
   bonus: 'Снять бонусы',
   old_product: 'Применить скидку 50% по сроку годности',
   old_product_err: 'НЕВОЗМОЖНО ПРИМЕНИТЬ ДЛЯ АКЦИОННОГО ТОВАРА',
+  maybe_old_product_err: 'НЕВОЗМОЖНО ПРИМЕНИТЬ ДЛЯ ДАННОГО ТОВАРА'
 }
 
 export const FORM_FIELDS = {

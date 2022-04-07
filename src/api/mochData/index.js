@@ -213,6 +213,7 @@ export const ProductList = (status = 2) => {
           price: 90,
           unit: 'шт',
           sale: false,
+          maybeOld: true
         },
         {
           id: 3,
@@ -222,6 +223,7 @@ export const ProductList = (status = 2) => {
           price: 19,
           unit: 'шт',
           sale: true,
+          maybeOld: true
         },
         {
           id: 4,
@@ -231,6 +233,7 @@ export const ProductList = (status = 2) => {
           price: 130,
           unit: 'кг',
           sale: false,
+          maybeOld: false
         },
         {
           id: 5,
@@ -240,6 +243,7 @@ export const ProductList = (status = 2) => {
           price: 130,
           unit: 'кг',
           sale: false,
+          maybeOld: true
         },
         {
           id: 6,
@@ -249,6 +253,7 @@ export const ProductList = (status = 2) => {
           price: 130,
           unit: 'кг',
           sale: false,
+          maybeOld: true
         },
         {
           id: 7,
@@ -258,6 +263,7 @@ export const ProductList = (status = 2) => {
           price: 130,
           unit: 'кг',
           sale: false,
+          maybeOld: true
         },
         {
           id: 8,
@@ -267,6 +273,7 @@ export const ProductList = (status = 2) => {
           price: 130,
           unit: 'кг',
           sale: false,
+          maybeOld: true
         },
         {
           id: 9,
@@ -276,6 +283,7 @@ export const ProductList = (status = 2) => {
           price: 130,
           unit: 'кг',
           sale: false,
+          maybeOld: true
         },
         {
           id: 10,
@@ -285,6 +293,7 @@ export const ProductList = (status = 2) => {
           price: 130,
           unit: 'кг',
           sale: false,
+          maybeOld: true
         },
       ],
     }
@@ -376,21 +385,27 @@ export const HistoryCheck = (status = 2) => { // когда сервер буд�
               id: 1,
               label: 'Сухарики', // здесь отдавать еще название продукта! + здесь наверное будет идти title -> сериалайзер
               old_product: false,
-              price: 20
+              price: 20,
+              maybeOld: true,
+              sale: false,
             },
             {
               count: 5,
               id: 2,
               label: 'Макароны', // здесь отдавать еще название продукта!
               old_product: false,
-              price: 201
+              price: 201,
+              maybeOld: true,
+              sale: false,
             },
             {
               count: 3,
               id: 3,
               label: 'Колбаса', // здесь отдавать еще название продукта!
               old_product: true,
-              price: 100
+              price: 100,
+              maybeOld: true,
+              sale: false,
             },
           ]
         },
@@ -410,21 +425,27 @@ export const HistoryCheck = (status = 2) => { // когда сервер буд�
               id: 1,
               label: 'Сухарики', // здесь отдавать еще название продукта!
               old_product: false,
-              price: 20
+              price: 20,
+              maybeOld: true,
+              sale: false,
             },
             {
               count: 5,
               id: 2,
               label: 'Макароны', // здесь отдавать еще название продукта!
               old_product: false,
-              price: 201
+              price: 201,
+              maybeOld: true,
+              sale: false,
             },
             {
               count: 3,
               id: 3,
               label: 'Колбаса', // здесь отдавать еще название продукта!
               old_product: true,
-              price: 100
+              price: 100,
+              maybeOld: true,
+              sale: false,
             },
           ]
         },
@@ -445,21 +466,27 @@ export const HistoryCheck = (status = 2) => { // когда сервер буд�
               id: 1,
               label: 'Сухарики', // здесь отдавать еще название продукта!
               old_product: false,
-              price: 20
+              price: 20,
+              maybeOld: true,
+              sale: false
             },
             {
               count: 4,
               id: 2,
               label: 'Макароны', // здесь отдавать еще название продукта!
               old_product: false,
-              price: 201
+              price: 201,
+              maybeOld: true,
+              sale: false,
             },
             {
               count: 3,
               id: 3,
               label: 'Колбаса', // здесь отдавать еще название продукта!
               old_product: true,
-              price: 100
+              price: 100,
+              maybeOld: true,
+              sale: false,
             },
           ]
         },

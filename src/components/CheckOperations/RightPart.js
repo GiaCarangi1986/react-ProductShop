@@ -259,7 +259,7 @@ const RightPart = ({
                                 <div style={{ width: '35px', margin: 'auto' }}>
                                   <Switch
                                     text={line.old_product}
-                                    disabled={line.sale || hiddenActions || editCheck && uncorrectSwitch(line.id)}
+                                    disabled={line.sale || !line.maybeOld || hiddenActions || editCheck && uncorrectSwitch(line.id)}
                                     onGx-change={() => handleChangeSwitch(line)}
                                     name={`${line.id}-${line.old_product}`}
                                     value={`${line.old_product}`}

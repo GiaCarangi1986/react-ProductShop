@@ -196,7 +196,13 @@ const AddCheckParams = ({
   const unitForCount = unit === UNITS[0] ? FORM_LABELS.count : FORM_LABELS.weight
   const countLabel = formik.values.product ? `${unitForCount} (макс. ${formik.values.product?.count})` : `${unitForCount} (макс. НЕОПРЕДЕЛЕНО)`
   const bonusLabel = linesOfCheck.length && formik.values.card?.value ? `${FORM_LABELS.bonus} (макс. ${maxBonus})` : `${FORM_LABELS.bonus} (макс. НЕОПРЕДЕЛЕНО)`
-  const oldProductLabel = formik.values.product?.sale ? `${FORM_LABELS.old_product} (${FORM_LABELS.old_product_err})` : FORM_LABELS.old_product
+  let oldProductLabel = FORM_LABELS.old_product
+  if (formik.values.product?.sale) {
+    oldProductLabel += ` (${FORM_LABELS.old_product_err})`
+  }
+  else if (formik.values.product && !formik.values.product?.maybeOld) {
+    oldProductLabel += ` (${FORM_LABELS.maybe_old_product_err})`
+  }
   const disabledCardAdd = bonusErr || digitalCard === +formik.values.bonus && discountCard?.card?.value === formik.values.card?.value || !formik.values.card && discountCard && Object.keys(discountCard).length === 0
 
   return (
@@ -253,7 +259,7 @@ const AddCheckParams = ({
         <div className={classNames(style.grid_row, style.grid_row_special)}>
           <Switch
             text={oldProductLabel}
-            disabled={!formik.values.product || formik.values.product.sale}
+            disabled={!formik.values.product || formik.values.product.sale || !formik.values.product.maybeOld}
             onGx-change={handleChangeSwitch}
             name={FORM_FIELDS.old_product}
             value={`${formik.values.old_product}`}
