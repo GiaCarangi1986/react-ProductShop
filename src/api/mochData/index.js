@@ -42,7 +42,6 @@ export const CheckList = (status = 2) => {
           bonus_pop: 2,
           paidedCheck: true, // оплачен ли чек
           changedCheck: true, // был ли чек редактирован
-          paid: false // был ли чек отложен = !оплачен
         },
         {
           id: 3,
@@ -53,7 +52,6 @@ export const CheckList = (status = 2) => {
           bonus_pop: 21,
           paidedCheck: true, // оплачен ли чек
           changedCheck: false, // был ли чек редактирован
-          paid: false // был ли чек отложен
         },
         {
           id: 4,
@@ -64,7 +62,6 @@ export const CheckList = (status = 2) => {
           bonus_pop: 2,
           paidedCheck: false, // оплачен ли чек
           changedCheck: false, // был ли чек редактирован
-          paid: true // был ли чек отложен
         },
         {
           id: 5,
@@ -75,7 +72,6 @@ export const CheckList = (status = 2) => {
           bonus_pop: 2,
           paidedCheck: false, // оплачен ли чек
           changedCheck: false, // был ли чек редактирован
-          paid: true // был ли чек отложен
         },
         {
           id: 6,
@@ -86,7 +82,6 @@ export const CheckList = (status = 2) => {
           bonus_pop: 2,
           paidedCheck: true, // оплачен ли чек
           changedCheck: false, // был ли чек редактирован
-          paid: false // был ли чек отложен
         },
         {
           id: 7,
@@ -97,7 +92,6 @@ export const CheckList = (status = 2) => {
           bonus_pop: 2,
           paidedCheck: true, // оплачен ли чек
           changedCheck: false, // был ли чек редактирован
-          paid: false // был ли чек отложен
         },
         {
           id: 8,
@@ -108,7 +102,6 @@ export const CheckList = (status = 2) => {
           bonus_pop: 2,
           paidedCheck: true, // оплачен ли чек
           changedCheck: false, // был ли чек редактирован
-          paid: false // был ли чек отложен
         },
         {
           id: 9,
@@ -119,7 +112,6 @@ export const CheckList = (status = 2) => {
           bonus_pop: 2,
           paidedCheck: true, // оплачен ли чек
           changedCheck: false, // был ли чек редактирован
-          paid: false // был ли чек отложен
         },
         {
           id: 10,
@@ -130,7 +122,6 @@ export const CheckList = (status = 2) => {
           bonus_pop: 2,
           paidedCheck: true, // оплачен ли чек
           changedCheck: false, // был ли чек редактирован
-          paid: false // был ли чек отложен
         },
         {
           id: 11,
@@ -141,7 +132,6 @@ export const CheckList = (status = 2) => {
           bonus_pop: 2,
           paidedCheck: true, // оплачен ли чек
           changedCheck: false, // был ли чек редактирован
-          paid: false // был ли чек отложен
         },
         {
           id: 12,
@@ -152,7 +142,6 @@ export const CheckList = (status = 2) => {
           bonus_pop: 2,
           paidedCheck: true, // оплачен ли чек
           changedCheck: false, // был ли чек редактирован
-          paid: false // был ли чек отложен
         },
         {
           id: 13,
@@ -163,7 +152,6 @@ export const CheckList = (status = 2) => {
           bonus_pop: 2,
           paidedCheck: true, // оплачен ли чек
           changedCheck: false, // был ли чек редактирован
-          paid: false // был ли чек отложен
         },
         {
           id: 14,
@@ -174,7 +162,6 @@ export const CheckList = (status = 2) => {
           bonus_pop: 2,
           paidedCheck: true, // оплачен ли чек
           changedCheck: false, // был ли чек редактирован
-          paid: false // был ли чек отложен
         },
         {
           id: 15,
@@ -185,7 +172,6 @@ export const CheckList = (status = 2) => {
           bonus_pop: 2,
           paidedCheck: true, // оплачен ли чек
           changedCheck: false, // был ли чек редактирован
-          paid: false // был ли чек отложен
         },
       ],
       // results: [],

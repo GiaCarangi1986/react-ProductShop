@@ -4,7 +4,7 @@ import { Button, Modal } from '../../views'
 import { MODAL_TYPES } from '../../const'
 import style from './modal.module.scss'
 
-const SureDelete = ({ func = () => { }, data = '' }) => {
+const SureDelete = ({ func = () => { }, data = {} }) => {
   const { modal, dispatch } = useStoreon('modal')
   const [open, setOpen] = useState(false)
 
@@ -19,7 +19,7 @@ const SureDelete = ({ func = () => { }, data = '' }) => {
     setOpen(modal === MODAL_TYPES.sureDelete)
   }, [modal])
 
-  const messsage = `{Выбранный чек с id = ${data} будет безвозратно удален}`
+  const messsage = `Выбранный чек с id = ${data.id} будет безвозратно удален`
 
   return (
     <Modal setOpen={setOpen} variant='centered' open={open}>

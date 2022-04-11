@@ -40,11 +40,11 @@ const CheckTable = ({
   const [filters, setFilters] = useState({})
   const [dataForDelete, setDataForDelete] = useState({})
 
-  const deleteCheck = (id) => {
+  const deleteCheck = ({ id, delayed_check }) => {
     const activeLine = id
     setStatusLoading(dataStates.loading)
     setEventType(TABLE_EVENT_TYPES.changeData)
-    api.deleteCheck(activeLine)
+    api.deleteCheck(activeLine, delayed_check)
       .then((res) => {
         console.log('delete_check', res)
         setStatusLoading(dataStates.loaded)
@@ -84,7 +84,10 @@ const CheckTable = ({
     dispatch('modal/toggle', {
       modal: MODAL_TYPES.sureDelete,
     })
-    setDataForDelete(e.target.name)
+    setDataForDelete({
+      id: e.target.name.id,
+      delayed_check: e.target.name.delayed_check
+    })
   }
 
   useEffect(() => { // ok
@@ -175,7 +178,7 @@ const CheckTable = ({
                         disabled={userRole === USER_ROLE.kassir && !elem.delayed_check}
                         variant='text'
                         data-cy='btn'
-                        onClick={editCheck} delayCheck
+                        onClick={editCheck}
                         name={{
                           id: elem.id,
                           delayed_check: elem.delayed_check
@@ -207,7 +210,10 @@ const CheckTable = ({
                         variant='text'
                         disabled={userRole === USER_ROLE.kassir && !elem.delayed_check}
                         data-cy='btn'
-                        name={elem.id}
+                        name={{
+                          id: elem.id,
+                          delayed_check: elem.delayed_check
+                        }}
                         onClick={openSureForDelete}
                       >
                         <Icon slot='icon-left' icon='deleteIcon' />

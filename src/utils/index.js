@@ -103,7 +103,7 @@ export function processingResult(item) {
     product_count: item?.product_count || 0, // кол-во продуктов в чеке
     sum_without_bonus: item?.sum + item?.bonus_pop || 0, // сумма без бонусов
     sum: item?.sum || 0, // итоговая сумма,
-    delayed_check: item?.paid || false,  // отложен ли чек
+    delayed_check: !item?.paidedCheck || false,  // оплачен ли чек (если да, то не отложен)
     changed_check: item?.changedCheck || false // редактированный ли чек
   };
 }

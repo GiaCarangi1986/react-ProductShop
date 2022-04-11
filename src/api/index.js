@@ -15,7 +15,7 @@ class Api extends BaseApi {
 
   async getCheckList({ page = 1, pageSize = 30, ...params }) {
     try {
-      const res = await this.get('/api/check_list/', {
+      const res = await this.get('/api/check/', {
         page,
         page_size: pageSize,
         ...params,
@@ -58,13 +58,14 @@ class Api extends BaseApi {
     }
   }
 
-  async setCheck(check = {}) {
+  async setCheck(check = {}) { // +
     try {
-      const res = await this.post('/api/create_check/', check)
+      const res = await this.post('/api/check/', check)
+      // res.id ?
       return res.data
     }
     catch (err) {
-      return '2222' // вернется id созданного чека
+      return '2222' // вернется созданный чек
     }
   }
 
@@ -78,9 +79,11 @@ class Api extends BaseApi {
     }
   }
 
-  async deleteCheck(id = '') {
+  async deleteCheck(id = '', isDelayCheck = false) { // +
     try {
-      const res = await this.delete(`/api/delete_check/${id}`)
+      const res = await this.delete(`/api/check/${id}`, {
+        isCheckDelay: isDelayCheck
+      })
       return res.data
     }
     catch (err) {
@@ -88,24 +91,26 @@ class Api extends BaseApi {
     }
   }
 
-  async updateCheck(parentId = '', id = '') {
+  async updateCheck(parentCheckId = '', id = '') { // +
     try {
-      const res = await this.put(`/api/update_check/${id}`, parentId)
+      const res = await this.patch(`/api/check/${id}`, {
+        parentCheckId
+      })
       return res.data
     }
     catch (err) {
-      return `updateCheck, в предыдущий чек с id=${id} в качестве id-родителя был указан созданный ${parentId}`
+      return `updateCheck, в предыдущий чек с id=${id} в качестве id-родителя был указан созданный ${parentCheckId}`
     }
   }
 
-  async paidCheck(id = '', data = '') {
+  async paidCheck(id = '', data = {}) { // +
     try {
-      const res = await this.put(`/api/paid_check/${id}`, data)
+      const res = await this.put(`/api/check/${id}`, data)
       return res.data
     }
     catch (err) {
       console.log('data', data)
-      return `paidCheck, чек с id=${id} был изменен данными`
+      return `paidCheck, чек с id=${id} был удален и созданный новый оплаченный`
     }
   }
 }

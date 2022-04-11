@@ -92,7 +92,7 @@ const CheckOperations = () => {
 
   const deleteCheck = () => {
     setLoading(true)
-    api.deleteCheck(activeLine)
+    api.deleteCheck(activeLine, delayCheck)
       .then((res) => {
         console.log('delete_check', res)
         setLoading(false)
