@@ -107,19 +107,10 @@ const CheckOperations = () => {
   const createCheck = (paid = true) => { // этот запрос и на редакт/отложен, ибо одинаково все
     setLoading(true)
     const check = generatCheck(discountCard, linesOfCheck, currentUser, paid, activeLine)
-    api.setCheck(check)
+    api.createCheck(check, activeLine ? addedChecks[addedChecks.length - 1].id : null)
       .then((id) => {
         console.log('createCheck', id)
         console.log('check', check)
-        if (activeLine) {
-          api.updateCheck(id, addedChecks[addedChecks.length - 1].id)
-            .then(res => {
-              console.log('update_check', res)
-            })
-            .catch(err => {
-              console.log('err', err)
-            })
-        }
         setLoading(false)
         redirectToCheckList()
       })

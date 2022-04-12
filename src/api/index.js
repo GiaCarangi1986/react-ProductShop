@@ -58,9 +58,12 @@ class Api extends BaseApi {
     }
   }
 
-  async setCheck(check = {}) { // +
+  async createCheck(check = {}, prevId) { // +
     try {
-      const res = await this.post('/api/check/', check)
+      const res = await this.post('/api/check/', {
+        ...check,
+        parentCheckId: prevId
+      })
       // res.id ?
       return res.data
     }
@@ -91,17 +94,17 @@ class Api extends BaseApi {
     }
   }
 
-  async updateCheck(parentCheckId = '', id = '') { // +
-    try {
-      const res = await this.patch(`/api/check/${id}`, {
-        parentCheckId
-      })
-      return res.data
-    }
-    catch (err) {
-      return `updateCheck, в предыдущий чек с id=${id} в качестве id-родителя был указан созданный ${parentCheckId}`
-    }
-  }
+  // async updateCheck(parentCheckId = '', id = '') { // +
+  //   try {
+  //     const res = await this.patch(`/api/check/${id}`, {
+  //       parentCheckId
+  //     })
+  //     return res.data
+  //   }
+  //   catch (err) {
+  //     return `updateCheck, в предыдущий чек с id=${id} в качестве id-родителя был указан созданный ${parentCheckId}`
+  //   }
+  // }
 
   async paidCheck(id = '', data = {}) { // +
     try {
