@@ -1,47 +1,14 @@
 import { useEffect, useState } from 'react';
 import dayjs from './day';
 
-export function getCookie(cname) {
-  const name = `${cname}=`;
-  const decodedCookie = decodeURIComponent(document.cookie);
-  const ca = decodedCookie.split(';');
-  for (let i = 0; i < ca.length; i += 1) {
-    let c = ca[i];
-    while (c.charAt(0) === ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) === 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return '';
-}
-
-export function setCookie(name, token, days) {
-  const date = new Date();
-  const value = token || '';
-  let expires = '';
-  if (days) {
-    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-    expires = `expires=${date.toUTCString()}`;
-  }
-  document.cookie = `${name}=${value};${expires};path=/`;
-  return true;
-}
-
-export function removeCookie(name) {
-  return setCookie(name, '', -999);
-}
-
 export function handingErrors(response) {
-  const value = response.data;
   let errorsObj = {}
-  if (response.status === 500) {
+  if (response.statusCode === 500) {
     errorsObj = { key: 'non_field_errors', val: 'Произошла ошибка на сервере. Попробуйте позже' }
   } else {
     errorsObj = {
-      key: Object.keys(value)[0] || 'non_field_errors',
-      val: value[Object.keys(value)[0]][0] || 'Произошла ошибка на сервере. Попробуйте позже'
+      key: 'non_field_errors',
+      val: response.message || 'Произошла ошибка на сервере. Попробуйте позже'
     }
   }
 

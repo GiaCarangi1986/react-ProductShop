@@ -486,15 +486,3 @@ export const HistoryCheck = (status = 2) => { // когда сервер буд�
     }
   }
 }
-
-export const LogoutUser = (status = 1) => {
-  if (status === 1) {
-    return {}
-  }
-  throw {
-    response: {
-      data: { non_field_errors: [ERROR_MESSAGE.uncorrect_logout] },
-      status: 404,
-    }
-  }
-}

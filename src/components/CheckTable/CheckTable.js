@@ -69,7 +69,7 @@ const CheckTable = ({
   const editCheck = (e) => {
     dispatch('page/toggle', {
       headers: {
-        main: 'Редактирование чека',
+        main: e.target.name.delayed_check ? 'Оплата отложенного чека' : 'Редактирование чека',
         left: 'История изменений',
         right: 'Чек-лист',
         type: PAGES_TYPES.editCheck,
