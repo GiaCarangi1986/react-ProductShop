@@ -38,7 +38,7 @@ export const CheckList = (status = 2) => {
           date_time: new Date(),
           kassir: 'Курочкина Е. С.',
           sum: 1000,
-          bonus_add: 10,
+          // bonus_add: 10,
           bonus_pop: 2,
           paidedCheck: true, // оплачен ли чек
           changedCheck: true, // был ли чек редактирован

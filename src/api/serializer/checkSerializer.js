@@ -11,9 +11,7 @@ const checkSerializer = (res) => {
       count: res.count,
       results: checkList,
       next: res.next,
-      previous: res.previous,
       cols_names: NAMES,
-      count_all: res.count_all || null,
     }
     return checks;
   }

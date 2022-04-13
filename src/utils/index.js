@@ -98,7 +98,7 @@ export function processingResult(item) {
     id: item?.id || '', // id чека
     date_time: dateFotmattedForTable(item?.date_time) || '', // дата и время совершения покупки
     kassir: item?.kassir || '', // ФИО кассир
-    bonus_add: item?.bonus_add || 0, // сколько начислено бонусов
+    // bonus_add: item?.bonus_add || 0, // сколько начислено бонусов
     bonus_pop: item?.bonus_pop || 0, // сколько снято бонусов
     product_count: item?.product_count || 0, // кол-во продуктов в чеке
     sum_without_bonus: item?.sum + item?.bonus_pop || 0, // сумма без бонусов

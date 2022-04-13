@@ -1,6 +1,6 @@
 import BaseApi from '@garpix/base-api'
 import { LoginUser, CheckList, LogoutUser, ProductList, CardList, HistoryCheck } from './mochData'
-import { checkSerializer } from './serializer'
+import { checkSerializer, checkParamsSerializer } from './serializer'
 
 class Api extends BaseApi {
   async loginUser(params) {
@@ -13,17 +13,18 @@ class Api extends BaseApi {
     }
   }
 
-  async getCheckList({ page = 1, pageSize = 30, ...params }) {
+  async getCheckList({ page = 1, pageSize = 30, ...params }) { // +
+    const serParam = checkParamsSerializer(params)
     try {
       const res = await this.get('/api/check/', {
         page,
-        page_size: pageSize,
-        ...params,
+        pageSize,
+        ...serParam,
       })
       return checkSerializer(res.data)
     }
     catch (err) {
-      console.log('params', params)
+      console.log('serParam', serParam)
       return checkSerializer(CheckList(1)) // 1 - норм, 2 - ошибка
     }
   }
@@ -93,18 +94,6 @@ class Api extends BaseApi {
       return id
     }
   }
-
-  // async updateCheck(parentCheckId = '', id = '') { // +
-  //   try {
-  //     const res = await this.patch(`/api/check/${id}`, {
-  //       parentCheckId
-  //     })
-  //     return res.data
-  //   }
-  //   catch (err) {
-  //     return `updateCheck, в предыдущий чек с id=${id} в качестве id-родителя был указан созданный ${parentCheckId}`
-  //   }
-  // }
 
   async paidCheck(id = '', data = {}) { // +
     try {

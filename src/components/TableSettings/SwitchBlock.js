@@ -5,9 +5,8 @@ import style from './table-settings.module.scss'
 
 const SwitchBlock = ({ settingsDisabled = false, setFilters = () => { }, filters = {} }) => {
   const [checked, setChecked] = useState({
-    paided_show: filters?.paided_show || true, // показывать оплаченные чеки
-    delayed_show: filters?.delayed_show || true, // был ли чек редактирован
-    changed_show: filters?.changed_show || true // был ли чек отложен
+    delayed_show: filters?.delayed_show || false, // показать только неоплаченные (отложенные) чеки
+    changed_show: filters?.changed_show || false // показать только редактированные чеки
   })
 
   const handleChangeSwitch = (e) => {
@@ -24,14 +23,6 @@ const SwitchBlock = ({ settingsDisabled = false, setFilters = () => { }, filters
 
   return (
     <div className={style['table-settings-filter-check']}>
-      <Switch
-        text='Оплаченные чеки'
-        value={String(+checked.paided_show)}
-        checked={checked.paided_show}
-        name={FORM_FIELDS.paided_show}
-        onGx-change={handleChangeSwitch}
-        disabled={settingsDisabled}
-      />
       <Switch
         text='Отложенные чеки'
         value={String(+checked.delayed_show)}

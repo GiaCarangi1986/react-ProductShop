@@ -413,7 +413,7 @@ export const NAMES = { // примерная структура столбцов
   id: 'ID (штрих-код)',
   date_time: 'Дата и время',
   kassir: 'ФИО кассира',
-  bonus_add: 'Кол-во начисленных бонусов',
+  // bonus_add: 'Кол-во начисленных бонусов',
   bonus_pop: 'Кол-во снятых бонусов',
   sum_without_bonus: 'Сумма без бонусов',
   sum: 'Итоговая сумма',
@@ -423,7 +423,7 @@ export const WIDTH_COL = {
   id: 250,
   date_time: 180,
   kassir: 300,
-  bonus_add: 150,
+  // bonus_add: 150,
   bonus_pop: 150,
   sum_without_bonus: 150,
   sum: 150,
@@ -525,7 +525,6 @@ export const FORM_FIELDS = {
   card: 'card',
   bonus: 'bonus',
   old_product: 'old_product',
-  paided_show: 'paided_show',
   delayed_show: 'delayed_show',
   changed_show: 'changed_show'
 }

@@ -26,9 +26,8 @@ const CheckOptions = () => {
         api={api.getCheckList}
         initFilter={{
           page_size: 50,
-          paided_show: true, // показывать оплаченные чеки
-          changed_show: true, // был ли чек редактирован
-          delayed_show: true // был ли чек отложен
+          changed_show: false, // показать только редактированные чеки
+          delayed_show: false // показать только неоплаченные чеки
         }}
       >
         {(props) => {
