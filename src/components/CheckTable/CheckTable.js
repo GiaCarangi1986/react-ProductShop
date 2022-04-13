@@ -136,6 +136,7 @@ const CheckTable = ({
         displayLoadBtn={count > 0 && results.length !== count && eventType !== TABLE_EVENT_TYPES.allLoaded}
         filters={filters}
         setFilters={setFilters}
+        count={count}
       />
       <div className={overlayClasses}>
         <Table

@@ -13,12 +13,11 @@ class Api extends BaseApi {
     }
   }
 
-  async getCheckList({ page = 1, pageSize = 30, ...params }) { // +
+  async getCheckList({ page = 1, ...params }) { // +
     const serParam = checkParamsSerializer(params)
     try {
       const res = await this.get('/api/check/', {
         page,
-        pageSize,
         ...serParam,
       })
       return checkSerializer(res.data)

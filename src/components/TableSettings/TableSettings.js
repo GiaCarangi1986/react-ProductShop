@@ -5,7 +5,7 @@ import { useStoreon } from 'storeon/react'
 import { Button } from '../../views'
 import DateSearch from './DateSearch'
 import SwitchBlock from './SwitchBlock';
-import { PATHS, PAGES_TYPES } from '../../const';
+import { PATHS, PAGES_TYPES, TABLE_EVENT_TYPES } from '../../const';
 import style from './table-settings.module.scss'
 
 const TableSettings = ({
@@ -14,7 +14,8 @@ const TableSettings = ({
   setEventType = () => { },
   displayLoadBtn = false,
   filters = {},
-  setFilters = () => { }
+  setFilters = () => { },
+  count = 0
 }) => {
   const { dispatch } = useStoreon()
   const navigate = useNavigate();
@@ -24,6 +25,14 @@ const TableSettings = ({
       headers: { main: 'Добавление чека', left: 'Составляющие чека', right: 'Чек-лист', btnText: 'Перейти к оплате', type: PAGES_TYPES.addCheck, },
     })
     navigate(PATHS.check_operations.path)
+  }
+
+  const showAll = () => {
+    setEventType(TABLE_EVENT_TYPES.allLoaded)
+
+    const oldFilters = { ...filters }
+    oldFilters.pageSize = count
+    setFilters(oldFilters)
   }
 
   return (
@@ -45,9 +54,7 @@ const TableSettings = ({
           {displayLoadBtn && !settingsDisabled && (
             <Button
               type='button'
-              onClick={() => {
-                // setEventType(TABLE_EVENT_TYPES.allLoaded)
-              }}
+              onClick={showAll}
               outline
               className='btn_width-100'
             >
