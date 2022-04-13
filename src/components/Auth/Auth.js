@@ -5,7 +5,7 @@ import { useStoreon } from 'storeon/react';
 import { Button, Fieldset, Form, Input, Logo, ErrorText, PreloaderPage } from '../../views';
 import { handingErrors, deleteSpaces } from '../../utils'
 import * as schema from '../../schema';
-import { PATHS } from '../../const';
+import { PATHS, FORM_FIELDS } from '../../const';
 import api from '../../api';
 
 import style from './auth.module.scss';
@@ -21,8 +21,8 @@ const Auth = () => {
         setSubmitting(false);
         resetForm();
         dispatch('user/save', {
-          first_name: data.first_name || '',
-          last_name: data.last_name || '',
+          first_name: data.firstName || '',
+          last_name: data.lastName || '',
           ...data
         });
         navigate(PATHS.check_list.path);
@@ -79,7 +79,7 @@ const Auth = () => {
               type='email'
               nameOfStyle='input-label'
               value={formik.values.username}
-              name='username'
+              name={FORM_FIELDS.username}
               onGx-input={formik.handleChange}
               onGx-blur={handleBlur}
             />
@@ -90,7 +90,7 @@ const Auth = () => {
               type='password'
               nameOfStyle='input-label'
               value={formik.values.password}
-              name='password'
+              name={FORM_FIELDS.password}
               onGx-input={formik.handleChange}
               onGx-blur={handleBlur}
             />

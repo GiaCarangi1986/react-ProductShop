@@ -526,7 +526,9 @@ export const FORM_FIELDS = {
   bonus: 'bonus',
   old_product: 'old_product',
   delayed_show: 'delayed_show',
-  changed_show: 'changed_show'
+  changed_show: 'changed_show',
+  password: 'password',
+  username: 'username'
 }
 
 export const UNITS = ['шт', 'кг']
