@@ -28,8 +28,11 @@ const Auth = () => {
         navigate(PATHS.check_list.path);
       })
       .catch((err) => {
-        const errResponse = handingErrors(err);
-        setFieldError([errResponse.key], errResponse.val)
+        const { response = null } = err
+        if (response) {
+          const errResponse = handingErrors(response);
+          setFieldError([errResponse.key], errResponse.val)
+        }
         setDisabledBtn(false)
         setSubmitting(false)
       })

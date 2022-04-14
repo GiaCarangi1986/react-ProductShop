@@ -2,13 +2,14 @@ import { useEffect, useState } from 'react';
 import dayjs from './day';
 
 export function handingErrors(response) {
+  const value = response.data;
   let errorsObj = {}
-  if (response.statusCode === 500) {
+  if (value.statusCode === 500) {
     errorsObj = { key: 'non_field_errors', val: 'Произошла ошибка на сервере. Попробуйте позже' }
   } else {
     errorsObj = {
       key: 'non_field_errors',
-      val: response.message || 'Произошла ошибка на сервере. Попробуйте позже'
+      val: value.message || 'Произошла ошибка на сервере. Попробуйте позже'
     }
   }
 

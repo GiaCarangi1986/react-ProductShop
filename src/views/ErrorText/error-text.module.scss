@@ -1,41 +1,41 @@
 .error-text {
-    color: var(--ps-color-red);
-    font-size: 10px;
+  color: var(--ps-color-red);
+  font-size: 10px;
 }
 .error-text-absolute {
-    position: absolute;
-    bottom: -32px;
-    left: 0;
-    margin-bottom: 20px;
+  position: absolute;
+  bottom: -32px;
+  left: 3px;
+  margin-bottom: 20px;
 }
 
 .error-auth {
-    width: 100%;
-    bottom: -13px;
+  width: 100%;
+  bottom: -13px;
 }
 
 .error-addOrUpdateCheck {
-    bottom: 0;
-    top: 98%;
-    width: 130%;
+  bottom: 0;
+  top: 98%;
+  width: 130%;
 }
-.error-settingsForTable{
-    bottom: 22px;
-    right: 0;
-    left: auto;
-    font-size: 11px;
+.error-settingsForTable {
+  bottom: 22px;
+  right: 0;
+  left: auto;
+  font-size: 11px;
 }
-.error-itemsTableColumn{
-    right: 11px;
-    left: auto;
-    font-size: 11px;
+.error-itemsTableColumn {
+  right: 11px;
+  left: auto;
+  font-size: 11px;
 
-    margin-bottom: 0;
-    bottom: 39.5px;
+  margin-bottom: 0;
+  bottom: 39.5px;
 }
 
 .error-form {
-    font-size: 14px;
-    position: absolute;
-    top: 10px;
+  font-size: 14px;
+  position: absolute;
+  top: 10px;
 }

@@ -4,19 +4,20 @@ import { checkSerializer, checkParamsSerializer } from './serializer'
 
 class Api extends BaseApi {
   async loginUser(params) {
-    try {
-      const res = await this.post('/api/login/', params)
-      return res.data
-    }
-    catch (err) {
-      return LoginUser(params)
-    }
+    // try {
+    const res = await this.post('/login/', params)
+    // console.log('res.data', res.data)
+    return res
+    // }
+    // catch (err) {
+    //   return err
+    // }
   }
 
   async getCheckList({ page = 1, ...params }) {
     const serParam = checkParamsSerializer(params)
     try {
-      const res = await this.get('/api/check/', {
+      const res = await this.get('/check/', {
         page,
         ...serParam,
       })
@@ -30,7 +31,7 @@ class Api extends BaseApi {
 
   async getProductListForCreatingCheck() {
     try {
-      const res = await this.get('/api/product/')
+      const res = await this.get('/product/')
       return res.data
     }
     catch (err) {
@@ -40,7 +41,7 @@ class Api extends BaseApi {
 
   async getCardListForCreatingCheck() {
     try {
-      const res = await this.get('/api/bonus_card/')
+      const res = await this.get('/bonus_card/')
       return res.data
     }
     catch (err) {
@@ -50,7 +51,7 @@ class Api extends BaseApi {
 
   async createCheck(check = {}, prevId) {
     try {
-      const res = await this.post('/api/check/', {
+      const res = await this.post('/check/', {
         ...check,
         parentCheckId: prevId
       })
@@ -64,7 +65,7 @@ class Api extends BaseApi {
 
   async getHistoryCheck(id = '') {
     try {
-      const res = await this.post('/api/history_check/', id)
+      const res = await this.post('/history_check/', id)
       return res.data
     }
     catch (err) {
@@ -74,7 +75,7 @@ class Api extends BaseApi {
 
   async deleteCheck(id = '', isDelayCheck = false) {
     try {
-      const res = await this.delete(`/api/check/${id}`, {
+      const res = await this.delete(`/check/${id}`, {
         isCheckDelay: isDelayCheck
       })
       return res.data
@@ -86,7 +87,7 @@ class Api extends BaseApi {
 
   async paidCheck(id = '', data = {}) {
     try {
-      const res = await this.put(`/api/check/${id}`, data)
+      const res = await this.put(`/check/${id}`, data)
       return res.data
     }
     catch (err) {
@@ -96,6 +97,6 @@ class Api extends BaseApi {
   }
 }
 
-export const MAIN_URL = 'http://localhost:8010'
+export const MAIN_URL = 'http://localhost:4000'
 const api = new Api(`${MAIN_URL}`)
 export default api
