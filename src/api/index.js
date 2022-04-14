@@ -1,17 +1,12 @@
 import BaseApi from '@garpix/base-api'
-import { LoginUser, CheckList, ProductList, CardList, HistoryCheck } from './mochData'
-import { checkSerializer, checkParamsSerializer } from './serializer'
+import { CheckList, ProductList, CardList, HistoryCheck } from './mochData'
+import { checkSerializer, checkParamsSerializer, authSerializer } from './serializer'
 
 class Api extends BaseApi {
   async loginUser(params) {
-    // try {
-    const res = await this.post('/login/', params)
-    // console.log('res.data', res.data)
-    return res
-    // }
-    // catch (err) {
-    //   return err
-    // }
+    const serParams = authSerializer(params)
+    const res = await this.post('/login/', serParams)
+    return res.data
   }
 
   async getCheckList({ page = 1, ...params }) {
