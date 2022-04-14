@@ -17,7 +17,7 @@ const Select = ({ func = () => { }, type, ...props }) => {
           switch (type) {
             case SELECT_TYPES.product:
               return ({
-                label: `${elem.id} (${elem.title}, ${elem.category})`,
+                label: `${elem.id} (${elem.title}, ${elem.manufacturer})`,
                 value: elem.id,
                 unit: elem.unit,
                 name: elem.title,

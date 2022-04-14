@@ -13,7 +13,7 @@ class Api extends BaseApi {
     }
   }
 
-  async getCheckList({ page = 1, ...params }) { // +
+  async getCheckList({ page = 1, ...params }) {
     const serParam = checkParamsSerializer(params)
     try {
       const res = await this.get('/api/check/', {
@@ -30,7 +30,7 @@ class Api extends BaseApi {
 
   async getProductListForCreatingCheck() {
     try {
-      const res = await this.get('/api/product_list/')
+      const res = await this.get('/api/product/')
       return res.data
     }
     catch (err) {
@@ -40,7 +40,7 @@ class Api extends BaseApi {
 
   async getCardListForCreatingCheck() {
     try {
-      const res = await this.get('/api/card_list/')
+      const res = await this.get('/api/bonus_card/')
       return res.data
     }
     catch (err) {
@@ -48,7 +48,7 @@ class Api extends BaseApi {
     }
   }
 
-  async createCheck(check = {}, prevId) { // +
+  async createCheck(check = {}, prevId) {
     try {
       const res = await this.post('/api/check/', {
         ...check,
@@ -72,7 +72,7 @@ class Api extends BaseApi {
     }
   }
 
-  async deleteCheck(id = '', isDelayCheck = false) { // +
+  async deleteCheck(id = '', isDelayCheck = false) {
     try {
       const res = await this.delete(`/api/check/${id}`, {
         isCheckDelay: isDelayCheck
@@ -84,7 +84,7 @@ class Api extends BaseApi {
     }
   }
 
-  async paidCheck(id = '', data = {}) { // +
+  async paidCheck(id = '', data = {}) {
     try {
       const res = await this.put(`/api/check/${id}`, data)
       return res.data

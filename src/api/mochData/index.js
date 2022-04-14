@@ -194,7 +194,7 @@ export const ProductList = (status = 2) => {
         {
           id: 1,
           title: 'Чипсы',
-          category: 'Снеки',
+          manufacturer: 'Снеки',
           count: 100,
           price: 90,
           unit: 'шт',
@@ -204,7 +204,7 @@ export const ProductList = (status = 2) => {
         {
           id: 3,
           title: 'Мороженое',
-          category: 'Замороженные продукты',
+          manufacturer: 'Замороженные продукты',
           count: 100,
           price: 19,
           unit: 'шт',
@@ -214,7 +214,7 @@ export const ProductList = (status = 2) => {
         {
           id: 4,
           title: 'Морковь',
-          category: 'Овощи',
+          manufacturer: 'Овощи',
           count: 100,
           price: 130,
           unit: 'кг',
@@ -224,7 +224,7 @@ export const ProductList = (status = 2) => {
         {
           id: 5,
           title: 'Морковь',
-          category: 'Овощи',
+          manufacturer: 'Овощи',
           count: 100,
           price: 130,
           unit: 'кг',
@@ -234,7 +234,7 @@ export const ProductList = (status = 2) => {
         {
           id: 6,
           title: 'Морковь',
-          category: 'Овощи',
+          manufacturer: 'Овощи',
           count: 100,
           price: 130,
           unit: 'кг',
@@ -244,7 +244,7 @@ export const ProductList = (status = 2) => {
         {
           id: 7,
           title: 'Морковь',
-          category: 'Овощи',
+          manufacturer: 'Овощи',
           count: 100,
           price: 130,
           unit: 'кг',
@@ -254,7 +254,7 @@ export const ProductList = (status = 2) => {
         {
           id: 8,
           title: 'Морковь',
-          category: 'Овощи',
+          manufacturer: 'Овощи',
           count: 100,
           price: 130,
           unit: 'кг',
@@ -264,7 +264,7 @@ export const ProductList = (status = 2) => {
         {
           id: 9,
           title: 'Морковь',
-          category: 'Овощи',
+          manufacturer: 'Овощи',
           count: 100,
           price: 130,
           unit: 'кг',
@@ -274,7 +274,7 @@ export const ProductList = (status = 2) => {
         {
           id: 10,
           title: 'Морковь',
-          category: 'Овощи',
+          manufacturer: 'Овощи',
           count: 100,
           price: 130,
           unit: 'кг',
