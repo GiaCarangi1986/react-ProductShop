@@ -1,30 +1,30 @@
 import BaseApi from '@garpix/base-api'
 import { CheckList, ProductList, CardList, HistoryCheck } from './mochData'
-import { checkSerializer, checkParamsSerializer, authSerializer } from './serializer'
+import { checkGetSerializer, checkParamsSerializer, authSendSerializer, authGetSerializer } from './serializer'
 
 class Api extends BaseApi {
-  async loginUser(params) {
-    const serParams = authSerializer(params)
+  constructor(url) {
+    super()
+    this.url = url
+  }
+
+  loginUser = async (params) => {
+    const serParams = authSendSerializer(params)
     const res = await this.post('/login/', serParams)
-    return res.data
+    const serRes = authGetSerializer(res.data)
+    return serRes
   }
 
-  async getCheckList({ page = 1, ...params }) {
+  getCheckList = async ({ page = 1, ...params }) => {
     const serParam = checkParamsSerializer(params)
-    try {
-      const res = await this.get('/check/', {
-        page,
-        ...serParam,
-      })
-      return checkSerializer(res.data)
-    }
-    catch (err) {
-      console.log('serParam', serParam)
-      return checkSerializer(CheckList(1)) // 1 - норм, 2 - ошибка
-    }
+    const res = await this.get('/check/', {
+      page,
+      ...serParam,
+    })
+    return checkGetSerializer(res.data)
   }
 
-  async getProductListForCreatingCheck() {
+  getProductListForCreatingCheck = async () => {
     try {
       const res = await this.get('/product/')
       return res.data
@@ -34,7 +34,7 @@ class Api extends BaseApi {
     }
   }
 
-  async getCardListForCreatingCheck() {
+  getCardListForCreatingCheck = async () => {
     try {
       const res = await this.get('/bonus_card/')
       return res.data
@@ -44,7 +44,7 @@ class Api extends BaseApi {
     }
   }
 
-  async createCheck(check = {}, prevId) {
+  createCheck = async (check = {}, prevId) => {
     try {
       const res = await this.post('/check/', {
         ...check,
@@ -58,7 +58,7 @@ class Api extends BaseApi {
     }
   }
 
-  async getHistoryCheck(id = '') {
+  getHistoryCheck = async (id = '') => {
     try {
       const res = await this.post('/history_check/', id)
       return res.data
@@ -68,7 +68,7 @@ class Api extends BaseApi {
     }
   }
 
-  async deleteCheck(id = '', isDelayCheck = false) {
+  deleteCheck = async (id = '', isDelayCheck = false) => {
     try {
       const res = await this.delete(`/check/${id}`, {
         isCheckDelay: isDelayCheck
@@ -80,7 +80,7 @@ class Api extends BaseApi {
     }
   }
 
-  async paidCheck(id = '', data = {}) {
+  paidCheck = async (id = '', data = {}) => {
     try {
       const res = await this.put(`/check/${id}`, data)
       return res.data

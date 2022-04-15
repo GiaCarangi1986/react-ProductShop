@@ -1,9 +1,9 @@
-import checkSerializer from './checkSerializer'
-import checkParamsSerializer from './checkParamsSerializer'
-import authSerializer from './authSerializer'
+import { checkGetSerializer, checkParamsSerializer } from './checkSerializer'
+import { authSendSerializer, authGetSerializer } from './authSerializer'
 
 export {
-  checkSerializer,
+  checkGetSerializer,
   checkParamsSerializer,
-  authSerializer
+  authSendSerializer,
+  authGetSerializer
 }
