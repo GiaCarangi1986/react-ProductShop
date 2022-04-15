@@ -1,5 +1,5 @@
 const authSerializer = (params = {}) => ({
-  login: params.username, // имя (логин)
+  login: params.phone, // имя (логин)
   password: params.password, // пароль
 })
 

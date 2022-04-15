@@ -16,6 +16,7 @@ import Select from './Select'
 import TextArea from './TextArea'
 import Menu from './Menu';
 import Switch from './Switch'
+import InputPhone from './InputPhone'
 
 export {
   Button,
@@ -36,5 +37,6 @@ export {
   Select,
   TextArea,
   Menu,
-  Switch
+  Switch,
+  InputPhone
 }

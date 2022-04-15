@@ -59,11 +59,10 @@ const maxCount = Yup.mixed()
 
 const signUp = () => {
   return Yup.object().shape({
-    username: Yup.string()
+    phone: Yup.string()
       .nullable()
       .required(errorsMessenge.requiredField)
-      .min(4, errorsMessenge.shortString)
-      .max(50, errorsMessenge.longString),
+      .min(11, errorsMessenge.uncorrectNumber),
     password: Yup.string()
       .nullable()
       .required(errorsMessenge.requiredField)

@@ -35,6 +35,8 @@
 .input::part(input) {
   padding: 0 var(--gx-input-spacing-medium);
   margin: 0;
+  width: 100%;
+  border: 2px solid var(--ps-border-color-default);
 }
 
 .input::placeholder::part(input) {

@@ -6,8 +6,7 @@ import style from './input.module.scss';
 const Input = ({
   children = null,
   nameOfStyle = null,
-  label='',
-  value=null,
+  value = null,
   clearable,
   ...props
 }) => {
@@ -15,7 +14,7 @@ const Input = ({
   const classes = classNames({
     [style.input]: true,
     [style[`${nameOfStyle}`]]: nameOfStyle,
-    [style['input-value']]: value && value !== ''
+    [style['input-value']]: value
   })
 
   const inputClearable = clearable && value && value !== '' || null;
@@ -25,10 +24,9 @@ const Input = ({
       value={value}
       className={classes}
       clearable={inputClearable}
-      label={label}
       {...props}>
-        {children}
-      </GxInput>
+      {children}
+    </GxInput>
   );
 }
 

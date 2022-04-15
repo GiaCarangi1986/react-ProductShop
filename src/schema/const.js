@@ -18,6 +18,7 @@ const priceZero = 'Цена должна быть больше 0'
 const correctDates = 'Дата окончания не может быть больше даты начала'
 const correctBonus = 'Превышено возможное кол-во бонусов для списания'
 const maxCount = 'Превышено максимальное кол-во данного продукта'
+const uncorrectNumber = 'Неверный формат телефона'
 
 export {
   login,
@@ -37,5 +38,6 @@ export {
   priceZero,
   correctDates,
   correctBonus,
-  maxCount
+  maxCount,
+  uncorrectNumber
 }

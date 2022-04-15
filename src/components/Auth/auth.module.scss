@@ -23,21 +23,23 @@
 .auth-form {
   width: 100%;
   margin-top: 40px;
-} 
+}
 
 .auth-input {
   margin-bottom: 20px;
 }
 
-.auth gx-input {
+.auth gx-input,
+.auth gx-phone-input {
   margin-bottom: 20px;
 }
 
-.auth gx-input::part(form-control) {
+.auth gx-input::part(form-control),
+.auth gx-phone-input::part(form-control) {
   width: 320px;
 }
 
-.btn_wrapper{
+.btn_wrapper {
   display: flex;
   justify-content: center;
 }

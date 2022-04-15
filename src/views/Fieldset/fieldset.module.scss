@@ -1,18 +1,30 @@
 .fieldset {
-    border: 0 none;
-    padding: 0;
-    position: relative;
+  border: 0 none;
+  padding: 0;
+  position: relative;
 }
 
 .fieldset-error gx-input,
 .fieldset-error {
-    --gx-input-border-color: var(--ps-color-red);
-    --gx-input-border-color-hover: var(--ps-color-red-hover);
-    --gx-input-border-color-focus: var(--ps-color-red-hover);
+  --gx-input-border-color: var(--ps-color-red);
+  --gx-input-border-color-hover: var(--ps-color-red-hover);
+  --gx-input-border-color-focus: var(--ps-color-red-hover);
 }
 
-.pressed_bottom{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+.fieldset-error gx-phone-input {
+  &::part(input) {
+    border-color: var(--ps-color-red);
+  }
+  &:hover,
+  &:focus {
+    &::part(input) {
+      border-color: var(--ps-color-red-hover);
+    }
+  }
+}
+
+.pressed_bottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }

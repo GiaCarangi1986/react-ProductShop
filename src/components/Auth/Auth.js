@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router';
 import { useStoreon } from 'storeon/react';
-import { Button, Fieldset, Form, Input, Logo, ErrorText, PreloaderPage } from '../../views';
+import { Button, Fieldset, Form, Input, Logo, ErrorText, PreloaderPage, InputPhone } from '../../views';
 import { handingErrors, deleteSpaces } from '../../utils'
 import * as schema from '../../schema';
 import { PATHS, FORM_FIELDS } from '../../const';
@@ -42,11 +42,16 @@ const Auth = () => {
     enableReinitialize: true,
     validationSchema: schema.signUp,
     initialValues: {
-      username: '',
+      phone: '',
       password: '',
     },
     onSubmit
   })
+
+  const handleChangePhone = (e) => {
+    const { name } = e.target;
+    formik.setFieldValue(name, e.detail.value);
+  }
 
   const handleBlur = e => {
     const { name } = e.target;
@@ -76,15 +81,18 @@ const Auth = () => {
           onGx-submit={formik.handleSubmit}
           novalidate
         >
-          <Fieldset error={formik.errors.username} touched={formik.touched.username} errorClass='auth'>
-            <Input
-              label='Логин'
-              type='email'
+          <Fieldset error={formik.errors.phone} touched={formik.touched.phone} errorClass='auth'>
+            <InputPhone
+              label='Телефон'
+              country='ru'
+              onlyCountries={['ru']}
+              name={FORM_FIELDS.phone}
+              type='text'
               nameOfStyle='input-label'
-              value={formik.values.username}
-              name={FORM_FIELDS.username}
               onGx-input={formik.handleChange}
-              onGx-blur={handleBlur}
+              onGx-change={handleChangePhone}
+              value={formik.values.phone}
+              onBlur={handleBlur}
             />
           </Fieldset>
           <Fieldset error={formik.errors.password} touched={formik.touched.password} errorClass='auth'>

@@ -528,7 +528,7 @@ export const FORM_FIELDS = {
   delayed_show: 'delayed_show',
   changed_show: 'changed_show',
   password: 'password',
-  username: 'username'
+  phone: 'phone'
 }
 
 export const UNITS = ['шт', 'кг']
