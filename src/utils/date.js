@@ -10,7 +10,17 @@ const formatDateToInput = () => {
   return dayjs(new Date()).format('YYYY-MM-DDTHH:mm')
 }
 
+const formatDateToBack = (dateStr) => {
+  if (dateStr) {
+    return dayjs(dateStr).format('YYYY-MM-DDTHH:mm:ss')
+  }
+  else {
+    return dayjs(new Date()).format('YYYY-MM-DDTHH:mm:ss')
+  }
+}
+
 export {
   formatDateToInput,
-  cleanTheDate
+  cleanTheDate,
+  formatDateToBack
 }

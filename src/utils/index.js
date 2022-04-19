@@ -64,13 +64,11 @@ function dateFotmattedForModal(date) {
 export function processingResult(item) {
   return {
     id: item?.id || '', // id чека
-    date_time: dateFotmattedForTable(item?.date_time) || '', // дата и время совершения покупки
+    date_time: dateFotmattedForTable(item?.dateTime || new Date()), // дата и время совершения покупки
     kassir: item?.kassir || '', // ФИО кассир
-    // bonus_add: item?.bonus_add || 0, // сколько начислено бонусов
-    bonus_pop: item?.bonus_pop || 0, // сколько снято бонусов
-    product_count: item?.product_count || 0, // кол-во продуктов в чеке
-    sum_without_bonus: item?.sum + item?.bonus_pop || 0, // сумма без бонусов
-    sum: item?.sum || 0, // итоговая сумма,
+    bonus_pop: item?.bonusPop || 0, // сколько снято бонусов
+    sum_without_bonus: item?.totalSum || 0, // сумма без бонусов
+    sum: item?.totalSum - item?.bonusPop || 0, // итоговая сумма (после применения бонусов),
     delayed_check: !item?.paidedCheck || false,  // оплачен ли чек (если да, то не отложен)
     changed_check: item?.changedCheck || false // редактированный ли чек
   };

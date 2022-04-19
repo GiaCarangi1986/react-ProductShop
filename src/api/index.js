@@ -8,20 +8,25 @@ class Api extends BaseApi {
     this.url = url
   }
 
-  loginUser = async (params) => {
+  loginUser = async (params) => { // +
     const serParams = authSendSerializer(params)
     const res = await this.post('/login/', serParams)
     const serRes = authGetSerializer(res.data)
     return serRes
   }
 
-  getCheckList = async ({ page = 1, ...params }) => {
-    const serParam = checkParamsSerializer(params)
-    const res = await this.get('/check/', {
-      page,
-      ...serParam,
-    })
-    return checkGetSerializer(res.data)
+  getCheckList = async ({ page = 1, ...params }) => { // +-
+    try {
+      const serParam = checkParamsSerializer(params)
+      const res = await this.get('/check/', {
+        page,
+        ...serParam,
+      })
+      return checkGetSerializer(res.data)
+    } catch (error) {
+      return []
+    }
+
   }
 
   getProductListForCreatingCheck = async () => {
