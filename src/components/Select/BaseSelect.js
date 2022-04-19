@@ -38,7 +38,7 @@ const baseCustomStyles = (error = false, otherStyle = {}) => {
     option: (base, { isSelected }) => ({
       ...base,
       color: '#002C44',
-      wordBreak: 'break-all',
+      wordBreak: 'word-break',
       backgroundColor: isSelected ? '#EDF8F8' : 'white',
       '&:hover': {
         color: isSelected ? '#002C44' : '#009BA4',

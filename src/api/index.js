@@ -1,5 +1,5 @@
 import BaseApi from '@garpix/base-api'
-import { CheckList, ProductList, CardList, HistoryCheck } from './mochData'
+import { ProductList, CardList, HistoryCheck } from './mochData'
 import { checkGetSerializer, checkParamsSerializer, authSendSerializer, authGetSerializer } from './serializer'
 
 class Api extends BaseApi {
@@ -15,7 +15,7 @@ class Api extends BaseApi {
     return serRes
   }
 
-  getCheckList = async ({ page = 1, ...params }) => { // +-
+  getCheckList = async ({ page = 1, ...params }) => { // +
     try {
       const serParam = checkParamsSerializer(params)
       const res = await this.get('/check/', {

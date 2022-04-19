@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useStoreon } from 'storeon/react'
 import BaseSelect from './BaseSelect'
 import { SELECT_TYPES } from '../../const'
-import { e } from '@garpix/fetcher/dataStates-3fdb48f5'
+import { productGetSerializer } from '../../api/serializer'
 
 const Select = ({ func = () => { }, type, ...props }) => {
   const { dispatch } = useStoreon()
@@ -16,15 +16,16 @@ const Select = ({ func = () => { }, type, ...props }) => {
         const newRes = res.map(elem => {
           switch (type) {
             case SELECT_TYPES.product:
+              const elemSer = productGetSerializer(elem)
               return ({
-                label: `${elem.id} (${elem.title}, ${elem.manufacturer})`,
-                value: elem.id,
-                unit: elem.unit,
-                name: elem.title,
-                price: elem.price,
-                sale: elem.sale,
-                count: elem.count,
-                maybeOld: elem.maybeOld
+                label: `${elemSer.id} (${elemSer.title}${elemSer.manufacturer && ', '}${elemSer.manufacturer})`,
+                value: elemSer.id,
+                unit: elemSer.unit,
+                name: elemSer.title,
+                price: elemSer.price,
+                sale: elemSer.sale,
+                count: elemSer.count,
+                maybeOld: elemSer.maybeOld
               })
 
             case SELECT_TYPES.card:
