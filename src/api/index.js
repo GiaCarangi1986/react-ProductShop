@@ -1,5 +1,5 @@
 import BaseApi from '@garpix/base-api'
-import { ProductList, CardList, HistoryCheck } from './mochData'
+import { CardList, HistoryCheck } from './mochData'
 import { checkGetSerializer, checkParamsSerializer, authSendSerializer, authGetSerializer } from './serializer'
 
 class Api extends BaseApi {
@@ -29,19 +29,14 @@ class Api extends BaseApi {
 
   }
 
-  getProductListForCreatingCheck = async () => {
-    try {
-      const res = await this.get('/product/')
-      return res.data
-    }
-    catch (err) {
-      return ProductList(1).results // 1 - норм, 2 - ошибка
-    }
+  getProductListForCreatingCheck = async () => { // +
+    const res = await this.get('/product/')
+    return res.data
   }
 
-  getCardListForCreatingCheck = async () => {
+  getCardListForCreatingCheck = async (value) => {
     try {
-      const res = await this.get('/bonus_card/')
+      const res = await this.post('/bonus_card/', { search: value })
       return res.data
     }
     catch (err) {

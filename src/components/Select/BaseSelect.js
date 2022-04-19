@@ -77,8 +77,13 @@ const BaseSelect = ({
   value = null,
   err = false,
   otherStyle = {},
+  setInputValue = () => { },
   ...props
 }) => {
+  const onInput = (e) => {
+    setInputValue(e)
+  }
+
   return (
     <>
       <label className={style['select-label']} htmlFor={id}>
@@ -94,6 +99,7 @@ const BaseSelect = ({
         isLoading={isLoading}
         options={options}
         value={value}
+        onInputChange={onInput}
         {...props}
       />
     </>

@@ -278,7 +278,7 @@ const AddCheckParams = ({
               name={FORM_FIELDS.card}
               label={FORM_LABELS.card}
               data-cy='title'
-              func={api.getCardListForCreatingCheck}
+              onInputFunc={api.getCardListForCreatingCheck}
               type={SELECT_TYPES.card}
               onBlur={() => handleSelectBlur(FORM_FIELDS.card)}
               onChange={(e) => chooseCard(e, FORM_FIELDS.card)}
