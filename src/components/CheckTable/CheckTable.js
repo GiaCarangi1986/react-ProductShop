@@ -130,7 +130,6 @@ const CheckTable = ({
     <>
       <TableSettings
         setEventType={setEventType}
-        settingsDisabled={results.length === 0}
         isLoaded={status === dataStates.loaded}
         resultsLen={results.length}
         displayLoadBtn={count > 0 && results.length !== count && eventType !== TABLE_EVENT_TYPES.allLoaded}

@@ -3,7 +3,7 @@ import { Switch } from '../../views'
 import { FORM_FIELDS } from '../../const'
 import style from './table-settings.module.scss'
 
-const SwitchBlock = ({ settingsDisabled = false, setFilters = () => { }, filters = {} }) => {
+const SwitchBlock = ({ setFilters = () => { }, filters = {} }) => {
   const [checked, setChecked] = useState({
     delayed_show: filters?.delayed_show || false, // показать только неоплаченные (отложенные) чеки
     changed_show: filters?.changed_show || false // показать только редактированные чеки
@@ -29,7 +29,7 @@ const SwitchBlock = ({ settingsDisabled = false, setFilters = () => { }, filters
         checked={checked.delayed_show}
         name={FORM_FIELDS.delayed_show}
         onGx-change={handleChangeSwitch}
-        disabled={settingsDisabled}
+        disabled={checked.changed_show}
       />
       <Switch
         text='Только редактированные чеки'
@@ -37,7 +37,7 @@ const SwitchBlock = ({ settingsDisabled = false, setFilters = () => { }, filters
         checked={checked.changed_show}
         name={FORM_FIELDS.changed_show}
         onGx-change={handleChangeSwitch}
-        disabled={settingsDisabled}
+        disabled={checked.delayed_show}
       />
     </div>
   )

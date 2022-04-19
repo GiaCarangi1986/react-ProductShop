@@ -7,7 +7,6 @@ const checkGetSerializer = (res) => {
     const checkList = [...res.results].map(item => {
       return processingResult(item);
     });
-    console.log('checkList', checkList)
     const checks = {
       count: res.count,
       results: checkList,

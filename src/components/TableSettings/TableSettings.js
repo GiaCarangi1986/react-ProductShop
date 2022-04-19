@@ -10,7 +10,6 @@ import style from './table-settings.module.scss'
 
 const TableSettings = ({
   children = null,
-  settingsDisabled = false,
   setEventType = () => { },
   displayLoadBtn = false,
   filters = {},
@@ -38,8 +37,8 @@ const TableSettings = ({
   return (
     <div className={style['table-settings']}>
       <div className={style['table-settings__left']}>
-        <DateSearch settingsDisabled={settingsDisabled} setEventType={setEventType} setFilters={setFilters} filters={filters} />
-        <SwitchBlock settingsDisabled={settingsDisabled} setFilters={setFilters} filters={filters} />
+        <DateSearch setEventType={setEventType} setFilters={setFilters} filters={filters} />
+        <SwitchBlock setFilters={setFilters} filters={filters} />
       </div>
 
       <div className={style['table-settings__right']}>
@@ -51,7 +50,7 @@ const TableSettings = ({
               Добавить
             </Button>
           </div>
-          {displayLoadBtn && !settingsDisabled && (
+          {displayLoadBtn && (
             <Button
               type='button'
               onClick={showAll}
