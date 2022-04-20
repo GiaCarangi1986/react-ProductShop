@@ -18,6 +18,8 @@ const Select = ({ func = () => { }, onInputFunc = () => { }, type, ...props }) =
 
   useEffect(() => {
     if (type === SELECT_TYPES.card) {
+      setLoading(false)
+
       if (!inputValue) {
         setOptions([emptyValue])
       }
@@ -32,8 +34,6 @@ const Select = ({ func = () => { }, onInputFunc = () => { }, type, ...props }) =
               bonus: elem.bonus
             })
             )
-
-            newRes.unshift(emptyValue)
 
             setOptions(newRes)
             setLoading(false)
