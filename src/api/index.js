@@ -62,6 +62,13 @@ class Api extends BaseApi {
     return res.data
   }
 
+  dirtyDeleteCheck = async (id = '', isDelayCheck = false) => { // +-
+    const res = await this.delete(`/check_additionally/${id}`, {
+      isCheckDelay: isDelayCheck
+    })
+    return res.data
+  }
+
   paidCheck = async (id = '', data = {}) => {
     try {
       const res = await this.put(`/check/${id}`, data)

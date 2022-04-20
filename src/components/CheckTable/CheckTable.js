@@ -47,8 +47,8 @@ const CheckTable = ({
     setEventType(TABLE_EVENT_TYPES.changeData)
     api.deleteCheck(activeLine, delayed_check)
       .then((res) => {
-        console.log('delete_check', res)
         setStatusLoading(dataStates.loaded)
+        setDataForDelete({})
       })
       .catch((err) => {
         const { response = null } = err
@@ -62,6 +62,27 @@ const CheckTable = ({
 
   const resetError = () => {
     setErrorMessage('')
+  }
+
+  const deleteHard = ({ id, delayed_check }) => {
+    resetError()
+
+    const activeLine = id
+    setStatusLoading(dataStates.loading)
+    setEventType(TABLE_EVENT_TYPES.changeData)
+    api.dirtyDeleteCheck(activeLine, delayed_check)
+      .then((res) => {
+        setStatusLoading(dataStates.loaded)
+        setDataForDelete({})
+      })
+      .catch((err) => {
+        const { response = null } = err
+        setStatusLoading(dataStates.loaded)
+
+        if (response) {
+          setErrorMessage(response.data?.message)
+        }
+      })
   }
 
   const redirectToCheckPage = () => {
@@ -252,7 +273,7 @@ const CheckTable = ({
       </div>
       {statusLoading === dataStates.loading && eventType !== TABLE_EVENT_TYPES.scroll ? <PreloaderPage /> : null}
       <SureDelete func={deleteCheck} data={dataForDelete} />
-      <ErrorModal errorMessage={errorMessage} func={resetError} closeArea={resetError} />
+      <ErrorModal errorMessage={errorMessage} func={deleteHard} closeArea={resetError} data={dataForDelete} />
     </>
   )
 }
