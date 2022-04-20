@@ -90,7 +90,7 @@ const CheckOperations = () => {
     }
   }
 
-  const deleteCheck = () => {
+  const deleteCheck = () => { // тут на все методы выводить ошибку в поле слева
     setLoading(true)
     api.deleteCheck(activeLine, delayCheck)
       .then((res) => {

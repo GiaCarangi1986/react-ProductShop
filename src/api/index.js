@@ -55,16 +55,11 @@ class Api extends BaseApi {
     }
   }
 
-  deleteCheck = async (id = '', isDelayCheck = false) => {
-    try {
-      const res = await this.delete(`/check/${id}`, {
-        isCheckDelay: isDelayCheck
-      })
-      return res.data
-    }
-    catch (err) {
-      return id
-    }
+  deleteCheck = async (id = '', isDelayCheck = false) => { // +-
+    const res = await this.delete(`/check/${id}`, {
+      isCheckDelay: isDelayCheck
+    })
+    return res.data
   }
 
   paidCheck = async (id = '', data = {}) => {

@@ -31,7 +31,8 @@ export const MODAL_TYPES = {
   payModal: 'payModal',
   addCheck: 'addCheck',
   sureExit: 'sureExit',
-  sureDelete: 'sureDelete'
+  sureDelete: 'sureDelete',
+  errorModal: 'errorModal'
 }
 
 export const PAGES_TYPES = {

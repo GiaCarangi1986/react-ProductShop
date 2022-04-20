@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import { useNavigate } from 'react-router';
 import { useStoreon } from 'storeon/react'
 import { dataStates } from '@garpix/fetcher'
-import { SureDelete } from '../Modal';
+import { SureDelete, ErrorModal } from '../Modal';
 import Table from './Table'
 import TableSettings from '../TableSettings'
 import { Button, Icon, PreloaderPage } from '../../views'
@@ -29,7 +29,7 @@ const CheckTable = ({
   otherData = {},
   isNext,
 }) => {
-  const { dispatch, currentUser } = useStoreon('currentUser')
+  const { dispatch, currentUser, modal } = useStoreon('currentUser', 'modal')
   const navigate = useNavigate();
 
   const [userRole, setUserRole] = useState(0)
@@ -39,6 +39,7 @@ const CheckTable = ({
   const [statusLoading, setStatusLoading] = useState(status)
   const [filters, setFilters] = useState({})
   const [dataForDelete, setDataForDelete] = useState({})
+  const [errorMessage, setErrorMessage] = useState('')
 
   const deleteCheck = ({ id, delayed_check }) => {
     const activeLine = id
@@ -50,9 +51,17 @@ const CheckTable = ({
         setStatusLoading(dataStates.loaded)
       })
       .catch((err) => {
-        console.log('err', err)
+        const { response = null } = err
         setStatusLoading(dataStates.loaded)
+
+        if (response) {
+          setErrorMessage(response.data?.message)
+        }
       })
+  }
+
+  const resetError = () => {
+    setErrorMessage('')
   }
 
   const redirectToCheckPage = () => {
@@ -90,7 +99,7 @@ const CheckTable = ({
     })
   }
 
-  useEffect(() => { // ok
+  useEffect(() => {
     setStatusLoading(status)
   }, [status])
 
@@ -118,6 +127,15 @@ const CheckTable = ({
   useEffect(() => {
     loadData(1, { ...filterParams, ...filters });
   }, [filters])
+
+  useEffect(() => {
+    if (!modal && errorMessage) {
+      console.log('modal-errorMessage', modal, errorMessage)
+      dispatch('modal/toggle', {
+        modal: MODAL_TYPES.errorModal,
+      })
+    }
+  }, [modal, errorMessage])
 
   const overlayClasses = classNames({
     [style['table-grid']]: true,
@@ -234,6 +252,7 @@ const CheckTable = ({
       </div>
       {statusLoading === dataStates.loading && eventType !== TABLE_EVENT_TYPES.scroll ? <PreloaderPage /> : null}
       <SureDelete func={deleteCheck} data={dataForDelete} />
+      <ErrorModal errorMessage={errorMessage} func={resetError} closeArea={resetError} />
     </>
   )
 }
