@@ -116,7 +116,6 @@ const CheckTable = ({
   }, [currentUser])
 
   useEffect(() => {
-    console.log('filters', filters)
     loadData(1, { ...filterParams, ...filters });
   }, [filters])
 

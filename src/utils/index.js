@@ -102,7 +102,7 @@ export function generatCheck(discountCard = {}, linesOfCheck = [], currentUser =
   const linesCheckList = arrCorrectProductLines(linesOfCheck)
 
   return {
-    date_time: dateFotmattedForTable(new Date()), // время покупки/отложенного чека
+    date_time: new Date(), // время покупки/отложенного чека
     bonus_count: +discountCard?.bonus || 0, // кол-во использованных бонусов
     totalCost, // итоговая стоимость (без бонусов)
     paid, // оплачен чек или нет (на данном этапе только false, ибо он тут отложен или только подготовлен к оплате)

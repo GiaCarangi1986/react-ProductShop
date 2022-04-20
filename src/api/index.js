@@ -1,6 +1,6 @@
 import BaseApi from '@garpix/base-api'
-import { CardList, HistoryCheck } from './mochData'
-import { checkGetSerializer, checkParamsSerializer, authSendSerializer, authGetSerializer } from './serializer'
+import { HistoryCheck } from './mochData'
+import { checkGetSerializer, checkParamsSerializer, authSendSerializer, authGetSerializer, createCheckSerializer } from './serializer'
 
 class Api extends BaseApi {
   constructor(url) {
@@ -34,28 +34,15 @@ class Api extends BaseApi {
     return res.data
   }
 
-  getCardListForCreatingCheck = async (value) => {
-    try {
-      const res = await this.post('/bonus_card/', { search: value })
-      return res.data
-    }
-    catch (err) {
-      return CardList(1).results // 1 - норм, 2 - ошибка
-    }
+  getCardListForCreatingCheck = async (value) => { // +
+    const res = await this.post('/bonus_card/', { search: value })
+    return res.data
   }
 
-  createCheck = async (check = {}, prevId) => {
-    try {
-      const res = await this.post('/check/', {
-        ...check,
-        parentCheckId: prevId
-      })
-      // res.id ?
-      return res.data
-    }
-    catch (err) {
-      return '2222' // вернется созданный чек
-    }
+  createCheck = async (check = {}, prevId) => { // +
+    const serData = createCheckSerializer(check, prevId)
+    const res = await this.post('/check/', serData)
+    return res.data.id
   }
 
   getHistoryCheck = async (id = '') => {

@@ -6,36 +6,6 @@ export const ERROR_MESSAGE = {
   uncorrect_getting_history_check_list: 'Список историй изменений чека не удалось получить',
 }
 
-export const CardList = (status = 2) => {
-  if (status === 1) {
-    return { // лист бонусных карт
-      results: [
-        {
-          id: 1,
-          bonus: 4.2,
-          FIO: 'Курочкина Елизавета Сергеевна'
-        },
-        {
-          id: 3,
-          bonus: 63,
-          FIO: 'Иванов Николай Федорович'
-        },
-        {
-          id: 4,
-          bonus: 1000,
-          FIO: 'Кузнецов Федор Андреевич'
-        },
-      ],
-    }
-  }
-  throw {
-    response: {
-      data: { non_field_errors: [ERROR_MESSAGE.uncorrect_getting_card_list] },
-      status: 404,
-    }
-  }
-}
-
 export const HistoryCheck = (status = 2) => { // когда сервер буду писать у запросов сделать все camelCase
   if (status === 1) {
     return {

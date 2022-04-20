@@ -27,4 +27,28 @@ const checkParamsSerializer = (params = {}) => ({
   pageSize: params.page_size // кол-во получения за 1 запрос
 })
 
-export { checkGetSerializer, checkParamsSerializer };
+const createCheckSerializer = (check, parentCheckId) => {
+  const serCheckList = []
+  check.linesCheckList.forEach(line => {
+    serCheckList.push({
+      productCount: line.count, // кол-во продуктов в строке
+      productFK: line.id, // Id продукта
+      oldProduct: line.old_product, // выставлена ли скидка 50% на данный товар
+      price: line.price // цена товара
+    })
+  })
+
+  return ({
+    bonusCount: check.bonus_count, // кол-во снятых бонусов
+    bonusCardFK: check.cardId, // id бонусной карты
+    changedCheck: check.changedCheck, // был ли чек редактирован
+    dateTime: formatDateToBack(check.date_time), // дата и время покупки
+    userFK: check.kassirId, // id пользователя, пробившего чек
+    checkLines: serCheckList, // строки чека
+    paid: check.paid, // был чек оплачен (или отложен)
+    parentCheckId, // id нового чека, которое указывается у редактированного чека
+    totalSum: check.totalCost, // итоговая стоимость (без бонусов)
+  })
+}
+
+export { checkGetSerializer, checkParamsSerializer, createCheckSerializer };
