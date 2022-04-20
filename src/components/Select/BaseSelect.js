@@ -32,8 +32,9 @@ const baseCustomStyles = (error = false, otherStyle = {}) => {
     singleValue: (base) => ({
       ...base,
     }),
-    menu: (base) => ({
+    menuList: (base) => ({
       ...base,
+      maxHeight: 200,
     }),
     option: (base, { isSelected }) => ({
       ...base,

@@ -110,7 +110,6 @@ const CheckOperations = () => {
     api.createCheck(check, activeLine ? addedChecks[addedChecks.length - 1].id : null)
       .then((id) => {
         console.log('createCheck', id)
-        console.log('check', check)
         setLoading(false)
         redirectToCheckList()
       })

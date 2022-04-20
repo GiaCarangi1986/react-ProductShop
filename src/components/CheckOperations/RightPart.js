@@ -249,9 +249,12 @@ const RightPart = ({
                                 const color = line.old_product && (
                                   check_line_key === CHECK_LINE_ADDING.total_cost || check_line_key === CHECK_LINE_ADDING.price) ?
                                   'red' : 'black'
+                                const value = check_line_key === CHECK_LINE_ADDING.count ?
+                                  line.unit === UNITS[1] ? line[check_line_key] + ', кг' : line[check_line_key] + ', шт' :
+                                  line[check_line_key]
                                 return (
                                   <td className={tdClasses} key={check_line_key}>
-                                    <div style={{ width: `${w - 1}px`, margin, color }}>{line[check_line_key]}</div>
+                                    <div style={{ width: `${w - 1}px`, margin, color }}>{value}</div>
                                   </td>
                                 )
                               })}
