@@ -15,10 +15,6 @@ export const PATHS = {
     path: '/reports',
     exact: false,
   },
-  reports: { // вкладка с отчетами
-    path: '/reports',
-    exact: false,
-  },
   check_operations: { // страница для операция с чеками (создать, редактировать, посмотреть)
     path: '/check_operations',
     exact: false,

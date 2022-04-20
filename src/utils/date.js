@@ -25,7 +25,7 @@ function dateFotmattedForTable(date) {
     currentDate = dayjs(date).format('DD.MM.YYYY HH:mm:ss')
   }
   else {
-    currentDate = dayjs(new Date).format('DD.MM.YYYY HH:mm:ss')
+    currentDate = dayjs(new Date()).format('DD.MM.YYYY HH:mm:ss')
   }
   return currentDate
 }

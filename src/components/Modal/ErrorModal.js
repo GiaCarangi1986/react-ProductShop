@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import classNames from 'classnames'
 import { useStoreon } from 'storeon/react'
 import { Button, Modal } from '../../views'
 import { MODAL_TYPES } from '../../const'

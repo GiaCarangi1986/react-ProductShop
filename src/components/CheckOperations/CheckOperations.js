@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import _ from 'lodash'
 import { useNavigate } from 'react-router';
 import { useStoreon } from 'storeon/react';
 import { GxGrid, GxCol, GxRow } from '@garpix/garpix-web-components-react'
@@ -61,7 +62,6 @@ const CheckOperations = () => {
     setLoading(true)
     api.getHistoryCheck(id)
       .then(res => {
-        console.log('res', res)
         setAddedChecks(res)
         setLoading(false)
 
@@ -80,7 +80,8 @@ const CheckOperations = () => {
 
   const sureForExit = () => {
     const addDiscountCard = discountCard && Object.keys(discountCard).length > 0
-    if (typePage !== PAGES_TYPES.viewCheck && total_sum !== prevTotalSum || addDiscountCard && typePage === PAGES_TYPES.addCheck) {
+    if (typePage === PAGES_TYPES.editCheck && !_.isEqual(linesOfCheck, linesOfGeneratedCheck)
+      || (addDiscountCard || total_sum !== prevTotalSum) && typePage === PAGES_TYPES.addCheck) {
       dispatch('modal/toggle', {
         modal: MODAL_TYPES.sureExit,
       })
@@ -94,7 +95,6 @@ const CheckOperations = () => {
     setLoading(true)
     api.deleteCheck(activeLine, delayCheck)
       .then((res) => {
-        console.log('delete_check', res)
         setLoading(false)
         redirectToCheckList()
       })
@@ -109,7 +109,6 @@ const CheckOperations = () => {
     const check = generatCheck(discountCard, linesOfCheck, currentUser, paid, activeLine)
     api.createCheck(check, activeLine ? addedChecks[addedChecks.length - 1].id : null)
       .then((id) => {
-        console.log('createCheck', id)
         setLoading(false)
         redirectToCheckList()
       })
@@ -133,7 +132,6 @@ const CheckOperations = () => {
   }
 
   const postponeCheck = () => {
-    console.log('postponeCheck', generatCheck(discountCard, linesOfCheck, currentUser, false, false))
     dispatch('page/close')
     createCheck(false)
   }
