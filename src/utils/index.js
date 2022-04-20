@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import dayjs from './day';
+import { dateFotmattedForTable } from './date';
 
 export function handingErrors(response) {
   const value = response.data;
@@ -43,22 +43,6 @@ export function cods(code, results, value = 'pk') {
     }
   }
   return neededValues;
-}
-
-function dateFotmattedForTable(date) {
-  let currentDate = ''
-  if (dayjs(date).isValid()) {
-    currentDate = dayjs(date).format('DD.MM.YYYY HH:mm:ss')
-  }
-  return currentDate
-}
-
-function dateFotmattedForModal(date) {
-  let currentDate = ''
-  if (dayjs(date).isValid()) {
-    currentDate = dayjs(date).format('YYYY-MM-DDTHH:mm')
-  }
-  return currentDate
 }
 
 export function processingResult(item) {

@@ -1,6 +1,13 @@
 import BaseApi from '@garpix/base-api'
 import { HistoryCheck } from './mochData'
-import { checkGetSerializer, checkParamsSerializer, authSendSerializer, authGetSerializer, createCheckSerializer } from './serializer'
+import {
+  checkGetSerializer,
+  checkParamsSerializer,
+  authSendSerializer,
+  authGetSerializer,
+  createCheckSerializer,
+  checkHistorySerializer
+} from './serializer'
 
 class Api extends BaseApi {
   constructor(url) {
@@ -39,30 +46,26 @@ class Api extends BaseApi {
     return res.data
   }
 
-  createCheck = async (check = {}, prevId) => { // +
+  createCheck = async (check = {}, prevId) => { // + -редактр и отложить глянуть еще
     const serData = createCheckSerializer(check, prevId)
     const res = await this.post('/check/', serData)
     return res.data.id
   }
 
-  getHistoryCheck = async (id = '') => {
-    try {
-      const res = await this.post('/history_check/', id)
-      return res.data
-    }
-    catch (err) {
-      return HistoryCheck(1).results // 1 - норм, 2 - ошибка
-    }
+  getHistoryCheck = async (id = '') => { // +
+    const res = await this.patch(`/check/${id}`)
+    const serRes = checkHistorySerializer(res.data)
+    return serRes
   }
 
-  deleteCheck = async (id = '', isDelayCheck = false) => { // +-
+  deleteCheck = async (id = '', isDelayCheck = false) => { // +
     const res = await this.delete(`/check/${id}`, {
       isCheckDelay: isDelayCheck
     })
     return res.data
   }
 
-  dirtyDeleteCheck = async (id = '', isDelayCheck = false) => { // +-
+  dirtyDeleteCheck = async (id = '', isDelayCheck = false) => { // +
     const res = await this.delete(`/check_additionally/${id}`, {
       isCheckDelay: isDelayCheck
     })

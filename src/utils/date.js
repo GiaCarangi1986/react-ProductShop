@@ -19,8 +19,29 @@ const formatDateToBack = (dateStr) => {
   }
 }
 
+function dateFotmattedForTable(date) {
+  let currentDate = ''
+  if (dayjs(date).isValid()) {
+    currentDate = dayjs(date).format('DD.MM.YYYY HH:mm:ss')
+  }
+  else {
+    currentDate = dayjs(new Date).format('DD.MM.YYYY HH:mm:ss')
+  }
+  return currentDate
+}
+
+function dateFotmattedForModal(date) {
+  let currentDate = ''
+  if (dayjs(date).isValid()) {
+    currentDate = dayjs(date).format('YYYY-MM-DDTHH:mm')
+  }
+  return currentDate
+}
+
 export {
   formatDateToInput,
   cleanTheDate,
-  formatDateToBack
+  formatDateToBack,
+  dateFotmattedForTable,
+  dateFotmattedForModal
 }

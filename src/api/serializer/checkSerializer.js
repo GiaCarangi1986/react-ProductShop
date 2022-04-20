@@ -1,6 +1,6 @@
 import { processingResult } from '../../utils'
 import { NAMES } from '../../const'
-import { formatDateToBack } from '../../utils/date';
+import { formatDateToBack, dateFotmattedForTable } from '../../utils/date';
 
 const checkGetSerializer = (res) => {
   if (res) {
@@ -51,4 +51,35 @@ const createCheckSerializer = (check, parentCheckId) => {
   })
 }
 
-export { checkGetSerializer, checkParamsSerializer, createCheckSerializer };
+const checkHistorySerializer = (checks = []) => {
+  const checksSer = []
+  checks.forEach(check => {
+    const _check = {
+      id: check?.id || 0, // id чека
+      date_time: dateFotmattedForTable(check?.dateTime), // дата и время покупки ****** мб потом время настроить
+      kassirName: check?.kassir || '', // fio кассира
+      totalSum: check?.totalSum || 0, // итоговая сумма (без бонусов)
+      bonus_count: check?.bonusCount || 0, // потрачено бонусов
+      paidedCheck: check?.paid || false, // оплачен ли чек
+      cardId: check?.cardFK || null // id бонусной карты
+    }
+
+    const _line = []
+    check.checkLines?.forEach(line => {
+      _line.push({
+        id: line.id, // id строки чека
+        count: line.productCount, // кол-во проудктов в чеке
+        price: line.price, // цена продукта из чека
+        old_product: line.oldProduct, // является ли продукт из строки чека старым
+        label: line.productName, // название продукта
+        mayBeOld: line.mayBeOld, // может ли бы старым продукт
+        sale: line.sale, // распространяется ли скидка на продукт
+      })
+    })
+
+    checksSer.push({ ..._check, linesCheckList: _line })
+  })
+  return checksSer
+}
+
+export { checkGetSerializer, checkParamsSerializer, createCheckSerializer, checkHistorySerializer };
