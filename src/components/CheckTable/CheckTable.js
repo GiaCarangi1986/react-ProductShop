@@ -28,6 +28,7 @@ const CheckTable = ({
   status,
   otherData = {},
   isNext,
+  reload = () => { }
 }) => {
   const { dispatch, currentUser, modal } = useStoreon('currentUser', 'modal')
   const navigate = useNavigate();
@@ -49,6 +50,7 @@ const CheckTable = ({
       .then((res) => {
         setStatusLoading(dataStates.loaded)
         setDataForDelete({})
+        reload()
       })
       .catch((err) => {
         const { response = null } = err
@@ -74,6 +76,7 @@ const CheckTable = ({
       .then((res) => {
         setStatusLoading(dataStates.loaded)
         setDataForDelete({})
+        reload()
       })
       .catch((err) => {
         const { response = null } = err
