@@ -11,7 +11,7 @@ import {
   UNITS,
   PAGES_TYPES
 } from '../../const'
-import { roundNumber, calcTotalCostInLine } from '../../utils'
+import { roundNumber, calcTotalCostInLine, totalCostFunc } from '../../utils'
 import table_style from '../CheckTable/check_table.module.scss'
 import style from './check_operations.module.scss';
 
@@ -63,14 +63,6 @@ const RightPart = ({
   const deleteOldProduct = (lineInfo = null, listLines) => {
     const updateProducts = [...listLines].filter(line => !(line.id === lineInfo.id && line.old_product === lineInfo.old_product))
     return updateProducts
-  }
-
-  const recalculateLines = (arrlines = []) => {
-    let sum = 0
-    arrlines.forEach(line => {
-      sum += line.total_cost
-    })
-    setTotalSum(sum)
   }
 
   const uncorrectValue = (id = '-1', count = 0) => {
@@ -126,7 +118,7 @@ const RightPart = ({
     }
 
     setNewCheckFields(updateProductLines)
-    recalculateLines(updateProductLines)
+    setTotalSum(totalCostFunc(updateProductLines))
     setLinesOfCheck(updateProductLines)
     /*
       если есть продукт с той же id, но другой old_product, то прибавляем к нему и удаляем текущую строку
@@ -137,7 +129,7 @@ const RightPart = ({
   useEffect(() => {
     const newArr = calcTotalCostInLine(linesOfCheck)
     setNewCheckFields(newArr)
-    recalculateLines(newArr)
+    setTotalSum(totalCostFunc(newArr))
 
     if (!linesOfGeneratedCheck.length) {
       setLinesOfGeneratedCheck(_.cloneDeep(newArr))

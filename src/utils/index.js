@@ -90,7 +90,7 @@ export const calcTotalCostInLine = (checkLines = []) => {
   return newArr
 }
 
-function totalCostFunc(linesOfCheck) {
+export function totalCostFunc(linesOfCheck) {
   let totalCost = 0
   linesOfCheck.forEach(line => {
     totalCost += line.count * line.price
