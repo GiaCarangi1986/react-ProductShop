@@ -52,7 +52,7 @@ class Api extends BaseApi {
     return res.data.id
   }
 
-  getHistoryCheck = async (id = '') => { // +
+  getHistoryCheck = async (id = '') => { // +-
     const res = await this.patch(`/check/${id}`)
     const serRes = checkHistorySerializer(res.data)
     return serRes

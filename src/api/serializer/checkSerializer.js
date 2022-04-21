@@ -67,13 +67,13 @@ const checkHistorySerializer = (checks = []) => {
     const _line = []
     check.checkLines?.forEach(line => {
       _line.push({
-        id: line.id, // id строки чека
-        count: line.productCount, // кол-во проудктов в чеке
-        price: line.price, // цена продукта из чека
-        old_product: line.oldProduct, // является ли продукт из строки чека старым
-        label: line.productName, // название продукта
-        maybeOld: line.maybeOld, // может ли бы старым продукт
-        sale: line.sale, // распространяется ли скидка на продукт
+        id: line?.productId || 0, // id продукта
+        count: line?.productCount || 0, // кол-во проудктов в чеке
+        price: line?.price || 0, // цена продукта из чека
+        old_product: line?.oldProduct || false, // является ли продукт из строки чека старым
+        label: line?.productName || '', // название продукта
+        maybeOld: line?.maybeOld || false, // может ли бы старым продукт
+        sale: line?.sale || false, // распространяется ли скидка на продукт
       })
     })
 
