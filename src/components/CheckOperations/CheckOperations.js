@@ -33,7 +33,8 @@ const CheckOperations = () => {
   const PARTS_VIEWS = {
     addCheck: AddCheckParams,
     viewCheck: HistoryChanges,
-    editCheck: HistoryChanges
+    editCheck: HistoryChanges,
+    payDelayCheck: HistoryChanges
   }
 
   const handleSubmitError = ({ response, actions }) => { // пока не используется

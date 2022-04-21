@@ -58,12 +58,12 @@ const checkHistorySerializer = (checks = []) => {
       id: check?.id || 0, // id чека
       date_time: dateFotmattedForTable(check?.dateTime), // дата и время покупки ****** мб потом время настроить
       kassirName: check?.kassir || '', // fio кассира
-      totalSum: check?.totalSum || 0, // итоговая сумма (без бонусов)
+      totalCost: check?.totalSum || 0, // итоговая сумма (без бонусов)
       bonus_count: check?.bonusCount || 0, // потрачено бонусов
-      paidedCheck: check?.paid || false, // оплачен ли чек
+      paid: check?.paid || false, // оплачен ли чек
       cardId: check?.cardFK || null // id бонусной карты
     }
-
+    // paid
     const _line = []
     check.checkLines?.forEach(line => {
       _line.push({

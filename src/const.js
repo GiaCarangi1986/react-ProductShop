@@ -34,7 +34,8 @@ export const MODAL_TYPES = {
 export const PAGES_TYPES = {
   addCheck: 'addCheck',
   viewCheck: 'viewCheck',
-  editCheck: 'editCheck'
+  editCheck: 'editCheck',
+  payDelayCheck: 'payDelayCheck'
 }
 
 export const ERROR_TYPES = {

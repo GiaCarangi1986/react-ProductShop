@@ -105,7 +105,7 @@ const CheckTable = ({
         main: e.target.name.delayed_check ? 'Оплата отложенного чека' : 'Редактирование чека',
         left: 'История изменений',
         right: 'Чек-лист',
-        type: PAGES_TYPES.editCheck,
+        type: e.target.name.delayed_check ? PAGES_TYPES.payDelayCheck : PAGES_TYPES.editCheck,
         id: e.target.name.id,
         btnText: e.target.name.delayed_check ? 'Оплатить' : 'Выплатить'
       },

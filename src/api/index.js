@@ -74,6 +74,7 @@ class Api extends BaseApi {
 
   paidCheck = async (id = '', data = {}) => {
     try {
+      // console.log('data', data)
       const res = await this.put(`/check/${id}`, data)
       return res.data
     }

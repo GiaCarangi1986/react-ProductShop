@@ -20,7 +20,7 @@ const Modal = ({
   });
 
   const afterHideModal = () => {
-    if (modal !== MODAL_TYPES.errorModal && closeArea) {
+    if (modal !== MODAL_TYPES.errorModal) {
       setOpen(false);
       dispatch('modal/close');
     }

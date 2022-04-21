@@ -148,6 +148,7 @@ const RightPart = ({
   const viewPage = typePage === PAGES_TYPES.viewCheck
   const changeNotLastEntry = activeLine !== addedChecks[addedChecks.length - 1]?.id
   const editCheck = typePage === PAGES_TYPES.editCheck
+  const payDelayCheck = typePage === PAGES_TYPES.payDelayCheck
   const hiddenActions = viewPage || (changeNotLastEntry && editCheck)
   const sumWithBonus = total_sum - (discountCard?.bonus || 0)
   const correctSumWithBonus = sumWithBonus > 0 ? sumWithBonus : 0
@@ -156,7 +157,7 @@ const RightPart = ({
   const totalInfo = editCheck && !delayCheck ?
     [`Итоговая стоимость предыдущая: ${prevCorrectSumWithBonus}`, `Итоговая стоимость текущая: ${correctSumWithBonus}`] :
     [`Итого без бонусов: ${total_sum}`, `Итого с бонусами: ${correctSumWithBonus}`]
-  const noNeedWarn = prevCorrectSumWithBonus === correctSumWithBonus
+  const needWarn = prevCorrectSumWithBonus === correctSumWithBonus
 
   const onSubmit = () => {
     addOrUpdateCheck()
@@ -226,7 +227,7 @@ const RightPart = ({
                                     <Button
                                       className='button-edit_action'
                                       title='Прибавить кол-во'
-                                      disabled={line.unit === UNITS[1] || uncorrectValue(line.id, line.count) && editCheck}
+                                      disabled={line.unit === UNITS[1] || uncorrectValue(line.id, line.count) && (editCheck || payDelayCheck)}
                                       name={{ id: line.id, old_product: line.old_product }}
                                       value={1}
                                       onClick={changeProductCount}
@@ -262,7 +263,7 @@ const RightPart = ({
                                 <div style={{ width: '35px', margin: 'auto' }}>
                                   <Switch
                                     text={line.old_product}
-                                    disabled={line.sale || !line.maybeOld || hiddenActions || editCheck && uncorrectSwitch(line.id)}
+                                    disabled={line.sale || !line.maybeOld || hiddenActions || (editCheck || payDelayCheck) && uncorrectSwitch(line.id)}
                                     onGx-change={() => handleChangeSwitch(line)}
                                     name={`${line.id}-${line.old_product}`}
                                     value={`${line.old_product}`}
@@ -301,7 +302,7 @@ const RightPart = ({
                 </div>
                 {!viewPage && (
                   <div className={style.wrap_btn}>
-                    {!editCheck && (
+                    {!(editCheck || payDelayCheck) && (
                       <Button
                         className='btn_width-100-red'
                         data-cy='btn'
@@ -318,7 +319,7 @@ const RightPart = ({
                       className='btn_width-100'
                       data-cy='btn'
                       buttonDis
-                      disabled={!linesOfCheck.length && !editCheck || noNeedWarn}
+                      disabled={!linesOfCheck.length && !editCheck || needWarn && !payDelayCheck}
                     >
                       {btnText}
                     </Button>
