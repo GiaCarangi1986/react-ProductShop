@@ -199,6 +199,8 @@ const CheckTable = ({
                 [style['table-row_archive']]: elem.delayed_check,
                 [style['table-row_edited']]: elem.changed_check
               })
+              const disActBtns = userRole === USER_ROLE.kassir && !elem.delayed_check || !elem.mayActions
+
               return (
                 <tr data-test={key} key={key} className={classesRow}>
                   <td className={classNames(style['table-col'], style['table-col-full-rights'])}>
@@ -216,7 +218,7 @@ const CheckTable = ({
                       <Button
                         className='button-edit_action'
                         title='Редактировать'
-                        disabled={userRole === USER_ROLE.kassir && !elem.delayed_check}
+                        disabled={disActBtns}
                         variant='text'
                         data-cy='btn'
                         onClick={editCheck}
@@ -249,7 +251,7 @@ const CheckTable = ({
                         className='button-delete_action'
                         title='Удалить'
                         variant='text'
-                        disabled={userRole === USER_ROLE.kassir && !elem.delayed_check}
+                        disabled={disActBtns}
                         data-cy='btn'
                         name={{
                           id: elem.id,

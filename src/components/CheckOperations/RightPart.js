@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import classNames from 'classnames'
+import _ from 'lodash'
 import { GxGrid, GxCol, GxRow } from '@garpix/garpix-web-components-react'
 import { Button, Form, Icon, Switch } from '../../views'
 import {
@@ -10,7 +11,7 @@ import {
   UNITS,
   PAGES_TYPES
 } from '../../const'
-import { roundNumber } from '../../utils'
+import { roundNumber, calcTotalCostInLine } from '../../utils'
 import table_style from '../CheckTable/check_table.module.scss'
 import style from './check_operations.module.scss';
 
@@ -114,9 +115,11 @@ const RightPart = ({
       productData.old_product = !productData.old_product
       if (productData.old_product) {
         productData.price /= 2
+        productData.total_cost /= 2
       }
       else {
         productData.price *= 2
+        productData.total_cost *= 2
       }
       updateProductLines[index] = productData
     }
@@ -131,17 +134,12 @@ const RightPart = ({
   }
 
   useEffect(() => {
-    const newArr = []
-    linesOfCheck.forEach(line => {
-      const newLine = { ...line }
-      newLine.total_cost = roundNumber(line.price * line.count)
-      newArr.push(newLine)
-    })
+    const newArr = calcTotalCostInLine(linesOfCheck)
     setNewCheckFields(newArr)
     recalculateLines(newArr)
 
     if (!linesOfGeneratedCheck.length) {
-      setLinesOfGeneratedCheck(linesOfCheck)
+      setLinesOfGeneratedCheck(_.cloneDeep(newArr))
     }
   }, [linesOfCheck])
 
@@ -158,7 +156,6 @@ const RightPart = ({
     [`Итоговая стоимость предыдущая: ${roundNumber(prevCorrectSumWithBonus)}`,
     `Итоговая стоимость текущая: ${roundNumber(correctSumWithBonus)}`] :
     [`Итого без бонусов: ${roundNumber(total_sum)}`, `Итого с бонусами: ${roundNumber(correctSumWithBonus)}`]
-  const needWarn = prevCorrectSumWithBonus === correctSumWithBonus
 
   const onSubmit = () => {
     addOrUpdateCheck()
@@ -321,7 +318,7 @@ const RightPart = ({
                       className='btn_width-100'
                       data-cy='btn'
                       buttonDis
-                      disabled={!linesOfCheck.length && !editCheck || needWarn && !payDelayCheck || !linesOfGeneratedCheck.length}
+                      disabled={_.isEqual(linesOfCheck, linesOfGeneratedCheck) || payDelayCheck && !linesOfCheck.length}
                     >
                       {btnText}
                     </Button>

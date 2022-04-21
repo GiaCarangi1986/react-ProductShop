@@ -16,6 +16,13 @@ export function handingErrors(response) {
   return errorsObj
 }
 
+export function roundNumber(number = 0) {
+  if (!number) {
+    return number
+  }
+  return Math.round(number * 100) / 100
+}
+
 export function checkNumber(value) {
   if (Number.isNaN(Number(value))) {
     return value;
@@ -54,7 +61,8 @@ export function processingResult(item) {
     sum_without_bonus: item?.totalSum || 0, // сумма без бонусов
     sum: item?.totalSum - item?.bonusPop || 0, // итоговая сумма (после применения бонусов),
     delayed_check: !item?.paidedCheck || false,  // оплачен ли чек (если да, то не отложен)
-    changed_check: item?.changedCheck || false // редактированный ли чек
+    changed_check: item?.changedCheck || false, // редактированный ли чек
+    mayActions: item.mayActions || false // можно ли редакт/удалять чек (ограничение - до 3 часов после пробивки)
   };
 }
 
@@ -72,12 +80,22 @@ const arrCorrectProductLines = (linesOfCheck = []) => {
   return linesCheckList
 }
 
+export const calcTotalCostInLine = (checkLines = []) => {
+  const newArr = []
+  checkLines.forEach(line => {
+    const newLine = { ...line }
+    newLine.total_cost = roundNumber(line.price * line.count)
+    newArr.push(newLine)
+  })
+  return newArr
+}
+
 function totalCostFunc(linesOfCheck) {
   let totalCost = 0
   linesOfCheck.forEach(line => {
     totalCost += line.count * line.price
   })
-  return totalCost
+  return roundNumber(totalCost)
 }
 
 export function generatCheck(discountCard = {}, linesOfCheck = [], currentUser = {}, paid = false, changedCheck = false) {
@@ -165,12 +183,5 @@ export function declensionBonusNumber(digital = 0) {
     return 'ов'
   }
 };
-
-export function roundNumber(number = 0) {
-  if (!number) {
-    return number
-  }
-  return Math.round(number * 100) / 100
-}
 
 export default handlingBoolean

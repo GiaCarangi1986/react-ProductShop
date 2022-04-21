@@ -6,11 +6,12 @@ import { GxGrid, GxCol, GxRow } from '@garpix/garpix-web-components-react'
 import RightPart from './RightPart'
 import { Button, Icon, PreloaderPage } from '../../views';
 import { PayModal, SureExit } from '../Modal';
-import { generatCheck, handingErrors, roundNumber } from '../../utils';
+import { generatCheck, handingErrors, roundNumber, calcTotalCostInLine } from '../../utils';
 import { PATHS, MODAL_TYPES, PAGES_TYPES } from '../../const';
 import style from './check_operations.module.scss';
 import AddCheckParams from './AddCheckParams';
 import HistoryChanges from './HistoryChanges';
+
 import api from '../../api'
 
 const CheckOperations = () => {
@@ -48,7 +49,7 @@ const CheckOperations = () => {
   const updateCheckInfo = (element = {}) => {
     setActiveLine(element.id)
     setDelayCheck(!element.paid)
-    setLinesOfCheck(element.linesCheckList)
+    setLinesOfCheck(calcTotalCostInLine(element.linesCheckList))
     setLinesOfGeneratedCheck([])
     if (element.bonus_count) {
       setDiscountCard({
