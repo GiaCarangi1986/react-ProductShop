@@ -7,6 +7,9 @@
   bottom: -32px;
   left: 3px;
   margin-bottom: 20px;
+  &__date {
+    width: max-content;
+  }
 }
 
 .error-auth {

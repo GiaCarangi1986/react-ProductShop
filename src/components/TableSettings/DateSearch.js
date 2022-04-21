@@ -43,6 +43,7 @@ const DateSearch = ({ setEventType = () => { }, setFilters = () => { }, filters 
           error={formik.errors.start_at}
           touched={formik.touched.start_at}
           errorClass='addOrUpdateService'
+          date
         >
           <Input
             label={FORM_LABELS.start_at}
@@ -59,6 +60,7 @@ const DateSearch = ({ setEventType = () => { }, setFilters = () => { }, filters 
           error={formik.errors.end_at}
           touched={formik.touched.start_at}
           errorClass='addOrUpdateService'
+          date
         >
           <Input
             label={FORM_LABELS.end_at}
