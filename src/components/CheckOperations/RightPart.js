@@ -319,7 +319,7 @@ const RightPart = ({
                       className='btn_width-100'
                       data-cy='btn'
                       buttonDis
-                      disabled={!linesOfCheck.length && !editCheck || needWarn && !payDelayCheck}
+                      disabled={!linesOfCheck.length && !editCheck || needWarn && !payDelayCheck || !linesOfGeneratedCheck.length}
                     >
                       {btnText}
                     </Button>
