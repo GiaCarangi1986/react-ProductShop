@@ -10,7 +10,7 @@ import {
   UNITS,
   PAGES_TYPES
 } from '../../const'
-
+import { roundNumber } from '../../utils'
 import table_style from '../CheckTable/check_table.module.scss'
 import style from './check_operations.module.scss';
 
@@ -134,7 +134,7 @@ const RightPart = ({
     const newArr = []
     linesOfCheck.forEach(line => {
       const newLine = { ...line }
-      newLine.total_cost = Math.round(line.price * line.count * 100) / 100
+      newLine.total_cost = roundNumber(line.price * line.count)
       newArr.push(newLine)
     })
     setNewCheckFields(newArr)
@@ -155,8 +155,9 @@ const RightPart = ({
   const prevSumWithBonus = prevTotalSum - (discountCard?.bonus || 0)
   const prevCorrectSumWithBonus = prevSumWithBonus > 0 ? prevSumWithBonus : 0
   const totalInfo = editCheck && !delayCheck ?
-    [`Итоговая стоимость предыдущая: ${prevCorrectSumWithBonus}`, `Итоговая стоимость текущая: ${correctSumWithBonus}`] :
-    [`Итого без бонусов: ${total_sum}`, `Итого с бонусами: ${correctSumWithBonus}`]
+    [`Итоговая стоимость предыдущая: ${roundNumber(prevCorrectSumWithBonus)}`,
+    `Итоговая стоимость текущая: ${roundNumber(correctSumWithBonus)}`] :
+    [`Итого без бонусов: ${roundNumber(total_sum)}`, `Итого с бонусами: ${roundNumber(correctSumWithBonus)}`]
   const needWarn = prevCorrectSumWithBonus === correctSumWithBonus
 
   const onSubmit = () => {

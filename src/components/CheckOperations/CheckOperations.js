@@ -6,7 +6,7 @@ import { GxGrid, GxCol, GxRow } from '@garpix/garpix-web-components-react'
 import RightPart from './RightPart'
 import { Button, Icon, PreloaderPage } from '../../views';
 import { PayModal, SureExit } from '../Modal';
-import { generatCheck, handingErrors } from '../../utils';
+import { generatCheck, handingErrors, roundNumber } from '../../utils';
 import { PATHS, MODAL_TYPES, PAGES_TYPES } from '../../const';
 import style from './check_operations.module.scss';
 import AddCheckParams from './AddCheckParams';
@@ -146,12 +146,12 @@ const CheckOperations = () => {
 
   const headersForPayModal = typePage === PAGES_TYPES.addCheck || delayCheck ? {
     main: 'Покупка',
-    text: `Ожидается оплата в размере ${total_sum - (+discountCard?.bonus || 0)} руб.`,
+    text: `Ожидается оплата в размере ${roundNumber(total_sum - (+discountCard?.bonus || 0))} руб.`,
     btnCancel: 'Отмена',
     btnOk: 'Оплатить',
   } : {
     main: 'Возврат',
-    text: `Ожидается возврат в размере ${prevTotalSum - total_sum} руб.`,
+    text: `Ожидается возврат в размере ${roundNumber(prevTotalSum - total_sum)} руб.`,
     btnCancel: 'Отмена',
     btnOk: 'Выплатить',
   }

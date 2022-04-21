@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useFormik } from 'formik'
 import classNames from 'classnames'
 import { Button, ErrorText, Fieldset, Form, Input, Switch } from '../../views'
-import { deleteSpaces, declensionBonusNumber } from '../../utils'
+import { deleteSpaces, declensionBonusNumber, roundNumber } from '../../utils'
 import Select from '../Select'
 import { FORM_FIELDS, FORM_LABELS, UNITS, SELECT_TYPES } from '../../const'
 import { addLineOfCheck } from '../../schema'
@@ -61,7 +61,7 @@ const AddCheckParams = ({
       if (lines[index].id === formik.values.product.value && lines[index].old_product === formik.values.old_product) {
         lines[index].count += +formik.values.count
         if (unit === UNITS[1]) {
-          lines[index].count = Math.round(lines[index].count * 100) / 100
+          lines[index].count = roundNumber(lines[index].count)
         }
         wasUpdate = true
         break

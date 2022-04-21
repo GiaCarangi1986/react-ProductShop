@@ -166,4 +166,11 @@ export function declensionBonusNumber(digital = 0) {
   }
 };
 
+export function roundNumber(number = 0) {
+  if (!number) {
+    return number
+  }
+  return Math.round(number * 100) / 100
+}
+
 export default handlingBoolean
