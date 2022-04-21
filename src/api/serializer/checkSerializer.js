@@ -63,7 +63,7 @@ const checkHistorySerializer = (checks = []) => {
       paid: check?.paid || false, // оплачен ли чек
       cardId: check?.cardFK || null // id бонусной карты
     }
-    // paid
+
     const _line = []
     check.checkLines?.forEach(line => {
       _line.push({
@@ -72,7 +72,7 @@ const checkHistorySerializer = (checks = []) => {
         price: line.price, // цена продукта из чека
         old_product: line.oldProduct, // является ли продукт из строки чека старым
         label: line.productName, // название продукта
-        mayBeOld: line.mayBeOld, // может ли бы старым продукт
+        maybeOld: line.maybeOld, // может ли бы старым продукт
         sale: line.sale, // распространяется ли скидка на продукт
       })
     })

@@ -67,7 +67,7 @@ const AddCheckParams = ({
         break
       }
     }
-
+    console.log('formik.values.product.sale', formik.values.product.sale)
     if (!wasUpdate) {
       lines.push({
         id: formik.values.product.value,
@@ -77,6 +77,7 @@ const AddCheckParams = ({
         unit: formik.values.product.unit,
         old_product: formik.values.old_product,
         sale: formik.values.product.sale,
+        maybeOld: formik.values.product.maybeOld
       })
     }
     setWasAddProduct(true)

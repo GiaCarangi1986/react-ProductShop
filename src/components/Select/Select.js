@@ -53,13 +53,12 @@ const Select = ({ func = () => { }, onInputFunc = () => { }, type, value, ...pro
       func()
         .then((res) => {
           const newRes = res.map(elem => {
-
             const elemSer = productGetSerializer(elem)
             return ({
               label: `${elemSer.id} (${elemSer.title}${elemSer.manufacturer && ', '}${elemSer.manufacturer})`,
               value: elemSer.id,
               unit: elemSer.unit,
-              name: elemSer.title,
+              name: `${elemSer.title}${elemSer.manufacturer && ', '}${elemSer.manufacturer}`,
               price: elemSer.price,
               sale: elemSer.sale,
               count: elemSer.count,

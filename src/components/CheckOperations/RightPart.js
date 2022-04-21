@@ -207,6 +207,7 @@ const RightPart = ({
                           const classesRow = classNames({
                             [table_style['table-row']]: true,
                           })
+
                           return (
                             <tr key={`${line.id}-${line.old_product}`} className={classesRow}>
                               {!hiddenActions && (

@@ -7,7 +7,7 @@ const productGetSerializer = (product = {}) => ({
   unit: product?.unit || UNITS[0], // ед. измер.
   count: product?.count || 0, // кол-во имеется на складе
   price: product?.price || 0, // цена продукта (текущая)
-  sale: product?.sale || 0, // распространяется ли на товар скидка в данный момент
+  sale: product?.sale || false, // распространяется ли на товар скидка в данный момент
   maybeOld: product?.maybeOld || false, // можно ли к данному продукту применить скидку 50%
 })
 
