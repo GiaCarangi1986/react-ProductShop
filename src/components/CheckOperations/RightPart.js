@@ -47,6 +47,7 @@ const RightPart = ({
     for (let index = 0; index < updateProduct.length; index++) {
       if (updateProduct[index].id === +btnData.name.id && updateProduct[index].old_product === btnData.name.old_product) {
         updateProduct[index].count += +btnData.value
+        updateProduct[index].total_cost = updateProduct[index].count * updateProduct[index].price
         break
       }
     }
@@ -160,6 +161,9 @@ const RightPart = ({
   const onSubmit = () => {
     addOrUpdateCheck()
   }
+
+  console.log('linesOfCheck', linesOfCheck)
+  console.log('linesOfGeneratedCheck', linesOfGeneratedCheck)
 
   return (
     <>
@@ -318,7 +322,7 @@ const RightPart = ({
                       className='btn_width-100'
                       data-cy='btn'
                       buttonDis
-                      disabled={_.isEqual(linesOfCheck, linesOfGeneratedCheck) || !editCheck && !linesOfCheck.length}
+                      disabled={_.isEqual(linesOfCheck, linesOfGeneratedCheck) && editCheck || !editCheck && !linesOfCheck.length}
                     >
                       {btnText}
                     </Button>
