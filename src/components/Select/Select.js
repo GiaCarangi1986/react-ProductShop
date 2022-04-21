@@ -4,7 +4,7 @@ import BaseSelect from './BaseSelect'
 import { SELECT_TYPES } from '../../const'
 import { productGetSerializer } from '../../api/serializer'
 
-const Select = ({ func = () => { }, onInputFunc = () => { }, type, ...props }) => {
+const Select = ({ func = () => { }, onInputFunc = () => { }, type, value, ...props }) => {
   const { dispatch } = useStoreon()
   const [isLoading, setLoading] = useState(true)
   const [options, setOptions] = useState([])
@@ -19,8 +19,7 @@ const Select = ({ func = () => { }, onInputFunc = () => { }, type, ...props }) =
   useEffect(() => {
     if (type === SELECT_TYPES.card) {
       setLoading(false)
-
-      if (!inputValue) {
+      if (!inputValue && value) {
         setOptions([emptyValue])
       }
       else {
@@ -46,7 +45,7 @@ const Select = ({ func = () => { }, onInputFunc = () => { }, type, ...props }) =
           });
       }
     }
-  }, [inputValue])
+  }, [inputValue, value])
 
   useEffect(() => {
     if (type === SELECT_TYPES.product) {
@@ -86,6 +85,7 @@ const Select = ({ func = () => { }, onInputFunc = () => { }, type, ...props }) =
       isLoading={isLoading}
       options={options}
       setInputValue={setInputValue}
+      value={value}
       {...props}
     />
   )
