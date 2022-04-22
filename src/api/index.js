@@ -64,14 +64,12 @@ class Api extends BaseApi {
     return res.data
   }
 
-  dirtyDeleteCheck = async (id = '', isDelayCheck = false) => { // +
-    const res = await this.delete(`/check_additionally/${id}`, {
-      isCheckDelay: isDelayCheck
-    })
+  dirtyDeleteCheck = async (id = '') => { // +
+    const res = await this.delete(`/check_additionally/${id}`)
     return res.data
   }
 
-  paidCheck = async (id = '', data = {}) => {
+  paidCheck = async (id = '', data = {}) => { // +
     const serData = createCheckSerializer(data)
     const res = await this.put(`/check/${id}`, serData)
     return res.data

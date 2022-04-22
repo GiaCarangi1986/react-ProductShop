@@ -66,13 +66,13 @@ const CheckTable = ({
     setErrorMessage('')
   }
 
-  const deleteHard = ({ id, delayed_check }) => {
+  const deleteHard = ({ id }) => {
     resetError()
 
     const activeLine = id
     setStatusLoading(dataStates.loading)
     setEventType(TABLE_EVENT_TYPES.changeData)
-    api.dirtyDeleteCheck(activeLine, delayed_check)
+    api.dirtyDeleteCheck(activeLine)
       .then((res) => {
         setStatusLoading(dataStates.loaded)
         setDataForDelete({})
