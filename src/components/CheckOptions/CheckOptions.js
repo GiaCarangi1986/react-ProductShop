@@ -25,7 +25,7 @@ const CheckOptions = () => {
         isHistoryPush={false}
         api={api.getCheckList}
         initFilter={{
-          page_size: 50,
+          page_size: 15,
           changed_show: false, // показать только редактированные чеки
           delayed_show: false // показать только неоплаченные чеки
         }}
