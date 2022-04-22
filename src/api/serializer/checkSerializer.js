@@ -27,7 +27,7 @@ const checkParamsSerializer = (params = {}) => ({
   pageSize: params.page_size // кол-во получения за 1 запрос
 })
 
-const createCheckSerializer = (check, parentCheckId) => {
+const createCheckSerializer = (check = {}, parentCheckId = null) => {
   const serCheckList = []
   check.linesCheckList.forEach(line => {
     serCheckList.push({

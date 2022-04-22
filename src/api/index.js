@@ -1,5 +1,4 @@
 import BaseApi from '@garpix/base-api'
-import { HistoryCheck } from './mochData'
 import {
   checkGetSerializer,
   checkParamsSerializer,
@@ -46,7 +45,7 @@ class Api extends BaseApi {
     return res.data
   }
 
-  createCheck = async (check = {}, prevId) => { // + -редактр и отложить глянуть еще
+  createCheck = async (check = {}, prevId) => { // + - отложить глянуть еще
     const serData = createCheckSerializer(check, prevId)
     const res = await this.post('/check/', serData)
     return res.data.id
@@ -73,15 +72,9 @@ class Api extends BaseApi {
   }
 
   paidCheck = async (id = '', data = {}) => {
-    try {
-      // console.log('data', data)
-      const res = await this.put(`/check/${id}`, data)
-      return res.data
-    }
-    catch (err) {
-      console.log('data', data)
-      return `paidCheck, чек с id=${id} был удален и созданный новый оплаченный`
-    }
+    const serData = createCheckSerializer(data)
+    const res = await this.put(`/check/${id}`, serData)
+    return res.data
   }
 }
 

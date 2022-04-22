@@ -124,8 +124,8 @@ const CheckOperations = () => {
     setLoading(true)
     api.paidCheck(activeLine, generatCheck(discountCard, linesOfCheck, currentUser, true))
       .then(res => {
-        console.log('payDelayCheck', res)
         setLoading(false)
+        redirectToCheckList()
       })
       .catch(err => {
         console.log('err', err)
