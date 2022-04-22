@@ -1,11 +1,11 @@
 import React from 'react'
 import { Layout } from '../views';
-// import CheckOptions from '../components/CheckOptions'
+import AdminPanel from '../components/AdminPanel';
 
 const AdminPanelPage = () => {
   return (
     <Layout>
-      <div>aaЫВВЫaaa</div>
+      <AdminPanel />
     </Layout>
   )
 }
