@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router';
 import { Routes, Route } from 'react-router-dom'
 import { useStoreon } from 'storeon/react'
-import { AuthPage, CheckOperationsPage, CrudOperationsPage, ReportPage, ChangeCheckPage } from './pages'
+import { AuthPage, CheckOperationsPage, AdminPanelPage, ChangeCheckPage } from './pages'
 import { ERROR_TYPES, PATHS } from './const'
 import { useNetwork } from './utils'
 import { ErrorPopup } from './views';
@@ -42,15 +42,9 @@ const App = () => {
         />
         <Route
           strict
-          path={PATHS.crud_operations.path}
-          exact={PATHS.crud_operations.exact}
-          element={<CrudOperationsPage />}
-        />
-        <Route
-          strict
-          path={PATHS.reports.path}
-          exact={PATHS.reports.exact}
-          element={<ReportPage />}
+          path={PATHS.admin_panel.path}
+          exact={PATHS.admin_panel.exact}
+          element={<AdminPanelPage />}
         />
         <Route
           strict

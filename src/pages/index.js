@@ -1,13 +1,11 @@
 import AuthPage from './AuthPage'
 import CheckOperationsPage from './CheckOperationsPage'
-import CrudOperationsPage from './CrudOperationsPage'
-import ReportPage from './ReportPage'
+import AdminPanelPage from './AdminPanelPage'
 import ChangeCheckPage from './ChangeCheckPage'
 
 export {
   AuthPage,
   CheckOperationsPage,
-  CrudOperationsPage,
-  ReportPage,
+  AdminPanelPage,
   ChangeCheckPage,
 }

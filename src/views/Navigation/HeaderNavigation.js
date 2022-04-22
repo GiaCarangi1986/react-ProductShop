@@ -34,24 +34,14 @@ const HeaderNavigation = () => {
         </NavLink>
       </li>
       {haveRights && (
-        <>
-          <li>
-            <NavLink
-              to={PATHS.crud_operations.path}
-              className={setStyle}
-            >
-              Работа с таблицами
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to={PATHS.reports.path}
-              className={setStyle}
-            >
-              Отчеты
-            </NavLink>
-          </li>
-        </>
+        <li>
+          <NavLink
+            to={PATHS.admin_panel.path}
+            className={setStyle}
+          >
+            Админ панель
+          </NavLink>
+        </li>
       )}
     </ul>
   )
