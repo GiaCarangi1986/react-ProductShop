@@ -145,14 +145,18 @@ const CheckOperations = () => {
     })
   }
 
+  const sumWithUsingBonus = (sum) => sum - (+discountCard?.bonus || 0)
+  const correctSum = (delta) => delta > 0 ? delta : 0
+
   const headersForPayModal = typePage === PAGES_TYPES.addCheck || delayCheck ? {
     main: 'Покупка',
-    text: `Ожидается оплата в размере ${roundNumber(total_sum - (+discountCard?.bonus || 0))} руб.`,
+    text: `Ожидается оплата в размере ${roundNumber(sumWithUsingBonus(total_sum))} руб.`,
     btnCancel: 'Отмена',
     btnOk: 'Оплатить',
   } : {
     main: 'Возврат',
-    text: `Ожидается возврат в размере ${roundNumber(prevTotalSum - total_sum)} руб.`,
+    text: `Ожидается возврат в размере 
+    ${roundNumber(correctSum(sumWithUsingBonus(prevTotalSum - (+discountCard?.bonus || 0)) - total_sum))} руб.`,
     btnCancel: 'Отмена',
     btnOk: 'Выплатить',
   }

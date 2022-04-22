@@ -154,9 +154,6 @@ const RightPart = ({
     addOrUpdateCheck()
   }
 
-  console.log('linesOfCheck', linesOfCheck)
-  console.log('linesOfGeneratedCheck', linesOfGeneratedCheck)
-
   return (
     <>
       <section className={style.part_right}>
