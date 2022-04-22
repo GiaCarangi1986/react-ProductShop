@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from '../../views'
+import { Button, ErrorText } from '../../views'
 import style from './check_operations.module.scss';
 
 const HistoryChanges = ({
@@ -9,6 +9,7 @@ const HistoryChanges = ({
     addedChecks = [],
     activeLine = -1,
     updateCheckInfo = () => { },
+    error = []
   } = viewCheck
 
   const setActiveBtn = (e) => {
@@ -23,29 +24,36 @@ const HistoryChanges = ({
   }
 
   return (
-    <ul className={style.histoty_btns_container}>
-      {addedChecks.map(line => {
-        const activeStyle = activeLine === line.id ? 'item-btn-active' : ''
-        return (
-          <li key={line.id} className={style.history_item}>
-            <Button
-              variant='text'
-              name={{
-                id: line.id,
-                linesCheckList: line.linesCheckList,
-                totalCost: line.totalCost,
-                cardId: line.cardId,
-                paid: line.paid
-              }}
-              onClick={setActiveBtn}
-              className={activeStyle}
-            >
-              {`${line.date_time}, ${line.kassirName}`}
-            </Button>
-          </li>
-        )
-      })}
-    </ul>
+    <>
+      <ul className={style.histoty_btns_container}>
+        {addedChecks.map(line => {
+          const activeStyle = activeLine === line.id ? 'item-btn-active' : ''
+          return (
+            <li key={line.id} className={style.history_item}>
+              <Button
+                variant='text'
+                name={{
+                  id: line.id,
+                  linesCheckList: line.linesCheckList,
+                  totalCost: line.totalCost,
+                  cardId: line.cardId,
+                  paid: line.paid
+                }}
+                onClick={setActiveBtn}
+                className={activeStyle}
+              >
+                {`${line.date_time}, ${line.kassirName}`}
+              </Button>
+            </li>
+          )
+        })}
+      </ul>
+      <div className={style.block_error}>
+        <ErrorText errorClass='form'>
+          {error[1]}
+        </ErrorText>
+      </div>
+    </>
   )
 }
 
