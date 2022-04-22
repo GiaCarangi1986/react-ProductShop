@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  gap: 20px;
+  padding: 20px;
+  height: calc(100vh - 80px);
+}
+
+.header {
+  padding-left: 10px;
+  margin: 0;
+  margin-bottom: 5px;
+  position: relative;
+  width: 200px;
+  &::after {
+    position: absolute;
+    content: "";
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--ps-color-accent);
+    bottom: -2px;
+    left: 0;
+  }
+}

@@ -597,3 +597,49 @@ export const ADMIN_REPORTS = { // отчеты
     title: 'Популярные товары'
   },
 }
+
+export const ADMIN_PANEL = [
+  {
+    title: 'Действия',
+    content: [
+      {
+        title: ADMIN_ACTIONS.make_deliveries.title,
+        value: ADMIN_ACTIONS.make_deliveries.value
+      },
+      {
+        title: ADMIN_ACTIONS.write_off_act.title,
+        value: ADMIN_ACTIONS.write_off_act.value
+      }
+    ]
+  },
+  {
+    title: 'CRUD операции',
+    content: [
+      {
+        title: ADMIN_CRUD.bonus_card.title,
+        value: ADMIN_CRUD.bonus_card.value
+      },
+      {
+        title: ADMIN_CRUD.sale.title,
+        value: ADMIN_CRUD.sale.value
+      },
+      {
+        title: ADMIN_CRUD.user.title,
+        value: ADMIN_CRUD.user.value
+      }
+    ]
+  },
+  {
+    title: 'Отчеты',
+    content: [
+      {
+        title: ADMIN_REPORTS.best_saler.title,
+        value: ADMIN_REPORTS.best_saler.value
+      },
+      {
+        title: ADMIN_REPORTS.popular_product.title,
+        value: ADMIN_REPORTS.popular_product.value
+      },
+    ]
+  }
+]
