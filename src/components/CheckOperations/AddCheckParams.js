@@ -18,7 +18,8 @@ const AddCheckParams = ({
     setDiscountCard = () => { },
     linesOfCheck = [],
     setLinesOfCheck = () => { },
-    total_sum = 0
+    total_sum = 0,
+    error = []
   } = addCheck
 
   const [disabled, setDisabled] = useState(true)
@@ -35,7 +36,8 @@ const AddCheckParams = ({
     count: '1',
     card: null,
     bonus: '0',
-    old_product: false
+    old_product: false,
+    non_field_errors: error[1]
   }
 
   const formik = useFormik({
@@ -193,6 +195,12 @@ const AddCheckParams = ({
     setBonusText(`бонус${declensionBonusNumber(cardMaxBonus)}`)
   }, [cardMaxBonus])
 
+  useEffect(() => {
+    if (error.length) {
+      formik.setFieldValue(error[0], error[1])
+    }
+  }, [error])
+
   const digitalCard = +(discountCard?.bonus || 0)
   const unitForCount = unit === UNITS[0] ? FORM_LABELS.count : FORM_LABELS.weight
   const countLabel = formik.values.product ? `${unitForCount} (макс. ${formik.values.product?.count})` : `${unitForCount} (макс. НЕОПРЕДЕЛЕНО)`
@@ -205,6 +213,7 @@ const AddCheckParams = ({
     oldProductLabel += ` (${FORM_LABELS.maybe_old_product_err})`
   }
   const disabledCardAdd = bonusErr || digitalCard === +formik.values.bonus && discountCard?.card?.value === formik.values.card?.value || !formik.values.card && discountCard && Object.keys(discountCard).length === 0
+  const cardBonusText = formik.values?.card ? `На карте ${cardMaxBonus} ${bonusText}` : ''
 
   return (
     <Form data-cy='form'>
@@ -316,17 +325,15 @@ const AddCheckParams = ({
             </Button>
           </div>
         </div>
-        {formik.values?.card && (
-          <div className={classNames(style.grid_row, style.grid_row_special)}>
-            <p className={style.container_special}>На карте {cardMaxBonus} {bonusText}</p>
-          </div>
-        )}
+        <div className={classNames(style.grid_row, style.grid_row_special)}>
+          <p className={style.container_special}>{cardBonusText}</p>
+        </div>
       </div>
-      {formik.errors.non_field_errors ? (
+      <div className={style.block_error}>
         <ErrorText errorClass='form'>
-          {formik.errors.non_field_errors}
+          {formik.values.non_field_errors}
         </ErrorText>
-      ) : null}
+      </div>
     </Form>
   )
 }

@@ -24,6 +24,7 @@ const CheckOperations = () => {
   const [total_sum, setTotalSum] = useState(0)
   const [loading, setLoading] = useState(false)
   const [typePage, setTypePage] = useState(null)
+  const [error, setError] = useState([])
 
   const [activeLine, setActiveLine] = useState(null)
   const [addedChecks, setAddedChecks] = useState([])
@@ -38,12 +39,11 @@ const CheckOperations = () => {
     payDelayCheck: HistoryChanges
   }
 
-  const handleSubmitError = ({ response, actions }) => { // пока не используется
+  const handleSubmitError = (response) => {
     if (response) {
       const errResponse = handingErrors(response);
-      actions.setFieldError([errResponse.key], errResponse.val)
+      setError([errResponse.key, errResponse.val])
     }
-    actions.setSubmitting(false)
   }
 
   const updateCheckInfo = (element = {}) => {
@@ -101,7 +101,7 @@ const CheckOperations = () => {
         redirectToCheckList()
       })
       .catch((err) => {
-        console.log('err', err)
+        handleSubmitError(err?.response)
         setLoading(false)
       })
   }
@@ -115,7 +115,7 @@ const CheckOperations = () => {
         redirectToCheckList()
       })
       .catch((err) => {
-        console.log('err', err)
+        handleSubmitError(err?.response)
         setLoading(false)
       })
   }
@@ -128,7 +128,7 @@ const CheckOperations = () => {
         redirectToCheckList()
       })
       .catch(err => {
-        console.log('err', err)
+        handleSubmitError(err?.response)
         setLoading(false)
       })
   }
@@ -216,12 +216,14 @@ const CheckOperations = () => {
                       setLinesOfCheck,
                       discountCard,
                       setDiscountCard,
-                      total_sum
+                      total_sum,
+                      error
                     }}
                     viewCheck={{
                       activeLine,
                       addedChecks,
-                      updateCheckInfo
+                      updateCheckInfo,
+                      error
                     }}
                   />
                 </GxGrid>
