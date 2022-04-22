@@ -30,7 +30,7 @@ const TableSettings = ({
     setEventType(TABLE_EVENT_TYPES.allLoaded)
 
     const oldFilters = { ...filters }
-    oldFilters.pageSize = count
+    oldFilters.page_size = count
     setFilters(oldFilters)
   }
 
