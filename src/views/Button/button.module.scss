@@ -38,12 +38,12 @@
   box-shadow: none;
 }
 
-.auth{
+.auth {
   width: 45%;
   position: relative;
 }
 
-.auth::part(base){
+.auth::part(base) {
   width: 100%;
 }
 
@@ -70,7 +70,7 @@
   box-shadow: none;
 }
 
-.dropdown-btn-open-dropdown{
+.dropdown-btn-open-dropdown {
   --gx-color-primary-50: var(--ps-color-accent-active);
 }
 
@@ -105,7 +105,7 @@
   width: 40px;
   min-width: 40px;
   height: 40px;
-  color: rgba(#002C44, 0.5);
+  color: rgba(#002c44, 0.5);
 }
 
 .search-btn::part(base):focus,
@@ -139,7 +139,7 @@
 }
 
 .button-edit_action gx-icon,
-.button-delete_action gx-icon{
+.button-delete_action gx-icon {
   margin-left: 0;
   margin-right: 0;
 }
@@ -194,7 +194,7 @@
   min-width: 100%;
 }
 
-.btn_width-100-red::part(base){
+.btn_width-100-red::part(base) {
   --gx-color-primary-50: var(--ps-color-red);
 }
 
@@ -209,16 +209,28 @@
   box-shadow: none;
 }
 
-.item-btn-active:after{
+.item-btn-active:after,
+.item-btn-active__admin:after {
   position: absolute;
-  content: '';
+  content: "";
   display: block;
   width: 60px;
   height: 5px;
   background: var(--ps-color-accent-active);
   top: 50%;
   left: 0;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
+}
+
+.item-btn__admin::part(label) {
+  white-space: break-spaces;
+  text-align: left;
+}
+
+.item-btn-active__admin:after {
+  width: 5px;
+  left: 3px;
+  border-radius: 50%;
 }
 
 .btn_width-square::part(base) {
@@ -226,11 +238,13 @@
   min-width: 40px;
 }
 
-.search_ok, .search_cancel{
+.search_ok,
+.search_cancel {
   width: 100px;
 }
 
-.search_ok::part(base), .search_cancel::part(base){
+.search_ok::part(base),
+.search_cancel::part(base) {
   min-width: 100px;
 }
 
@@ -248,37 +262,37 @@
   margin-right: 17px;
 }
 
-.user{
+.user {
   --gx-spacing-large: 10px;
   &::part(base) {
     box-shadow: none;
   }
 }
 
-.btn_menu_logout{
+.btn_menu_logout {
   width: 100%;
   --gx-spacing-large: 10px;
-  &::part(base){
+  &::part(base) {
     width: 100%;
     height: 100%;
     padding: 10px 20px;
     font-family: Roboto;
     border-radius: 0;
   }
-  &:hover{
+  &:hover {
     &::part(base) {
-        background-color: var(--ps-color-menu-hover);
-      }
+      background-color: var(--ps-color-menu-hover);
+    }
   }
-  &:active{
+  &:active {
     &::part(base) {
-        background-color: var(--ps-color-accent-hover);
-        color: var(--ps-color-menu-hover);
-      }
+      background-color: var(--ps-color-accent-hover);
+      color: var(--ps-color-menu-hover);
+    }
   }
 }
 
-.btn_choose_logout{
+.btn_choose_logout {
   position: relative;
 }
 
@@ -295,38 +309,37 @@
   }
 }
 
-
 .dropdown-btn[disabled]::part(base) {
   opacity: 1 !important;
 }
 
-.buttonDis:not([disabled='false'])[disabled]::part(base){
+.buttonDis:not([disabled="false"])[disabled]::part(base) {
   border-color: var(--ps-color-disabled);
   color: var(--ps-color-white);
   opacity: 1;
   background-color: var(--ps-color-disabled);
 }
 
-.outline:not([disabled='false'])[disabled]::part(base){
+.outline:not([disabled="false"])[disabled]::part(base) {
   border-color: var(--ps-color-disabled);
   color: var(--ps-color-disabled);
   opacity: 1;
   background-color: transparent;
 }
 
-.showAll::part(base){
-  position:absolute;
+.showAll::part(base) {
+  position: absolute;
   right: 20px;
 }
 
-.excel::part(base){
+.excel::part(base) {
   min-width: 0px;
   padding: 0;
   border: none;
 }
-.excel:hover::part(base){
+.excel:hover::part(base) {
   --gx-color-primary-60: var(--ps-color-accent-hover);
 }
-.excel:not([disabled='false'])[disabled]::part(base){
+.excel:not([disabled="false"])[disabled]::part(base) {
   color: var(--ps-color-disabled);
 }
