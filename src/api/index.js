@@ -14,14 +14,14 @@ class Api extends BaseApi {
     this.url = url
   }
 
-  loginUser = async (params) => { // +
+  loginUser = async (params) => {
     const serParams = authSendSerializer(params)
     const res = await this.post('/login/', serParams)
     const serRes = authGetSerializer(res.data)
     return serRes
   }
 
-  getCheckList = async ({ page = 1, ...params }) => { // +
+  getCheckList = async ({ page = 1, ...params }) => {
     try {
       const serParam = checkParamsSerializer(params)
       const res = await this.get('/check/', {
@@ -35,41 +35,41 @@ class Api extends BaseApi {
 
   }
 
-  getProductListForCreatingCheck = async () => { // +
+  getProductListForCreatingCheck = async () => {
     const res = await this.get('/product/')
     return res.data
   }
 
-  getCardListForCreatingCheck = async (value) => { // +
+  getCardListForCreatingCheck = async (value) => {
     const res = await this.post('/bonus_card/', { search: value })
     return res.data
   }
 
-  createCheck = async (check = {}, prevId) => { // + - отложить глянуть еще
+  createCheck = async (check = {}, prevId) => {
     const serData = createCheckSerializer(check, prevId)
     const res = await this.post('/check/', serData)
     return res.data.id
   }
 
-  getHistoryCheck = async (id = '') => { // +
+  getHistoryCheck = async (id = '') => {
     const res = await this.patch(`/check/${id}`)
     const serRes = checkHistorySerializer(res.data)
     return serRes
   }
 
-  deleteCheck = async (id = '', isDelayCheck = false) => { // +
+  deleteCheck = async (id = '', isDelayCheck = false) => {
     const res = await this.delete(`/check/${id}`, {
       isCheckDelay: isDelayCheck
     })
     return res.data
   }
 
-  dirtyDeleteCheck = async (id = '') => { // +
+  dirtyDeleteCheck = async (id = '') => {
     const res = await this.delete(`/check_additionally/${id}`)
     return res.data
   }
 
-  paidCheck = async (id = '', data = {}) => { // +
+  paidCheck = async (id = '', data = {}) => {
     const serData = createCheckSerializer(data)
     const res = await this.put(`/check/${id}`, serData)
     return res.data

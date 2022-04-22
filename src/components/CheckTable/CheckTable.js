@@ -163,7 +163,7 @@ const CheckTable = ({
 
   const overlayClasses = classNames({
     [style['table-grid']]: true,
-    [style['grid-rows']]: count > 0 && results.length !== count,
+    [style['grid-rows']]: count > 0 && true,
     [style.table_hide]: count === 0,
   })
 
