@@ -5,6 +5,14 @@
   height: calc(100vh - 80px);
   &__right {
     margin-bottom: 20px;
+    margin-top: 10px;
+    height: calc(100vh - 280px);
+    @media (max-width: 1200px) {
+      height: calc(100vh - 260px);
+    }
+  }
+  @media (max-width: 1200px) {
+    height: calc(100vh - 60px);
   }
 }
 
