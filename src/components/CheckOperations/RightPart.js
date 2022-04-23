@@ -38,7 +38,6 @@ const RightPart = ({
   const classesScroll = classNames({
     [table_style['table_scroll-horizontal']]: true,
     [table_style['table_scroll-vertical']]: true,
-    [style['table_scroll-horizontal']]: true,
   })
 
   const changeProductCount = e => {
