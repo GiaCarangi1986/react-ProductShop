@@ -128,9 +128,7 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
           </div>
         </div>
         <div className={style.wrap_row}>
-          <div className={style.wrap_col}>
-            <span className={style.text}>{totalInfo}</span>
-          </div>
+          <span className={style.text}>{totalInfo}</span>
           <div className={style.wrap_btn}>
             <Button
               type='submit'
