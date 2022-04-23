@@ -47,6 +47,14 @@
   color: var(--ps-border-color-hover);
 }
 
+.input_count::part(base) {
+  width: 75px;
+}
+
+.input_count::part(input) {
+  padding: 0 5px;
+}
+
 .input_date {
   width: 250px;
 }

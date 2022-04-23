@@ -150,6 +150,7 @@ export const CHECK_LINE_ADDING = {
 }
 
 export const MAKE_DELIVERS_HEADER = {
+  count: 'Заказываемое кол-во/вес',
   name: 'Наименование',
   quantity_or_weight: 'Оптимальный кол-во/вес',
   price_piece_or_kg: 'Цена 1шт/1кг',
@@ -157,6 +158,7 @@ export const MAKE_DELIVERS_HEADER = {
 }
 
 export const WIDTH_COL_MAKE_DELIVERS = {
+  count: 120,
   name: 250,
   quantity_or_weight: 120,
   price_piece_or_kg: 100,

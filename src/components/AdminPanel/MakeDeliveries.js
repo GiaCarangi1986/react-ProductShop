@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import classNames from 'classnames';
-import { Button, Form, Icon } from '../../views';
+import { Button, Form, Icon, Input } from '../../views';
 import {
   MAKE_DELIVERS_HEADER,
   WIDTH_COL_MAKE_DELIVERS,
@@ -54,9 +54,6 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
               <table className={table_style.table}>
                 <thead className={table_style['table-head']}>
                   <tr className={table_style['table-row']}>
-                    <th key='action_colunm' className={table_style['table-col']}>
-                      <div style={{ width: '50px' }} />
-                    </th>
                     {Object.keys(MAKE_DELIVERS_HEADER).map(header => {
                       const w = WIDTH_COL_MAKE_DELIVERS[header] || 30
                       return (
@@ -78,20 +75,20 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
                     return (
                       <tr key={`${line.id}`} className={classesRow}>
                         <td className={classNames(table_style['table-col'], table_style['table-col-full-rights'])} key='action_colunm'>
-                          <div style={{ width: '50px', margin: 'auto' }}>
+                          <div style={{ width: '50px', margin: 'auto' }} className={style.actions}>
                             <Button
                               className='button-edit_action'
                               title='Убавить кол-во'
                               // name={{ id: line.id, old_product: line.old_product }}
                               value={-1}
                               // onClick={changeProductCount}
-                              // disabled={line.count === 0}
+                              disabled={line.count === 0}
                               variant='text'
                               data-cy='btn'
                             >
                               <Icon slot='icon-left' icon='minus' />
                             </Button>
-                            {/* инпут, где это значение будет + руками можно менять */}
+                            <Input value={line.count} type='number' nameOfStyle='input_count' />
                             <Button
                               className='button-edit_action'
                               title='Прибавить кол-во'
