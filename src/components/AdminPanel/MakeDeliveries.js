@@ -1,14 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import classNames from 'classnames';
 import { Button, Form, Icon } from '../../views';
-import { MAKE_DELIVERS_HEADER, WIDTH_COL_CHECK, CHECK_LINE_ADDING, WIDTH_COL_CHECK_TBODY } from '../../const'; // тут все новое
+import {
+  MAKE_DELIVERS_HEADER,
+  WIDTH_COL_MAKE_DELIVERS,
+  MAKE_DELIVERS_LINE_ADDING,
+  WIDTH_COL_MAKE_DELIVERS_TBODY,
+  UNITS
+} from '../../const';
 import style from './style.module.scss';
 import table_style from '../CheckTable/check_table.module.scss'
 
-const MakeDeliveries = ({ children }) => {
-  const productList = [] // вот это запрос с сервака на получение списка с рекомендациями уже
+import api from '../../api'
+
+const MakeDeliveries = ({ children, make_deliveries }) => {
+  const {
+    productList = [],
+    setProductList = () => { },
+  } = make_deliveries
+
+  const [curProductList, setCurProductList] = useState([])
 
   const onSubmit = () => console.log('hello');
+
+  useEffect(() => {
+    if (!productList.length) {
+      api.getListForMakeDilevers()
+        .then(res => {
+          setProductList(res)
+          setCurProductList(res)
+        })
+        .catch(err => {
+          console.log('err', err) // далее добавить сюда строку под выводит ошибок (под кнопкой я бы сделала тут)
+        })
+    }
+  }, [])
 
   const classesScroll = classNames({
     [table_style['table_scroll-horizontal']]: true,
@@ -22,7 +48,7 @@ const MakeDeliveries = ({ children }) => {
     <div>
       {children}
       <Form onGx-submit={onSubmit} data-cy='form'>
-        <div className={classNames(table_style['table-grid'], style.container)}>
+        <div className={classNames(table_style['table-grid'], style.container__right)}>
           <div className={classesScroll}>
             <div className={table_style['table-layout']}>
               <table className={table_style.table}>
@@ -32,7 +58,7 @@ const MakeDeliveries = ({ children }) => {
                       <div style={{ width: '50px' }} />
                     </th>
                     {Object.keys(MAKE_DELIVERS_HEADER).map(header => {
-                      const w = WIDTH_COL_CHECK[header] || 30
+                      const w = WIDTH_COL_MAKE_DELIVERS[header] || 30
                       return (
                         <th key={header} className={table_style['table-col']}>
                           <div style={{ width: `${w}px`, margin: 'auto' }}>
@@ -44,13 +70,13 @@ const MakeDeliveries = ({ children }) => {
                   </tr>
                 </thead>
                 <tbody className={table_style['table-body']}>
-                  {productList.map(line => {
+                  {curProductList.map(line => {
                     const classesRow = classNames({
                       [table_style['table-row']]: true,
                     })
 
                     return (
-                      <tr key={`${line.id}-${line.old_product}`} className={classesRow}>
+                      <tr key={`${line.id}`} className={classesRow}>
                         <td className={classNames(table_style['table-col'], table_style['table-col-full-rights'])} key='action_colunm'>
                           <div style={{ width: '50px', margin: 'auto' }}>
                             <Button
@@ -79,17 +105,20 @@ const MakeDeliveries = ({ children }) => {
                             </Button>
                           </div>
                         </td>
-                        {Object.keys(CHECK_LINE_ADDING).map(check_line_key => {
-                          const leftOrCenter = Number.isNaN(Number(`${line[check_line_key]}`));
+                        {Object.keys(MAKE_DELIVERS_LINE_ADDING).map(product_line => {
+                          const leftOrCenter = Number.isNaN(Number(`${line[product_line]}`));
                           const tdClasses = classNames({
                             [table_style['table-col']]: true,
                             [table_style['table-col_left']]: leftOrCenter
                           })
-                          const w = WIDTH_COL_CHECK_TBODY[check_line_key] || ''
+                          const w = WIDTH_COL_MAKE_DELIVERS_TBODY[product_line] || ''
                           const margin = leftOrCenter ? '' : 'auto'
+                          const value = product_line === MAKE_DELIVERS_LINE_ADDING.count ?
+                            line.unit === UNITS[1] ? line[product_line] + ', кг' : line[product_line] + ', шт' :
+                            line[product_line]
                           return (
-                            <td className={tdClasses} key={check_line_key}>
-                              <div style={{ width: `${w - 1}px`, margin }}>{line[check_line_key]}</div>
+                            <td className={tdClasses} key={product_line}>
+                              <div style={{ width: `${w - 1}px`, margin }}>{value}</div>
                             </td>
                           )
                         })}
@@ -103,7 +132,7 @@ const MakeDeliveries = ({ children }) => {
         </div>
         <div className={style.wrap_row}>
           <div className={style.wrap_col}>
-            <span className={style.text}>{totalInfo[0]}</span>
+            <span className={style.text}>{totalInfo}</span>
           </div>
           <div className={style.wrap_btn}>
             <Button

@@ -158,10 +158,23 @@ export const MAKE_DELIVERS_HEADER = {
 
 export const WIDTH_COL_MAKE_DELIVERS = {
   name: 250,
-  quantity_or_weight: 90,
-  price_piece_or_kg: 90,
-  total_cost: 90,
-  old_product: 80,
+  quantity_or_weight: 120,
+  price_piece_or_kg: 100,
+  total_cost: 100,
+}
+
+export const MAKE_DELIVERS_LINE_ADDING = {
+  label: 'label',
+  count: 'count',
+  price: 'price',
+  total_cost: 'total_cost',
+}
+
+export const WIDTH_COL_MAKE_DELIVERS_TBODY = {
+  label: 250,
+  count: 120,
+  price: 100,
+  total_cost: 100,
 }
 
 export const USER_ROLE = {

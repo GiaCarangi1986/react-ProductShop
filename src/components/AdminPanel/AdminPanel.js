@@ -7,6 +7,7 @@ import style from './style.module.scss';
 
 const AdminPanel = () => {
   const [typePage, setTypePage] = useState('')
+  const [list, setList] = useState([])
 
   const handleClick = (e) => {
     setTypePage(e.target.value)
@@ -21,6 +22,7 @@ const AdminPanel = () => {
   }
 
   const RightPart = RIGHT_VIEWS[typePage]
+  // надо заугржку показывать если make_deliveries и []
 
   return (
     <div className={style.container}>
@@ -31,7 +33,12 @@ const AdminPanel = () => {
       </div>
       {RightPart && (
         <div className={style.right}>
-          <RightPart>
+          <RightPart
+            make_deliveries={{
+              productList: list,
+              setProductList: setList
+            }}
+          >
             <div className={style.close}>
               <Button
                 variant='text'

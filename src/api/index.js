@@ -74,6 +74,40 @@ class Api extends BaseApi {
     const res = await this.put(`/check/${id}`, serData)
     return res.data
   }
+
+  getListForMakeDilevers = async () => {
+    try {
+      const res = await this.get('/make_delivers/')
+      return res.data
+    } catch (error) {
+      return [
+        {
+          id: 1,
+          label: 'Простокваша, волжанка',
+          count: '5',
+          unit: 'шт',
+          price: '34',
+          total_cost: '150',
+        },
+        {
+          id: 2,
+          label: 'Квас, очаково',
+          count: '3',
+          unit: 'шт',
+          price: '50',
+          total_cost: '150',
+        },
+        {
+          id: 3,
+          label: 'Лимонад Колокольчик, черноголовка',
+          count: '5',
+          unit: 'шт',
+          price: '60',
+          total_cost: '300',
+        },
+      ]
+    }
+  }
 }
 
 export const MAIN_URL = 'http://localhost:4000'

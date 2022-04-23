@@ -3,6 +3,9 @@
   gap: 2%;
   padding: 20px;
   height: calc(100vh - 80px);
+  &__right {
+    margin-bottom: 20px;
+  }
 }
 
 .left {
