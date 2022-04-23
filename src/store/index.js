@@ -1,6 +1,5 @@
 import { createStoreon } from 'storeon';
 import persistState from 'storeon-sessionstorage'
-import { PAGE_SIZE } from '../const';
 
 const errorFn = store => {
   store.on('@init', () => ({ errorPopup: null }));
@@ -39,43 +38,10 @@ const pageCheckProps = store => {
   store.on('page/close', () => ({ page: null }));
 };
 
-const checkFilters = (store) => {
-  store.on('@init', () => ({ filters: { page: 1, pageSize: PAGE_SIZE, search: '', ordering: '' } }))
-  store.on('params/save', ({ }, { ...params }) => ({ filters: { ...params } }));
-  store.on('params/update', ({ filters }, params) => {
-    const newFilters = {
-      ...filters,
-      ...params
-    };
-    store.dispatch('params/save', newFilters);
-  });
-  store.on('params/reset', ({ filters }) => {
-    const newFilters = {
-      page: filters.page,
-      pageSize: filters.pageSize,
-      search: '',
-      ordering: '',
-    };
-    store.dispatch('params/save', newFilters);
-  });
-}
-
-const catchErrorsApi = (store) => {
-  store.on('@init', () => ({ response: null }))
-  store.on('catch/api', ({ }, response) => {
-    const status = response?.status || null
-    if (status && status === 401) {
-      store.dispatch('user/reset')
-    }
-  })
-}
-
 const storeonParams = [
   errorFn,
   userInfo,
   modalFn,
-  catchErrorsApi,
-  checkFilters,
   pageCheckProps,
   persistState([
     'currentUser',

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
 import { Button, Form, Icon } from '../../views';
-import { CHECK_LINES_HEADER, WIDTH_COL_CHECK, CHECK_LINE_ADDING, WIDTH_COL_CHECK_TBODY } from '../../const'; // тут все новое
+import { MAKE_DELIVERS_HEADER, WIDTH_COL_CHECK, CHECK_LINE_ADDING, WIDTH_COL_CHECK_TBODY } from '../../const'; // тут все новое
 import style from './style.module.scss';
 import table_style from '../CheckTable/check_table.module.scss'
 
@@ -31,12 +31,12 @@ const MakeDeliveries = ({ children }) => {
                     <th key='action_colunm' className={table_style['table-col']}>
                       <div style={{ width: '50px' }} />
                     </th>
-                    {Object.keys(CHECK_LINES_HEADER).map(header => {
+                    {Object.keys(MAKE_DELIVERS_HEADER).map(header => {
                       const w = WIDTH_COL_CHECK[header] || 30
                       return (
                         <th key={header} className={table_style['table-col']}>
                           <div style={{ width: `${w}px`, margin: 'auto' }}>
-                            {CHECK_LINES_HEADER[header]}
+                            {MAKE_DELIVERS_HEADER[header]}
                           </div>
                         </th>
                       )
