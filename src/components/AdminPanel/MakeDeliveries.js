@@ -8,7 +8,6 @@ import {
   MAKE_DELIVERS_LINE_ADDING,
   WIDTH_COL_MAKE_DELIVERS_TBODY,
   UNITS,
-  ADMIN_ACTIONS,
   MODAL_TYPES
 } from '../../const';
 import PayModal from '../Modal/PayModal';
@@ -21,7 +20,6 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
   const {
     productList = [],
     setProductList = () => { },
-    type = '',
   } = make_deliveries
   const { dispatch } = useStoreon();
 
@@ -74,7 +72,7 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
   }
 
   useEffect(() => {
-    if (!productList.length && type === ADMIN_ACTIONS.make_deliveries.value) {
+    if (!productList.length) {
       api.getListForMakeDilevers()
         .then(res => {
           const fullArr = []

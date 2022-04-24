@@ -20,7 +20,7 @@ export function roundNumber(number = 0) {
   if (!number) {
     return number
   }
-  return Math.round(number * 100) / 100
+  return Math.round(number * 1000) / 1000
 }
 
 export function checkNumber(value) {

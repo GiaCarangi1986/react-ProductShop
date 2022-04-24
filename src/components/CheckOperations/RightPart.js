@@ -106,11 +106,11 @@ const RightPart = ({
       const index = updateProductLines.indexOf(productData)
       productData.old_product = !productData.old_product
       if (productData.old_product) {
-        productData.price /= 2
+        productData.price = roundNumber(productData.price / 2)
         productData.total_cost /= 2
       }
       else {
-        productData.price *= 2
+        productData.price = roundNumber(productData.price * 2)
         productData.total_cost *= 2
       }
       updateProductLines[index] = productData

@@ -7,7 +7,7 @@ import style from './style.module.scss';
 
 const AdminPanel = () => {
   const [typePage, setTypePage] = useState('')
-  const [list, setList] = useState([])
+  const [makeDeliveriesList, setMakeDeliveriesList] = useState([])
 
   const handleClick = (e) => {
     setTypePage(e.target.value)
@@ -34,9 +34,8 @@ const AdminPanel = () => {
         <div className={style.right}>
           <RightPart
             make_deliveries={{
-              productList: list,
-              setProductList: setList,
-              type: typePage
+              productList: makeDeliveriesList,
+              setProductList: setMakeDeliveriesList,
             }}
           >
             <div className={style.close}>

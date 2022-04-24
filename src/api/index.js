@@ -89,6 +89,7 @@ class Api extends BaseApi {
           unit: 'шт',
           price: 34,
           total_cost: 150,
+          productId: 1,
         },
         {
           id: 2,
@@ -98,6 +99,7 @@ class Api extends BaseApi {
           unit: 'шт',
           price: 50,
           total_cost: 150,
+          productId: 2,
         },
         {
           id: 3,
@@ -107,6 +109,7 @@ class Api extends BaseApi {
           unit: 'шт',
           price: 60,
           total_cost: 300,
+          productId: 3,
         },
       ]
     }
