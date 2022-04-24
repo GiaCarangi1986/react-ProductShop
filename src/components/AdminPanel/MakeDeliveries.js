@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import classNames from 'classnames';
-import { Button, Form, Icon, Input } from '../../views';
+import { Button, Form, Icon, Input, PreloaderPage } from '../../views';
 import {
   MAKE_DELIVERS_HEADER,
   WIDTH_COL_MAKE_DELIVERS,
@@ -41,8 +41,9 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
     [table_style['table_scroll-vertical']]: true,
   })
 
-  const totalInfo = 'Итого:'
   const totalSum = 10
+  const totalInfo = `Итого: ${totalSum}`
+
   return (
     <div>
       {children}
@@ -142,6 +143,7 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
           </div>
         </div>
       </Form>
+      {curProductList.length === 0 && <PreloaderPage loaderClass='admin_panel' />}
     </div>
   )
 }

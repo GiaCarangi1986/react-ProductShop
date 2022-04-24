@@ -151,32 +151,36 @@ export const CHECK_LINE_ADDING = {
 
 export const MAKE_DELIVERS_HEADER = {
   count: 'Заказываемое кол-во/вес',
-  name: 'Наименование',
   quantity_or_weight: 'Оптимальный кол-во/вес',
+  name: 'Наименование',
+  manufacturer: 'Производитель',
   price_piece_or_kg: 'Цена 1шт/1кг',
   total_cost: 'Общая стоимость',
 }
 
 export const WIDTH_COL_MAKE_DELIVERS = {
-  count: 120,
+  count: 125,
+  quantity_or_weight: 95,
   name: 250,
-  quantity_or_weight: 120,
-  price_piece_or_kg: 100,
-  total_cost: 100,
+  manufacturer: 250,
+  price_piece_or_kg: 95,
+  total_cost: 95,
 }
 
 export const MAKE_DELIVERS_LINE_ADDING = {
-  label: 'label',
   count: 'count',
+  label: 'label',
+  manufacturer: 'manufacturer',
   price: 'price',
   total_cost: 'total_cost',
 }
 
 export const WIDTH_COL_MAKE_DELIVERS_TBODY = {
+  count: 95,
   label: 250,
-  count: 120,
-  price: 100,
-  total_cost: 100,
+  manufacturer: 250,
+  price: 95,
+  total_cost: 95,
 }
 
 export const USER_ROLE = {

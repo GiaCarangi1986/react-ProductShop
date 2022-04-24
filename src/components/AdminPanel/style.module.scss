@@ -6,11 +6,11 @@
   &__right {
     margin-bottom: 20px;
     margin-top: 10px;
-    height: calc(100vh - 280px);
+    height: calc(100vh - 245px);
     position: relative;
     background-color: var(--ps-background-color);
     @media (max-width: 1200px) {
-      height: calc(100vh - 260px);
+      height: calc(100vh - 225px);
     }
   }
   @media (max-width: 1200px) {

@@ -12,7 +12,7 @@
   background-color: var(--ps-preload-vis);
 }
 
-.loader-layout_full{
+.loader-layout_full {
   top: 0;
   width: 100vw;
   height: 100vh;
@@ -25,7 +25,7 @@
 }
 
 .loader-indicator {
-  --gx-color-primary-50: var(--ps-color-white);;
+  --gx-color-primary-50: var(--ps-color-white);
   position: absolute;
   top: 0;
   width: min-content;
@@ -37,14 +37,20 @@
   height: 1em;
 }
 
-@media screen and (max-width: 1200px){
+.loader-admin_panel {
+  width: 73%;
+  right: 0;
+  left: inherit;
+}
+
+@media screen and (max-width: 1200px) {
   .loader-layout {
     top: 60px;
   }
   .loader-indicator {
     top: 0;
   }
-  .loader-layout_full{
+  .loader-layout_full {
     top: 0;
   }
 }
