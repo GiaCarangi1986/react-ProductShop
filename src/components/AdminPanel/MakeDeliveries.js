@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { Button, Form, Icon, Input, PreloaderPage } from '../../views';
 import {
@@ -6,7 +6,8 @@ import {
   WIDTH_COL_MAKE_DELIVERS,
   MAKE_DELIVERS_LINE_ADDING,
   WIDTH_COL_MAKE_DELIVERS_TBODY,
-  UNITS
+  UNITS,
+  ADMIN_ACTIONS
 } from '../../const';
 import style from './style.module.scss';
 import table_style from '../CheckTable/check_table.module.scss'
@@ -17,18 +18,62 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
   const {
     productList = [],
     setProductList = () => { },
+    type = '',
   } = make_deliveries
 
-  const [curProductList, setCurProductList] = useState([])
+  const [sum, setSum] = useState(0)
 
-  const onSubmit = () => console.log('hello');
+  const onSubmit = () => console.log('hello', productList);
+
+  const changeSum = (productArr = []) => {
+    let sum = 0
+    productArr.forEach(line => {
+      sum += line.choosen_count * line.price
+    })
+    setSum(sum)
+  }
+
+  const HANDLE_CHANGE = {
+    button: 'button',
+    input: 'input'
+  }
+
+  const changeProductCount = (e = {}, type = '') => {
+    const value = e.target.value
+    const index = e.target.name
+    const oldArr = [...productList]
+    switch (type) {
+      case HANDLE_CHANGE.button:
+        oldArr[index].choosen_count += +value
+        break;
+      case HANDLE_CHANGE.input:
+        oldArr[index].choosen_count = +value
+        break;
+    }
+    setProductList(oldArr)
+  }
+
+  const handleButtonChange = (e) => {
+    console.log('HANDLE_CHANGE.button', HANDLE_CHANGE.button)
+    changeProductCount(e, HANDLE_CHANGE.button)
+  }
+
+  const handleInputChange = (e) => {
+    console.log('HANDLE_CHANGE.input', HANDLE_CHANGE.input)
+    changeProductCount(e, HANDLE_CHANGE.input)
+  }
 
   useEffect(() => {
-    if (!productList.length) {
+    if (!productList.length && type === ADMIN_ACTIONS.make_deliveries.value) {
       api.getListForMakeDilevers()
         .then(res => {
-          setProductList(res)
-          setCurProductList(res)
+          const fullArr = []
+          res.forEach(el => {
+            const line = el
+            line.choosen_count = el.count
+            fullArr.push(line)
+          })
+          setProductList(fullArr)
         })
         .catch(err => {
           console.log('err', err) // далее добавить сюда строку под выводит ошибок (под кнопкой я бы сделала тут)
@@ -36,13 +81,18 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
     }
   }, [])
 
+  useEffect(() => {
+    if (productList.length) {
+      changeSum(productList)
+    }
+  }, [productList])
+
   const classesScroll = classNames({
     [table_style['table_scroll-horizontal']]: true,
     [table_style['table_scroll-vertical']]: true,
   })
 
-  const totalSum = 10
-  const totalInfo = `Итого: ${totalSum}`
+  const totalInfo = `Итого: ${sum}`
 
   return (
     <div>
@@ -67,11 +117,10 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
                   </tr>
                 </thead>
                 <tbody className={table_style['table-body']}>
-                  {curProductList.map(line => {
+                  {productList.map((line, index) => {
                     const classesRow = classNames({
                       [table_style['table-row']]: true,
                     })
-
                     return (
                       <tr key={`${line.id}`} className={classesRow}>
                         <td className={classNames(table_style['table-col'], table_style['table-col-full-rights'])} key='action_colunm'>
@@ -79,22 +128,28 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
                             <Button
                               className='button-edit_action'
                               title='Убавить кол-во'
-                              // name={{ id: line.id, old_product: line.old_product }}
+                              name={index}
                               value={-1}
-                              // onClick={changeProductCount}
-                              disabled={line.count === 0}
+                              onClick={handleButtonChange}
+                              disabled={line.choosen_count === 0}
                               variant='text'
                               data-cy='btn'
                             >
                               <Icon slot='icon-left' icon='minus' />
                             </Button>
-                            <Input value={line.count} type='number' nameOfStyle='input_count' />
+                            <Input
+                              value={line.choosen_count}
+                              type='number'
+                              nameOfStyle='input_count'
+                              onGx-input={handleInputChange}
+                              name={index}
+                            />
                             <Button
                               className='button-edit_action'
                               title='Прибавить кол-во'
-                              // name={{ id: line.id, old_product: line.old_product }}
+                              name={index}
                               value={1}
-                              // onClick={changeProductCount}
+                              onClick={handleButtonChange}
                               variant='text'
                               data-cy='btn'
                             >
@@ -135,7 +190,7 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
               className='btn_width-100'
               data-cy='btn'
               buttonDis
-              disabled={!totalSum}
+              disabled={!sum}
             >
               Заказать
             </Button>
@@ -143,7 +198,7 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
           </div>
         </div>
       </Form>
-      {curProductList.length === 0 && <PreloaderPage loaderClass='admin_panel' />}
+      {productList.length === 0 && <PreloaderPage loaderClass='admin_panel' />}
     </div>
   )
 }

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { ADMIN_PANEL } from '../../const';
 import { Button, Icon } from '../../views';
 import MakeDeliveries from './MakeDeliveries';
 import Options from './Options'
+import { ADMIN_PANEL } from '../../const';
 import style from './style.module.scss';
 
 const AdminPanel = () => {
@@ -22,7 +22,6 @@ const AdminPanel = () => {
   }
 
   const RightPart = RIGHT_VIEWS[typePage]
-  // надо заугржку показывать если make_deliveries и []
 
   return (
     <div className={style.container}>
@@ -36,7 +35,8 @@ const AdminPanel = () => {
           <RightPart
             make_deliveries={{
               productList: list,
-              setProductList: setList
+              setProductList: setList,
+              type: typePage
             }}
           >
             <div className={style.close}>
