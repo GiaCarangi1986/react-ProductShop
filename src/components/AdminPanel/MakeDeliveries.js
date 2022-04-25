@@ -11,6 +11,7 @@ import {
   MODAL_TYPES
 } from '../../const';
 import PayModal from '../Modal/PayModal';
+import { dateFotmattedForTable } from '../../utils/date';
 import style from './style.module.scss';
 import table_style from '../CheckTable/check_table.module.scss'
 
@@ -24,6 +25,7 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
   const { dispatch } = useStoreon();
 
   const [sum, setSum] = useState(0)
+  const [latestDate, setLatestDate] = useState('...')
 
   const payOrder = () => {
     console.log('hello', productList);
@@ -76,12 +78,13 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
       api.getListForMakeDilevers()
         .then(res => {
           const fullArr = []
-          res.forEach(el => {
+          res.productList?.forEach(el => {
             const line = el
             line.choosen_count = el.count
             fullArr.push(line)
           })
           setProductList(fullArr)
+          setLatestDate(dateFotmattedForTable(res.latestDate))
         })
         .catch(err => {
           console.log('err', err) // далее добавить сюда строку под выводит ошибок (под кнопкой я бы сделала тут)
@@ -101,10 +104,12 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
   })
 
   const totalInfo = `Итого: ${sum}`
+  const dateInfo = `Последняя закупка была осуществлена ${latestDate}`
 
   return (
     <div>
       {children}
+      <h2 className={style.header_right}>{dateInfo}</h2>
       <div className={classNames(table_style['table-grid'], style.container__right)}>
         <div className={classesScroll}>
           <div className={table_style['table-layout']}>
