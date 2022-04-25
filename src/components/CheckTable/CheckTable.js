@@ -204,7 +204,7 @@ const CheckTable = ({
               return (
                 <tr data-test={key} key={key} className={classesRow}>
                   <td className={classNames(style['table-col'], style['table-col-full-rights'])}>
-                    <div style={{ width: '50px', margin: 'auto' }}>
+                    <div style={{ minWidth: '50px', margin: 'auto' }}>
                       <Button
                         className='button-edit_action'
                         title='Посмотреть'
@@ -241,12 +241,12 @@ const CheckTable = ({
                     const m = leftOrCenter ? '' : 'auto'
                     return (
                       <td key={`${col}`} className={tdClasses}>
-                        <div style={{ width: `${w - 1}px`, margin: m }}>{elem[col]}</div>
+                        <div style={{ minWidth: `${w - 1}px`, margin: m }}>{elem[col]}</div>
                       </td>
                     )
                   })}
                   <td className={style['table-col']}>
-                    <div style={{ width: '25px', margin: 'auto' }}>
+                    <div style={{ minWidth: '25px', margin: 'auto' }}>
                       <Button
                         className='button-delete_action'
                         title='Удалить'

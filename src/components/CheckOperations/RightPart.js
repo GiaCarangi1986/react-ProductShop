@@ -172,14 +172,14 @@ const RightPart = ({
                         <tr className={table_style['table-row']}>
                           {!hiddenActions && (
                             <th key='action_colunm' className={table_style['table-col']}>
-                              <div style={{ width: '50px' }} />
+                              <div style={{ minWidth: '50px' }} />
                             </th>
                           )}
                           {Object.keys(CHECK_LINES_HEADER).map(header => {
                             const w = WIDTH_COL_CHECK[header] || 30
                             return (
                               <th key={header} className={table_style['table-col']}>
-                                <div style={{ width: `${w}px`, margin: 'auto' }}>
+                                <div style={{ minWidth: `${w}px`, margin: 'auto' }}>
                                   {CHECK_LINES_HEADER[header]}
                                 </div>
                               </th>
@@ -202,7 +202,7 @@ const RightPart = ({
                             <tr key={`${line.id}-${line.old_product}`} className={classesRow}>
                               {!hiddenActions && (
                                 <td className={classNames(table_style['table-col'], table_style['table-col-full-rights'])} key='action_colunm'>
-                                  <div style={{ width: '50px', margin: 'auto' }}>
+                                  <div style={{ minWidth: '50px', margin: 'auto' }}>
                                     <Button
                                       className='button-edit_action'
                                       title='Убавить кол-во'
@@ -246,12 +246,12 @@ const RightPart = ({
                                   line[check_line_key]
                                 return (
                                   <td className={tdClasses} key={check_line_key}>
-                                    <div style={{ width: `${w - 1}px`, margin, color }}>{value}</div>
+                                    <div style={{ minWidth: `${w - 1}px`, margin, color }}>{value}</div>
                                   </td>
                                 )
                               })}
                               <td className={table_style['table-col']} key='action_colunm-old-product'>
-                                <div style={{ width: '35px', margin: 'auto' }}>
+                                <div style={{ minWidth: '35px', display: 'flex', justifyContent: 'center' }}>
                                   <Switch
                                     text={line.old_product}
                                     disabled={line.sale || !line.maybeOld || hiddenActions || (editCheck || payDelayCheck) && uncorrectSwitch(line.id)}
@@ -264,7 +264,7 @@ const RightPart = ({
                               </td>
                               {!hiddenActions && (
                                 <td className={table_style['table-col']} key='action_colunm-delete'>
-                                  <div style={{ width: '25px', margin: 'auto' }}>
+                                  <div style={{ minWidth: '25px', margin: 'auto' }}>
                                     <Button
                                       className='button-delete_action'
                                       variant='text'

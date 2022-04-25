@@ -120,7 +120,7 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
                     const w = WIDTH_COL_MAKE_DELIVERS[header] || 30
                     return (
                       <th key={header} className={table_style['table-col']}>
-                        <div style={{ width: `${w}px`, margin: 'auto' }}>
+                        <div style={{ minWidth: `${w}px`, margin: 'auto' }}>
                           {MAKE_DELIVERS_HEADER[header]}
                         </div>
                       </th>
@@ -136,7 +136,7 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
                   return (
                     <tr key={`${line.id}`} className={classesRow}>
                       <td className={classNames(table_style['table-col'], table_style['table-col-full-rights'])} key='action_colunm'>
-                        <div style={{ width: '50px', margin: 'auto' }} className={style.actions}>
+                        <div style={{ minWidth: '125px', margin: 'auto' }} className={style.actions}>
                           <Button
                             className='button-edit_action'
                             title='Убавить кол-во'
@@ -182,7 +182,7 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
                           line[product_line]
                         return (
                           <td className={tdClasses} key={product_line}>
-                            <div style={{ width: `${w - 1}px`, margin }}>{value}</div>
+                            <div style={{ minWidth: `${w - 1}px`, margin }}>{value}</div>
                           </td>
                         )
                       })}

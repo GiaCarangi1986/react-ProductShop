@@ -66,13 +66,13 @@ const Table = ({
             className={style['table-head']}>
             <tr className={style['table-row']}>
               <th key='action_colunm' className={style['table-col']}>
-                <div style={{ width: '50px' }} />
+                <div style={{ minWidth: '50px' }} />
               </th>
               {cols && colsTrue.map((key) => {
                 const w = WIDTH_COL[key] || 100
                 return (
                   <th key={`column-${key}`} className={style['table-col']}>
-                    <div style={{ width: `${w}px`, margin: 'auto' }}>
+                    <div style={{ minWidth: `${w}px`, margin: 'auto' }}>
                       {cols[key]}
                     </div>
                   </th>
