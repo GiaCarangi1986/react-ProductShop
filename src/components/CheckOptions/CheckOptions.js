@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { FetcherList } from '@garpix/fetcher/fetcher-list/react-router';
 import { useNavigate } from 'react-router';
 import { useStoreon } from 'storeon/react';
-import { PATHS, PAGES_TYPES } from '../../const';
+import { PATHS, PAGE_SIZE } from '../../const';
 import CheckTable from '../CheckTable';
 
 import api from '../../api'
@@ -25,7 +25,7 @@ const CheckOptions = () => {
         isHistoryPush={false}
         api={api.getCheckList}
         initFilter={{
-          page_size: PAGES_TYPES,
+          page_size: PAGE_SIZE,
           changed_show: false, // показать только редактированные чеки
           delayed_show: false // показать только неоплаченные чеки
         }}
