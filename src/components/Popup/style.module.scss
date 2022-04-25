@@ -1,0 +1,20 @@
+.container {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: max-content;
+  height: max-content;
+  padding: 10px;
+  background-color: var(--ps-color-white);
+  color: var(--ps-color-accent);
+  border-radius: 12px;
+  box-shadow: 0px 18px 40px -15px var(--ps-color-accent);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: flex-end;
+}
+
+.text {
+  margin: 0 5px 10px;
+}

@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { Button, Icon } from '../../views';
 import MakeDeliveries from './MakeDeliveries';
 import Options from './Options'
+import Popup from '../Popup';
 import { ADMIN_PANEL } from '../../const';
 import style from './style.module.scss';
 
 const AdminPanel = () => {
   const [typePage, setTypePage] = useState('')
   const [makeDeliveriesList, setMakeDeliveriesList] = useState([])
+  const [latestDate, setLatestDate] = useState('...')
 
   const handleClick = (e) => {
     setTypePage(e.target.value)
@@ -36,7 +38,9 @@ const AdminPanel = () => {
             make_deliveries={{
               productList: makeDeliveriesList,
               setProductList: setMakeDeliveriesList,
-              setTypePage
+              setTypePage,
+              latestDate,
+              setLatestDate
             }}
           >
             <div className={style.close}>
@@ -51,6 +55,7 @@ const AdminPanel = () => {
           </RightPart>
         </div>
       )}
+      <Popup />
     </div>
   )
 }

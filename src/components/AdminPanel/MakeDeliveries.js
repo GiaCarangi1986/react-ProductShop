@@ -8,7 +8,8 @@ import {
   MAKE_DELIVERS_LINE_ADDING,
   WIDTH_COL_MAKE_DELIVERS_TBODY,
   UNITS,
-  MODAL_TYPES
+  MODAL_TYPES,
+  POPUP_TYPES
 } from '../../const';
 import PayModal from '../Modal/PayModal';
 import { dateFotmattedForMakeDelivery } from '../../utils/date';
@@ -21,19 +22,24 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
   const {
     productList = [],
     setProductList = () => { },
-    setTypePage = () => { }
+    setTypePage = () => { },
+    latestDate,
+    setLatestDate
   } = make_deliveries
   const { dispatch } = useStoreon();
 
   const [sum, setSum] = useState(0)
-  const [latestDate, setLatestDate] = useState('...')
 
   const payOrder = () => {
     // err выводить в отедельное поле
     api.setListForMakeDilevers(productList)
       .then(res => {
-        console.log('res', res)
+        dispatch('popup/toggle', {
+          popup: POPUP_TYPES.admin_panel,
+          text: 'Заказ успешно выполнен'
+        })
         setTypePage('')
+        setProductList([])
       })
       .catch(err => console.log('err', err))
   }

@@ -34,5 +34,5 @@ const PayModal = ({ func = () => { }, headers = {} }) => {
     </Modal>
   )
 }
-// ожидается возврат
+
 export default PayModal

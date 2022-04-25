@@ -26,6 +26,10 @@ export const MODAL_TYPES = {
   errorModal: 'errorModal'
 }
 
+export const POPUP_TYPES = {
+  admin_panel: 'admin_panel'
+}
+
 export const PAGES_TYPES = {
   addCheck: 'addCheck',
   viewCheck: 'viewCheck',

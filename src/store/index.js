@@ -29,6 +29,15 @@ const modalFn = store => {
   store.on('modal/close', () => ({ modal: null }));
 };
 
+const popupFn = store => {
+  store.on('@init', () => ({ popup: null }));
+  store.on('popup/toggle', ({ }, { popup, ...params }) => ({
+    popup,
+    ...params
+  }));
+  store.on('popup/close', () => ({ popup: null }));
+};
+
 const pageCheckProps = store => {
   store.on('@init', () => ({ page: null }));
   store.on('page/toggle', ({ }, { page, ...params }) => ({
@@ -43,6 +52,7 @@ const storeonParams = [
   userInfo,
   modalFn,
   pageCheckProps,
+  popupFn,
   persistState([
     'currentUser',
   ]),
