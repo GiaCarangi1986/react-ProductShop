@@ -10,6 +10,7 @@ const AdminPanel = () => {
   const [typePage, setTypePage] = useState('')
   const [makeDeliveriesList, setMakeDeliveriesList] = useState([])
   const [latestDate, setLatestDate] = useState('...')
+  const [error, setError] = useState('')
 
   const handleClick = (e) => {
     setTypePage(e.target.value)
@@ -40,7 +41,9 @@ const AdminPanel = () => {
               setProductList: setMakeDeliveriesList,
               setTypePage,
               latestDate,
-              setLatestDate
+              setLatestDate,
+              error,
+              setError
             }}
           >
             <div className={style.close}>

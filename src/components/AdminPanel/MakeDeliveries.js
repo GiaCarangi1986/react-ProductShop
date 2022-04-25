@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { useStoreon } from 'storeon/react';
-import { Button, Icon, Input, PreloaderPage } from '../../views';
+import { Button, Icon, Input, PreloaderPage, ErrorText } from '../../views';
 import {
   MAKE_DELIVERS_HEADER,
   WIDTH_COL_MAKE_DELIVERS,
@@ -13,6 +13,7 @@ import {
 } from '../../const';
 import PayModal from '../Modal/PayModal';
 import { dateFotmattedForMakeDelivery } from '../../utils/date';
+import { handingErrors } from '../../utils'
 import style from './style.module.scss';
 import table_style from '../CheckTable/check_table.module.scss'
 
@@ -24,14 +25,22 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
     setProductList = () => { },
     setTypePage = () => { },
     latestDate,
-    setLatestDate
+    setLatestDate,
+    setError,
+    error
   } = make_deliveries
   const { dispatch } = useStoreon();
 
   const [sum, setSum] = useState(0)
 
+  const handleSubmitError = (response) => {
+    if (response) {
+      const errResponse = handingErrors(response);
+      setError(errResponse.val)
+    }
+  }
+
   const payOrder = () => {
-    // err выводить в отедельное поле
     api.setListForMakeDilevers(productList)
       .then(res => {
         dispatch('popup/toggle', {
@@ -40,8 +49,12 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
         })
         setTypePage('')
         setProductList([])
+        setLatestDate('...')
+        setError('')
       })
-      .catch(err => console.log('err', err))
+      .catch(err => {
+        handleSubmitError(err?.response)
+      })
   }
 
   const paymentСonfirmation = () => {
@@ -101,7 +114,7 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
           setLatestDate(dateFotmattedForMakeDelivery(res.latestDate))
         })
         .catch(err => {
-          console.log('err', err) // далее добавить сюда строку под выводит ошибок (под кнопкой я бы сделала тут)
+          handleSubmitError(err?.response)
         })
     }
   }, [])
@@ -210,6 +223,9 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
       </div>
       <div className={style.wrap_row}>
         <span className={style.text}>{totalInfo}</span>
+        <ErrorText errorClass='make_deliver'>
+          {error}
+        </ErrorText>
         <div className={style.wrap_btn}>
           <Button
             onClick={paymentСonfirmation}
@@ -220,7 +236,6 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
           >
             Заказать
           </Button>
-          {/* для подверждения заказа модалка пусть вылезает */}
         </div>
       </div>
       {productList.length === 0 && <PreloaderPage loaderClass='admin_panel' />}
