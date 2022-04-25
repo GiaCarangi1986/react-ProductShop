@@ -5,7 +5,8 @@ import {
   authSendSerializer,
   authGetSerializer,
   createCheckSerializer,
-  checkHistorySerializer
+  checkHistorySerializer,
+  productForMakeDeliverySerializer
 } from './serializer'
 
 class Api extends BaseApi {
@@ -75,46 +76,12 @@ class Api extends BaseApi {
     return res.data
   }
 
-  getListForMakeDilevers = async () => {
-    try {
-      const res = await this.get('/make_delivers/')
-      return res.data
-    } catch (error) {
-      return {
-        latestDate: new Date(),
-        productList: [
-          {
-            id: 1,
-            label: 'Простокваша',
-            manufacturer: 'волжанка',
-            count: 5,
-            unit: 'шт',
-            price: 34,
-            total_cost: 150,
-            productId: 1,
-          },
-          {
-            id: 2,
-            label: 'Квас',
-            manufacturer: 'очаково',
-            count: 0,
-            unit: 'шт',
-            price: 50,
-            total_cost: 150,
-            productId: 2,
-          },
-          {
-            id: 3,
-            label: 'Лимонад Колокольчик',
-            manufacturer: 'черноголовка',
-            count: 5,
-            unit: 'шт',
-            price: 60,
-            total_cost: 300,
-            productId: 3,
-          },
-        ]
-      }
+  getListForMakeDilevers = async () => { // +-
+    const res = await this.get('/delivery_line/')
+    const serRes = productForMakeDeliverySerializer(res.data.productList)
+    return {
+      productList: serRes,
+      latestDate: res.latestDate
     }
   }
 }
