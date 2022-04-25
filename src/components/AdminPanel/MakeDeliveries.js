@@ -112,6 +112,7 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
           })
           setProductList(fullArr)
           setLatestDate(dateFotmattedForMakeDelivery(res.latestDate))
+          setError('')
         })
         .catch(err => {
           handleSubmitError(err?.response)
@@ -224,7 +225,7 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
       <div className={style.wrap_row}>
         <span className={style.text}>{totalInfo}</span>
         <ErrorText errorClass='make_deliver'>
-          {error}
+          {productList.length !== 0 && error}
         </ErrorText>
         <div className={style.wrap_btn}>
           <Button
