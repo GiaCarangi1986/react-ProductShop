@@ -11,7 +11,7 @@ import {
   MODAL_TYPES
 } from '../../const';
 import PayModal from '../Modal/PayModal';
-import { dateFotmattedForTable } from '../../utils/date';
+import { dateFotmattedForMakeDelivery } from '../../utils/date';
 import style from './style.module.scss';
 import table_style from '../CheckTable/check_table.module.scss'
 
@@ -84,7 +84,7 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
             fullArr.push(line)
           })
           setProductList(fullArr)
-          setLatestDate(dateFotmattedForTable(res.latestDate))
+          setLatestDate(dateFotmattedForMakeDelivery(res.latestDate))
         })
         .catch(err => {
           console.log('err', err) // далее добавить сюда строку под выводит ошибок (под кнопкой я бы сделала тут)

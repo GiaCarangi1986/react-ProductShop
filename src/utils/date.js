@@ -30,6 +30,10 @@ function dateFotmattedForTable(date) {
   return currentDate
 }
 
+function dateFotmattedForMakeDelivery(date = new Date()) {
+  return dayjs(date).format('DD.MM.YYYY')
+}
+
 function dateFotmattedForModal(date) {
   let currentDate = ''
   if (dayjs(date).isValid()) {
@@ -43,5 +47,6 @@ export {
   cleanTheDate,
   formatDateToBack,
   dateFotmattedForTable,
-  dateFotmattedForModal
+  dateFotmattedForModal,
+  dateFotmattedForMakeDelivery
 }
