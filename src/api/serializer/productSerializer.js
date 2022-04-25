@@ -28,4 +28,18 @@ const productForMakeDeliverySerializer = (productList = []) => {
   return serProductList
 }
 
-export { productGetSerializer, productForMakeDeliverySerializer };
+const setMakeDeliverySerializer = (productList = []) => {
+  const serProductList = []
+  productList.forEach(product => {
+    if (product.count) {
+      serProductList.push({
+        productFK: product.id, // id продукта
+        productCount: product.count, // мин кол-во для заказа
+        priceBuy: product.price, // цена - рандомная от тек цена - 45% до тек цена - 5% (условно откуда то приходит с другой системы)
+      })
+    }
+  })
+  return serProductList
+}
+
+export { productGetSerializer, productForMakeDeliverySerializer, setMakeDeliverySerializer };

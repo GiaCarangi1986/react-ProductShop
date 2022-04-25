@@ -6,8 +6,10 @@ import {
   authGetSerializer,
   createCheckSerializer,
   checkHistorySerializer,
-  productForMakeDeliverySerializer
+  productForMakeDeliverySerializer,
+  setMakeDeliverySerializer
 } from './serializer'
+import { dateFotmattedForMakeDeliveryBack } from '../utils/date'
 
 class Api extends BaseApi {
   constructor(url) {
@@ -76,13 +78,19 @@ class Api extends BaseApi {
     return res.data
   }
 
-  getListForMakeDilevers = async () => { // +-
+  getListForMakeDilevers = async () => {
     const res = await this.get('/delivery_line/')
     const serRes = productForMakeDeliverySerializer(res.data.productList)
     return {
       productList: serRes,
       latestDate: res.latestDate
     }
+  }
+
+  setListForMakeDilevers = async (productList = []) => {
+    const serData = setMakeDeliverySerializer(productList)
+    const res = await this.post('/delivery_line/', { deliveryLines: serData, date: dateFotmattedForMakeDeliveryBack() })
+    return res.data
   }
 }
 

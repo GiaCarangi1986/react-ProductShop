@@ -36,6 +36,7 @@ const AdminPanel = () => {
             make_deliveries={{
               productList: makeDeliveriesList,
               setProductList: setMakeDeliveriesList,
+              setTypePage
             }}
           >
             <div className={style.close}>

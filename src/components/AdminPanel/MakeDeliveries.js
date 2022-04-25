@@ -21,6 +21,7 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
   const {
     productList = [],
     setProductList = () => { },
+    setTypePage = () => { }
   } = make_deliveries
   const { dispatch } = useStoreon();
 
@@ -28,7 +29,13 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
   const [latestDate, setLatestDate] = useState('...')
 
   const payOrder = () => {
-    console.log('hello', productList);
+    // err выводить в отедельное поле
+    api.setListForMakeDilevers(productList)
+      .then(res => {
+        console.log('res', res)
+        setTypePage('')
+      })
+      .catch(err => console.log('err', err))
   }
 
   const paymentСonfirmation = () => {

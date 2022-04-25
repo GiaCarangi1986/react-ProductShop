@@ -87,7 +87,7 @@ export const TABLE_EVENT_TYPES = {
   allLoaded: 'allLoaded',
 }
 
-export const PAGE_SIZE = 15
+export const PAGE_SIZE = 10
 
 export const SCREENS = {
   middle: "(max-width: 1200px)",
