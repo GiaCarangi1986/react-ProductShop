@@ -62,6 +62,7 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
         oldArr[index].choosen_count = +value
         break;
     }
+    oldArr[index].total_cost = oldArr[index].choosen_count * oldArr[index].price
     setProductList(oldArr)
   }
 
