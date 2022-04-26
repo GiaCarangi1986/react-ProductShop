@@ -1,5 +1,4 @@
 .input {
-  --gx-input-height-medium: 40px;
   --gx-input-font-size-medium: 16px;
   --gx-input-border-radius-medium: 6px;
   --gx-input-color: var(--ps-color-default);
@@ -37,6 +36,7 @@
   margin: 0;
   width: 100%;
   border: 2px solid var(--ps-border-color-default);
+  height: 40px;
 }
 
 .input::placeholder::part(input) {
@@ -79,19 +79,13 @@
 }
 
 @media (max-width: 1200px) {
-  .input {
-    --gx-input-height-medium: 35px;
+  .input::part(input) {
+    height: 35px;
   }
   .input-label {
     &::part(label) {
       transform: translateY(20%);
     }
-  }
-}
-
-@media (max-width: 1200px) {
-  .input {
-    --gx-input-height-medium: 35px;
   }
 }
 

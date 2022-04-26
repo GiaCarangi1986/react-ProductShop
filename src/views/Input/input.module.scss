@@ -95,12 +95,6 @@
   }
 }
 
-@media (max-width: 1200px) {
-  .input {
-    --gx-input-height-medium: 35px;
-  }
-}
-
 .search-btn-filter::part(clear-button) {
   position: absolute;
   right: 10px;
