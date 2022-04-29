@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { Button, Icon } from '../../views';
 import MakeDeliveries from './MakeDeliveries';
+import WriteOffProduct from './WriteOffProduct'
 import Options from './Options'
 import Popup from '../Popup';
-import { ADMIN_PANEL } from '../../const';
+import { ADMIN_PANEL, DEFAULT_DATE } from '../../const';
 import style from './style.module.scss';
 
 const AdminPanel = () => {
   const [typePage, setTypePage] = useState('')
   const [makeDeliveriesList, setMakeDeliveriesList] = useState([])
-  const [latestDate, setLatestDate] = useState('...')
+  const [latestDate, setLatestDate] = useState(DEFAULT_DATE)
   const [error, setError] = useState('')
 
   const handleClick = (e) => {
@@ -22,6 +23,7 @@ const AdminPanel = () => {
 
   const RIGHT_VIEWS = {
     make_deliveries: MakeDeliveries,
+    write_off_act: WriteOffProduct
   }
 
   const RightPart = RIGHT_VIEWS[typePage]
@@ -37,6 +39,15 @@ const AdminPanel = () => {
         <div className={style.right}>
           <RightPart
             make_deliveries={{
+              productList: makeDeliveriesList,
+              setProductList: setMakeDeliveriesList,
+              setTypePage,
+              latestDate,
+              setLatestDate,
+              error,
+              setError
+            }}
+            write_off_act={{
               productList: makeDeliveriesList,
               setProductList: setMakeDeliveriesList,
               setTypePage,

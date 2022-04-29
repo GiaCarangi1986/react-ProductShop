@@ -278,3 +278,5 @@ export const ADMIN_PANEL = [
     ]
   }
 ]
+
+export const DEFAULT_DATE = '...'

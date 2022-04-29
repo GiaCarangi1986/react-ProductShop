@@ -92,6 +92,15 @@ class Api extends BaseApi {
     const res = await this.post('/delivery_line/', { deliveryLines: serData, date: dateFotmattedForMakeDeliveryBack() })
     return res.data
   }
+
+  getLatestWriteOffDataDilevers = async () => {
+    try {
+      const res = await this.get('/writeoff/')
+      return res
+    } catch (error) {
+      return new Date()
+    }
+  }
 }
 
 export const MAIN_URL = 'http://localhost:4000'
