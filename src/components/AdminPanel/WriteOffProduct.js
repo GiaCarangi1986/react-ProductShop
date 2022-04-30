@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
+import { useFormik } from 'formik'
 import { useStoreon } from 'storeon/react';
-import { Button, Icon, Input, PreloaderPage, ErrorText } from '../../views';
+import { Button, Icon, Input, PreloaderPage, ErrorText, Fieldset } from '../../views';
+import Select from '../Select'
 import {
   MAKE_DELIVERS_HEADER,
   WIDTH_COL_MAKE_DELIVERS,
@@ -10,11 +12,15 @@ import {
   UNITS,
   MODAL_TYPES,
   POPUP_TYPES,
-  DEFAULT_DATE
+  DEFAULT_DATE,
+  FORM_FIELDS,
+  FORM_LABELS,
+  SELECT_TYPES
 } from '../../const';
 import PayModal from '../Modal/PayModal';
 import { dateFotmattedForTable } from '../../utils/date';
-import { handingErrors } from '../../utils'
+import { handingErrors, deleteSpaces, roundNumber } from '../../utils'
+import { addLineOfCheck } from '../../schema'
 import style from './style.module.scss';
 import table_style from '../CheckTable/check_table.module.scss'
 
@@ -32,6 +38,10 @@ const WriteOffProduct = ({ children, write_off_act }) => {
   } = write_off_act
   const { dispatch } = useStoreon();
 
+  const [unit, setUnit] = useState(UNITS[0])
+  const [wasAddProduct, setWasAddProduct] = useState(false)
+  const [disabled, setDisabled] = useState(true)
+
   const handleSubmitError = (response) => {
     if (response) {
       const errResponse = handingErrors(response);
@@ -39,16 +49,64 @@ const WriteOffProduct = ({ children, write_off_act }) => {
     }
   }
 
+  const initialValues = {
+    product: null,
+    count: '1',
+  }
+
+  const formik = useFormik({
+    initialValues,
+    validationSchema: addLineOfCheck,
+  })
+
+  const chooseProduct = (e, name) => {
+    formik.setFieldValue(name, e)
+    setUnit(e.unit)
+
+    setWasAddProduct(false)
+  }
+
+  const addLine = () => {
+    const lines = [...productList]
+    let wasUpdate = false
+    for (let index = 0; index < lines.length; index++) {
+      if (lines[index].id === formik.values.product.value) {
+        lines[index].count += +formik.values.count
+        if (unit === UNITS[1]) {
+          lines[index].count = roundNumber(lines[index].count)
+        }
+        wasUpdate = true
+        break
+      }
+    }
+
+    if (!wasUpdate) {
+      lines.push({
+        id: formik.values.product.value,
+        count: +formik.values.count,
+        label: formik.values.product.name,
+        unit: formik.values.product.unit,
+      })
+    }
+    setWasAddProduct(true)
+
+    formik.setFieldValue(FORM_FIELDS.count, 1)
+    formik.setFieldValue(FORM_FIELDS.product, null)
+    formik.setFieldTouched(FORM_FIELDS.product, false)
+
+    setProductList(lines)
+  }
+
   const payOrder = () => {
     api.setListForMakeDilevers(productList)
       .then(res => {
         dispatch('popup/toggle', {
           popup: POPUP_TYPES.admin_panel,
-          text: 'Заказ успешно выполнен'
+          text: 'Продукты успешно списаны'
         })
         setTypePage('')
         setProductList([])
-        setLatestDate('...')
+        setLatestDate(DEFAULT_DATE)
         setError('')
       })
       .catch(err => {
@@ -62,34 +120,41 @@ const WriteOffProduct = ({ children, write_off_act }) => {
     })
   }
 
-  const HANDLE_CHANGE = {
-    button: 'button',
-    input: 'input'
-  }
-
-  const changeProductCount = (e = {}, type = '') => {
+  const handleChange = (e) => {
     const value = e.target.value
     const index = e.target.name
     const oldArr = [...productList]
-    switch (type) {
-      case HANDLE_CHANGE.button:
-        oldArr[index].choosen_count += +value
-        break;
-      case HANDLE_CHANGE.input:
-        oldArr[index].choosen_count = +value
-        break;
-    }
+    oldArr[index].choosen_count += +value
     oldArr[index].total_cost = oldArr[index].choosen_count * oldArr[index].price
     setProductList(oldArr)
   }
 
-  const handleButtonChange = (e) => {
-    changeProductCount(e, HANDLE_CHANGE.button)
+  const handleBlur = (e, floorValue = null) => {
+    const { name, value } = e.target;
+    const clearValue = deleteSpaces(floorValue || value)
+    formik.handleBlur(e)
+    formik.setFieldValue([name], clearValue)
   }
 
-  const handleInputChange = (e) => {
-    changeProductCount(e, HANDLE_CHANGE.input)
+  const handleSelectBlur = (name = '') => {
+    formik.setFieldTouched([name], true)
   }
+
+  const blurPositiveValue = (e) => {
+    const obj = e
+    if (obj.target.value <= 0) {
+      obj.target.value = 1
+    }
+    handleBlur(obj)
+  }
+
+  useEffect(() => {
+    if (formik) {
+      const { isValid, dirty } = formik;
+      const isDisabled = !isValid || !dirty || wasAddProduct
+      setDisabled(isDisabled)
+    }
+  }, [formik])
 
   useEffect(() => {
     if (!productList.length) {
@@ -109,12 +174,62 @@ const WriteOffProduct = ({ children, write_off_act }) => {
     [table_style['table_scroll-vertical']]: true,
   })
 
-  const dateInfo = `Последняя закупка была осуществлена ${latestDate}`
+  const unitForCount = unit === UNITS[0] ? FORM_LABELS.count : FORM_LABELS.weight
+  const countLabel = formik.values.product ? `${unitForCount} (макс. ${formik.values.product?.count})` : `${unitForCount} (макс. НЕОПРЕДЕЛЕНО)`
+  const dateInfo = `Последнее списание было осуществлено ${latestDate}`
 
   return (
     <div>
       {children}
       <h2 className={style.header_right}>{dateInfo}</h2>
+      <div className={style.grid_row}>
+        <Fieldset
+          errorClass='addOrUpdateCheck'
+          containerClass='pressed_bottom'
+          error={formik.errors.product}
+          touched={formik.touched.product}>
+          <Select
+            value={formik.values.product}
+            name={FORM_FIELDS.product}
+            label={FORM_LABELS.product}
+            data-cy='title'
+            type={SELECT_TYPES.product}
+            func={api.getProductListForCreatingCheck}
+            onBlur={() => handleSelectBlur(FORM_FIELDS.product)}
+            onChange={(e) => chooseProduct(e, FORM_FIELDS.product)}
+            err={formik.errors.product && formik.touched.product}
+          />
+        </Fieldset>
+        <Fieldset
+          errorClass='addOrUpdateCheck'
+          error={formik.errors.count}
+          touched={formik.touched.count}>
+          <Input
+            value={formik.values.count}
+            onGx-input={formik.handleChange}
+            onGx-blur={blurPositiveValue}
+            name={FORM_FIELDS.count}
+            label={countLabel}
+            data-cy='title'
+            type='number'
+            min='1'
+            max='32767'
+            step={unit === UNITS[0] ? 1 : 0.1}
+            disabled={!formik.values.product}
+          />
+        </Fieldset>
+        <div className={style.btn_add_line}>
+          <Button
+            disabled={disabled}
+            className='btn_width-square'
+            data-cy='btn'
+            buttonDis
+            onClick={addLine}
+          >
+            +
+          </Button>
+        </div>
+      </div>
       <div className={classNames(table_style['table-grid'], style.container__right)}>
         <div className={classesScroll}>
           <div className={table_style['table-layout']}>
@@ -147,26 +262,19 @@ const WriteOffProduct = ({ children, write_off_act }) => {
                             title='Убавить кол-во'
                             name={index}
                             value={-1}
-                            onClick={handleButtonChange}
+                            onClick={handleChange}
                             disabled={line.choosen_count === 0}
                             variant='text'
                             data-cy='btn'
                           >
                             <Icon slot='icon-left' icon='minus' />
                           </Button>
-                          <Input
-                            value={line.choosen_count}
-                            type='number'
-                            nameOfStyle='input_count'
-                            onGx-input={handleInputChange}
-                            name={index}
-                          />
                           <Button
                             className='button-edit_action'
                             title='Прибавить кол-во'
                             name={index}
                             value={1}
-                            onClick={handleButtonChange}
+                            onClick={handleChange}
                             variant='text'
                             data-cy='btn'
                           >

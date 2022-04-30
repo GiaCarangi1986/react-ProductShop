@@ -9,7 +9,8 @@ import {
   WIDTH_COL_MAKE_DELIVERS_TBODY,
   UNITS,
   MODAL_TYPES,
-  POPUP_TYPES
+  POPUP_TYPES,
+  DEFAULT_DATE
 } from '../../const';
 import PayModal from '../Modal/PayModal';
 import { dateFotmattedForMakeDelivery } from '../../utils/date';
@@ -49,7 +50,7 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
         })
         setTypePage('')
         setProductList([])
-        setLatestDate('...')
+        setLatestDate(DEFAULT_DATE)
         setError('')
       })
       .catch(err => {
