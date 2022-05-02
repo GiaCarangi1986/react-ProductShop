@@ -14,6 +14,7 @@ const AdminPanel = () => {
   const [latestMakeDeliveryDate, setLatestMakeDeliveryDate] = useState(DEFAULT_DATE)
   const [latestWriteOffDate, setLatestWriteOffDate] = useState(DEFAULT_DATE)
   const [error, setError] = useState('')
+  const [period, setPeriod] = useState('Неделя')
 
   const handleClick = (e) => {
     setTypePage(e.target.value)
@@ -52,7 +53,9 @@ const AdminPanel = () => {
               latestDate: latestMakeDeliveryDate,
               setLatestDate: setLatestMakeDeliveryDate,
               error,
-              setError
+              setError,
+              period,
+              setPeriod
             }}
             write_off_act={{
               productList: writeOffList,
@@ -61,7 +64,7 @@ const AdminPanel = () => {
               latestDate: latestWriteOffDate,
               setLatestDate: setLatestWriteOffDate,
               error,
-              setError
+              setError,
             }}
           >
             <div className={style.close}>

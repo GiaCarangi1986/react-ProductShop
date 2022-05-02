@@ -30,13 +30,14 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
     latestDate,
     setLatestDate,
     setError,
-    error
+    error,
+    setPeriod,
+    period
   } = make_deliveries
   const { dispatch } = useStoreon();
 
   const [sum, setSum] = useState(0)
-  const [period, setPeriod] = useState('Неделя')
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
 
   const handleSubmitError = (response) => {
     if (response) {
@@ -135,6 +136,7 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
 
   useEffect(() => {
     if (!productList.length) {
+      console.log('hrer');
       makeDelivery()
     }
   }, [])

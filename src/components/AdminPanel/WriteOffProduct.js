@@ -34,7 +34,7 @@ const WriteOffProduct = ({ children, write_off_act }) => {
     latestDate,
     setLatestDate,
     setError,
-    error
+    error,
   } = write_off_act
   const { dispatch, currentUser } = useStoreon('currentUser');
 
