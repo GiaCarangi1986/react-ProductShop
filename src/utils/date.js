@@ -19,7 +19,7 @@ const formatDateToBack = (dateStr) => {
   }
 }
 
-function dateFotmattedForTable(date) {
+function dateFotmattedForTable(date = new Date()) {
   let currentDate = ''
   if (dayjs(date).isValid()) {
     currentDate = dayjs(date).format('DD.MM.YYYY HH:mm:ss')
@@ -27,7 +27,7 @@ function dateFotmattedForTable(date) {
   else {
     currentDate = dayjs(new Date()).format('DD.MM.YYYY HH:mm:ss')
   }
-  return currentDate
+  return dayjs(date).format('DD.MM.YYYY HH:mm:ss')
 }
 
 function dateFotmattedForMakeDelivery(date = new Date()) {

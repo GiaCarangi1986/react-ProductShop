@@ -95,12 +95,8 @@ class Api extends BaseApi {
   }
 
   getLatestWriteOffDataDilevers = async () => {
-    try {
-      const res = await this.get('/writeoff/')
-      return res
-    } catch (error) {
-      return new Date()
-    }
+    const res = await this.get('/writeoff/')
+    return res.data
   }
 
   setWriteOffProducts = async (productList = [], userFK = '') => {

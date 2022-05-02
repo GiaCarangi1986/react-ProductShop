@@ -43,6 +43,7 @@ const WriteOffProduct = ({ children, write_off_act }) => {
   const [disabled, setDisabled] = useState(true)
   const [productForm, setProductForm] = useState('')
   const [productCount, setProductCount] = useState('')
+  const [dateInfo, setDateInfo] = useState('')
 
   const handleSubmitError = (response) => {
     if (response) {
@@ -179,10 +180,17 @@ const WriteOffProduct = ({ children, write_off_act }) => {
   }, [formik])
 
   useEffect(() => {
-    if (!productList.length) {
+    if (latestDate === DEFAULT_DATE) {
       api.getLatestWriteOffDataDilevers()
         .then(res => {
-          setLatestDate(dateFotmattedForTable(res))
+          if (res) {
+            const date = dateFotmattedForTable(res)
+            setDateInfo(`Последнее списание было осуществлено ${date}`)
+            setLatestDate(date)
+          }
+          if (!res) {
+            setDateInfo('Ранее не было зафиксировано процедуры списания продуктов')
+          }
           setError('')
         })
         .catch(err => {
@@ -198,7 +206,6 @@ const WriteOffProduct = ({ children, write_off_act }) => {
 
   const unitForCount = unit === UNITS[0] ? FORM_LABELS.count : FORM_LABELS.weight
   const countLabel = formik.values.product ? `${unitForCount} (макс. ${formik.values.product?.count})` : `${unitForCount} (макс. НЕОПРЕДЕЛЕНО)`
-  const dateInfo = `Последнее списание было осуществлено ${latestDate}`
 
   return (
     <div>
@@ -360,7 +367,7 @@ const WriteOffProduct = ({ children, write_off_act }) => {
           </Button>
         </div>
       </div>
-      {latestDate === DEFAULT_DATE && <PreloaderPage loaderClass='admin_panel' />}
+      {!dateInfo && <PreloaderPage loaderClass='admin_panel' />}
       <PayModal
         headers={{ main: 'Подтвердите списание', text: `Ожидается списание ${productCount} ${productForm}`, btnCancel: 'Отмена', btnOk: 'Списать' }}
         func={payOrder} />
