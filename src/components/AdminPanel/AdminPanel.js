@@ -10,7 +10,9 @@ import style from './style.module.scss';
 const AdminPanel = () => {
   const [typePage, setTypePage] = useState('')
   const [makeDeliveriesList, setMakeDeliveriesList] = useState([])
-  const [latestDate, setLatestDate] = useState(DEFAULT_DATE)
+  const [writeOffList, setWriteOffList] = useState([])
+  const [latestMakeDeliveryDate, setLatestMakeDeliveryDate] = useState(DEFAULT_DATE)
+  const [latestWriteOffDate, setLatestWriteOffDate] = useState(DEFAULT_DATE)
   const [error, setError] = useState('')
 
   const handleClick = (e) => {
@@ -19,6 +21,11 @@ const AdminPanel = () => {
 
   const closeRightView = () => {
     setTypePage('')
+    setMakeDeliveriesList([])
+    setWriteOffList([])
+    setLatestMakeDeliveryDate([])
+    setLatestWriteOffDate([])
+    setError([])
   }
 
   const RIGHT_VIEWS = {
@@ -42,17 +49,17 @@ const AdminPanel = () => {
               productList: makeDeliveriesList,
               setProductList: setMakeDeliveriesList,
               setTypePage,
-              latestDate,
-              setLatestDate,
+              latestDate: latestMakeDeliveryDate,
+              setLatestDate: setLatestMakeDeliveryDate,
               error,
               setError
             }}
             write_off_act={{
-              productList: makeDeliveriesList,
-              setProductList: setMakeDeliveriesList,
+              productList: writeOffList,
+              setProductList: setWriteOffList,
               setTypePage,
-              latestDate,
-              setLatestDate,
+              latestDate: latestWriteOffDate,
+              setLatestDate: setLatestWriteOffDate,
               error,
               setError
             }}
