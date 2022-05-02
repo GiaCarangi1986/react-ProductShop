@@ -30,28 +30,6 @@ export function checkNumber(value) {
   return Number(value);
 }
 
-export function compareNumeric(a, b) {
-  if (a.value > b.value) return 1;
-  if (a.value === b.value) return 0;
-  return -1;
-}
-
-export function cods(code, results, value = 'pk') {
-
-  const neededValues = code.length ? [] : results
-  if (code.length) {
-
-    for (let index = 0; index < code.length; index += 1) {
-      for (let el = 0; el < results.length; el += 1) {
-        if (code[index] === results[el][value]) {
-          neededValues.push(results[el])
-        }
-      }
-    }
-  }
-  return neededValues;
-}
-
 export function processingResult(item) {
   return {
     id: item?.id || '', // id чека
@@ -131,37 +109,6 @@ export function formateFloat(number) {
   return Math.abs(number.replace(/[^\d](\.\d+)+/g, ''))
 }
 
-export const addZeroAndRound = (val = 0) => {
-  const resOfRound = (Math.round(val * 100) / 100)
-  let stringRes = ''
-  if (resOfRound.toString().includes('.')) {
-    stringRes = resOfRound.toString().split('.')
-  }
-  else stringRes = resOfRound.toString().split(',')
-
-  if (!stringRes[1]) {
-    stringRes[1] = '00'
-  }
-  else if (stringRes[1].length === 1) {
-    stringRes[1] += '0'
-  }
-
-  return stringRes.join('.')
-}
-
-export function handlingBoolean(value) {
-  return [...value].map(item => {
-    let newVal;
-    if (item.includes('true')) {
-      newVal = 'true'
-    }
-    if (item.includes('false')) {
-      newVal = 'false'
-    }
-    return newVal;
-  })
-}
-
 export function useNetwork() {
   const [isOffline, setNetwork] = useState(!window.navigator.onLine);
   useEffect(() => {
@@ -184,4 +131,9 @@ export function declensionBonusNumber(digital = 0) {
   }
 };
 
-export default handlingBoolean
+export function declensionProduct(digital = 0) {
+  if (digital === 1) {
+    return 'а'
+  }
+  return 'ов'
+};

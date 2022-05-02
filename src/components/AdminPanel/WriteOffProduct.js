@@ -19,7 +19,7 @@ import {
 } from '../../const';
 import PayModal from '../Modal/PayModal';
 import { dateFotmattedForTable } from '../../utils/date';
-import { handingErrors, deleteSpaces, roundNumber } from '../../utils'
+import { handingErrors, deleteSpaces, roundNumber, declensionProduct } from '../../utils'
 import { addLineOfCheck } from '../../schema'
 import style from './style.module.scss';
 import table_style from '../CheckTable/check_table.module.scss'
@@ -41,6 +41,8 @@ const WriteOffProduct = ({ children, write_off_act }) => {
   const [unit, setUnit] = useState(UNITS[0])
   const [wasAddProduct, setWasAddProduct] = useState(false)
   const [disabled, setDisabled] = useState(true)
+  const [productForm, setProductForm] = useState('')
+  const [productCount, setProductCount] = useState('')
 
   const handleSubmitError = (response) => {
     if (response) {
@@ -114,7 +116,18 @@ const WriteOffProduct = ({ children, write_off_act }) => {
       })
   }
 
+  const writeOffCount = () => {
+    let count = 0
+    productList.forEach(line => {
+      count += +line.count
+    })
+    return count
+  }
+
   const paymentСonfirmation = () => {
+    const count = writeOffCount()
+    setProductCount(count)
+    setProductForm(`продукт${declensionProduct(count)}`)
     dispatch('modal/toggle', {
       modal: MODAL_TYPES.payModal,
     })
@@ -350,8 +363,7 @@ const WriteOffProduct = ({ children, write_off_act }) => {
       </div>
       {latestDate === DEFAULT_DATE && <PreloaderPage loaderClass='admin_panel' />}
       <PayModal
-        // TODO просклонять продукты
-        headers={{ main: 'Подтвердите списание', text: `Ожидается списание ${productList.length} продуктов`, btnCancel: 'Отмена', btnOk: 'Списать' }}
+        headers={{ main: 'Подтвердите списание', text: `Ожидается списание ${productCount} ${productForm}`, btnCancel: 'Отмена', btnOk: 'Списать' }}
         func={payOrder} />
     </div>
   )
