@@ -171,6 +171,20 @@ export const WIDTH_COL_MAKE_DELIVERS = {
   total_cost: 90,
 }
 
+export const WRITEOFF_HEADER = {
+  change_count: '',
+  name: 'Наименование',
+  count: 'Кол-во/вес',
+  delete: ''
+}
+
+export const WIDTH_COL_WRITEOFF = {
+  change_count: 50,
+  name: 450,
+  count: 50,
+  delete: 25
+}
+
 export const MAKE_DELIVERS_LINE_ADDING = {
   count: 'count',
   label: 'label',
@@ -185,6 +199,16 @@ export const WIDTH_COL_MAKE_DELIVERS_TBODY = {
   manufacturer: 250,
   price: 90,
   total_cost: 90,
+}
+
+export const WRITEOFF_LINE_ADDING = {
+  label: 'label',
+  count: 'count'
+}
+
+export const WIDTH_COL_WRITEOFF_TBODY = {
+  label: 450,
+  count: 50
 }
 
 export const USER_ROLE = {

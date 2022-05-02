@@ -46,7 +46,7 @@ const RightPart = ({
     for (let index = 0; index < updateProduct.length; index++) {
       if (updateProduct[index].id === +btnData.name.id && updateProduct[index].old_product === btnData.name.old_product) {
         updateProduct[index].count += +btnData.value
-        updateProduct[index].total_cost = updateProduct[index].count * updateProduct[index].price
+        updateProduct[index].total_cost = roundNumber(updateProduct[index].count * updateProduct[index].price)
         break
       }
     }

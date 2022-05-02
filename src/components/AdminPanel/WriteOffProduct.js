@@ -5,10 +5,10 @@ import { useStoreon } from 'storeon/react';
 import { Button, Icon, Input, PreloaderPage, ErrorText, Fieldset } from '../../views';
 import Select from '../Select'
 import {
-  MAKE_DELIVERS_HEADER,
-  WIDTH_COL_MAKE_DELIVERS,
-  MAKE_DELIVERS_LINE_ADDING,
-  WIDTH_COL_MAKE_DELIVERS_TBODY,
+  WRITEOFF_HEADER,
+  WIDTH_COL_WRITEOFF,
+  WRITEOFF_LINE_ADDING,
+  WIDTH_COL_WRITEOFF_TBODY,
   UNITS,
   MODAL_TYPES,
   POPUP_TYPES,
@@ -121,12 +121,16 @@ const WriteOffProduct = ({ children, write_off_act }) => {
   }
 
   const handleChange = (e) => {
-    const value = e.target.value
-    const index = e.target.name
-    const oldArr = [...productList]
-    oldArr[index].choosen_count += +value
-    oldArr[index].total_cost = oldArr[index].choosen_count * oldArr[index].price
-    setProductList(oldArr)
+    const btnData = e.target
+    const updateProduct = [...productList]
+    for (let index = 0; index < updateProduct.length; index++) {
+      if (updateProduct[index].id === +btnData.name) {
+        updateProduct[index].count += +btnData.value
+        updateProduct[index].total_cost = roundNumber(updateProduct[index].count * updateProduct[index].price)
+        break
+      }
+    }
+    setProductList(updateProduct)
   }
 
   const handleBlur = (e, floorValue = null) => {
@@ -138,6 +142,12 @@ const WriteOffProduct = ({ children, write_off_act }) => {
 
   const handleSelectBlur = (name = '') => {
     formik.setFieldTouched([name], true)
+  }
+
+  const deleteProduct = (e) => {
+    const btnId = e.target.name
+    const updateProduct = [...productList].filter(line => !(line.id === +btnId))
+    setProductList(updateProduct)
   }
 
   const blurPositiveValue = (e) => {
@@ -230,18 +240,18 @@ const WriteOffProduct = ({ children, write_off_act }) => {
           </Button>
         </div>
       </div>
-      <div className={classNames(table_style['table-grid'], style.container__right)}>
+      <div className={classNames(table_style['table-grid'], style.container__right, style.container__right_small)}>
         <div className={classesScroll}>
           <div className={table_style['table-layout']}>
             <table className={table_style.table}>
               <thead className={table_style['table-head']}>
                 <tr className={table_style['table-row']}>
-                  {Object.keys(MAKE_DELIVERS_HEADER).map(header => {
-                    const w = WIDTH_COL_MAKE_DELIVERS[header] || 30
+                  {Object.keys(WRITEOFF_HEADER).map(header => {
+                    const w = WIDTH_COL_WRITEOFF[header] || 30
                     return (
                       <th key={header} className={table_style['table-col']}>
                         <div style={{ minWidth: `${w}px`, margin: 'auto' }}>
-                          {MAKE_DELIVERS_HEADER[header]}
+                          {WRITEOFF_HEADER[header]}
                         </div>
                       </th>
                     )
@@ -249,21 +259,21 @@ const WriteOffProduct = ({ children, write_off_act }) => {
                 </tr>
               </thead>
               <tbody className={table_style['table-body']}>
-                {productList.map((line, index) => {
+                {productList.map((line) => {
                   const classesRow = classNames({
                     [table_style['table-row']]: true,
                   })
                   return (
                     <tr key={`${line.id}`} className={classesRow}>
                       <td className={classNames(table_style['table-col'], table_style['table-col-full-rights'])} key='action_colunm'>
-                        <div style={{ minWidth: '125px', margin: 'auto' }} className={style.actions}>
+                        <div style={{ minWidth: '50px', margin: 'auto' }} className={style.actions}>
                           <Button
                             className='button-edit_action'
                             title='Убавить кол-во'
-                            name={index}
+                            name={line.id}
                             value={-1}
                             onClick={handleChange}
-                            disabled={line.choosen_count === 0}
+                            disabled={line.count === 1}
                             variant='text'
                             data-cy='btn'
                           >
@@ -272,7 +282,7 @@ const WriteOffProduct = ({ children, write_off_act }) => {
                           <Button
                             className='button-edit_action'
                             title='Прибавить кол-во'
-                            name={index}
+                            name={line.id}
                             value={1}
                             onClick={handleChange}
                             variant='text'
@@ -282,15 +292,15 @@ const WriteOffProduct = ({ children, write_off_act }) => {
                           </Button>
                         </div>
                       </td>
-                      {Object.keys(MAKE_DELIVERS_LINE_ADDING).map(product_line => {
+                      {Object.keys(WRITEOFF_LINE_ADDING).map(product_line => {
                         const leftOrCenter = Number.isNaN(Number(`${line[product_line]}`));
                         const tdClasses = classNames({
                           [table_style['table-col']]: true,
                           [table_style['table-col_left']]: leftOrCenter
                         })
-                        const w = WIDTH_COL_MAKE_DELIVERS_TBODY[product_line] || ''
+                        const w = WIDTH_COL_WRITEOFF_TBODY[product_line] || ''
                         const margin = leftOrCenter ? '' : 'auto'
-                        const value = product_line === MAKE_DELIVERS_LINE_ADDING.count ?
+                        const value = product_line === WRITEOFF_LINE_ADDING.count ?
                           line.unit === UNITS[1] ? line[product_line] + ', кг' : line[product_line] + ', шт' :
                           line[product_line]
                         return (
@@ -299,6 +309,20 @@ const WriteOffProduct = ({ children, write_off_act }) => {
                           </td>
                         )
                       })}
+                      <td className={table_style['table-col']} key='action_colunm-delete'>
+                        <div style={{ minWidth: '25px', margin: 'auto' }}>
+                          <Button
+                            className='button-delete_action'
+                            variant='text'
+                            data-cy='btn'
+                            title='Удалить строку'
+                            name={line.id}
+                            onClick={deleteProduct}
+                          >
+                            <Icon slot='icon-left' icon='deleteIcon' />
+                          </Button>
+                        </div>
+                      </td>
                     </tr>
                   )
                 })}
@@ -318,6 +342,7 @@ const WriteOffProduct = ({ children, write_off_act }) => {
             className='btn_width-100'
             data-cy='btn'
             buttonDis
+            disabled={!productList.length}
           >
             Списать
           </Button>

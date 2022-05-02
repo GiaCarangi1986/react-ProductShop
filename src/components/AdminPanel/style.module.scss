@@ -12,6 +12,12 @@
     @media (max-width: 1200px) {
       height: calc(100vh - 225px);
     }
+    &_small {
+      height: calc(100vh - 360px);
+      @media (max-width: 1200px) {
+        height: calc(100vh - 335px);
+      }
+    }
   }
   @media (max-width: 1200px) {
     height: calc(100vh - 60px);
