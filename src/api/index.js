@@ -10,7 +10,7 @@ import {
   setMakeDeliverySerializer,
   setWriteOffSerializer
 } from './serializer'
-import { dateFotmattedForMakeDeliveryBack } from '../utils/date'
+import { dateFotmattedForMakeDeliveryBack, formatDateToBack } from '../utils/date'
 
 class Api extends BaseApi {
   constructor(url) {
@@ -101,7 +101,7 @@ class Api extends BaseApi {
 
   setWriteOffProducts = async (productList = [], userFK = '') => {
     const serData = setWriteOffSerializer(productList)
-    const res = await this.post('/writeoff/', { productList: serData, dateTimeWriteOff: dateFotmattedForMakeDeliveryBack(), userFK })
+    const res = await this.post('/writeoff/', { productList: serData, dateTimeWriteOff: formatDateToBack(), userFK })
     return res.data
   }
 }

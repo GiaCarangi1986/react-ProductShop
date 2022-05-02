@@ -43,7 +43,6 @@ const WriteOffProduct = ({ children, write_off_act }) => {
   const [disabled, setDisabled] = useState(true)
   const [productForm, setProductForm] = useState('')
   const [productCount, setProductCount] = useState('')
-  const [dateInfo, setDateInfo] = useState('')
 
   const handleSubmitError = (response) => {
     if (response) {
@@ -101,7 +100,7 @@ const WriteOffProduct = ({ children, write_off_act }) => {
   }
 
   const payOrder = () => {
-    api.setListForMakeDilevers(productList, currentUser.id)
+    api.setWriteOffProducts(productList, currentUser.id)
       .then(res => {
         dispatch('popup/toggle', {
           popup: POPUP_TYPES.admin_panel,
@@ -185,11 +184,10 @@ const WriteOffProduct = ({ children, write_off_act }) => {
         .then(res => {
           if (res) {
             const date = dateFotmattedForTable(res)
-            setDateInfo(`Последнее списание было осуществлено ${date}`)
-            setLatestDate(date)
+            setLatestDate(`Последнее списание было осуществлено ${date}`)
           }
           if (!res) {
-            setDateInfo('Ранее не было зафиксировано процедуры списания продуктов')
+            setLatestDate('Ранее не было зафиксировано процедуры списания продуктов')
           }
           setError('')
         })
@@ -210,7 +208,7 @@ const WriteOffProduct = ({ children, write_off_act }) => {
   return (
     <div>
       {children}
-      <h2 className={style.header_right}>{dateInfo}</h2>
+      <h2 className={style.header_right}>{latestDate}</h2>
       <div className={style.grid_row}>
         <Fieldset
           errorClass='addOrUpdateCheck'
@@ -352,8 +350,8 @@ const WriteOffProduct = ({ children, write_off_act }) => {
       </div>
       <div className={style.wrap_row}>
         <span />
-        <ErrorText errorClass='make_deliver'>
-          {productList.length !== 0 && error}
+        <ErrorText errorClass='writeoff'>
+          {latestDate !== DEFAULT_DATE && error}
         </ErrorText>
         <div className={style.wrap_btn}>
           <Button
@@ -367,7 +365,7 @@ const WriteOffProduct = ({ children, write_off_act }) => {
           </Button>
         </div>
       </div>
-      {!dateInfo && <PreloaderPage loaderClass='admin_panel' />}
+      {latestDate === DEFAULT_DATE && <PreloaderPage loaderClass='admin_panel' />}
       <PayModal
         headers={{ main: 'Подтвердите списание', text: `Ожидается списание ${productCount} ${productForm}`, btnCancel: 'Отмена', btnOk: 'Списать' }}
         func={payOrder} />
