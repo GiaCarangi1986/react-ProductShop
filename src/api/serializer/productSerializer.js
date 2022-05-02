@@ -42,4 +42,17 @@ const setMakeDeliverySerializer = (productList = []) => {
   return serProductList
 }
 
-export { productGetSerializer, productForMakeDeliverySerializer, setMakeDeliverySerializer };
+const setWriteOffSerializer = (productList = []) => {
+  const serProductList = []
+  productList.forEach(product => {
+    if (product.count) {
+      serProductList.push({
+        productFK: product.id, // id продукта
+        productCount: product.count, // кол-во для списания
+      })
+    }
+  })
+  return serProductList
+}
+
+export { productGetSerializer, productForMakeDeliverySerializer, setMakeDeliverySerializer, setWriteOffSerializer };

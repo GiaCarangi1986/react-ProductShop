@@ -36,7 +36,7 @@ const WriteOffProduct = ({ children, write_off_act }) => {
     setError,
     error
   } = write_off_act
-  const { dispatch } = useStoreon();
+  const { dispatch, currentUser } = useStoreon('currentUser');
 
   const [unit, setUnit] = useState(UNITS[0])
   const [wasAddProduct, setWasAddProduct] = useState(false)
@@ -100,7 +100,7 @@ const WriteOffProduct = ({ children, write_off_act }) => {
   }
 
   const payOrder = () => {
-    api.setListForMakeDilevers(productList)
+    api.setListForMakeDilevers(productList, currentUser.id)
       .then(res => {
         dispatch('popup/toggle', {
           popup: POPUP_TYPES.admin_panel,
@@ -139,7 +139,6 @@ const WriteOffProduct = ({ children, write_off_act }) => {
     for (let index = 0; index < updateProduct.length; index++) {
       if (updateProduct[index].id === +btnData.name) {
         updateProduct[index].count += +btnData.value
-        updateProduct[index].total_cost = roundNumber(updateProduct[index].count * updateProduct[index].price)
         break
       }
     }
