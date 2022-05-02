@@ -107,7 +107,7 @@ export const FORM_LABELS = {
   bonus: 'Снять бонусы',
   old_product: 'Применить скидку 50% по сроку годности',
   old_product_err: 'НЕВОЗМОЖНО ПРИМЕНИТЬ ДЛЯ АКЦИОННОГО ТОВАРА',
-  maybe_old_product_err: 'НЕВОЗМОЖНО ПРИМЕНИТЬ ДЛЯ ДАННОГО ТОВАРА'
+  maybe_old_product_err: 'НЕВОЗМОЖНО ПРИМЕНИТЬ ДЛЯ ДАННОГО ТОВАРА',
 }
 
 export const FORM_FIELDS = {
@@ -121,7 +121,8 @@ export const FORM_FIELDS = {
   delayed_show: 'delayed_show',
   changed_show: 'changed_show',
   password: 'password',
-  phone: 'phone'
+  phone: 'phone',
+  period: 'period'
 }
 
 export const UNITS = ['шт', 'кг']

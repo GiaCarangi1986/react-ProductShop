@@ -6,11 +6,11 @@
   &__right {
     margin-bottom: 20px;
     margin-top: 10px;
-    height: calc(100vh - 245px);
+    height: calc(100vh - 320px);
     position: relative;
     background-color: var(--ps-background-color);
     @media (max-width: 1200px) {
-      height: calc(100vh - 225px);
+      height: calc(100vh - 295px);
     }
     &_small {
       height: calc(100vh - 360px);
@@ -115,4 +115,14 @@
   column-gap: 5%;
   align-items: end;
   margin: 10px 0 20px 0;
+}
+
+.period {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  width: 68.5vw;
+  &__text {
+    margin: 0;
+  }
 }

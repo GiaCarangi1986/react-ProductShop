@@ -1,4 +1,10 @@
-.menu_user{
+.menu_user {
   --gx-spacing-large: 10px;
   width: 196px;
+}
+
+.menu_item {
+  &::part(base) {
+    padding: 0;
+  }
 }

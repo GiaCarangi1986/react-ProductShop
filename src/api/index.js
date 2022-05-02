@@ -79,8 +79,10 @@ class Api extends BaseApi {
     return res.data
   }
 
-  getListForMakeDilevers = async () => {
-    const res = await this.get('/delivery_line/')
+  getListForMakeDilevers = async (period) => {
+    const res = await this.get('/delivery_line/', {
+      period
+    })
     const serRes = productForMakeDeliverySerializer(res.data.productList)
     return {
       productList: serRes,

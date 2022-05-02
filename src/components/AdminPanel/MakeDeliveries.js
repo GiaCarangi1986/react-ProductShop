@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { useStoreon } from 'storeon/react';
-import { Button, Icon, Input, PreloaderPage, ErrorText } from '../../views';
+import { Button, Icon, Input, PreloaderPage, ErrorText, Dropdown, Menu } from '../../views';
 import {
   MAKE_DELIVERS_HEADER,
   WIDTH_COL_MAKE_DELIVERS,
@@ -10,13 +10,15 @@ import {
   UNITS,
   MODAL_TYPES,
   POPUP_TYPES,
-  DEFAULT_DATE
+  DEFAULT_DATE,
 } from '../../const';
 import PayModal from '../Modal/PayModal';
 import { dateFotmattedForMakeDelivery } from '../../utils/date';
 import { handingErrors } from '../../utils'
+
 import style from './style.module.scss';
 import table_style from '../CheckTable/check_table.module.scss'
+import user_style from '../User/user.module.scss'
 
 import api from '../../api'
 
@@ -33,6 +35,8 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
   const { dispatch } = useStoreon();
 
   const [sum, setSum] = useState(0)
+  const [period, setPeriod] = useState('Неделя')
+  const [loading, setLoading] = useState(true)
 
   const handleSubmitError = (response) => {
     if (response) {
@@ -101,23 +105,37 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
     changeProductCount(e, HANDLE_CHANGE.input)
   }
 
+  const makeDelivery = (period = 3600000 * 24 * 7) => {
+    setLoading(true)
+    api.getListForMakeDilevers(period)
+      .then(res => {
+        const fullArr = []
+        res.productList?.forEach(el => {
+          const line = el
+          line.choosen_count = el.count
+          fullArr.push(line)
+        })
+        setProductList(fullArr)
+        setLatestDate(dateFotmattedForMakeDelivery(res.latestDate))
+        setError('')
+        setLoading(false)
+      })
+      .catch(err => {
+        handleSubmitError(err?.response)
+        setLoading(false)
+      })
+  }
+
+  const changePeriod = (e) => {
+    if (e.target.name !== period) {
+      setPeriod(e.target.name)
+      makeDelivery(e.target.value)
+    }
+  }
+
   useEffect(() => {
     if (!productList.length) {
-      api.getListForMakeDilevers()
-        .then(res => {
-          const fullArr = []
-          res.productList?.forEach(el => {
-            const line = el
-            line.choosen_count = el.count
-            fullArr.push(line)
-          })
-          setProductList(fullArr)
-          setLatestDate(dateFotmattedForMakeDelivery(res.latestDate))
-          setError('')
-        })
-        .catch(err => {
-          handleSubmitError(err?.response)
-        })
+      makeDelivery()
     }
   }, [])
 
@@ -135,10 +153,46 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
   const totalInfo = `Итого: ${sum}`
   const dateInfo = `Последняя закупка была осуществлена ${latestDate}`
 
+  const MENU_OPTIONS = [
+    {
+      func: e => changePeriod(e),
+      text: 'День',
+      value: 3600000 * 24,
+    },
+    {
+      func: e => changePeriod(e),
+      text: 'Неделя',
+      value: 3600000 * 24 * 7,
+    },
+    {
+      func: e => changePeriod(e),
+      text: 'Месяц',
+      value: 3600000 * 24 * 7 * 4,
+    },
+  ]
+
   return (
     <div>
       {children}
       <h2 className={style.header_right}>{dateInfo}</h2>
+      <div className={style.grid_row}>
+        <div className={style.period}>
+          <p className={style.period__text}>Выберите период рассчета кол-ва продуктов поставки:</p>
+          <Dropdown distance={5} className='user' withoutBase>
+            <Button slot='trigger' variant='text' className='user'>
+              <div className={user_style.user_title}>
+                <span className={user_style.user_name}>{period}</span>
+                <Icon
+                  icon='dropdownArrow'
+                  nameOfStyle='arrow'
+                  className={user_style.user_icon}
+                />
+              </div>
+            </Button>
+            <Menu styleForMenu='user' styleForMenuItem='user' items={MENU_OPTIONS} />
+          </Dropdown>
+        </div>
+      </div>
       <div className={classNames(table_style['table-grid'], style.container__right)}>
         <div className={classesScroll}>
           <div className={table_style['table-layout']}>
@@ -240,11 +294,11 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
           </Button>
         </div>
       </div>
-      {productList.length === 0 && <PreloaderPage loaderClass='admin_panel' />}
+      {loading && <PreloaderPage loaderClass='admin_panel' />}
       <PayModal
         headers={{ main: 'Подтвердите покупку', text: `Ожидается оплата в размере ${sum} руб.`, btnCancel: 'Отмена', btnOk: 'Оплатить' }}
         func={payOrder} />
-    </div>
+    </div >
   )
 }
 
