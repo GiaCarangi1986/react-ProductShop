@@ -225,9 +225,9 @@ export const WIDTH_COL_WRITEOFF_TBODY = {
 }
 
 export const USER_ROLE = {
-  admin: 1,
-  main_kassir: 2,
-  kassir: 3
+  admin: 'admin',
+  main_kassir: 'mainKassir',
+  kassir: 'kassir'
 }
 
 export const ADMIN_ACTIONS = {

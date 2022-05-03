@@ -31,12 +31,12 @@ const BestSellers = ({ children, best_saler }) => {
   useEffect(() => {
     if (!peopleList.length) {
       api.getBestSellers(filters)
-        .then(res => {
+        .then((res) => {
           setPeopleList(res)
         })
         .catch(err => console.log('err', err))
     }
-  }, [])
+  }, [filters])
 
   const classesScroll = classNames({
     [table_style['table_scroll-horizontal']]: true,

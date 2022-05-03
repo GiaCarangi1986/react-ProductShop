@@ -6,8 +6,8 @@ const cleanTheDate = (dateStr) => {
   return dayjs(dateStr).locale('ru').format('LLL')
 }
 
-const formatDateToInput = () => {
-  return dayjs(new Date()).format('YYYY-MM-DDTHH:mm')
+const formatDateToInput = (date = new Date()) => {
+  return dayjs(date).format('YYYY-MM-DDTHH:mm')
 }
 
 const formatDateToBack = (dateStr) => {

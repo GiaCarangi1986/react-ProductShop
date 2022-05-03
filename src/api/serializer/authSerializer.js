@@ -7,7 +7,7 @@ const authGetSerializer = (params = {}) => ({
   firstName: params.firstName, // имя
   id: params.id, // id
   lastName: params.lastName, // фамилия
-  roleId: params.roleId // роль
+  role: params.role // роль (наименование)
 })
 
 export { authSendSerializer, authGetSerializer };

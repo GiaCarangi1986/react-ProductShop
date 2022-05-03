@@ -33,7 +33,7 @@ const CheckTable = ({
   const { dispatch, currentUser, modal } = useStoreon('currentUser', 'modal')
   const navigate = useNavigate();
 
-  const [userRole, setUserRole] = useState(0)
+  const [userRole, setUserRole] = useState('')
   const [eventType, setEventType] = useState(null)
   const [colsTrue, setColsTrue] = useState([])
   const [cols, setCols] = useState(null)
@@ -144,7 +144,7 @@ const CheckTable = ({
 
   useEffect(() => {
     if (currentUser) {
-      setUserRole(currentUser.roleId)
+      setUserRole(currentUser.role)
     }
   }, [currentUser])
 

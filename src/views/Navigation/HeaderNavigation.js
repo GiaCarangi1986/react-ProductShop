@@ -11,7 +11,7 @@ const HeaderNavigation = () => {
   const [haveRights, setHaveRights] = useState(false)
 
   useEffect(() => {
-    setHaveRights(currentUser.roleId === USER_ROLE.admin)
+    setHaveRights(currentUser.role === USER_ROLE.admin)
   }, [currentUser])
 
   const setStyle = ({ isActive = false }) => {
