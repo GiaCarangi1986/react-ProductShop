@@ -187,13 +187,13 @@ export const WIDTH_COL_WRITEOFF = {
 }
 
 export const BEST_SELLERS = {
-  name: 'ФИО',
+  fio: 'ФИО',
   sales: 'Продажи, руб.',
   role: 'Должность'
 }
 
 export const WIDTH_COL_BEST_SELLERS = {
-  name: 450,
+  fio: 450,
   sales: 70,
   role: 70,
 }

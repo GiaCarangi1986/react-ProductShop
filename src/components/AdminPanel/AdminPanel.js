@@ -28,7 +28,8 @@ const AdminPanel = () => {
     setWriteOffList([])
     setLatestMakeDeliveryDate([])
     setLatestWriteOffDate([])
-    setError([])
+    setError('')
+    setPeopleList([])
   }
 
   const RIGHT_VIEWS = {

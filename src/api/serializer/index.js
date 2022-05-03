@@ -1,6 +1,6 @@
 import { checkGetSerializer, checkParamsSerializer, createCheckSerializer, checkHistorySerializer } from './checkSerializer'
 import { authSendSerializer, authGetSerializer } from './authSerializer'
-import { bestSellersSerializer } from './bestSellersSerializer'
+import { sendParamsBestSellersSerializer, getBestSellersSerializer } from './bestSellersSerializer'
 import { productGetSerializer, productForMakeDeliverySerializer, setMakeDeliverySerializer, setWriteOffSerializer } from './productSerializer'
 
 export {
@@ -14,5 +14,6 @@ export {
   productForMakeDeliverySerializer,
   setMakeDeliverySerializer,
   setWriteOffSerializer,
-  bestSellersSerializer
+  sendParamsBestSellersSerializer,
+  getBestSellersSerializer
 }

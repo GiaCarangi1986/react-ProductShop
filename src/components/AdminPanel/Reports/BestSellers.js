@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
-import { Button, Icon, PreloaderPage } from '../../../views';
+import { PreloaderPage } from '../../../views';
 import {
   BEST_SELLERS,
   WIDTH_COL_BEST_SELLERS,
@@ -27,14 +27,23 @@ const BestSellers = ({ children, best_saler }) => {
   }
 
   const [filters, setFilters] = useState(initDateValues)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    if (!peopleList.length) {
+    if (filters?.date_search?.start_at) {
+      setLoading(true)
       api.getBestSellers(filters)
         .then((res) => {
           setPeopleList(res)
+          setLoading(false)
         })
-        .catch(err => console.log('err', err))
+        .catch(err => {
+          console.log('err', err)
+          setLoading(false)
+        })
+    }
+    else {
+      setPeopleList([])
     }
   }, [filters])
 
@@ -97,7 +106,7 @@ const BestSellers = ({ children, best_saler }) => {
           </div>
         </div>
       </div>
-      {/* {peopleList.length === 0 && <PreloaderPage loaderClass='admin_panel' />} */}
+      {loading && <PreloaderPage loaderClass='admin_panel' />}
     </div>
   )
 }
