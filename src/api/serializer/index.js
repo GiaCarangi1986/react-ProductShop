@@ -2,6 +2,7 @@ import { checkGetSerializer, checkParamsSerializer, createCheckSerializer, check
 import { authSendSerializer, authGetSerializer } from './authSerializer'
 import { sendParamsBestSellersSerializer, getBestSellersSerializer } from './bestSellersSerializer'
 import { getPopularProductsSerializer } from './popularProductsSerializer'
+import { getRevenueDataSerializer } from './revenueSerializer'
 import { productGetSerializer, productForMakeDeliverySerializer, setMakeDeliverySerializer, setWriteOffSerializer } from './productSerializer'
 
 export {
@@ -17,5 +18,6 @@ export {
   setWriteOffSerializer,
   sendParamsBestSellersSerializer,
   getBestSellersSerializer,
-  getPopularProductsSerializer
+  getPopularProductsSerializer,
+  getRevenueDataSerializer
 }

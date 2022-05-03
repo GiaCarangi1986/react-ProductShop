@@ -26,23 +26,24 @@ const Revenue = ({ children, revenue }) => {
   const [filters, setFilters] = useState(initDateValues)
   const [loading, setLoading] = useState(false)
 
-  // useEffect(() => {
-  //   if (filters?.date_search?.start_at) {
-  //     setLoading(true)
-  //     api.getPopularProducts(filters)
-  //       .then((res) => {
-  //         setRevenueList(res)
-  //         setLoading(false)
-  //       })
-  //       .catch(err => {
-  //         console.log('err', err)
-  //         setLoading(false)
-  //       })
-  //   }
-  //   else {
-  //     setRevenueList([])
-  //   }
-  // }, [filters])
+  useEffect(() => {
+    if (filters?.date_search?.start_at) {
+      setLoading(true)
+      api.getRevenueData(filters)
+        .then((res) => {
+          setRevenueList(res)
+          setLoading(false)
+        })
+        .catch(err => {
+          console.log('err', err)
+          setLoading(false)
+        })
+    }
+    else {
+      setRevenueList([])
+    }
+  }, [filters])
+
   const data = [
     {
       name: '12.12.2022',
@@ -103,7 +104,7 @@ const Revenue = ({ children, revenue }) => {
           <LineChart
             width={1150}
             height={500}
-            data={data}
+            data={revenueList}
             margin={{
               top: 5,
               right: 30,
@@ -120,13 +121,13 @@ const Revenue = ({ children, revenue }) => {
             </YAxis>
             <Tooltip />
             <Legend />
-            <Line type="monotone" dataKey="валовая прибыль" stroke="#8884d8" />
             <Line type="monotone" dataKey="выручка" stroke="#82ca9d" />
+            <Line type="monotone" dataKey="валовая прибыль" stroke="#8884d8" />
             <Line type="monotone" dataKey="использовано бонусов" stroke="#ca8f82" />
           </LineChart>
         </div>
       </div>
-      {/* {loading && <PreloaderPage loaderClass='admin_panel' />} */}
+      {loading && <PreloaderPage loaderClass='admin_panel' />}
     </div>
   )
 }
