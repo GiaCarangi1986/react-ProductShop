@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { useStoreon } from 'storeon/react';
-import { Button, Icon, Input, PreloaderPage, ErrorText, Dropdown, Menu } from '../../views';
+import { Button, Icon, Input, PreloaderPage, ErrorText, Dropdown, Menu } from '../../../views';
 import {
   MAKE_DELIVERS_HEADER,
   WIDTH_COL_MAKE_DELIVERS,
@@ -11,16 +11,16 @@ import {
   MODAL_TYPES,
   POPUP_TYPES,
   DEFAULT_DATE,
-} from '../../const';
-import PayModal from '../Modal/PayModal';
-import { dateFotmattedForMakeDelivery } from '../../utils/date';
-import { handingErrors } from '../../utils'
+} from '../../../const';
+import PayModal from '../../Modal/PayModal';
+import { dateFotmattedForMakeDelivery } from '../../../utils/date';
+import { handingErrors } from '../../../utils'
 
-import style from './style.module.scss';
-import table_style from '../CheckTable/check_table.module.scss'
-import user_style from '../User/user.module.scss'
+import style from '../style.module.scss';
+import table_style from '../../CheckTable/check_table.module.scss'
+import user_style from '../../User/user.module.scss'
 
-import api from '../../api'
+import api from '../../../api'
 
 const MakeDeliveries = ({ children, make_deliveries }) => {
   const {

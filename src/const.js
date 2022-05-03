@@ -91,7 +91,7 @@ export const TABLE_EVENT_TYPES = {
   allLoaded: 'allLoaded',
 }
 
-export const PAGE_SIZE = 15
+export const PAGE_SIZE = 25
 
 export const SCREENS = {
   middle: "(max-width: 1200px)",
@@ -184,6 +184,18 @@ export const WIDTH_COL_WRITEOFF = {
   name: 450,
   count: 50,
   delete: 25
+}
+
+export const BEST_SELLERS = {
+  name: 'ФИО',
+  sales: 'Продажи, руб.',
+  role: 'Должность'
+}
+
+export const WIDTH_COL_BEST_SELLERS = {
+  name: 450,
+  sales: 70,
+  role: 70,
 }
 
 export const MAKE_DELIVERS_LINE_ADDING = {

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { useFormik } from 'formik'
 import { useStoreon } from 'storeon/react';
-import { Button, Icon, Input, PreloaderPage, ErrorText, Fieldset } from '../../views';
-import Select from '../Select'
+import { Button, Icon, Input, PreloaderPage, ErrorText, Fieldset } from '../../../views';
+import Select from '../../Select'
 import {
   WRITEOFF_HEADER,
   WIDTH_COL_WRITEOFF,
@@ -16,15 +16,15 @@ import {
   FORM_FIELDS,
   FORM_LABELS,
   SELECT_TYPES
-} from '../../const';
-import PayModal from '../Modal/PayModal';
-import { dateFotmattedForTable } from '../../utils/date';
-import { handingErrors, deleteSpaces, roundNumber, declensionProduct } from '../../utils'
-import { addLineOfCheck } from '../../schema'
-import style from './style.module.scss';
-import table_style from '../CheckTable/check_table.module.scss'
+} from '../../../const';
+import PayModal from '../../Modal/PayModal';
+import { dateFotmattedForTable } from '../../../utils/date';
+import { handingErrors, deleteSpaces, roundNumber, declensionProduct } from '../../../utils'
+import { addLineOfCheck } from '../../../schema'
+import style from '../style.module.scss';
+import table_style from '../../CheckTable/check_table.module.scss'
 
-import api from '../../api'
+import api from '../../../api'
 
 const WriteOffProduct = ({ children, write_off_act }) => {
   const {

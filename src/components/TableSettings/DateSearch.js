@@ -8,6 +8,11 @@ import style from './table-settings.module.scss'
 
 const DateSearch = ({ setEventType = () => { }, setFilters = () => { }, filters = {} }) => {
   const initialValues = {
+    start_at: filters?.date_search?.start_at || null,
+    end_at: filters?.date_search?.end_at || null
+  }
+
+  const emptyValues = {
     start_at: null,
     end_at: null
   }
@@ -29,7 +34,7 @@ const DateSearch = ({ setEventType = () => { }, setFilters = () => { }, filters 
     if (filters?.date_search?.start_at) {
       formik.submitForm()
     }
-    formik.setValues(initialValues)
+    formik.setValues(emptyValues)
     formik.setTouched({})
     setEventType(null)
   }

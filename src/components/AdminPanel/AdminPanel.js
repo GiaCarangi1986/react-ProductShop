@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Button, Icon } from '../../views';
-import MakeDeliveries from './MakeDeliveries';
-import WriteOffProduct from './WriteOffProduct'
+import MakeDeliveries from './Actions/MakeDeliveries';
+import WriteOffProduct from './Actions/WriteOffProduct'
+import BestSellers from './Reports/BestSellers'
 import Options from './Options'
 import Popup from '../Popup';
 import { ADMIN_PANEL, DEFAULT_DATE } from '../../const';
@@ -15,6 +16,7 @@ const AdminPanel = () => {
   const [latestWriteOffDate, setLatestWriteOffDate] = useState(DEFAULT_DATE)
   const [error, setError] = useState('')
   const [period, setPeriod] = useState('Неделя')
+  const [peopleList, setPeopleList] = useState([])
 
   const handleClick = (e) => {
     setTypePage(e.target.value)
@@ -31,7 +33,8 @@ const AdminPanel = () => {
 
   const RIGHT_VIEWS = {
     make_deliveries: MakeDeliveries,
-    write_off_act: WriteOffProduct
+    write_off_act: WriteOffProduct,
+    best_saler: BestSellers
   }
 
   const RightPart = RIGHT_VIEWS[typePage]
@@ -65,6 +68,10 @@ const AdminPanel = () => {
               setLatestDate: setLatestWriteOffDate,
               error,
               setError,
+            }}
+            best_saler={{
+              peopleList,
+              setPeopleList
             }}
           >
             <div className={style.close}>
