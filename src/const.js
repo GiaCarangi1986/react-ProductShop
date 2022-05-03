@@ -282,6 +282,10 @@ export const ADMIN_REPORTS = { // отчеты
     value: 'popular_product',
     title: 'Популярные товары'
   },
+  revenue: { // выручка за период (+ выручка - прожади; валовая прибыль - доход-расход)
+    value: 'revenue',
+    title: 'Выручка магазина'
+  },
 }
 
 export const ADMIN_PANEL = [
@@ -325,6 +329,10 @@ export const ADMIN_PANEL = [
       {
         title: ADMIN_REPORTS.popular_product.title,
         value: ADMIN_REPORTS.popular_product.value
+      },
+      {
+        title: ADMIN_REPORTS.revenue.title,
+        value: ADMIN_REPORTS.revenue.value
       },
     ]
   }

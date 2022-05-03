@@ -4,6 +4,7 @@ import MakeDeliveries from './Actions/MakeDeliveries';
 import WriteOffProduct from './Actions/WriteOffProduct'
 import BestSellers from './Reports/BestSellers'
 import PopularProducts from './Reports/PopularProducts';
+import Revenue from './Reports/Revenue'
 import Options from './Options'
 import Popup from '../Popup';
 import { ADMIN_PANEL, DEFAULT_DATE } from '../../const';
@@ -19,6 +20,7 @@ const AdminPanel = () => {
   const [period, setPeriod] = useState('Неделя')
   const [peopleList, setPeopleList] = useState([])
   const [popularList, setPopularList] = useState([])
+  const [revenueList, setRevenueList] = useState([])
 
   const handleClick = (e) => {
     setTypePage(e.target.value)
@@ -32,13 +34,15 @@ const AdminPanel = () => {
     setLatestWriteOffDate([])
     setError('')
     setPeopleList([])
+    setRevenueList([])
   }
 
   const RIGHT_VIEWS = {
     make_deliveries: MakeDeliveries,
     write_off_act: WriteOffProduct,
     best_saler: BestSellers,
-    popular_product: PopularProducts
+    popular_product: PopularProducts,
+    revenue: Revenue
   }
 
   const RightPart = RIGHT_VIEWS[typePage]
@@ -80,6 +84,10 @@ const AdminPanel = () => {
             popular_product={{
               popularList,
               setPopularList
+            }}
+            revenue={{
+              revenueList,
+              setRevenueList
             }}
           >
             <div className={style.close}>
