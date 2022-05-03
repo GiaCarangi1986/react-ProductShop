@@ -136,7 +136,6 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
 
   useEffect(() => {
     if (!productList.length) {
-      console.log('hrer');
       makeDelivery()
     }
   }, [])
@@ -169,7 +168,7 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
     {
       func: e => changePeriod(e),
       text: 'Месяц',
-      value: 3600000 * 24 * 7 * 4,
+      value: 3600000 * 24 * 30,
     },
   ]
 
