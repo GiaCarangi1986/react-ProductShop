@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Label } from 'recharts';
 import { PreloaderPage } from '../../../views';
-import {
-  POPULAR_PRODUCTS,
-  WIDTH_COL_POPULAR_PRODUCTS,
-} from '../../../const';
 import DateSearch from '../../TableSettings/DateSearch';
 import { formatDateToInput } from '../../../utils/date';
 
@@ -29,29 +26,71 @@ const Revenue = ({ children, revenue }) => {
   const [filters, setFilters] = useState(initDateValues)
   const [loading, setLoading] = useState(false)
 
-  useEffect(() => {
-    if (filters?.date_search?.start_at) {
-      setLoading(true)
-      api.getPopularProducts(filters)
-        .then((res) => {
-          setRevenueList(res)
-          setLoading(false)
-        })
-        .catch(err => {
-          console.log('err', err)
-          setLoading(false)
-        })
-    }
-    else {
-      setRevenueList([])
-    }
-  }, [filters])
-
+  // useEffect(() => {
+  //   if (filters?.date_search?.start_at) {
+  //     setLoading(true)
+  //     api.getPopularProducts(filters)
+  //       .then((res) => {
+  //         setRevenueList(res)
+  //         setLoading(false)
+  //       })
+  //       .catch(err => {
+  //         console.log('err', err)
+  //         setLoading(false)
+  //       })
+  //   }
+  //   else {
+  //     setRevenueList([])
+  //   }
+  // }, [filters])
+  const data = [
+    {
+      name: '12.12.2022',
+      выручка: 43000,
+      'валовая прибыль': 2400,
+      'использовано бонусов': 400,
+    },
+    {
+      name: '13.12.2022',
+      выручка: 3000,
+      'валовая прибыль': 1398,
+      'использовано бонусов': 450,
+    },
+    {
+      name: '14.12.2022',
+      выручка: 2000,
+      'валовая прибыль': 9800,
+      'использовано бонусов': 202,
+    },
+    {
+      name: '15.12.2022',
+      выручка: 2780,
+      'валовая прибыль': 3908,
+      'использовано бонусов': 300,
+    },
+    {
+      name: '16.12.2022',
+      выручка: 1890,
+      'валовая прибыль': 4800,
+      'использовано бонусов': 390,
+    },
+    {
+      name: '17.12.2022',
+      выручка: 2390,
+      'валовая прибыль': 3800,
+      'использовано бонусов': 100,
+    },
+    {
+      name: '18.12.2022',
+      выручка: 3490,
+      'валовая прибыль': 4300,
+      'использовано бонусов': 510,
+    },
+  ];
   const classesScroll = classNames({
     [table_style['table_scroll-horizontal']]: true,
     [table_style['table_scroll-vertical']]: true,
   })
-
   return (
     <div>
       {children}
@@ -59,54 +98,35 @@ const Revenue = ({ children, revenue }) => {
       <div className={style.grid_row}>
         <DateSearch filters={filters} setFilters={setFilters} />
       </div>
-      {/* <div className={classNames(table_style['table-grid'], style.container__right, style.container__right_small)}>
+      <div className={classNames(table_style['table-grid'], style.container__right, style.container__right_gragh)}>
         <div className={classesScroll}>
-          <div className={table_style['table-layout']}>
-            <table className={table_style.table}>
-              <thead className={table_style['table-head']}>
-                <tr className={table_style['table-row']}>
-                  {Object.keys(POPULAR_PRODUCTS).map(header => {
-                    const w = WIDTH_COL_POPULAR_PRODUCTS[header] || 30
-                    return (
-                      <th key={header} className={table_style['table-col']}>
-                        <div style={{ minWidth: `${w}px`, margin: 'auto' }}>
-                          {POPULAR_PRODUCTS[header]}
-                        </div>
-                      </th>
-                    )
-                  })}
-                </tr>
-              </thead>
-              <tbody className={table_style['table-body']}>
-                {revenueList.map((line) => {
-                  const classesRow = classNames({
-                    [table_style['table-row']]: true,
-                  })
-                  return (
-                    <tr key={`${line.id}`} className={classesRow}>
-                      {Object.keys(POPULAR_PRODUCTS).map(product_line => {
-                        const leftOrCenter = Number.isNaN(Number(`${line[product_line]}`));
-                        const tdClasses = classNames({
-                          [table_style['table-col']]: true,
-                          [table_style['table-col_left']]: leftOrCenter
-                        })
-                        const w = WIDTH_COL_POPULAR_PRODUCTS[product_line] || ''
-                        const margin = leftOrCenter ? '' : 'auto'
-                        return (
-                          <td className={tdClasses} key={product_line}>
-                            <div style={{ minWidth: `${w - 1}px`, margin }}>{line[product_line]}</div>
-                          </td>
-                        )
-                      })}
-                    </tr>
-                  )
-                })}
-              </tbody>
-            </table>
-          </div>
+          <LineChart
+            width={1150}
+            height={500}
+            data={data}
+            margin={{
+              top: 5,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name">
+              <Label value="Дата" offset={-10} position="insideBottomRight" />
+            </XAxis>
+            <YAxis>
+              <Label value="Выручка" angle={-90} position="insideTopLeft" dy={63} dx={-20} />
+            </YAxis>
+            <Tooltip />
+            <Legend />
+            <Line type="monotone" dataKey="валовая прибыль" stroke="#8884d8" />
+            <Line type="monotone" dataKey="выручка" stroke="#82ca9d" />
+            <Line type="monotone" dataKey="использовано бонусов" stroke="#ca8f82" />
+          </LineChart>
         </div>
-      </div> */}
-      {loading && <PreloaderPage loaderClass='admin_panel' />}
+      </div>
+      {/* {loading && <PreloaderPage loaderClass='admin_panel' />} */}
     </div>
   )
 }
