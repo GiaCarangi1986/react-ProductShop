@@ -10,7 +10,8 @@ import {
   setMakeDeliverySerializer,
   setWriteOffSerializer,
   sendParamsBestSellersSerializer,
-  getBestSellersSerializer
+  getBestSellersSerializer,
+  getPopularProductsSerializer
 } from './serializer'
 import { dateFotmattedForMakeDeliveryBack, formatDateToBack } from '../utils/date'
 
@@ -113,6 +114,13 @@ class Api extends BaseApi {
     const serParam = sendParamsBestSellersSerializer(params)
     const res = await this.get('/best_sellers/', serParam)
     const serRes = getBestSellersSerializer(res.data)
+    return serRes
+  }
+
+  getPopularProducts = async (params) => {
+    const serParam = sendParamsBestSellersSerializer(params)
+    const res = await this.get('/popular_products/', serParam)
+    const serRes = getPopularProductsSerializer(res.data)
     return serRes
   }
 }

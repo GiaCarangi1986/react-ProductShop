@@ -198,6 +198,20 @@ export const WIDTH_COL_BEST_SELLERS = {
   role: 70,
 }
 
+export const POPULAR_PRODUCTS = {
+  title: 'Название',
+  manufacturer: 'Производитель',
+  category: 'Категория',
+  sale_count: 'Кол-во продаж',
+}
+
+export const WIDTH_COL_POPULAR_PRODUCTS = {
+  title: 200,
+  manufacturer: 200,
+  category: 200,
+  sale_count: 70,
+}
+
 export const MAKE_DELIVERS_LINE_ADDING = {
   count: 'count',
   label: 'label',
