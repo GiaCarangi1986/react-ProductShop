@@ -103,6 +103,7 @@ const AddCheckParams = ({
 
   const chooseProduct = (e, name) => {
     formik.setFieldValue(name, e)
+    formik.setFieldValue('count', 1)
     setUnit(e.unit)
 
     setWasAddProduct(false)
