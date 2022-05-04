@@ -31,7 +31,6 @@ const Revenue = ({ children, revenue }) => {
       setLoading(true)
       api.getRevenueData(filters)
         .then((res) => {
-          console.log('res', res)
           setRevenueList(res)
           setLoading(false)
         })

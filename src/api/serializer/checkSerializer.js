@@ -56,7 +56,7 @@ const checkHistorySerializer = (checks = []) => {
   checks.forEach(check => {
     const _check = {
       id: check?.id || 0, // id чека
-      date_time: dateFotmattedForTable(check?.dateTime), // дата и время покупки ****** мб потом время настроить
+      date_time: dateFotmattedForTable(check?.dateTime), // дата и время покупки
       kassirName: check?.kassir || '', // fio кассира
       totalCost: check?.totalSum || 0, // итоговая сумма (без бонусов)
       bonus_count: check?.bonusCount || 0, // потрачено бонусов
@@ -72,8 +72,9 @@ const checkHistorySerializer = (checks = []) => {
         price: line?.price || 0, // цена продукта из чека
         old_product: line?.oldProduct || false, // является ли продукт из строки чека старым
         label: line?.productName || '', // название продукта
-        maybeOld: line?.maybeOld || false, // может ли бы старым продукт
+        maybeOld: line?.maybeOld || false, // может ли быть старым продукт
         sale: line?.sale || false, // распространяется ли скидка на продукт
+        unit: line?.unit // ед. измер.
       })
     })
 
