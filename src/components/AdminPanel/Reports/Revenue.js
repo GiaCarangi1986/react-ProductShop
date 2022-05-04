@@ -31,6 +31,7 @@ const Revenue = ({ children, revenue }) => {
       setLoading(true)
       api.getRevenueData(filters)
         .then((res) => {
+          console.log('res', res)
           setRevenueList(res)
           setLoading(false)
         })
@@ -44,54 +45,11 @@ const Revenue = ({ children, revenue }) => {
     }
   }, [filters])
 
-  const data = [
-    {
-      name: '12.12.2022',
-      выручка: 43000,
-      'валовая прибыль': 2400,
-      'использовано бонусов': 400,
-    },
-    {
-      name: '13.12.2022',
-      выручка: 3000,
-      'валовая прибыль': 1398,
-      'использовано бонусов': 450,
-    },
-    {
-      name: '14.12.2022',
-      выручка: 2000,
-      'валовая прибыль': 9800,
-      'использовано бонусов': 202,
-    },
-    {
-      name: '15.12.2022',
-      выручка: 2780,
-      'валовая прибыль': 3908,
-      'использовано бонусов': 300,
-    },
-    {
-      name: '16.12.2022',
-      выручка: 1890,
-      'валовая прибыль': 4800,
-      'использовано бонусов': 390,
-    },
-    {
-      name: '17.12.2022',
-      выручка: 2390,
-      'валовая прибыль': 3800,
-      'использовано бонусов': 100,
-    },
-    {
-      name: '18.12.2022',
-      выручка: 3490,
-      'валовая прибыль': 4300,
-      'использовано бонусов': 510,
-    },
-  ];
   const classesScroll = classNames({
     [table_style['table_scroll-horizontal']]: true,
     [table_style['table_scroll-vertical']]: true,
   })
+
   return (
     <div>
       {children}
