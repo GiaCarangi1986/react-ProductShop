@@ -22,6 +22,8 @@ const BonusCardOwners = ({ children, bonus_card }) => {
     error,
   } = bonus_card
 
+  const [loading, setLoading] = useState(false)
+
   const handleSubmitError = (response) => {
     if (response) {
       const errResponse = handingErrors(response);
@@ -43,6 +45,23 @@ const BonusCardOwners = ({ children, bonus_card }) => {
   //       handleSubmitError(err?.response)
   //     })
   // }
+
+  useEffect(() => {
+    if (!bonusCardOwner.lenght) {
+      setLoading(true)
+      api.getBonusCardOwner()
+        .then(res => {
+          setBonusCardOwner(res)
+          setLoading(false)
+          setError('')
+        })
+        .catch(err => {
+          console.log('err', err)
+          handleSubmitError(err?.response) // норм ошибку выводить
+          setLoading(false)
+        })
+    }
+  }, [])
 
   const classesScroll = classNames({
     [table_style['table_scroll-horizontal']]: true,
