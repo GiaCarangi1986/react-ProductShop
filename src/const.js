@@ -216,6 +216,22 @@ export const WIDTH_COL_BONUS_CARD_OWNER = {
   gender: 60,
 }
 
+export const SALE_LIST = {
+  id: 'ID акции',
+  start_date: 'Дата начала',
+  end_date: 'Дата окончания',
+  discountPercent: 'Размер скидки, %',
+  product_count: 'Кол-во продуктов, участвующих в акции',
+}
+
+export const WIDTH_COL_SALE_LIST = {
+  id: 30,
+  start_date: 80,
+  end_date: 80,
+  discountPercent: 80,
+  product_count: 80,
+}
+
 export const POPULAR_PRODUCTS = {
   title: 'Название',
   manufacturer: 'Производитель',

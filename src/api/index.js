@@ -13,7 +13,8 @@ import {
   getBestSellersSerializer,
   getPopularProductsSerializer,
   getRevenueDataSerializer,
-  getBonusCardOwnerSerializer
+  getBonusCardOwnerSerializer,
+  getSaleSerializer
 } from './serializer'
 import { dateFotmattedForMakeDeliveryBack, formatDateToBack } from '../utils/date'
 
@@ -136,6 +137,12 @@ class Api extends BaseApi {
   getBonusCardOwner = async () => {
     const res = await this.get('/bonus_card_owner/')
     const serRes = getBonusCardOwnerSerializer(res.data)
+    return serRes
+  }
+
+  getSaleList = async () => {
+    const res = await this.get('/sale/')
+    const serRes = getSaleSerializer(res.data)
     return serRes
   }
 }

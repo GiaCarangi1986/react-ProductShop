@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {
-  BONUS_CARD_OWNER,
-  WIDTH_COL_BONUS_CARD_OWNER,
+  SALE_LIST,
+  WIDTH_COL_SALE_LIST,
 } from '../../../const';
 import { handingErrors } from '../../../utils'
 import ListShow from './ListShow';
@@ -28,7 +28,7 @@ const Sale = ({ children, sale }) => {
   useEffect(() => {
     if (!saleList.length) {
       setLoading(true)
-      api.getBonusCardOwner()
+      api.getSaleList()
         .then(res => {
           setSaleList(res)
           setLoading(false)
@@ -46,8 +46,8 @@ const Sale = ({ children, sale }) => {
     <ListShow
       children={children}
       list={saleList}
-      WIDTH_COL={WIDTH_COL_BONUS_CARD_OWNER}
-      NAME_COL={BONUS_CARD_OWNER}
+      WIDTH_COL={WIDTH_COL_SALE_LIST}
+      NAME_COL={SALE_LIST}
       loading={loading}
       error={error}
     />
