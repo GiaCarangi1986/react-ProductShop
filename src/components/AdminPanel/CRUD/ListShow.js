@@ -1,10 +1,40 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import classNames from 'classnames';
 import { Button, Icon, PreloaderPage, ErrorText } from '../../../views';
 import style from '../style.module.scss';
 import table_style from '../../CheckTable/check_table.module.scss'
 
-const ListShow = ({ children, list = [], WIDTH_COL = {}, NAME_COL = {}, loading = false, error = '' }) => {
+const ListShow = ({
+  children,
+  list = [],
+  setList = () => { },
+  WIDTH_COL = {},
+  NAME_COL = {},
+  loading = false,
+  setLoading = () => { },
+  error = '',
+  setError = () => { },
+  func = () => { },
+  handleSubmitError = () => { }
+}) => {
+
+  useEffect(() => {
+    if (!list.length) {
+      setLoading(true)
+      func()
+        .then(res => {
+          setList(res)
+          setLoading(false)
+          setError('')
+        })
+        .catch(err => {
+          console.log('err', err)
+          handleSubmitError(err?.response)
+          setLoading(false)
+        })
+    }
+  }, [])
+
   const classesScroll = classNames({
     [table_style['table_scroll-horizontal']]: true,
     [table_style['table_scroll-vertical']]: true,

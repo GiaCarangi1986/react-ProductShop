@@ -25,31 +25,19 @@ const BonusCardOwners = ({ children, bonus_card }) => {
     }
   }
 
-  useEffect(() => {
-    if (!bonusCardOwner.length) {
-      setLoading(true)
-      api.getBonusCardOwner()
-        .then(res => {
-          setBonusCardOwner(res)
-          setLoading(false)
-          setError('')
-        })
-        .catch(err => {
-          console.log('err', err)
-          handleSubmitError(err?.response) // норм ошибку выводить
-          setLoading(false)
-        })
-    }
-  }, [])
-
   return (
     <ListShow
       children={children}
       list={bonusCardOwner}
+      setList={setBonusCardOwner}
       WIDTH_COL={WIDTH_COL_BONUS_CARD_OWNER}
       NAME_COL={BONUS_CARD_OWNER}
       loading={loading}
+      setLoading={setLoading}
       error={error}
+      setError={setError}
+      func={api.getBonusCardOwner}
+      handleSubmitError={handleSubmitError}
     />
   )
 }

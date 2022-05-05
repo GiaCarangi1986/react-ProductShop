@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   SALE_LIST,
   WIDTH_COL_SALE_LIST,
@@ -25,31 +25,19 @@ const Sale = ({ children, sale }) => {
     }
   }
 
-  useEffect(() => {
-    if (!saleList.length) {
-      setLoading(true)
-      api.getSaleList()
-        .then(res => {
-          setSaleList(res)
-          setLoading(false)
-          setError('')
-        })
-        .catch(err => {
-          console.log('err', err)
-          handleSubmitError(err?.response) // норм ошибку выводить
-          setLoading(false)
-        })
-    }
-  }, [])
-
   return (
     <ListShow
       children={children}
       list={saleList}
+      setList={setSaleList}
       WIDTH_COL={WIDTH_COL_SALE_LIST}
       NAME_COL={SALE_LIST}
       loading={loading}
+      setLoading={setLoading}
       error={error}
+      setError={setError}
+      func={api.getSaleList}
+      handleSubmitError={handleSubmitError}
     />
   )
 }
