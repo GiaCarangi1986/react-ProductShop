@@ -47,7 +47,7 @@ const BonusCardOwners = ({ children, bonus_card }) => {
   // }
 
   useEffect(() => {
-    if (!bonusCardOwner.lenght) {
+    if (!bonusCardOwner.length) {
       setLoading(true)
       api.getBonusCardOwner()
         .then(res => {
@@ -77,6 +77,9 @@ const BonusCardOwners = ({ children, bonus_card }) => {
             <table className={table_style.table}>
               <thead className={table_style['table-head']}>
                 <tr className={table_style['table-row']}>
+                  <th key='edit' className={table_style['table-col']}>
+                    <div style={{ minWidth: '30px', margin: 'auto' }} />
+                  </th>
                   {Object.keys(BONUS_CARD_OWNER).map(header => {
                     const w = WIDTH_COL_BONUS_CARD_OWNER[header] || 30
                     return (
@@ -87,6 +90,9 @@ const BonusCardOwners = ({ children, bonus_card }) => {
                       </th>
                     )
                   })}
+                  <th key='delete' className={table_style['table-col']}>
+                    <div style={{ minWidth: '30px', margin: 'auto' }} />
+                  </th>
                 </tr>
               </thead>
               <tbody className={table_style['table-body']}>
