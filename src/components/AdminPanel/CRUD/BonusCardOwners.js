@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   BONUS_CARD_OWNER,
   WIDTH_COL_BONUS_CARD_OWNER,

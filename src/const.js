@@ -216,6 +216,24 @@ export const WIDTH_COL_BONUS_CARD_OWNER = {
   gender: 60,
 }
 
+export const USER_LIST = {
+  id: 'ID бонусной карты',
+  fio: 'ФИО',
+  phone: 'Телефон',
+  email: 'Эл. почта',
+  password: 'Пароль',
+  role: 'Роль',
+}
+
+export const WIDTH_COL_USER_LIST = {
+  id: 30,
+  fio: 160,
+  phone: 100,
+  email: 120,
+  password: 80,
+  role: 60,
+}
+
 export const SALE_LIST = {
   id: 'ID акции',
   start_date: 'Дата начала',

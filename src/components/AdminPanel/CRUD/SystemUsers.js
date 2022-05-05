@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
-  BONUS_CARD_OWNER,
-  WIDTH_COL_BONUS_CARD_OWNER,
+  USER_LIST,
+  WIDTH_COL_USER_LIST,
 } from '../../../const';
 import { handingErrors } from '../../../utils'
 import ListShow from './ListShow';
@@ -25,31 +25,19 @@ const SystemUsers = ({ children, user }) => {
     }
   }
 
-  useEffect(() => {
-    if (!systemUsers.length) {
-      setLoading(true)
-      api.getBonusCardOwner()
-        .then(res => {
-          setSystemUsers(res)
-          setLoading(false)
-          setError('')
-        })
-        .catch(err => {
-          console.log('err', err)
-          handleSubmitError(err?.response) // норм ошибку выводить
-          setLoading(false)
-        })
-    }
-  }, [])
-
   return (
     <ListShow
       children={children}
       list={systemUsers}
-      WIDTH_COL={WIDTH_COL_BONUS_CARD_OWNER}
-      NAME_COL={BONUS_CARD_OWNER}
+      setList={setSystemUsers}
+      WIDTH_COL={WIDTH_COL_USER_LIST}
+      NAME_COL={USER_LIST}
       loading={loading}
+      setLoading={setLoading}
       error={error}
+      setError={setError}
+      func={api.getBonusCardOwner}
+      handleSubmitError={handleSubmitError}
     />
   )
 }
