@@ -58,30 +58,32 @@ const Revenue = ({ children, revenue }) => {
       </div>
       <div className={classNames(table_style['table-grid'], style.container__right, style.container__right_gragh)}>
         <div className={classesScroll}>
-          <LineChart
-            width={1150}
-            height={500}
-            data={revenueList}
-            margin={{
-              top: 5,
-              right: 30,
-              left: 20,
-              bottom: 5,
-            }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name">
-              <Label value="Дата" offset={-10} position="insideBottomRight" />
-            </XAxis>
-            <YAxis>
-              <Label value="Выручка" angle={-90} position="insideTopLeft" dy={63} dx={-20} />
-            </YAxis>
-            <Tooltip />
-            <Legend />
-            <Line type="monotone" dataKey="выручка" stroke="#82ca9d" />
-            <Line type="monotone" dataKey="валовая прибыль" stroke="#8884d8" />
-            <Line type="monotone" dataKey="использовано бонусов" stroke="#ca8f82" />
-          </LineChart>
+          <div className={style.chart}>
+            <LineChart
+              width={1000}
+              height={400}
+              data={revenueList}
+              margin={{
+                top: 5,
+                right: 30,
+                left: 20,
+                bottom: 5,
+              }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="name">
+                <Label value="Дата" offset={-10} position="insideBottomRight" />
+              </XAxis>
+              <YAxis>
+                <Label value="Выручка" angle={-90} position="insideTopLeft" dy={63} dx={-20} />
+              </YAxis>
+              <Tooltip />
+              <Legend />
+              <Line type="monotone" dataKey="выручка" stroke="#82ca9d" />
+              <Line type="monotone" dataKey="валовая прибыль" stroke="#8884d8" />
+              <Line type="monotone" dataKey="использовано бонусов" stroke="#ca8f82" />
+            </LineChart>
+          </div>
         </div>
       </div>
       {loading && <PreloaderPage loaderClass='admin_panel' />}
