@@ -25,6 +25,8 @@ const AdminPanel = () => {
   const [popularList, setPopularList] = useState([])
   const [revenueList, setRevenueList] = useState([])
   const [bonusCardOwner, setBonusCardOwner] = useState([])
+  const [saleList, setSaleList] = useState([])
+  const [systemUsers, setSystemUsers] = useState([])
 
   const handleClick = (e) => {
     setTypePage(e.target.value)
@@ -40,6 +42,8 @@ const AdminPanel = () => {
     setPeopleList([])
     setRevenueList([])
     setBonusCardOwner([])
+    setSaleList([])
+    setSystemUsers([])
   }
 
   const RIGHT_VIEWS = {
@@ -100,6 +104,18 @@ const AdminPanel = () => {
             bonus_card={{
               bonusCardOwner,
               setBonusCardOwner,
+              error,
+              setError,
+            }}
+            user={{
+              systemUsers,
+              setSystemUsers,
+              error,
+              setError,
+            }}
+            sale={{
+              saleList,
+              setSaleList,
               error,
               setError,
             }}
