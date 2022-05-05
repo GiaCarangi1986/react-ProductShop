@@ -12,6 +12,12 @@
     @media (max-width: 1200px) {
       height: calc(100vh - 295px);
     }
+    &_big {
+      height: calc(100vh - 230px);
+      @media (max-width: 1200px) {
+        height: calc(100vh - 205px);
+      }
+    }
     &_gragh {
       height: calc(100vh - 325px);
       @media (max-width: 1200px) {

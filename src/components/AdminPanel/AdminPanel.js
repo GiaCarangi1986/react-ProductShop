@@ -5,6 +5,9 @@ import WriteOffProduct from './Actions/WriteOffProduct'
 import BestSellers from './Reports/BestSellers'
 import PopularProducts from './Reports/PopularProducts';
 import Revenue from './Reports/Revenue'
+import SystemUsers from './CRUD/SystemUsers'
+import Sale from './CRUD/Sale'
+import BonusCardOwners from './CRUD/BonusCardOwners'
 import Options from './Options'
 import Popup from '../Popup';
 import { ADMIN_PANEL, DEFAULT_DATE } from '../../const';
@@ -21,6 +24,7 @@ const AdminPanel = () => {
   const [peopleList, setPeopleList] = useState([])
   const [popularList, setPopularList] = useState([])
   const [revenueList, setRevenueList] = useState([])
+  const [bonusCardOwner, setBonusCardOwner] = useState([])
 
   const handleClick = (e) => {
     setTypePage(e.target.value)
@@ -35,6 +39,7 @@ const AdminPanel = () => {
     setError('')
     setPeopleList([])
     setRevenueList([])
+    setBonusCardOwner([])
   }
 
   const RIGHT_VIEWS = {
@@ -42,7 +47,10 @@ const AdminPanel = () => {
     write_off_act: WriteOffProduct,
     best_saler: BestSellers,
     popular_product: PopularProducts,
-    revenue: Revenue
+    revenue: Revenue,
+    bonus_card: BonusCardOwners,
+    user: SystemUsers,
+    sale: Sale
   }
 
   const RightPart = RIGHT_VIEWS[typePage]
@@ -88,6 +96,12 @@ const AdminPanel = () => {
             revenue={{
               revenueList,
               setRevenueList
+            }}
+            bonus_card={{
+              bonusCardOwner,
+              setBonusCardOwner,
+              error,
+              setError,
             }}
           >
             <div className={style.close}>

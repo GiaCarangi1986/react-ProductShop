@@ -198,6 +198,24 @@ export const WIDTH_COL_BEST_SELLERS = {
   role: 70,
 }
 
+export const BONUS_CARD_OWNER = {
+  id_card: 'ID бонусной карты',
+  fio: 'ФИО',
+  phone: 'Телефон',
+  email: 'Эл. почта',
+  birthDate: 'День рождения',
+  gender: 'Пол',
+}
+
+export const WIDTH_COL_BONUS_CARD_OWNER = {
+  id_card: 30,
+  fio: 150,
+  phone: 60,
+  email: 50,
+  birthDate: 50,
+  gender: 50,
+}
+
 export const POPULAR_PRODUCTS = {
   title: 'Название',
   manufacturer: 'Производитель',
