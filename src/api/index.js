@@ -14,7 +14,8 @@ import {
   getPopularProductsSerializer,
   getRevenueDataSerializer,
   getBonusCardOwnerSerializer,
-  getSaleSerializer
+  getSaleSerializer,
+  getUserListSerializer
 } from './serializer'
 import { dateFotmattedForMakeDeliveryBack, formatDateToBack } from '../utils/date'
 
@@ -143,6 +144,12 @@ class Api extends BaseApi {
   getSaleList = async () => {
     const res = await this.get('/sale/')
     const serRes = getSaleSerializer(res.data)
+    return serRes
+  }
+
+  getUserList = async () => {
+    const res = await this.get('/user/')
+    const serRes = getUserListSerializer(res.data)
     return serRes
   }
 }

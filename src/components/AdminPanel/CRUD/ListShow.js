@@ -92,6 +92,7 @@ const ListShow = ({
                         const tdClasses = classNames({
                           [table_style['table-col']]: true,
                           [table_style['table-col_left']]: leftOrCenter
+                          // тут еще стиль добавить, если product_line === 'password'
                         })
                         const w = WIDTH_COL[product_line] || ''
                         const margin = leftOrCenter ? '' : 'auto'

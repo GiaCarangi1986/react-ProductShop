@@ -5,6 +5,7 @@ import { getPopularProductsSerializer } from './popularProductsSerializer'
 import { getRevenueDataSerializer } from './revenueSerializer'
 import { getBonusCardOwnerSerializer } from './bonusCardOwner'
 import { getSaleSerializer } from './sale'
+import { getUserListSerializer } from './userList'
 import { productGetSerializer, productForMakeDeliverySerializer, setMakeDeliverySerializer, setWriteOffSerializer } from './productSerializer'
 
 export {
@@ -23,5 +24,6 @@ export {
   getPopularProductsSerializer,
   getRevenueDataSerializer,
   getBonusCardOwnerSerializer,
-  getSaleSerializer
+  getSaleSerializer,
+  getUserListSerializer
 }

@@ -36,7 +36,7 @@ const SystemUsers = ({ children, user }) => {
       setLoading={setLoading}
       error={error}
       setError={setError}
-      func={api.getBonusCardOwner}
+      func={api.getUserList}
       handleSubmitError={handleSubmitError}
     />
   )
