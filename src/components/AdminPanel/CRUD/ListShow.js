@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import classNames from 'classnames';
 import { Button, Icon, PreloaderPage, ErrorText } from '../../../views';
+import { FORM_FIELDS } from '../../../const';
 import style from '../style.module.scss';
 import table_style from '../../CheckTable/check_table.module.scss'
 
@@ -88,11 +89,12 @@ const ListShow = ({
                         </div>
                       </td>
                       {Object.keys(NAME_COL).map(product_line => {
+                        console.log('product_line', product_line)
                         const leftOrCenter = Number.isNaN(Number(`${line[product_line]}`));
                         const tdClasses = classNames({
                           [table_style['table-col']]: true,
-                          [table_style['table-col_left']]: leftOrCenter
-                          // тут еще стиль добавить, если product_line === 'password'
+                          [table_style['table-col_left']]: leftOrCenter,
+                          [style.password]: product_line === FORM_FIELDS.password
                         })
                         const w = WIDTH_COL[product_line] || ''
                         const margin = leftOrCenter ? '' : 'auto'

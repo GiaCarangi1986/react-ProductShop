@@ -149,3 +149,12 @@
   justify-content: center;
   align-items: center;
 }
+
+.password {
+  color: var(--ps-background-color);
+  background-color: var(--ps-background-color);
+}
+
+.password:hover {
+  color: var(--ps-border-color-hover);
+}
