@@ -139,6 +139,12 @@ class Api extends BaseApi {
     return serRes
   }
 
+  deleteBonusCardOwner = async (id) => {
+    const res = await this.delete(`/bonus_card_owner/${id}`)
+    const serRes = getBonusCardOwnerSerializer(res.data)
+    return serRes
+  }
+
   getSaleList = async () => {
     const res = await this.get('/sale/')
     const serRes = getSaleSerializer(res.data)

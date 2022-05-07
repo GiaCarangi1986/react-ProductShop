@@ -24,6 +24,20 @@ const BonusCardOwners = ({ children, bonus_card }) => {
     }
   }
 
+  const onDelete = e => {
+    setLoading(true)
+    api.deleteBonusCardOwner(e.target.name)
+      .then(res => {
+        setBonusCardOwner(res)
+        setLoading(false)
+      })
+      .catch(err => {
+        console.log('err', err)
+        handleSubmitError(err?.response)
+        setLoading(false)
+      })
+  }
+
   return (
     <ListShow
       children={children}
@@ -37,6 +51,7 @@ const BonusCardOwners = ({ children, bonus_card }) => {
       setError={setError}
       func={api.getBonusCardOwner}
       handleSubmitError={handleSubmitError}
+      onDelete={onDelete}
     />
   )
 }
