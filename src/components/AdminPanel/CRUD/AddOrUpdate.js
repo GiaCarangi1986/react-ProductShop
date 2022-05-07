@@ -3,7 +3,7 @@ import cn from 'classnames';
 import { Button, Icon, ErrorText } from '../../../views';
 import style from '../style.module.scss';
 
-const AddOrUpdate = ({ children, comeBack = () => { }, header = '', disabled = false, btnText = '', error = '' }) => {
+const AddOrUpdate = ({ children, comeBack = () => { }, header = '', disabled = false, error = '' }) => {
 
   return (
     <div className={cn(style.right, style.right__addupdate)}>
@@ -33,7 +33,7 @@ const AddOrUpdate = ({ children, comeBack = () => { }, header = '', disabled = f
             buttonDis
             disabled={disabled}
           >
-            {btnText}
+            Применить
           </Button>
         </div>
       </div>
