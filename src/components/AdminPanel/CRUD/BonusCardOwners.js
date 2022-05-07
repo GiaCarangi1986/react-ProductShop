@@ -85,14 +85,16 @@ const BonusCardOwners = ({ children, bonus_card }) => {
     formik.setErrors({})
     formik.setTouched({})
     setHeader('')
+    setError('')
   }
 
-  const apiHandler = (func, value) => {
+  const apiHandler = (func, value, afterFunc = () => { }) => {
     setLoading(true)
     func(value)
       .then(res => {
         setBonusCardOwner(res)
         setLoading(false)
+        afterFunc()
       })
       .catch(err => {
         console.log('err', err)
@@ -106,8 +108,7 @@ const BonusCardOwners = ({ children, bonus_card }) => {
   }
 
   const addData = () => {
-    apiHandler(api.addBonusCardOwner, formik.values)
-    comeBack()
+    apiHandler(api.addBonusCardOwner, formik.values, comeBack)
   }
 
   const editData = () => {
@@ -117,6 +118,7 @@ const BonusCardOwners = ({ children, bonus_card }) => {
   const onAdd = () => {
     setAddUpdate(true)
     setHeader(HEADER.add)
+    setError('')
   }
 
   useEffect(() => {
@@ -132,7 +134,7 @@ const BonusCardOwners = ({ children, bonus_card }) => {
   return (
     <>
       {addUpdate ? (
-        <AddOrUpdate comeBack={comeBack} header={header} disabled={disabled} apply={func}>
+        <AddOrUpdate comeBack={comeBack} header={header} disabled={disabled} apply={func} error={error}>
           <div className={style.addupdate__row}>
             <Fieldset
               errorClass='addOrUpdateCRUD'
