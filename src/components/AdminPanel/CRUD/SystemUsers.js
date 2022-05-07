@@ -28,7 +28,7 @@ const SystemUsers = ({ children, user }) => {
     setLoading(true)
     api.deleteUser(e.target.name)
       .then(res => {
-        console.log('res', res)
+        setSystemUsers(res)
         setLoading(false)
       })
       .catch(err => {

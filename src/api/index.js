@@ -153,7 +153,8 @@ class Api extends BaseApi {
 
   deleteUser = async (id) => {
     const res = await this.delete(`/user/${id}`)
-    return res.data
+    const serRes = getUserListSerializer(res.data)
+    return serRes
   }
 }
 
