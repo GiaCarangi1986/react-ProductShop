@@ -1,3 +1,5 @@
+import { dateFotmattedForMakeDelivery } from '../../utils/date';
+
 const getBonusCardOwnerSerializer = (params = []) => {
   const serList = []
   params.forEach(el => {
@@ -6,7 +8,7 @@ const getBonusCardOwnerSerializer = (params = []) => {
       fio: el.FIO, // ФИО
       phone: `+${el.phone}`, // телефон
       email: el.email, // почта
-      birthDate: el.birthDate, // день рождения
+      birthDate: dateFotmattedForMakeDelivery(el.birthDate), // день рождения
       gender: el.gender, // пол
     })
   })

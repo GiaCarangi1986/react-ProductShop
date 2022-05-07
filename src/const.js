@@ -240,6 +240,7 @@ export const SALE_LIST = {
   end_date: 'Дата окончания',
   discountPercent: 'Размер скидки, %',
   product_count: 'Кол-во продуктов, участвующих в акции',
+  status: 'Статус акции'
 }
 
 export const WIDTH_COL_SALE_LIST = {
@@ -248,6 +249,7 @@ export const WIDTH_COL_SALE_LIST = {
   end_date: 80,
   discountPercent: 80,
   product_count: 80,
+  status: 80
 }
 
 export const POPULAR_PRODUCTS = {
@@ -391,3 +393,9 @@ export const ADMIN_PANEL = [
 ]
 
 export const DEFAULT_DATE = '...'
+
+export const SALE_KIND = {
+  past: 'прошла',
+  present: 'идет',
+  future: 'запланирована'
+}
