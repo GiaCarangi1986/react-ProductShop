@@ -108,6 +108,10 @@ export const FORM_LABELS = {
   old_product: 'Применить скидку 50% по сроку годности',
   old_product_err: 'НЕВОЗМОЖНО ПРИМЕНИТЬ ДЛЯ АКЦИОННОГО ТОВАРА',
   maybe_old_product_err: 'НЕВОЗМОЖНО ПРИМЕНИТЬ ДЛЯ ДАННОГО ТОВАРА',
+  fio: 'ФИО',
+  email: 'Эл. почта',
+  bithDate: 'Дата рождения',
+  gender: 'Пол',
 }
 
 export const FORM_FIELDS = {
@@ -122,7 +126,11 @@ export const FORM_FIELDS = {
   changed_show: 'changed_show',
   password: 'password',
   phone: 'phone',
-  period: 'period'
+  period: 'period',
+  fio: 'fio',
+  email: 'email',
+  bithDate: 'bithDate',
+  gender: 'gender',
 }
 
 export const UNITS = ['шт', 'кг']

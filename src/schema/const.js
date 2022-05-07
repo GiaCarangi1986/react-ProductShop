@@ -19,6 +19,7 @@ const correctDates = 'Дата окончания не может быть бо�
 const correctBonus = 'Превышено возможное кол-во бонусов для списания'
 const maxCount = 'Превышено максимальное кол-во данного продукта'
 const uncorrectNumber = 'Неверный формат телефона'
+const uncorrectEmail = 'Некорректный email'
 
 export {
   login,
@@ -39,5 +40,6 @@ export {
   correctDates,
   correctBonus,
   maxCount,
-  uncorrectNumber
+  uncorrectNumber,
+  uncorrectEmail
 }

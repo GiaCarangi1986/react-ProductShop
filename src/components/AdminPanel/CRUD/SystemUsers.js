@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useFormik } from 'formik'
 import {
   USER_LIST,
   WIDTH_COL_USER_LIST,
@@ -6,6 +7,7 @@ import {
 import { handingErrors } from '../../../utils'
 import ListShow from './ListShow';
 import AddOrUpdate from './AddOrUpdate';
+import style from '../style.module.scss';
 import api from '../../../api'
 
 const SystemUsers = ({ children, user }) => {
@@ -51,7 +53,11 @@ const SystemUsers = ({ children, user }) => {
 
   return (
     <>
-      {addUpdate ? <AddOrUpdate comeBack={comeBack} /> : (
+      {addUpdate ? (
+        <AddOrUpdate comeBack={comeBack}>
+          <p>dffdf</p>
+        </AddOrUpdate>
+      ) : (
         <ListShow
           children={children}
           list={systemUsers}

@@ -1,6 +1,8 @@
 import * as Yup from 'yup';
 import * as errorsMessenge from './const';
 
+const emailReg = /^[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$/;
+
 const objectTemp = Yup.object().nullable().required(errorsMessenge.requiredField)
 
 const numberTemp = Yup.number()
@@ -31,6 +33,19 @@ const priceTemp = (val = 150, err = errorsMessenge.lardgeString) => Yup.string()
 
 const dateTemp = Yup.mixed().nullable().required(errorsMessenge.requiredField)
 
+const phoneTemp = Yup.string()
+  .nullable()
+  .required(errorsMessenge.requiredField)
+  .min(11, errorsMessenge.uncorrectNumber)
+
+const emailTemp = Yup.string()
+  .nullable()
+  .required(errorsMessenge.requiredField)
+  .matches(emailReg, errorsMessenge.uncorrectEmail)
+  .email(errorsMessenge.uncorrectEmail)
+  .min(5, errorsMessenge.shortString)
+  .max(254, errorsMessenge.longString);
+
 const dateTempEnd = Yup.mixed()
   .test('CorrectDates', errorsMessenge.correctDates, (value, context) => {
     if (context.parent.start_at && value) {
@@ -59,10 +74,7 @@ const maxCount = Yup.mixed()
 
 const signUp = () => {
   return Yup.object().shape({
-    phone: Yup.string()
-      .nullable()
-      .required(errorsMessenge.requiredField)
-      .min(11, errorsMessenge.uncorrectNumber),
+    phone: phoneTemp,
     password: Yup.string()
       .nullable()
       .required(errorsMessenge.requiredField)
@@ -76,8 +88,17 @@ const addLineOfCheck = Yup.object().shape({
   count: maxCount,
 })
 
+const userCRUD = Yup.object().shape({
+  fio: stringTemp,
+  phone: phoneTemp,
+  email: emailTemp,
+  bithDate: objectTemp,
+  gender: objectTemp
+})
+
 export {
   signUp,
   addLineOfCheck,
-  dateSearch
+  dateSearch,
+  userCRUD
 }

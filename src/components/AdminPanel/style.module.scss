@@ -108,6 +108,9 @@
   justify-content: space-between;
   gap: 10px;
   position: relative;
+  &__addupdate {
+    margin-top: 20px;
+  }
 }
 
 .wrap_btn {
@@ -129,6 +132,9 @@
   margin: 0;
   color: var(--ps-border-color-hover);
   margin-top: -5px;
+  &__addupdate {
+    padding: 10px;
+  }
 }
 
 .grid_row {
@@ -164,4 +170,19 @@
 
 .password:hover {
   color: var(--ps-border-color-hover);
+}
+
+.addupdate {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: calc(100% - 120px);
+  overflow-y: auto;
+  &__row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(130px, 1fr));
+    gap: 5%;
+    width: 100%;
+  }
 }
