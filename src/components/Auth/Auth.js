@@ -5,7 +5,7 @@ import { useStoreon } from 'storeon/react';
 import { Button, Fieldset, Form, Input, Logo, ErrorText, PreloaderPage, InputPhone } from '../../views';
 import { handingErrors, deleteSpaces } from '../../utils'
 import * as schema from '../../schema';
-import { PATHS, FORM_FIELDS } from '../../const';
+import { PATHS, FORM_FIELDS, FORM_LABELS } from '../../const';
 import api from '../../api';
 
 import style from './auth.module.scss';
@@ -83,7 +83,7 @@ const Auth = () => {
         >
           <Fieldset error={formik.errors.phone} touched={formik.touched.phone} errorClass='auth'>
             <InputPhone
-              label='Телефон'
+              label={FORM_LABELS.phone}
               country='ru'
               onlyCountries={['ru']}
               name={FORM_FIELDS.phone}
@@ -97,7 +97,7 @@ const Auth = () => {
           </Fieldset>
           <Fieldset error={formik.errors.password} touched={formik.touched.password} errorClass='auth'>
             <Input
-              label='Пароль'
+              label={FORM_LABELS.password}
               type='password'
               nameOfStyle='input-label'
               value={formik.values.password}

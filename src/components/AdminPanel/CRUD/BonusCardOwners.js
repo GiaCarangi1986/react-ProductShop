@@ -6,8 +6,8 @@ import {
   FORM_FIELDS,
   FORM_LABELS
 } from '../../../const';
-import { handingErrors, deleteSpaces } from '../../../utils'
-import { Input, Fieldset } from '../../../views';
+import { handingErrors, deleteSpaces, capitalize } from '../../../utils'
+import { Input, Fieldset, InputPhone } from '../../../views';
 import ListShow from './ListShow';
 import AddOrUpdate from './AddOrUpdate';
 import { userCRUD } from '../../../schema';
@@ -39,11 +39,13 @@ const BonusCardOwners = ({ children, bonus_card }) => {
   }
 
   const initialValues = {
-    fio: '',
+    firstName: '',
+    secondName: '',
+    patronymic: '',
     phone: '',
     email: '',
     bithDate: null,
-    gender: false, // запрос буду делать на получение списка
+    gender: null, // запрос буду делать на получение списка
   }
 
   const formik = useFormik({
@@ -56,6 +58,15 @@ const BonusCardOwners = ({ children, bonus_card }) => {
     const value = deleteSpaces(formik.values[name])
     formik.handleBlur(e)
     formik.setFieldValue([name], value)
+  }
+
+  const handleChangePhone = (e) => {
+    const { name } = e.target;
+    formik.setFieldValue(name, e.detail.value);
+  }
+
+  const handleInput = e => {
+    formik.setFieldValue(e.target.name, capitalize(e.target.value))
   }
 
   const onDelete = e => {
@@ -90,34 +101,50 @@ const BonusCardOwners = ({ children, bonus_card }) => {
           <div className={style.addupdate__row}>
             <Fieldset
               errorClass='addOrUpdateCRUD'
-              error={formik.errors.fio}
-              touched={formik.touched.fio}>
+              error={formik.errors.firstName}
+              touched={formik.touched.firstName}>
               <Input
-                value={formik.values.fio}
-                onGx-input={formik.handleChange}
+                value={formik.values.firstName}
+                onGx-input={handleInput}
                 onGx-blur={handleBlur}
-                name={FORM_FIELDS.fio}
-                label={FORM_LABELS.fio}
+                name={FORM_FIELDS.firstName}
+                label={FORM_LABELS.firstName}
                 data-cy='title'
                 type='text'
               />
             </Fieldset>
             <Fieldset
               errorClass='addOrUpdateCRUD'
-              error={formik.errors.fio}
-              touched={formik.touched.fio}>
-              <Input
-                value={formik.values.fio}
-                onGx-input={formik.handleChange}
-                onGx-blur={handleBlur}
-                name={FORM_FIELDS.fio}
-                label={FORM_LABELS.fio}
-                data-cy='title'
+              error={formik.errors.phone}
+              touched={formik.touched.phone}>
+              <InputPhone
+                label={FORM_LABELS.phone}
+                country='ru'
+                onlyCountries={['ru']}
+                name={FORM_FIELDS.phone}
                 type='text'
+                onGx-input={formik.handleChange}
+                onGx-change={handleChangePhone}
+                value={formik.values.phone}
+                onBlur={handleBlur}
               />
             </Fieldset>
           </div>
           <div className={style.addupdate__row}>
+            <Fieldset
+              errorClass='addOrUpdateCRUD'
+              error={formik.errors.secondName}
+              touched={formik.touched.secondName}>
+              <Input
+                value={formik.values.secondName}
+                onGx-input={handleInput}
+                onGx-blur={handleBlur}
+                name={FORM_FIELDS.secondName}
+                label={FORM_LABELS.secondName}
+                data-cy='title'
+                type='text'
+              />
+            </Fieldset>
             <Fieldset
               errorClass='addOrUpdateCRUD'
               error={formik.errors.email}
@@ -132,16 +159,48 @@ const BonusCardOwners = ({ children, bonus_card }) => {
                 type='text'
               />
             </Fieldset>
+          </div>
+          <div className={style.addupdate__row}>
             <Fieldset
               errorClass='addOrUpdateCRUD'
-              error={formik.errors.fio}
-              touched={formik.touched.fio}>
+              error={formik.errors.patronymic}
+              touched={formik.touched.patronymic}>
               <Input
-                value={formik.values.fio}
+                value={formik.values.patronymic}
+                onGx-input={handleInput}
+                onGx-blur={handleBlur}
+                name={FORM_FIELDS.patronymic}
+                label={FORM_LABELS.patronymic}
+                data-cy='title'
+                type='text'
+              />
+            </Fieldset>
+            <Fieldset
+              errorClass='addOrUpdateCRUD'
+              error={formik.errors.bithDate}
+              touched={formik.touched.bithDate}>
+              <Input
+                value={formik.values.bithDate}
                 onGx-input={formik.handleChange}
                 onGx-blur={handleBlur}
-                name={FORM_FIELDS.fio}
-                label={FORM_LABELS.fio}
+                name={FORM_FIELDS.bithDate}
+                label={FORM_LABELS.bithDate}
+                data-cy='title'
+                type='date'
+              />
+            </Fieldset>
+          </div>
+          <div className={style.addupdate__row}>
+            <Fieldset
+              errorClass='addOrUpdateCRUD'
+              error={formik.errors.gender}
+              touched={formik.touched.gender}>
+              <Input
+                value={formik.values.gender}
+                onGx-input={formik.handleChange}
+                onGx-blur={handleBlur}
+                name={FORM_FIELDS.gender}
+                label={FORM_LABELS.gender}
                 data-cy='title'
                 type='text'
               />

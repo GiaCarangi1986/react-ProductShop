@@ -137,3 +137,7 @@ export function declensionProduct(digital = 0) {
   }
   return 'ов'
 };
+
+export function capitalize(input) {
+  return input.replace(/( |^)[а-яёa-z]/g, function (u) { return u.toUpperCase(); });
+}

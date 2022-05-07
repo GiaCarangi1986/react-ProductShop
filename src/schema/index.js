@@ -1,7 +1,13 @@
 import * as Yup from 'yup';
 import * as errorsMessenge from './const';
 
-const emailReg = /^[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$/;
+const REGEX = {
+  emailReg: /^[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$/,
+  cyrillic_with_hyphen: /[А-ЯЁёа-я-]$/,
+  first_letter_not_hyphen: /^[^-]/,
+  last_letter_not_hyphen: /.*[^-]{1}$/,
+  no_multiple_hyphen: /^((?!-{2}| {2}).)*$/
+}
 
 const objectTemp = Yup.object().nullable().required(errorsMessenge.requiredField)
 
@@ -38,9 +44,32 @@ const phoneTemp = Yup.string()
   .required(errorsMessenge.requiredField)
   .min(11, errorsMessenge.uncorrectNumber)
 
+const nameTemp = stringTemp
+  .nullable()
+  .required(errorsMessenge.requiredField)
+  .min(2, errorsMessenge.shortString)
+  .max(80, errorsMessenge.longString)
+  .matches(
+    REGEX.cyrillic_with_hyphen,
+    errorsMessenge.cyrillic_with_hyphen
+  )
+  .matches(
+    REGEX.first_letter_not_hyphen,
+    errorsMessenge.first_letter_not_hyphen
+  )
+  .matches(
+    REGEX.last_letter_not_hyphen,
+    errorsMessenge.last_letter_not_hyphen
+  )
+  .matches(
+    REGEX.no_multiple_hyphen,
+    errorsMessenge.no_multiple_hyphen
+  );
+
+
 const emailTemp = Yup.string()
   .notRequired()
-  .matches(emailReg, errorsMessenge.uncorrectEmail)
+  .matches(REGEX.emailReg, errorsMessenge.uncorrectEmail)
   .email(errorsMessenge.uncorrectEmail)
   .min(5, errorsMessenge.shortString)
   .max(254, errorsMessenge.longString);
@@ -88,10 +117,12 @@ const addLineOfCheck = Yup.object().shape({
 })
 
 const userCRUD = Yup.object().shape({
-  fio: stringTemp,
+  firstName: nameTemp,
+  secondName: nameTemp,
+  patronymic: nameTemp.notRequired(),
   phone: phoneTemp,
   email: emailTemp,
-  bithDate: objectTemp,
+  bithDate: dateTemp,
   gender: objectTemp
 })
 

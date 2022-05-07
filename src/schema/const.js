@@ -20,6 +20,10 @@ const correctBonus = 'Превышено возможное кол-во бону
 const maxCount = 'Превышено максимальное кол-во данного продукта'
 const uncorrectNumber = 'Неверный формат телефона'
 const uncorrectEmail = 'Некорректный email'
+const cyrillic_with_hyphen = 'Может содержать кириллицу и дефис'
+const first_letter_not_hyphen = 'ФИО не может начинаться с дефиса'
+const no_multiple_hyphen = 'Дефисы не могут повторяться'
+const last_letter_not_hyphen = 'Не может оканчиваться на дефис'
 
 export {
   login,
@@ -41,5 +45,9 @@ export {
   correctBonus,
   maxCount,
   uncorrectNumber,
-  uncorrectEmail
+  uncorrectEmail,
+  cyrillic_with_hyphen,
+  first_letter_not_hyphen,
+  no_multiple_hyphen,
+  last_letter_not_hyphen,
 }
