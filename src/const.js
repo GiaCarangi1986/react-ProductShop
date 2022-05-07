@@ -144,6 +144,7 @@ export const UNITS = ['шт', 'кг']
 export const SELECT_TYPES = {
   product: 'product',
   card: 'card',
+  gender: 'gender'
 }
 
 export const MODALS_CHECK_TITLE = {

@@ -168,6 +168,12 @@ class Api extends BaseApi {
     const serRes = getUserListSerializer(res.data)
     return serRes
   }
+
+  getGenderListForSelect = async () => {
+    const res = await this.get('/gender/')
+    return res.data
+  }
+
 }
 
 export const MAIN_URL = 'http://localhost:4000'

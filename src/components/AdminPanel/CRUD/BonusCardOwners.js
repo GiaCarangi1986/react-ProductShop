@@ -4,10 +4,12 @@ import {
   BONUS_CARD_OWNER,
   WIDTH_COL_BONUS_CARD_OWNER,
   FORM_FIELDS,
-  FORM_LABELS
+  FORM_LABELS,
+  SELECT_TYPES
 } from '../../../const';
 import { handingErrors, deleteSpaces, capitalize } from '../../../utils'
 import { Input, Fieldset, InputPhone } from '../../../views';
+import Select from '../../Select';
 import ListShow from './ListShow';
 import AddOrUpdate from './AddOrUpdate';
 import { userCRUD } from '../../../schema';
@@ -67,6 +69,14 @@ const BonusCardOwners = ({ children, bonus_card }) => {
 
   const handleInput = e => {
     formik.setFieldValue(e.target.name, capitalize(e.target.value))
+  }
+
+  const handleSelectBlur = (name = '') => {
+    formik.setFieldTouched([name], true)
+  }
+
+  const chooseSelectValue = (e, name) => {
+    formik.setFieldValue(name, e)
   }
 
   const onDelete = e => {
@@ -193,16 +203,19 @@ const BonusCardOwners = ({ children, bonus_card }) => {
           <div className={style.addupdate__row}>
             <Fieldset
               errorClass='addOrUpdateCRUD'
+              containerClass='pressed_bottom'
               error={formik.errors.gender}
               touched={formik.touched.gender}>
-              <Input
+              <Select
                 value={formik.values.gender}
-                onGx-input={formik.handleChange}
-                onGx-blur={handleBlur}
                 name={FORM_FIELDS.gender}
                 label={FORM_LABELS.gender}
                 data-cy='title'
-                type='text'
+                type={SELECT_TYPES.gender}
+                func={api.getGenderListForSelect}
+                onBlur={() => handleSelectBlur(FORM_FIELDS.gender)}
+                onChange={(e) => chooseSelectValue(e, FORM_FIELDS.gender)}
+                err={formik.errors.gender && formik.touched.gender}
               />
             </Fieldset>
           </div>
