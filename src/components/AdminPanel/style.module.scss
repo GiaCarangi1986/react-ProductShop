@@ -55,6 +55,9 @@
   height: 100%;
   background-color: var(--ps-color-white);
   padding: 10px;
+  &__addupdate {
+    width: 100%;
+  }
 }
 
 .header {
@@ -88,6 +91,10 @@
 .close {
   display: flex;
   justify-content: flex-end;
+}
+
+.back {
+  display: flex;
 }
 
 .actions {

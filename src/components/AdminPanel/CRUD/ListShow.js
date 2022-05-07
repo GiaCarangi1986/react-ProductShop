@@ -17,7 +17,8 @@ const ListShow = ({
   setError = () => { },
   func = () => { },
   handleSubmitError = () => { },
-  onDelete = () => { }
+  onDelete = () => { },
+  onAdd = () => { },
 }) => {
 
   useEffect(() => {
@@ -134,7 +135,7 @@ const ListShow = ({
         </ErrorText>
         <div className={style.wrap_btn}>
           <Button
-            // onClick={paymentСonfirmation}
+            onClick={onAdd}
             className='btn_width-100'
             data-cy='btn'
             buttonDis
