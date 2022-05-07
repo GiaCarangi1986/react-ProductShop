@@ -89,7 +89,7 @@ const BonusCardOwners = ({ children, bonus_card }) => {
         <AddOrUpdate comeBack={comeBack} header={header}>
           <div className={style.addupdate__row}>
             <Fieldset
-              errorClass='addOrUpdateCheck'
+              errorClass='addOrUpdateCRUD'
               error={formik.errors.fio}
               touched={formik.touched.fio}>
               <Input
@@ -103,7 +103,7 @@ const BonusCardOwners = ({ children, bonus_card }) => {
               />
             </Fieldset>
             <Fieldset
-              errorClass='addOrUpdateCheck'
+              errorClass='addOrUpdateCRUD'
               error={formik.errors.fio}
               touched={formik.touched.fio}>
               <Input
@@ -119,7 +119,7 @@ const BonusCardOwners = ({ children, bonus_card }) => {
           </div>
           <div className={style.addupdate__row}>
             <Fieldset
-              errorClass='addOrUpdateCheck'
+              errorClass='addOrUpdateCRUD'
               error={formik.errors.email}
               touched={formik.touched.email}>
               <Input
@@ -133,7 +133,7 @@ const BonusCardOwners = ({ children, bonus_card }) => {
               />
             </Fieldset>
             <Fieldset
-              errorClass='addOrUpdateCheck'
+              errorClass='addOrUpdateCRUD'
               error={formik.errors.fio}
               touched={formik.touched.fio}>
               <Input
