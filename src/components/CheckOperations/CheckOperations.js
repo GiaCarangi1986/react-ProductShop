@@ -95,7 +95,7 @@ const CheckOperations = () => {
 
   const deleteCheck = () => { // тут на все методы выводить ошибку в поле слева
     setLoading(true)
-    api.deleteCheck(activeLine, delayCheck)
+    api.deleteCheck(activeLine)
       .then((res) => {
         setLoading(false)
         redirectToCheckList()

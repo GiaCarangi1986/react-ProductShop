@@ -19,7 +19,6 @@ const AdminPanel = () => {
   const [writeOffList, setWriteOffList] = useState([])
   const [latestMakeDeliveryDate, setLatestMakeDeliveryDate] = useState(DEFAULT_DATE)
   const [latestWriteOffDate, setLatestWriteOffDate] = useState(DEFAULT_DATE)
-  const [error, setError] = useState('')
   const [period, setPeriod] = useState('Неделя')
   const [peopleList, setPeopleList] = useState([])
   const [popularList, setPopularList] = useState([])
@@ -38,7 +37,6 @@ const AdminPanel = () => {
     setWriteOffList([])
     setLatestMakeDeliveryDate([])
     setLatestWriteOffDate([])
-    setError('')
     setPeopleList([])
     setRevenueList([])
     setBonusCardOwner([])
@@ -75,8 +73,6 @@ const AdminPanel = () => {
               setTypePage,
               latestDate: latestMakeDeliveryDate,
               setLatestDate: setLatestMakeDeliveryDate,
-              error,
-              setError,
               period,
               setPeriod
             }}
@@ -86,8 +82,6 @@ const AdminPanel = () => {
               setTypePage,
               latestDate: latestWriteOffDate,
               setLatestDate: setLatestWriteOffDate,
-              error,
-              setError,
             }}
             best_saler={{
               peopleList,
@@ -104,20 +98,14 @@ const AdminPanel = () => {
             bonus_card={{
               bonusCardOwner,
               setBonusCardOwner,
-              error,
-              setError,
             }}
             user={{
               systemUsers,
               setSystemUsers,
-              error,
-              setError,
             }}
             sale={{
               saleList,
               setSaleList,
-              error,
-              setError,
             }}
           >
             <div className={style.close}>

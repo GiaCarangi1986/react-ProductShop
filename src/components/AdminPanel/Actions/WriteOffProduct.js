@@ -33,8 +33,6 @@ const WriteOffProduct = ({ children, write_off_act }) => {
     setTypePage = () => { },
     latestDate,
     setLatestDate,
-    setError,
-    error,
   } = write_off_act
   const { dispatch, currentUser } = useStoreon('currentUser');
 
@@ -43,6 +41,7 @@ const WriteOffProduct = ({ children, write_off_act }) => {
   const [disabled, setDisabled] = useState(true)
   const [productForm, setProductForm] = useState('')
   const [productCount, setProductCount] = useState('')
+  const [error, setError] = useState('')
 
   const handleSubmitError = (response) => {
     if (response) {

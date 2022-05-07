@@ -12,17 +12,30 @@ const SystemUsers = ({ children, user }) => {
   const {
     systemUsers = [],
     setSystemUsers = () => { },
-    setError,
-    error,
   } = user
 
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
   const handleSubmitError = (response) => {
     if (response) {
       const errResponse = handingErrors(response);
       setError(errResponse.val)
     }
+  }
+
+  const onDelete = e => {
+    setLoading(true)
+    api.deleteUser(e.target.name)
+      .then(res => {
+        console.log('res', res)
+        setLoading(false)
+      })
+      .catch(err => {
+        console.log('err', err)
+        handleSubmitError(err?.response)
+        setLoading(false)
+      })
   }
 
   return (
@@ -38,6 +51,7 @@ const SystemUsers = ({ children, user }) => {
       setError={setError}
       func={api.getUserList}
       handleSubmitError={handleSubmitError}
+      onDelete={onDelete}
     />
   )
 }

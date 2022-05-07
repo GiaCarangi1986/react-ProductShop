@@ -69,9 +69,7 @@ class Api extends BaseApi {
   }
 
   deleteCheck = async (id = '', isDelayCheck = false) => {
-    const res = await this.delete(`/check/${id}`, {
-      isCheckDelay: isDelayCheck
-    })
+    const res = await this.delete(`/check/${id}`)
     return res.data
   }
 
@@ -151,6 +149,11 @@ class Api extends BaseApi {
     const res = await this.get('/user/')
     const serRes = getUserListSerializer(res.data)
     return serRes
+  }
+
+  deleteUser = async (id) => {
+    const res = await this.delete(`/user/${id}`)
+    return res.data
   }
 }
 

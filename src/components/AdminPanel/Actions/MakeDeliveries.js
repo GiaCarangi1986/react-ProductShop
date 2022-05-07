@@ -29,8 +29,6 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
     setTypePage = () => { },
     latestDate,
     setLatestDate,
-    setError,
-    error,
     setPeriod,
     period
   } = make_deliveries
@@ -38,6 +36,7 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
 
   const [sum, setSum] = useState(0)
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
   const handleSubmitError = (response) => {
     if (response) {

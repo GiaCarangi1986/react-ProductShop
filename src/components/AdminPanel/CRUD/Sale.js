@@ -12,11 +12,10 @@ const Sale = ({ children, sale }) => {
   const {
     saleList = [],
     setSaleList = () => { },
-    setError,
-    error,
   } = sale
 
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
   const handleSubmitError = (response) => {
     if (response) {

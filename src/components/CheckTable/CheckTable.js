@@ -46,7 +46,7 @@ const CheckTable = ({
     const activeLine = id
     setStatusLoading(dataStates.loading)
     setEventType(TABLE_EVENT_TYPES.changeData)
-    api.deleteCheck(activeLine, delayed_check)
+    api.deleteCheck(activeLine)
       .then((res) => {
         setStatusLoading(dataStates.loaded)
         setDataForDelete({})

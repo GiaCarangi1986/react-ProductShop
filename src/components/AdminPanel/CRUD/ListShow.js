@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import classNames from 'classnames';
 import { Button, Icon, PreloaderPage, ErrorText } from '../../../views';
-import { FORM_FIELDS } from '../../../const';
+import { FORM_FIELDS, USER_ROLE } from '../../../const';
 import style from '../style.module.scss';
 import table_style from '../../CheckTable/check_table.module.scss'
 
@@ -16,7 +16,8 @@ const ListShow = ({
   error = '',
   setError = () => { },
   func = () => { },
-  handleSubmitError = () => { }
+  handleSubmitError = () => { },
+  onDelete = () => { }
 }) => {
 
   useEffect(() => {
@@ -89,7 +90,6 @@ const ListShow = ({
                         </div>
                       </td>
                       {Object.keys(NAME_COL).map(product_line => {
-                        console.log('product_line', product_line)
                         const leftOrCenter = Number.isNaN(Number(`${line[product_line]}`));
                         const tdClasses = classNames({
                           [table_style['table-col']]: true,
@@ -112,7 +112,8 @@ const ListShow = ({
                             data-cy='btn'
                             title='Удалить строку'
                             name={line.id}
-                          // onClick={deleteProduct}
+                            disabled={line?.role === USER_ROLE.admin}
+                            onClick={onDelete}
                           >
                             <Icon slot='icon-left' icon='deleteIcon' />
                           </Button>

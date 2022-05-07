@@ -12,11 +12,10 @@ const BonusCardOwners = ({ children, bonus_card }) => {
   const {
     bonusCardOwner = [],
     setBonusCardOwner = () => { },
-    setError,
-    error,
   } = bonus_card
 
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
   const handleSubmitError = (response) => {
     if (response) {
