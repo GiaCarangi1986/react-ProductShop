@@ -15,8 +15,8 @@ const AddOrUpdate = ({ children, comeBack = () => { }, header = '', disabled = f
         >
           <Icon slot='icon-left' icon='arrowBack' />
         </Button>
+        <h2 className={style.header_right}>{header}</h2>
       </div>
-      <h2 className={cn(style.header_right, style.header_right__addupdate)}>{header}</h2>
       <div className={style.addupdate}>
         {children}
       </div>
