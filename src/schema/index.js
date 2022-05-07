@@ -122,7 +122,7 @@ const userCRUD = Yup.object().shape({
   patronymic: nameTemp.notRequired(),
   phone: phoneTemp,
   email: emailTemp,
-  bithDate: dateTemp,
+  birthDate: dateTemp,
   gender: objectTemp
 })
 

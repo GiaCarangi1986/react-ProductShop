@@ -15,4 +15,12 @@ const getBonusCardOwnerSerializer = (params = []) => {
   return serList
 }
 
-export { getBonusCardOwnerSerializer };
+const createBonusCardOwnerSerializer = (params = {}) => ({
+  FIO: `${params.secondName} ${params.firstName} ${params.patronymic}`, // ФИО
+  phone: params.phone, // телефон
+  email: params?.email || null, // почта
+  birthDate: params.birthDate, // день рождения
+  genderFK: params.gender?.value, // пол
+})
+
+export { getBonusCardOwnerSerializer, createBonusCardOwnerSerializer };

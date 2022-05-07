@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useFormik } from 'formik'
 import {
   BONUS_CARD_OWNER,
@@ -27,10 +27,10 @@ const BonusCardOwners = ({ children, bonus_card }) => {
     update: 'Редактирование держателя карты'
   }
 
+  const [disabled, setDisabled] = useState(true)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [addUpdate, setAddUpdate] = useState(false)
-  const [data, setData] = useState([])
   const [header, setHeader] = useState('')
 
   const handleSubmitError = (response) => {
@@ -46,8 +46,8 @@ const BonusCardOwners = ({ children, bonus_card }) => {
     patronymic: '',
     phone: '',
     email: '',
-    bithDate: null,
-    gender: null, // запрос буду делать на получение списка
+    birthDate: null,
+    gender: null,
   }
 
   const formik = useFormik({
@@ -79,9 +79,17 @@ const BonusCardOwners = ({ children, bonus_card }) => {
     formik.setFieldValue(name, e)
   }
 
-  const onDelete = e => {
+  const comeBack = () => {
+    setAddUpdate(false)
+    formik.setValues(initialValues)
+    formik.setErrors({})
+    formik.setTouched({})
+    setHeader('')
+  }
+
+  const apiHandler = (func, value) => {
     setLoading(true)
-    api.deleteBonusCardOwner(e.target.name)
+    func(value)
       .then(res => {
         setBonusCardOwner(res)
         setLoading(false)
@@ -93,10 +101,17 @@ const BonusCardOwners = ({ children, bonus_card }) => {
       })
   }
 
-  const comeBack = () => {
-    setAddUpdate(false)
-    setData([])
-    setHeader('')
+  const onDelete = e => {
+    apiHandler(api.deleteBonusCardOwner, e.target.name)
+  }
+
+  const addData = () => {
+    apiHandler(api.addBonusCardOwner, formik.values)
+    comeBack()
+  }
+
+  const editData = () => {
+
   }
 
   const onAdd = () => {
@@ -104,21 +119,31 @@ const BonusCardOwners = ({ children, bonus_card }) => {
     setHeader(HEADER.add)
   }
 
+  useEffect(() => {
+    if (formik) {
+      const { isValid, dirty } = formik;
+      const isDisabled = !isValid || !dirty
+      setDisabled(isDisabled)
+    }
+  }, [formik])
+
+  const func = header === HEADER.add ? addData : editData
+
   return (
     <>
       {addUpdate ? (
-        <AddOrUpdate comeBack={comeBack} header={header}>
+        <AddOrUpdate comeBack={comeBack} header={header} disabled={disabled} apply={func}>
           <div className={style.addupdate__row}>
             <Fieldset
               errorClass='addOrUpdateCRUD'
-              error={formik.errors.firstName}
-              touched={formik.touched.firstName}>
+              error={formik.errors.secondName}
+              touched={formik.touched.secondName}>
               <Input
-                value={formik.values.firstName}
+                value={formik.values.secondName}
                 onGx-input={handleInput}
                 onGx-blur={handleBlur}
-                name={FORM_FIELDS.firstName}
-                label={FORM_LABELS.firstName}
+                name={FORM_FIELDS.secondName}
+                label={FORM_LABELS.secondName}
                 data-cy='title'
                 type='text'
               />
@@ -143,14 +168,14 @@ const BonusCardOwners = ({ children, bonus_card }) => {
           <div className={style.addupdate__row}>
             <Fieldset
               errorClass='addOrUpdateCRUD'
-              error={formik.errors.secondName}
-              touched={formik.touched.secondName}>
+              error={formik.errors.firstName}
+              touched={formik.touched.firstName}>
               <Input
-                value={formik.values.secondName}
+                value={formik.values.firstName}
                 onGx-input={handleInput}
                 onGx-blur={handleBlur}
-                name={FORM_FIELDS.secondName}
-                label={FORM_LABELS.secondName}
+                name={FORM_FIELDS.firstName}
+                label={FORM_LABELS.firstName}
                 data-cy='title'
                 type='text'
               />
@@ -187,14 +212,14 @@ const BonusCardOwners = ({ children, bonus_card }) => {
             </Fieldset>
             <Fieldset
               errorClass='addOrUpdateCRUD'
-              error={formik.errors.bithDate}
-              touched={formik.touched.bithDate}>
+              error={formik.errors.birthDate}
+              touched={formik.touched.birthDate}>
               <Input
-                value={formik.values.bithDate}
+                value={formik.values.birthDate}
                 onGx-input={formik.handleChange}
                 onGx-blur={handleBlur}
-                name={FORM_FIELDS.bithDate}
-                label={FORM_LABELS.bithDate}
+                name={FORM_FIELDS.birthDate}
+                label={FORM_LABELS.birthDate}
                 data-cy='title'
                 type='date'
               />

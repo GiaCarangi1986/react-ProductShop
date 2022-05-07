@@ -112,7 +112,7 @@ export const FORM_LABELS = {
   secondName: 'Фамилия',
   patronymic: 'Отчество (при наличии)',
   email: 'Эл. почта (необязательно)',
-  bithDate: 'Дата рождения',
+  birthDate: 'Дата рождения',
   gender: 'Пол',
   phone: 'Телефон',
   password: 'Пароль'
@@ -135,7 +135,7 @@ export const FORM_FIELDS = {
   secondName: 'secondName',
   patronymic: 'patronymic',
   email: 'email',
-  bithDate: 'bithDate',
+  birthDate: 'birthDate',
   gender: 'gender',
 }
 
