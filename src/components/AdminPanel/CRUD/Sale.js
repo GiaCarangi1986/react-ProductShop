@@ -24,6 +24,20 @@ const Sale = ({ children, sale }) => {
     }
   }
 
+  const onDelete = e => {
+    setLoading(true)
+    api.deleteSale(e.target.name)
+      .then(res => {
+        setSaleList(res)
+        setLoading(false)
+      })
+      .catch(err => {
+        console.log('err', err)
+        handleSubmitError(err?.response)
+        setLoading(false)
+      })
+  }
+
   return (
     <ListShow
       children={children}
@@ -37,6 +51,7 @@ const Sale = ({ children, sale }) => {
       setError={setError}
       func={api.getSaleList}
       handleSubmitError={handleSubmitError}
+      onDelete={onDelete}
     />
   )
 }

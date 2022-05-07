@@ -151,6 +151,12 @@ class Api extends BaseApi {
     return serRes
   }
 
+  deleteSale = async (id) => {
+    const res = await this.delete(`/sale/${id}`)
+    const serRes = getSaleSerializer(res.data)
+    return serRes
+  }
+
   getUserList = async () => {
     const res = await this.get('/user/')
     const serRes = getUserListSerializer(res.data)
