@@ -11,7 +11,7 @@ import {
 } from '../../../const';
 import { handingErrors, deleteSpaces, capitalize } from '../../../utils'
 import { formatDateToInput } from '../../../utils/date'
-import { Input, Fieldset, InputPhone, Button } from '../../../views';
+import { Input, Fieldset, Icon, Button } from '../../../views';
 import Select from '../../Select';
 import ListShow from './ListShow';
 import AddOrUpdate from './AddOrUpdate';
@@ -33,6 +33,159 @@ const BonusCardOwners = ({ children, sale }) => {
   const [addUpdate, setAddUpdate] = useState(false)
   const [header, setHeader] = useState('')
   const [data, setData] = useState(null)
+  const [productList, setProductList] = useState([
+    '2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222221',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+    '1',
+  ])
 
   const handleSubmitError = (response) => {
     if (response) {
@@ -223,50 +376,27 @@ const BonusCardOwners = ({ children, sale }) => {
             </Fieldset>
           </div>
           <div className={style.addupdate__row}>
-            <Fieldset
-              errorClass='addOrUpdateCRUD'
-              error={formik.errors.phone}
-              touched={formik.touched.phone}>
-              <InputPhone
-                label={FORM_LABELS.phone}
-                country='ru'
-                onlyCountries={['ru']}
-                name={FORM_FIELDS.phone}
-                type='text'
-                onGx-input={formik.handleChange}
-                onGx-change={handleChangePhone}
-                value={formik.values.phone}
-                onBlur={handleBlur}
-              />
-            </Fieldset>
-            <Fieldset
-              errorClass='addOrUpdateCRUD'
-              error={formik.errors.email}
-              touched={formik.touched.email}>
-              <Input
-                value={formik.values.email}
-                onGx-input={formik.handleChange}
-                onGx-blur={handleBlur}
-                name={FORM_FIELDS.email}
-                label={FORM_LABELS.email}
-                data-cy='title'
-                type='text'
-              />
-            </Fieldset>
-            <Fieldset
-              errorClass='addOrUpdateCRUD'
-              error={formik.errors.birthDate}
-              touched={formik.touched.birthDate}>
-              <Input
-                value={formik.values.birthDate}
-                onGx-input={formik.handleChange}
-                onGx-blur={handleBlur}
-                name={FORM_FIELDS.birthDate}
-                label={FORM_LABELS.birthDate}
-                data-cy='title'
-                type='date'
-              />
-            </Fieldset>
+            <p className={style.list_header}>Участвующие продукты:</p>
+            <ul className={style.list_product}>
+              {productList.map(product => (
+                <li key={product.id} className={style.list_line}>
+                  <p className={style.list_item}>{`${product}`}</p>
+                  <div>
+                    <Button
+                      variant='text'
+                      className='button-delete_action'
+                      data-cy='btn'
+                      title='Удалить строку'
+                    // name={{ id: line.id, old_product: line.old_product }}
+                    // onClick={deleteProduct}
+                    >
+                      <Icon slot='icon-left' icon='deleteIcon' />
+                    </Button>
+                  </div>
+
+                </li>
+              ))}
+            </ul>
           </div>
         </AddOrUpdate>
       ) : (
@@ -286,7 +416,8 @@ const BonusCardOwners = ({ children, sale }) => {
           onAdd={onAction}
           onEdit={onEdit}
         />
-      )}
+      )
+      }
     </>
   )
 }
