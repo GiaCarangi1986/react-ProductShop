@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import classNames from 'classnames';
 import { Button, Icon, PreloaderPage, ErrorText } from '../../../views';
-import { FORM_FIELDS, USER_ROLE } from '../../../const';
+import { FORM_FIELDS, USER_ROLE, HEADER_BASIC } from '../../../const';
 import style from '../style.module.scss';
 import table_style from '../../CheckTable/check_table.module.scss'
 
@@ -19,7 +19,12 @@ const ListShow = ({
   handleSubmitError = () => { },
   onDelete = () => { },
   onAdd = () => { },
+  onEdit = () => { }
 }) => {
+
+  const sendAddHeader = () => {
+    onAdd(HEADER_BASIC.add)
+  }
 
   useEffect(() => {
     if (!list.length) {
@@ -85,6 +90,7 @@ const ListShow = ({
                             name={line.id}
                             variant='text'
                             data-cy='btn'
+                            onClick={onEdit}
                           >
                             <Icon slot='icon-left' icon='write' />
                           </Button>
@@ -135,7 +141,7 @@ const ListShow = ({
         </ErrorText>
         <div className={style.wrap_btn}>
           <Button
-            onClick={onAdd}
+            onClick={sendAddHeader}
             className='btn_width-100'
             data-cy='btn'
             buttonDis

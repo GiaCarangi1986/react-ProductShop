@@ -5,7 +5,8 @@ import {
   WIDTH_COL_BONUS_CARD_OWNER,
   FORM_FIELDS,
   FORM_LABELS,
-  SELECT_TYPES
+  SELECT_TYPES,
+  HEADER_BASIC
 } from '../../../const';
 import { handingErrors, deleteSpaces, capitalize } from '../../../utils'
 import { Input, Fieldset, InputPhone } from '../../../views';
@@ -22,10 +23,7 @@ const BonusCardOwners = ({ children, bonus_card }) => {
     setBonusCardOwner = () => { },
   } = bonus_card
 
-  const HEADER = {
-    add: 'Добавление держателя карты',
-    update: 'Редактирование держателя карты'
-  }
+  const HEADER = 'держателя карты'
 
   const [disabled, setDisabled] = useState(true)
   const [loading, setLoading] = useState(false)
@@ -88,13 +86,13 @@ const BonusCardOwners = ({ children, bonus_card }) => {
     setError('')
   }
 
-  const apiHandler = (func, value, afterFunc = () => { }) => {
+  const apiHandler = (func, setFunc = () => { }, value, afterFunc = () => { }, params) => {
     setLoading(true)
     func(value)
       .then(res => {
-        setBonusCardOwner(res)
+        setFunc(res)
         setLoading(false)
-        afterFunc()
+        params ? afterFunc(params) : afterFunc()
       })
       .catch(err => {
         console.log('err', err)
@@ -104,21 +102,25 @@ const BonusCardOwners = ({ children, bonus_card }) => {
   }
 
   const onDelete = e => {
-    apiHandler(api.deleteBonusCardOwner, e.target.name)
+    apiHandler(api.deleteBonusCardOwner, setBonusCardOwner, e.target.name)
   }
 
   const addData = () => {
-    apiHandler(api.addBonusCardOwner, formik.values, comeBack)
+    apiHandler(api.addBonusCardOwner, setBonusCardOwner, formik.values, comeBack)
   }
 
   const editData = () => {
-
+    // apiHandler(api.getBonusCardOwnerForEdit,setBonusCardOwner, e.target.name)
   }
 
-  const onAdd = () => {
+  const onAction = (action) => {
     setAddUpdate(true)
-    setHeader(HEADER.add)
+    setHeader(`${action} ${HEADER}`)
     setError('')
+  }
+
+  const onEdit = (e) => {
+    apiHandler(api.getBonusCardOwnerForEdit, formik.setValues, e.target.name, onAction, HEADER_BASIC.update)
   }
 
   useEffect(() => {
@@ -261,7 +263,8 @@ const BonusCardOwners = ({ children, bonus_card }) => {
           func={api.getBonusCardOwner}
           handleSubmitError={handleSubmitError}
           onDelete={onDelete}
-          onAdd={onAdd}
+          onAdd={onAction}
+          onEdit={onEdit}
         />
       )}
     </>
