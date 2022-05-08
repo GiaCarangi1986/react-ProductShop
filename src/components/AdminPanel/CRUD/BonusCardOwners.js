@@ -48,6 +48,7 @@ const BonusCardOwners = ({ children, bonus_card }) => {
     email: '',
     birthDate: null,
     gender: null,
+    id: null
   }
 
   const formik = useFormik({
@@ -115,7 +116,7 @@ const BonusCardOwners = ({ children, bonus_card }) => {
   }
 
   const editData = () => {
-    // apiHandler(api.getBonusCardOwnerForEdit,setBonusCardOwner, e.target.name)
+    apiHandler(api.editBonusCardOwner, setBonusCardOwner, formik.values, comeBack)
   }
 
   const onAction = (action) => {
