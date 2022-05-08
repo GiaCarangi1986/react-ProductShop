@@ -17,6 +17,12 @@ const numberTemp = Yup.number()
   .max(32767, errorsMessenge.bigNumber)
   .required(errorsMessenge.requiredField);
 
+const percentTemp = Yup.number()
+  .nullable()
+  .required(errorsMessenge.requiredField)
+  .min(1, errorsMessenge.min_percent)
+  .max(100, errorsMessenge.max_percent);
+
 const countTemp = Yup.number()
   .nullable()
   .min(0.001, errorsMessenge.positiveNumber)
@@ -126,9 +132,17 @@ const userCRUD = Yup.object().shape({
   gender: objectTemp
 })
 
+const saleCRUD = Yup.object().shape({
+  start_at: dateTemp,
+  end_at: dateTempEnd.nullable().required(errorsMessenge.requiredField),
+  salePercent: percentTemp,
+  product: objectTemp.notRequired().nullable(),
+})
+
 export {
   signUp,
   addLineOfCheck,
   dateSearch,
-  userCRUD
+  userCRUD,
+  saleCRUD
 }

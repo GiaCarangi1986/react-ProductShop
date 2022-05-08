@@ -24,6 +24,8 @@ const cyrillic_with_hyphen = 'Может содержать кириллицу �
 const first_letter_not_hyphen = 'ФИО не может начинаться с дефиса'
 const no_multiple_hyphen = 'Дефисы не могут повторяться'
 const last_letter_not_hyphen = 'Не может оканчиваться на дефис'
+const min_percent = 'Минимальное значение - 1'
+const max_percent = 'Максимальное значение - 100'
 
 export {
   login,
@@ -50,4 +52,6 @@ export {
   first_letter_not_hyphen,
   no_multiple_hyphen,
   last_letter_not_hyphen,
+  min_percent,
+  max_percent
 }

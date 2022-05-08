@@ -185,3 +185,10 @@
     gap: 10px;
   }
 }
+
+.wrap_add {
+  display: grid;
+  grid-template-columns: minmax(130px, 1fr) auto;
+  column-gap: 5%;
+  align-items: self-end;
+}
