@@ -22,7 +22,7 @@ const getBonusCardOwnerForEditSerializer = (params = {}) => {
     secondName: params.secondName, // фамилия
     patronymic: params.patronymic, // отчество
     phone: `+${params.phone}`, // телефон
-    email: params.email, // почта
+    email: params?.email || '', // почта
     birthDate: params.birthDate, // день рождения
     gender: {
       id: params.gender?.id,

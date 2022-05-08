@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import _ from 'lodash'
 import { useFormik } from 'formik'
 import {
   BONUS_CARD_OWNER,
@@ -30,6 +31,7 @@ const BonusCardOwners = ({ children, bonus_card }) => {
   const [error, setError] = useState('')
   const [addUpdate, setAddUpdate] = useState(false)
   const [header, setHeader] = useState('')
+  const [data, setData] = useState(null)
 
   const handleSubmitError = (response) => {
     if (response) {
@@ -93,6 +95,9 @@ const BonusCardOwners = ({ children, bonus_card }) => {
         setFunc(res)
         setLoading(false)
         params ? afterFunc(params) : afterFunc()
+        if (params === HEADER_BASIC.update) {
+          setData({ ...res })
+        }
       })
       .catch(err => {
         console.log('err', err)
@@ -117,6 +122,9 @@ const BonusCardOwners = ({ children, bonus_card }) => {
     setAddUpdate(true)
     setHeader(`${action} ${HEADER}`)
     setError('')
+    if (action === HEADER_BASIC.add) {
+      setData({ ...initialValues })
+    }
   }
 
   const onEdit = (e) => {
@@ -125,9 +133,12 @@ const BonusCardOwners = ({ children, bonus_card }) => {
 
   useEffect(() => {
     if (formik) {
-      const { isValid, dirty } = formik;
-      const isDisabled = !isValid || !dirty
+      const { isValid, values } = formik;
+      const isDisabled = !isValid || _.isEqual(values, data)
       setDisabled(isDisabled)
+      if (!data) {
+        setData({ ...values })
+      }
     }
   }, [formik])
 
