@@ -166,24 +166,6 @@ const BonusCardOwners = ({ children, bonus_card }) => {
             </Fieldset>
             <Fieldset
               errorClass='addOrUpdateCRUD'
-              error={formik.errors.phone}
-              touched={formik.touched.phone}>
-              <InputPhone
-                label={FORM_LABELS.phone}
-                country='ru'
-                onlyCountries={['ru']}
-                name={FORM_FIELDS.phone}
-                type='text'
-                onGx-input={formik.handleChange}
-                onGx-change={handleChangePhone}
-                value={formik.values.phone}
-                onBlur={handleBlur}
-              />
-            </Fieldset>
-          </div>
-          <div className={style.addupdate__row}>
-            <Fieldset
-              errorClass='addOrUpdateCRUD'
               error={formik.errors.firstName}
               touched={formik.touched.firstName}>
               <Input
@@ -196,22 +178,6 @@ const BonusCardOwners = ({ children, bonus_card }) => {
                 type='text'
               />
             </Fieldset>
-            <Fieldset
-              errorClass='addOrUpdateCRUD'
-              error={formik.errors.email}
-              touched={formik.touched.email}>
-              <Input
-                value={formik.values.email}
-                onGx-input={formik.handleChange}
-                onGx-blur={handleBlur}
-                name={FORM_FIELDS.email}
-                label={FORM_LABELS.email}
-                data-cy='title'
-                type='text'
-              />
-            </Fieldset>
-          </div>
-          <div className={style.addupdate__row}>
             <Fieldset
               errorClass='addOrUpdateCRUD'
               error={formik.errors.patronymic}
@@ -228,22 +194,6 @@ const BonusCardOwners = ({ children, bonus_card }) => {
             </Fieldset>
             <Fieldset
               errorClass='addOrUpdateCRUD'
-              error={formik.errors.birthDate}
-              touched={formik.touched.birthDate}>
-              <Input
-                value={formik.values.birthDate}
-                onGx-input={formik.handleChange}
-                onGx-blur={handleBlur}
-                name={FORM_FIELDS.birthDate}
-                label={FORM_LABELS.birthDate}
-                data-cy='title'
-                type='date'
-              />
-            </Fieldset>
-          </div>
-          <div className={style.addupdate__row}>
-            <Fieldset
-              errorClass='addOrUpdateCRUD'
               containerClass='pressed_bottom'
               error={formik.errors.gender}
               touched={formik.touched.gender}>
@@ -257,6 +207,52 @@ const BonusCardOwners = ({ children, bonus_card }) => {
                 onBlur={() => handleSelectBlur(FORM_FIELDS.gender)}
                 onChange={(e) => chooseSelectValue(e, FORM_FIELDS.gender)}
                 err={formik.errors.gender && formik.touched.gender}
+              />
+            </Fieldset>
+          </div>
+          <div className={style.addupdate__row}>
+            <Fieldset
+              errorClass='addOrUpdateCRUD'
+              error={formik.errors.phone}
+              touched={formik.touched.phone}>
+              <InputPhone
+                label={FORM_LABELS.phone}
+                country='ru'
+                onlyCountries={['ru']}
+                name={FORM_FIELDS.phone}
+                type='text'
+                onGx-input={formik.handleChange}
+                onGx-change={handleChangePhone}
+                value={formik.values.phone}
+                onBlur={handleBlur}
+              />
+            </Fieldset>
+            <Fieldset
+              errorClass='addOrUpdateCRUD'
+              error={formik.errors.email}
+              touched={formik.touched.email}>
+              <Input
+                value={formik.values.email}
+                onGx-input={formik.handleChange}
+                onGx-blur={handleBlur}
+                name={FORM_FIELDS.email}
+                label={FORM_LABELS.email}
+                data-cy='title'
+                type='text'
+              />
+            </Fieldset>
+            <Fieldset
+              errorClass='addOrUpdateCRUD'
+              error={formik.errors.birthDate}
+              touched={formik.touched.birthDate}>
+              <Input
+                value={formik.values.birthDate}
+                onGx-input={formik.handleChange}
+                onGx-blur={handleBlur}
+                name={FORM_FIELDS.birthDate}
+                label={FORM_LABELS.birthDate}
+                data-cy='title'
+                type='date'
               />
             </Fieldset>
           </div>
