@@ -85,6 +85,7 @@ const BonusCardOwners = ({ children, sale }) => {
     formik.setTouched({})
     setHeader('')
     setError('')
+    setProductList([])
   }
 
   const apiHandler = (func, setFunc = () => { }, value, afterFunc = () => { }, params) => {
@@ -162,6 +163,10 @@ const BonusCardOwners = ({ children, sale }) => {
         return 0;
       }))
     formik.setFieldValue(FORM_FIELDS.product, null)
+  }
+
+  const deleteProduct = (e) => {
+    setProductList([...productList].filter(line => line.id !== +e.target.name))
   }
 
   useEffect(() => {
@@ -265,8 +270,8 @@ const BonusCardOwners = ({ children, sale }) => {
                       className='button-delete_action'
                       data-cy='btn'
                       title='Удалить строку'
-                    // name={{ id: line.id, old_product: line.old_product }}
-                    // onClick={deleteProduct}
+                      name={product.id}
+                      onClick={deleteProduct}
                     >
                       <Icon slot='icon-left' icon='deleteIcon' />
                     </Button>
