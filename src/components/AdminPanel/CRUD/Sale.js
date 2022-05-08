@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import _ from 'lodash'
+import { useStoreon } from 'storeon/react';
 import { useFormik } from 'formik'
 import {
   SALE_LIST,
@@ -7,10 +8,12 @@ import {
   FORM_FIELDS,
   FORM_LABELS,
   SELECT_TYPES,
-  HEADER_BASIC
+  HEADER_BASIC,
+  POPUP_TYPES
 } from '../../../const';
 import { handingErrors, deleteSpaces, capitalize } from '../../../utils'
 import { formatDateToInput } from '../../../utils/date'
+import Popup from '../../Popup'
 import { Input, Fieldset, Icon, Button } from '../../../views';
 import Select from '../../Select';
 import ListShow from './ListShow';
@@ -25,6 +28,8 @@ const BonusCardOwners = ({ children, sale }) => {
     setSaleList = () => { },
   } = sale
 
+  const { dispatch } = useStoreon();
+
   const HEADER = 'акции'
 
   const [disabled, setDisabled] = useState(true)
@@ -33,159 +38,7 @@ const BonusCardOwners = ({ children, sale }) => {
   const [addUpdate, setAddUpdate] = useState(false)
   const [header, setHeader] = useState('')
   const [data, setData] = useState(null)
-  const [productList, setProductList] = useState([
-    '2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222221',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-    '1',
-  ])
+  const [productList, setProductList] = useState([])
 
   const handleSubmitError = (response) => {
     if (response) {
@@ -211,11 +64,6 @@ const BonusCardOwners = ({ children, sale }) => {
     const value = deleteSpaces(formik.values[name])
     formik.handleBlur(e)
     formik.setFieldValue([name], value)
-  }
-
-  const handleChangePhone = (e) => {
-    const { name } = e.target;
-    formik.setFieldValue(name, e.detail.value);
   }
 
   const handleInput = e => {
@@ -282,7 +130,37 @@ const BonusCardOwners = ({ children, sale }) => {
     apiHandler(api.getBonusCardOwnerForEdit, formik.setValues, e.target.name, onAction, HEADER_BASIC.update)
   }
 
-  const addLine = (e) => {
+  const addLine = () => {
+    const lines = [...productList]
+    let exist = false
+    for (const line of lines) {
+      if (line.id === formik.values.product.value) {
+        exist = true
+        break
+      }
+    }
+    if (!exist) {
+      lines.push({
+        id: formik.values.product.value,
+        label: formik.values.product.name,
+      })
+    }
+    else {
+      dispatch('popup/toggle', {
+        popup: POPUP_TYPES.admin_panel,
+        text: `Продукт '${formik.values.product.name}' уже добавлен`
+      })
+    }
+    setProductList(lines.sort(
+      function (a, b) {
+        if (a.label > b.label) {
+          return 1;
+        }
+        if (a.label < b.label) {
+          return -1;
+        }
+        return 0;
+      }))
     formik.setFieldValue(FORM_FIELDS.product, null)
   }
 
@@ -380,7 +258,7 @@ const BonusCardOwners = ({ children, sale }) => {
             <ul className={style.list_product}>
               {productList.map(product => (
                 <li key={product.id} className={style.list_line}>
-                  <p className={style.list_item}>{`${product}`}</p>
+                  <p className={style.list_item}>{product.label}</p>
                   <div>
                     <Button
                       variant='text'
@@ -418,6 +296,7 @@ const BonusCardOwners = ({ children, sale }) => {
         />
       )
       }
+      <Popup />
     </>
   )
 }

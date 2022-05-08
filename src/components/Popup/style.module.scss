@@ -2,7 +2,8 @@
   position: fixed;
   right: 20px;
   bottom: 20px;
-  width: max-content;
+  // width: max-content;
+  max-width: 50%;
   height: max-content;
   padding: 10px;
   background-color: var(--ps-color-white);
@@ -18,4 +19,5 @@
 
 .text {
   margin: 0 5px 10px;
+  word-break: break-word;
 }
