@@ -143,7 +143,7 @@ const BonusCardOwners = ({ children, bonus_card }) => {
     }
   }, [formik])
 
-  const func = header === HEADER.add ? addData : editData
+  const func = header === `${HEADER_BASIC.add} ${HEADER}` ? addData : editData
 
   return (
     <>

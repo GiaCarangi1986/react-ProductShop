@@ -38,7 +38,6 @@ const BonusCardOwners = ({ children, sale }) => {
   const [addUpdate, setAddUpdate] = useState(false)
   const [header, setHeader] = useState('')
   const [data, setData] = useState(null)
-  const [productList, setProductList] = useState([])
 
   const handleSubmitError = (response) => {
     if (response) {
@@ -52,6 +51,7 @@ const BonusCardOwners = ({ children, sale }) => {
     end_at: null,
     salePercent: 1,
     product: null,
+    productList: []
   }
 
   const formik = useFormik({
@@ -85,7 +85,6 @@ const BonusCardOwners = ({ children, sale }) => {
     formik.setTouched({})
     setHeader('')
     setError('')
-    setProductList([])
   }
 
   const apiHandler = (func, setFunc = () => { }, value, afterFunc = () => { }, params) => {
@@ -111,7 +110,8 @@ const BonusCardOwners = ({ children, sale }) => {
   }
 
   const addData = () => {
-    apiHandler(api.addBonusCardOwner, setSaleList, formik.values, comeBack)
+    console.log('here');
+    apiHandler(api.addSale, setSaleList, formik.values, comeBack)
   }
 
   const editData = () => {
@@ -132,7 +132,7 @@ const BonusCardOwners = ({ children, sale }) => {
   }
 
   const addLine = () => {
-    const lines = [...productList]
+    const lines = [...formik.values.productList]
     let exist = false
     for (const line of lines) {
       if (line.id === formik.values.product.value) {
@@ -152,7 +152,7 @@ const BonusCardOwners = ({ children, sale }) => {
         text: `Продукт '${formik.values.product.name}' уже добавлен`
       })
     }
-    setProductList(lines.sort(
+    formik.setFieldValue('productList', lines.sort(
       function (a, b) {
         if (a.label > b.label) {
           return 1;
@@ -166,7 +166,7 @@ const BonusCardOwners = ({ children, sale }) => {
   }
 
   const deleteProduct = (e) => {
-    setProductList([...productList].filter(line => line.id !== +e.target.name))
+    formik.setFieldValue('productList', [...formik.values.productList].filter(line => line.id !== +e.target.name))
   }
 
   useEffect(() => {
@@ -180,7 +180,7 @@ const BonusCardOwners = ({ children, sale }) => {
     }
   }, [formik])
 
-  const func = header === HEADER.add ? addData : editData
+  const func = header === `${HEADER_BASIC.add} ${HEADER}` ? addData : editData
   const dateNow = formatDateToInput()
 
   return (
@@ -261,7 +261,7 @@ const BonusCardOwners = ({ children, sale }) => {
           <div className={style.addupdate__row}>
             <p className={style.list_header}>Участвующие продукты:</p>
             <ul className={style.list_product}>
-              {productList.map(product => (
+              {formik.values?.productList.map(product => (
                 <li key={product.id} className={style.list_line}>
                   <p className={style.list_item}>{product.label}</p>
                   <div>

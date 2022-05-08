@@ -25,7 +25,7 @@ const first_letter_not_hyphen = 'ФИО не может начинаться с 
 const no_multiple_hyphen = 'Дефисы не могут повторяться'
 const last_letter_not_hyphen = 'Не может оканчиваться на дефис'
 const min_percent = 'Минимальное значение - 1'
-const max_percent = 'Максимальное значение - 100'
+const max_percent = 'Максимальное значение - 99'
 
 export {
   login,
