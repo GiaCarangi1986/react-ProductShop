@@ -21,7 +21,8 @@ import {
   createSaleSerializer,
   createSaleCheckSerializer,
   getSaleCheckSerializer,
-  getSaleForEditSerializer
+  getSaleForEditSerializer,
+  createUserSerializer
 } from './serializer'
 import { dateFotmattedForMakeDeliveryBack, formatDateToBack } from '../utils/date'
 
@@ -218,6 +219,13 @@ class Api extends BaseApi {
 
   deleteUser = async (id) => {
     const res = await this.delete(`/user/${id}`)
+    const serRes = getUserListSerializer(res.data)
+    return serRes
+  }
+
+  addUser = async (data) => {
+    const serData = createUserSerializer(data)
+    const res = await this.post('/user/', serData)
     const serRes = getUserListSerializer(res.data)
     return serRes
   }

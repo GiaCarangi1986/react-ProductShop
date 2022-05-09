@@ -113,7 +113,7 @@ const SystemUsers = ({ children, user }) => {
   }
 
   const addData = () => {
-    apiHandler(api.addBonusCardOwner, setSystemUsers, formik.values, comeBack)
+    apiHandler(api.addUser, setSystemUsers, formik.values, comeBack)
   }
 
   const editData = () => {
@@ -199,7 +199,7 @@ const SystemUsers = ({ children, user }) => {
               touched={formik.touched.password}>
               <Input
                 value={formik.values.password}
-                onGx-input={handleInput}
+                onGx-input={formik.handleChange}
                 onGx-blur={handleBlur}
                 name={FORM_FIELDS.password}
                 label={FORM_LABELS.password}

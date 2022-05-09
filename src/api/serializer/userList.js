@@ -13,4 +13,12 @@ const getUserListSerializer = (params = []) => {
   return serList
 }
 
-export { getUserListSerializer };
+const createUserSerializer = (params = {}) => ({
+  FIO: `${params.secondName} ${params.firstName} ${params.patronymic}`, // ФИО
+  phone: params.phone, // телефон
+  email: params?.email || null, // почта
+  password: params.password, // пароль
+  roleFK: params.role?.value, // роль
+})
+
+export { getUserListSerializer, createUserSerializer };
