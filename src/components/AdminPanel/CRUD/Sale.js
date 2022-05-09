@@ -106,11 +106,10 @@ const BonusCardOwners = ({ children, sale }) => {
   }
 
   const onDelete = e => {
-    apiHandler(api.deleteBonusCardOwner, setSaleList, e.target.name)
+    apiHandler(api.deleteSale, setSaleList, e.target.name)
   }
 
   const addData = () => {
-    console.log('here');
     apiHandler(api.addSale, setSaleList, formik.values, comeBack)
   }
 

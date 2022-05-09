@@ -75,7 +75,7 @@ const AddCheckParams = ({
         id: formik.values.product.value,
         count: +formik.values.count,
         label: formik.values.product.name,
-        price: formik.values.old_product ? formik.values.product.price / 2 : formik.values.product.price,
+        price: roundNumber(formik.values.old_product ? formik.values.product.price / 2 : formik.values.product.price),
         unit: formik.values.product.unit,
         old_product: formik.values.old_product,
         sale: formik.values.product.sale,
