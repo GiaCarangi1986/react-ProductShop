@@ -183,7 +183,7 @@ class Api extends BaseApi {
     return serRes
   }
 
-  addCheckSale = async (productList) => {
+  checkSale = async (productList) => {
     const serData = createSaleCheckSerializer(productList)
     const res = await this.post('/sale_check/', serData)
     const serRes = getSaleCheckSerializer(res.data)
@@ -197,12 +197,12 @@ class Api extends BaseApi {
     return serRes
   }
 
-  // editBonusCardOwner = async (data) => {
-  //   const serData = createBonusCardOwnerSerializer(data)
-  //   const res = await this.put(`/bonus_card_owner/${data.id}`, serData)
-  //   const serRes = getBonusCardOwnerSerializer(res.data)
-  //   return serRes
-  // }
+  editSale = async (data) => {
+    const serData = createSaleSerializer(data)
+    const res = await this.put(`/sale/${data.id}`, serData)
+    const serRes = getSaleSerializer(res.data)
+    return serRes
+  }
 
   getSaleForEdit = async (id) => {
     const res = await this.patch(`/sale/${id}`)

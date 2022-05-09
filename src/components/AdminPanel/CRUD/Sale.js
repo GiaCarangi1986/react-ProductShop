@@ -50,6 +50,7 @@ const BonusCardOwners = ({ children, sale }) => {
   }
 
   const initialValues = {
+    id: '',
     start_at: null,
     end_at: null,
     salePercent: 1,
@@ -117,9 +118,13 @@ const BonusCardOwners = ({ children, sale }) => {
     apiHandler(api.addSale, setSaleList, formik.values, comeBack)
   }
 
-  const addData = () => {
+  const editDataCorrect = () => {
+    apiHandler(api.editSale, setSaleList, formik.values, comeBack)
+  }
+
+  const checkCorrect = (apiFunc = () => { }, afterFunc = () => { }) => {
     setLoading(true)
-    api.addCheckSale(formik.values.productList)
+    apiFunc(formik.values.productList)
       .then(res => {
         if (res.length) {
           setProductCheck(res)
@@ -128,7 +133,7 @@ const BonusCardOwners = ({ children, sale }) => {
           })
         }
         else {
-          addDataCorrect()
+          afterFunc()
         }
         setLoading(false)
       })
@@ -138,8 +143,12 @@ const BonusCardOwners = ({ children, sale }) => {
       })
   }
 
+  const addData = () => {
+    checkCorrect(api.checkSale, addDataCorrect)
+  }
+
   const editData = () => {
-    apiHandler(api.editBonusCardOwner, setSaleList, formik.values, comeBack)
+    checkCorrect(api.checkSale, editDataCorrect)
   }
 
   const onAction = (action) => {
