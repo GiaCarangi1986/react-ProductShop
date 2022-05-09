@@ -4,7 +4,7 @@ import { sendParamsBestSellersSerializer, getBestSellersSerializer } from './bes
 import { getPopularProductsSerializer } from './popularProductsSerializer'
 import { getRevenueDataSerializer } from './revenueSerializer'
 import { getBonusCardOwnerSerializer, createBonusCardOwnerSerializer, getBonusCardOwnerForEditSerializer } from './bonusCardOwner'
-import { getSaleSerializer, createSaleSerializer } from './sale'
+import { getSaleSerializer, createSaleSerializer, createSaleCheckSerializer, getSaleCheckSerializer } from './sale'
 import { getUserListSerializer } from './userList'
 import { productGetSerializer, productForMakeDeliverySerializer, setMakeDeliverySerializer, setWriteOffSerializer } from './productSerializer'
 
@@ -28,5 +28,7 @@ export {
   getUserListSerializer,
   createBonusCardOwnerSerializer,
   getBonusCardOwnerForEditSerializer,
-  createSaleSerializer
+  createSaleSerializer,
+  createSaleCheckSerializer,
+  getSaleCheckSerializer
 }

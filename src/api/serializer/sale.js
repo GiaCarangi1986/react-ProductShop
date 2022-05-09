@@ -20,6 +20,27 @@ const getSaleSerializer = (params = []) => {
   return serList
 }
 
+const getSaleCheckSerializer = (params = []) => {
+  const products = []
+  params.forEach(element => {
+    products.push({
+      id: element.id, // id продукта
+      title: element.title // название продукта
+    })
+  });
+  return products
+}
+
+const createSaleCheckSerializer = (productList = []) => {
+  const ids = []
+  productList.forEach(element => {
+    ids.push(element.id)
+  });
+  return {
+    productsID: ids, // список id продуктов для изменения
+  }
+}
+
 const createSaleSerializer = (params = {}) => {
   const ids = []
   params?.productList.forEach(element => {
@@ -33,4 +54,4 @@ const createSaleSerializer = (params = {}) => {
   }
 }
 
-export { getSaleSerializer, createSaleSerializer };
+export { getSaleSerializer, createSaleSerializer, createSaleCheckSerializer, getSaleCheckSerializer };

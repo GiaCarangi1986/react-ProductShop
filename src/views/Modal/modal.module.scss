@@ -29,3 +29,8 @@
   min-height: fit-content;
   border-radius: 6px;
 }
+
+.modal-centered::part(close-button) {
+  right: -15px;
+  top: -15px;
+}

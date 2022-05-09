@@ -23,7 +23,8 @@ export const MODAL_TYPES = {
   addCheck: 'addCheck',
   sureExit: 'sureExit',
   sureDelete: 'sureDelete',
-  errorModal: 'errorModal'
+  errorModal: 'errorModal',
+  productSale: 'productSale'
 }
 
 export const POPUP_TYPES = {

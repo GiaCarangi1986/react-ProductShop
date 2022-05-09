@@ -9,11 +9,13 @@ import {
   FORM_LABELS,
   SELECT_TYPES,
   HEADER_BASIC,
-  POPUP_TYPES
+  POPUP_TYPES,
+  MODAL_TYPES
 } from '../../../const';
 import { handingErrors, deleteSpaces, capitalize } from '../../../utils'
 import { formatDateToInput } from '../../../utils/date'
 import Popup from '../../Popup'
+import { ProductSale } from '../../Modal';
 import { Input, Fieldset, Icon, Button } from '../../../views';
 import Select from '../../Select';
 import ListShow from './ListShow';
@@ -38,6 +40,7 @@ const BonusCardOwners = ({ children, sale }) => {
   const [addUpdate, setAddUpdate] = useState(false)
   const [header, setHeader] = useState('')
   const [data, setData] = useState(null)
+  const [productCheck, setProductCheck] = useState([])
 
   const handleSubmitError = (response) => {
     if (response) {
@@ -110,8 +113,27 @@ const BonusCardOwners = ({ children, sale }) => {
     apiHandler(api.deleteSale, setSaleList, e.target.name)
   }
 
-  const addData = () => {
+  const addDataCorrect = () => {
     apiHandler(api.addSale, setSaleList, formik.values, comeBack)
+  }
+
+  const addData = () => {
+    setLoading(true)
+    api.addCheckSale(formik.values.productList)
+      .then(res => {
+        if (res.length) {
+          setProductCheck(res)
+          dispatch('modal/toggle', {
+            modal: MODAL_TYPES.productSale,
+          })
+        }
+        else {
+          addDataCorrect()
+        }
+      })
+      .catch(err => {
+        console.log('err', err)
+      })
   }
 
   const editData = () => {
@@ -302,6 +324,7 @@ const BonusCardOwners = ({ children, sale }) => {
       )
       }
       <Popup />
+      <ProductSale data={productCheck} func={addDataCorrect} />
     </>
   )
 }

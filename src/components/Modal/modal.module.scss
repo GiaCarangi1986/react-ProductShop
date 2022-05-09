@@ -12,6 +12,21 @@
   margin: 0;
 }
 
+.modal-centered__list {
+  max-height: 30vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 20px;
+}
+
+.modal-centered__item {
+  padding: 5px;
+  display: flex;
+  gap: 5px;
+}
+
 .modal-btns,
 .modal-btn-ok {
   margin-top: 30px;
