@@ -130,9 +130,11 @@ const BonusCardOwners = ({ children, sale }) => {
         else {
           addDataCorrect()
         }
+        setLoading(false)
       })
       .catch(err => {
         console.log('err', err)
+        setLoading(false)
       })
   }
 
