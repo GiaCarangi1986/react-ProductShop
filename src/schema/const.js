@@ -26,7 +26,7 @@ const no_multiple_hyphen = 'Дефисы не могут повторяться'
 const last_letter_not_hyphen = 'Не может оканчиваться на дефис'
 const min_percent = 'Минимальное значение - 1'
 const max_percent = 'Максимальное значение - 99'
-const uncorrectPassword = 'Допускается латиница, должна содержаться минимум 1 цифра'
+const uncorrectPassword = 'Кириллица не допускается'
 
 export {
   login,

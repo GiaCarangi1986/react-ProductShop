@@ -4,7 +4,7 @@ import * as errorsMessenge from './const';
 const REGEX = {
   emailReg: /^[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$/,
   cyrillic_with_hyphen: /[А-ЯЁёа-я-]$/,
-  passwordReg: /(?=.*[0-9])(?!.*[^\w\s])(?=.*[a-z])/g,
+  passwordReg: /^[a-zA-Z0-9 -_\w]+$/,
   first_letter_not_hyphen: /^[^-]/,
   last_letter_not_hyphen: /.*[^-]{1}$/,
   no_multiple_hyphen: /^((?!-{2}| {2}).)*$/
