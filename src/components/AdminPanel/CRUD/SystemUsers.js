@@ -14,7 +14,7 @@ import { Input, Fieldset, InputPhone } from '../../../views';
 import Select from '../../Select';
 import ListShow from './ListShow';
 import AddOrUpdate from './AddOrUpdate';
-import { userCRUD } from '../../../schema';
+import { systemUserCRUD } from '../../../schema';
 import style from '../style.module.scss';
 import api from '../../../api'
 
@@ -53,7 +53,7 @@ const SystemUsers = ({ children, user }) => {
 
   const formik = useFormik({
     initialValues,
-    validationSchema: userCRUD,
+    validationSchema: systemUserCRUD,
   })
 
   const handleBlur = e => {

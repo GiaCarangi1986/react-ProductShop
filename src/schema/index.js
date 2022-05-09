@@ -4,6 +4,7 @@ import * as errorsMessenge from './const';
 const REGEX = {
   emailReg: /^[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$/,
   cyrillic_with_hyphen: /[А-ЯЁёа-я-]$/,
+  passwordReg: /(?=.*[0-9])(?!.*[^\w\s])(?=.*[a-z])/g,
   first_letter_not_hyphen: /^[^-]/,
   last_letter_not_hyphen: /.*[^-]{1}$/,
   no_multiple_hyphen: /^((?!-{2}| {2}).)*$/
@@ -33,6 +34,13 @@ const stringTemp = Yup.string()
   .nullable()
   .max(150, errorsMessenge.lardgeString)
   .required(errorsMessenge.requiredField);
+
+const passwordType = Yup.string()
+  .nullable()
+  .required(errorsMessenge.requiredField)
+  .min(4, errorsMessenge.shortString)
+  .max(50, errorsMessenge.longString)
+  .matches(REGEX.passwordReg, errorsMessenge.uncorrectPassword)
 
 const priceTemp = (val = 150, err = errorsMessenge.lardgeString) => Yup.string()
   .nullable()
@@ -72,7 +80,6 @@ const nameTemp = stringTemp
     errorsMessenge.no_multiple_hyphen
   );
 
-
 const emailTemp = Yup.string()
   .notRequired()
   .matches(REGEX.emailReg, errorsMessenge.uncorrectEmail)
@@ -109,11 +116,7 @@ const maxCount = Yup.mixed()
 const signUp = () => {
   return Yup.object().shape({
     phone: phoneTemp,
-    password: Yup.string()
-      .nullable()
-      .required(errorsMessenge.requiredField)
-      .min(4, errorsMessenge.shortString)
-      .max(50, errorsMessenge.longString),
+    password: passwordType,
   });
 };
 
@@ -139,10 +142,21 @@ const saleCRUD = Yup.object().shape({
   product: objectTemp.notRequired().nullable(),
 })
 
+const systemUserCRUD = Yup.object().shape({
+  firstName: nameTemp,
+  secondName: nameTemp,
+  patronymic: nameTemp.notRequired(),
+  phone: phoneTemp,
+  email: emailTemp,
+  password: passwordType,
+  role: objectTemp
+})
+
 export {
   signUp,
   addLineOfCheck,
   dateSearch,
   userCRUD,
-  saleCRUD
+  saleCRUD,
+  systemUserCRUD
 }
