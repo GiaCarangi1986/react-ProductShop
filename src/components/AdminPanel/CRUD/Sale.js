@@ -152,7 +152,7 @@ const BonusCardOwners = ({ children, sale }) => {
   }
 
   const onEdit = (e) => {
-    apiHandler(api.getBonusCardOwnerForEdit, formik.setValues, e.target.name, onAction, HEADER_BASIC.update)
+    apiHandler(api.getSaleForEdit, formik.setValues, e.target.name, onAction, HEADER_BASIC.update)
   }
 
   const addLine = () => {

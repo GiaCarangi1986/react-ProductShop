@@ -54,4 +54,21 @@ const createSaleSerializer = (params = {}) => {
   }
 }
 
-export { getSaleSerializer, createSaleSerializer, createSaleCheckSerializer, getSaleCheckSerializer };
+const getSaleForEditSerializer = (params = {}) => {
+  const productList = []
+  params?.productList.forEach(element => {
+    productList.push({
+      id: element.id,
+      label: element.title
+    })
+  });
+  return {
+    id: params.id, // id
+    start_at: params.dateStart, // дата начала
+    end_at: params.dateEnd, // дата окончания
+    salePercent: params.discountPercent, // процент скидки
+    productList: [...productList], // список продуктов, участвующих в акции
+  }
+}
+
+export { getSaleSerializer, createSaleSerializer, createSaleCheckSerializer, getSaleCheckSerializer, getSaleForEditSerializer };

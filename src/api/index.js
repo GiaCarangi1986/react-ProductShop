@@ -20,7 +20,8 @@ import {
   getBonusCardOwnerForEditSerializer,
   createSaleSerializer,
   createSaleCheckSerializer,
-  getSaleCheckSerializer
+  getSaleCheckSerializer,
+  getSaleForEditSerializer
 } from './serializer'
 import { dateFotmattedForMakeDeliveryBack, formatDateToBack } from '../utils/date'
 
@@ -193,6 +194,19 @@ class Api extends BaseApi {
     const serData = createSaleSerializer(data)
     const res = await this.post('/sale/', serData)
     const serRes = getSaleSerializer(res.data)
+    return serRes
+  }
+
+  // editBonusCardOwner = async (data) => {
+  //   const serData = createBonusCardOwnerSerializer(data)
+  //   const res = await this.put(`/bonus_card_owner/${data.id}`, serData)
+  //   const serRes = getBonusCardOwnerSerializer(res.data)
+  //   return serRes
+  // }
+
+  getSaleForEdit = async (id) => {
+    const res = await this.patch(`/sale/${id}`)
+    const serRes = getSaleForEditSerializer(res.data)
     return serRes
   }
 
