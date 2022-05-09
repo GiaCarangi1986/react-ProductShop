@@ -85,7 +85,7 @@ const dateTempEnd = Yup.mixed()
     if (context.parent.start_at && value) {
       const dateStart = context.parent.start_at;
       const dateEnd = value;
-      return dateStart <= dateEnd;
+      return dateStart < dateEnd;
     }
     return true
   });

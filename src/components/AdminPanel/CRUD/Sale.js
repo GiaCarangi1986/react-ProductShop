@@ -97,6 +97,7 @@ const BonusCardOwners = ({ children, sale }) => {
         if (params === HEADER_BASIC.update) {
           setData({ ...res })
         }
+        setError('')
       })
       .catch(err => {
         console.log('err', err)
