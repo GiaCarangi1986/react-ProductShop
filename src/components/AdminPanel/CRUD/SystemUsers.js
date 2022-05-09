@@ -46,9 +46,9 @@ const SystemUsers = ({ children, user }) => {
     patronymic: '',
     phone: '',
     email: '',
-    birthDate: null,
-    gender: null,
-    id: null
+    password: '',
+    role: null,
+    id: ''
   }
 
   const formik = useFormik({
@@ -195,23 +195,37 @@ const SystemUsers = ({ children, user }) => {
             </Fieldset>
             <Fieldset
               errorClass='addOrUpdateCRUD'
-              containerClass='pressed_bottom'
-              error={formik.errors.gender}
-              touched={formik.touched.gender}>
-              <Select
-                value={formik.values.gender}
-                name={FORM_FIELDS.gender}
-                label={FORM_LABELS.gender}
+              error={formik.errors.password}
+              touched={formik.touched.password}>
+              <Input
+                value={formik.values.password}
+                onGx-input={handleInput}
+                onGx-blur={handleBlur}
+                name={FORM_FIELDS.password}
+                label={FORM_LABELS.password}
                 data-cy='title'
-                type={SELECT_TYPES.gender}
-                func={api.getGenderListForSelect}
-                onBlur={() => handleSelectBlur(FORM_FIELDS.gender)}
-                onChange={(e) => chooseSelectValue(e, FORM_FIELDS.gender)}
-                err={formik.errors.gender && formik.touched.gender}
+                type='password'
               />
             </Fieldset>
           </div>
           <div className={style.addupdate__row}>
+            <Fieldset
+              errorClass='addOrUpdateCRUD'
+              containerClass='pressed_bottom'
+              error={formik.errors.role}
+              touched={formik.touched.role}>
+              <Select
+                value={formik.values.role}
+                name={FORM_FIELDS.role}
+                label={FORM_LABELS.role}
+                data-cy='title'
+                type={SELECT_TYPES.role}
+                func={api.getRoleForSelect}
+                onBlur={() => handleSelectBlur(FORM_FIELDS.role)}
+                onChange={(e) => chooseSelectValue(e, FORM_FIELDS.role)}
+                err={formik.errors.role && formik.touched.role}
+              />
+            </Fieldset>
             <Fieldset
               errorClass='addOrUpdateCRUD'
               error={formik.errors.phone}
@@ -240,20 +254,6 @@ const SystemUsers = ({ children, user }) => {
                 label={FORM_LABELS.email}
                 data-cy='title'
                 type='text'
-              />
-            </Fieldset>
-            <Fieldset
-              errorClass='addOrUpdateCRUD'
-              error={formik.errors.birthDate}
-              touched={formik.touched.birthDate}>
-              <Input
-                value={formik.values.birthDate}
-                onGx-input={formik.handleChange}
-                onGx-blur={handleBlur}
-                name={FORM_FIELDS.birthDate}
-                label={FORM_LABELS.birthDate}
-                data-cy='title'
-                type='date'
               />
             </Fieldset>
           </div>

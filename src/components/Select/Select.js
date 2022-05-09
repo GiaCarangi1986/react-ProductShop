@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import BaseSelect from './BaseSelect'
-import { SELECT_TYPES } from '../../const'
+import { SELECT_TYPES, ROLES } from '../../const'
 import { productGetSerializer } from '../../api/serializer'
 
 const Select = ({ func = () => { }, onInputFunc = () => { }, type, value, ...props }) => {
@@ -79,6 +79,26 @@ const Select = ({ func = () => { }, onInputFunc = () => { }, type, value, ...pro
             const newRes = res.map(elem => {
               return ({
                 label: elem.title,
+                value: elem.id,
+              })
+            })
+
+            setOptions(newRes)
+            setLoading(false)
+          })
+          .catch((response) => {
+            console.log('response', response)
+            setLoading(false)
+          });
+        break;
+
+      case SELECT_TYPES.role:
+        setLoading(true)
+        func()
+          .then((res) => {
+            const newRes = res.map(elem => {
+              return ({
+                label: ROLES[elem.title],
                 value: elem.id,
               })
             })

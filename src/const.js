@@ -117,7 +117,8 @@ export const FORM_LABELS = {
   gender: 'Пол',
   phone: 'Телефон',
   password: 'Пароль',
-  salePercent: 'Процент скидки'
+  salePercent: 'Процент скидки',
+  role: 'Роль'
 }
 
 export const FORM_FIELDS = {
@@ -139,7 +140,8 @@ export const FORM_FIELDS = {
   email: 'email',
   birthDate: 'birthDate',
   gender: 'gender',
-  salePercent: 'salePercent'
+  salePercent: 'salePercent',
+  role: 'role'
 }
 
 export const UNITS = ['шт', 'кг']
@@ -147,7 +149,8 @@ export const UNITS = ['шт', 'кг']
 export const SELECT_TYPES = {
   product: 'product',
   card: 'card',
-  gender: 'gender'
+  gender: 'gender',
+  role: 'role'
 }
 
 export const MODALS_CHECK_TITLE = {
@@ -211,9 +214,9 @@ export const BEST_SELLERS = {
 }
 
 export const WIDTH_COL_BEST_SELLERS = {
-  fio: 450,
-  sales: 70,
-  role: 70,
+  fio: 350,
+  sales: 100,
+  role: 105,
 }
 
 export const BONUS_CARD_OWNER = {
@@ -421,4 +424,10 @@ export const SALE_KIND = {
 export const HEADER_BASIC = {
   add: 'Добавление',
   update: 'Редактирование'
+}
+
+export const ROLES = {
+  admin: 'Администратор',
+  mainKassir: 'Старший кассир',
+  kassir: 'Кассир'
 }

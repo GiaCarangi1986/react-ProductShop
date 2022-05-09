@@ -227,6 +227,10 @@ class Api extends BaseApi {
     return res.data
   }
 
+  getRoleForSelect = async () => {
+    const res = await this.get('/role/')
+    return res.data
+  }
 }
 
 export const MAIN_URL = 'http://localhost:4000'

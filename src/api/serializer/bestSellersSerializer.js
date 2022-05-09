@@ -1,5 +1,6 @@
 import { formatDateToBack } from '../../utils/date';
 import { roundNumber } from '../../utils';
+import { ROLES } from '../../const'
 
 const sendParamsBestSellersSerializer = (params = {}) => {
   const endDate = params?.date_search?.end_at ? new Date(params?.date_search?.end_at) : ''
@@ -13,11 +14,6 @@ const sendParamsBestSellersSerializer = (params = {}) => {
 }
 
 const getBestSellersSerializer = (params = []) => {
-  const ROLES = {
-    admin: 'Администратор',
-    mainKassir: 'Старший кассир',
-    kassir: 'Кассир'
-  }
   const list = []
   params.forEach(el => {
     list.push({
