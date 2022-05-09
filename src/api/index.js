@@ -183,8 +183,8 @@ class Api extends BaseApi {
     return serRes
   }
 
-  checkSale = async (productList) => {
-    const serData = createSaleCheckSerializer(productList)
+  checkSale = async (data) => {
+    const serData = createSaleCheckSerializer(data)
     const res = await this.post('/sale_check/', serData)
     const serRes = getSaleCheckSerializer(res.data)
     return serRes

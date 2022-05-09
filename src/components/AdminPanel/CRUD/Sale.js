@@ -124,7 +124,7 @@ const BonusCardOwners = ({ children, sale }) => {
 
   const checkCorrect = (apiFunc = () => { }, afterFunc = () => { }) => {
     setLoading(true)
-    apiFunc(formik.values.productList)
+    apiFunc(formik.values)
       .then(res => {
         if (res.length) {
           setProductCheck(res)
@@ -214,6 +214,7 @@ const BonusCardOwners = ({ children, sale }) => {
   }, [formik])
 
   const func = header === `${HEADER_BASIC.add} ${HEADER}` ? addData : editData
+  const funcAfterConfirm = header === `${HEADER_BASIC.add} ${HEADER}` ? addDataCorrect : editDataCorrect
   const dateNow = formatDateToInput()
 
   return (
@@ -335,7 +336,7 @@ const BonusCardOwners = ({ children, sale }) => {
       )
       }
       <Popup />
-      <ProductSale data={productCheck} func={addDataCorrect} />
+      <ProductSale data={productCheck} func={funcAfterConfirm} />
     </>
   )
 }

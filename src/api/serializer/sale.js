@@ -31,12 +31,13 @@ const getSaleCheckSerializer = (params = []) => {
   return products
 }
 
-const createSaleCheckSerializer = (productList = []) => {
+const createSaleCheckSerializer = (data = []) => {
   const ids = []
-  productList.forEach(element => {
+  data?.productList.forEach(element => {
     ids.push(element.id)
   });
   return {
+    id: +data.id,
     productsID: ids, // список id продуктов для изменения
   }
 }
