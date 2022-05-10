@@ -258,6 +258,11 @@
   margin: 0;
 }
 
+.histoty_btns_container_wrap {
+  background-color: var(--ps-background-color);
+  padding: 0 10px;
+}
+
 .histoty_btns_container {
   display: flex;
   flex-direction: column;
