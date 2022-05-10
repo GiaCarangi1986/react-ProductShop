@@ -25,15 +25,15 @@ const getBonusCardOwnerForEditSerializer = (params = {}) => {
     email: params?.email || '', // почта
     birthDate: params.birthDate, // день рождения
     gender: {
-      id: params.gender?.id,
+      value: params.gender?.id,
       label: params.gender?.title
     }, // пол
   }
 }
 
-const createBonusCardOwnerSerializer = (params = {}) => ({
+const createBonusCardOwnerSerializer = (params = {}, formattPhone = false) => ({
   FIO: `${params.secondName} ${params.firstName} ${params.patronymic}`, // ФИО
-  phone: params.phone, // телефон
+  phone: formattPhone ? params.phone.split('+')[1] : params.phone, // телефон
   email: params?.email || null, // почта
   birthDate: params.birthDate, // день рождения
   genderFK: params.gender?.value, // пол
