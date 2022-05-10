@@ -46,7 +46,7 @@ const RightPart = ({
     for (let index = 0; index < updateProduct.length; index++) {
       if (updateProduct[index].id === +btnData.name.id && updateProduct[index].old_product === btnData.name.old_product) {
         updateProduct[index].count += +btnData.value
-        updateProduct[index].total_cost = roundNumber(updateProduct[index].count * updateProduct[index].price)
+        updateProduct[index].total_cost = roundNumber(updateProduct[index].count * updateProduct[index].price * updateProduct[index].ratio)
         break
       }
     }
@@ -105,14 +105,14 @@ const RightPart = ({
     else {
       const index = updateProductLines.indexOf(productData)
       productData.old_product = !productData.old_product
+      // если поле равно price считать ratio*price
       if (productData.old_product) {
-        productData.price = roundNumber(productData.price / 2)
-        productData.total_cost /= 2
+        productData.ratio = 0.5
       }
       else {
-        productData.price = roundNumber(productData.price * 2)
-        productData.total_cost *= 2
+        productData.ratio = 1
       }
+      productData.total_cost = roundNumber(productData.ratio * productData.price * productData.count)
       updateProductLines[index] = productData
     }
 
@@ -243,7 +243,7 @@ const RightPart = ({
                                   'red' : 'black'
                                 const value = check_line_key === CHECK_LINE_ADDING.count ?
                                   line.unit === UNITS[1] ? line[check_line_key] + ', кг' : line[check_line_key] + ', шт' :
-                                  line[check_line_key]
+                                  check_line_key === CHECK_LINE_ADDING.price ? roundNumber(line.ratio * line.price) : line[check_line_key]
                                 return (
                                   <td className={tdClasses} key={check_line_key}>
                                     <div style={{ minWidth: `${w - 1}px`, margin, color }}>{value}</div>

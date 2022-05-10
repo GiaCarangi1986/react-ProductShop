@@ -95,7 +95,6 @@ const SystemUsers = ({ children, user }) => {
       .then(res => {
         setFunc(res)
         setLoading(false)
-        console.log('res', res)
         params ? afterFunc(params) : afterFunc()
         if (params === HEADER_BASIC.update) {
           setData({ ...res })

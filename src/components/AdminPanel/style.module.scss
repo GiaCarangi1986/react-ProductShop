@@ -122,11 +122,7 @@
 }
 
 .text {
-  width: 300px;
   word-break: break-word;
-  @media (max-width: 1200px) {
-    width: 260px;
-  }
 }
 
 .header_right {

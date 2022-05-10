@@ -74,7 +74,8 @@ const checkHistorySerializer = (checks = []) => {
         label: line?.productName || '', // название продукта
         maybeOld: line?.maybeOld || false, // может ли быть старым продукт
         sale: line?.sale || false, // распространяется ли скидка на продукт
-        unit: line?.unit // ед. измер.
+        unit: line?.unit, // ед. измер.
+        ratio: line?.oldProduct ? 0.5 : 1 // коэффициент цены
       })
     })
 

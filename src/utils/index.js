@@ -20,7 +20,7 @@ export function roundNumber(number = 0) {
   if (!number) {
     return number
   }
-  return Math.round(number * 1000) / 1000
+  return Math.round(number * 100) / 100
 }
 
 export function checkNumber(value) {
@@ -62,7 +62,7 @@ export const calcTotalCostInLine = (checkLines = []) => {
   const newArr = []
   checkLines.forEach(line => {
     const newLine = { ...line }
-    newLine.total_cost = roundNumber(line.price * line.count)
+    newLine.total_cost = roundNumber(line.price * line.count * line.ratio)
     newArr.push(newLine)
   })
   return newArr
@@ -71,7 +71,7 @@ export const calcTotalCostInLine = (checkLines = []) => {
 export function totalCostFunc(linesOfCheck) {
   let totalCost = 0
   linesOfCheck.forEach(line => {
-    totalCost += line.count * line.price
+    totalCost += line.count * line.price * line.ratio
   })
   return roundNumber(totalCost)
 }
