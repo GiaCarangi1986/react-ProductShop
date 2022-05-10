@@ -1,3 +1,5 @@
+import { ROLES } from "../../const"
+
 const getUserListSerializer = (params = []) => {
   const serList = []
   params.forEach(el => {
@@ -31,8 +33,8 @@ const getUserForEditSerializer = (params = {}) => {
     email: params?.email || '', // почта
     password: params.password, // пароль
     role: {
-      value: params.gender?.id,
-      label: params.gender?.title
+      value: params.role?.id,
+      label: ROLES[params.role?.title]
     }, // роль
   }
 }

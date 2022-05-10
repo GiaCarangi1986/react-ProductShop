@@ -95,6 +95,7 @@ const SystemUsers = ({ children, user }) => {
       .then(res => {
         setFunc(res)
         setLoading(false)
+        console.log('res', res)
         params ? afterFunc(params) : afterFunc()
         if (params === HEADER_BASIC.update) {
           setData({ ...res })
@@ -109,7 +110,7 @@ const SystemUsers = ({ children, user }) => {
   }
 
   const onDelete = e => {
-    apiHandler(api.deleteBonusCardOwner, setSystemUsers, e.target.name)
+    apiHandler(api.deleteUser, setSystemUsers, e.target.name)
   }
 
   const addData = () => {
@@ -117,7 +118,7 @@ const SystemUsers = ({ children, user }) => {
   }
 
   const editData = () => {
-    apiHandler(api.editBonusCardOwner, setSystemUsers, formik.values, comeBack)
+    apiHandler(api.editUser, setSystemUsers, formik.values, comeBack)
   }
 
   const onAction = (action) => {
@@ -130,7 +131,7 @@ const SystemUsers = ({ children, user }) => {
   }
 
   const onEdit = (e) => {
-    apiHandler(api.getBonusCardOwnerForEdit, formik.setValues, e.target.name, onAction, HEADER_BASIC.update)
+    apiHandler(api.getUserForEdit, formik.setValues, e.target.name, onAction, HEADER_BASIC.update)
   }
 
   useEffect(() => {

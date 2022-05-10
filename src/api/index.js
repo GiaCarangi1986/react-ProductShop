@@ -237,6 +237,13 @@ class Api extends BaseApi {
     return serRes
   }
 
+  editUser = async (data) => {
+    const serData = createUserSerializer(data)
+    const res = await this.put(`/user/${data.id}`, serData)
+    const serRes = getUserListSerializer(res.data)
+    return serRes
+  }
+
   getGenderListForSelect = async () => {
     const res = await this.get('/gender/')
     return res.data

@@ -232,7 +232,7 @@ export const WIDTH_COL_BONUS_CARD_OWNER = {
   id: 30,
   fio: 160,
   phone: 100,
-  email: 120,
+  email: 135,
   birthDate: 80,
   gender: 60,
 }
@@ -250,9 +250,9 @@ export const WIDTH_COL_USER_LIST = {
   id: 30,
   fio: 160,
   phone: 100,
-  email: 120,
-  password: 80,
-  role: 60,
+  email: 135,
+  password: 120,
+  role: 75,
 }
 
 export const SALE_LIST = {
@@ -270,7 +270,7 @@ export const WIDTH_COL_SALE_LIST = {
   end_date: 80,
   discountPercent: 80,
   product_count: 80,
-  status: 80
+  status: 105
 }
 
 export const POPULAR_PRODUCTS = {
