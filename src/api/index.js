@@ -161,7 +161,7 @@ class Api extends BaseApi {
   }
 
   editBonusCardOwner = async (data) => {
-    const serData = createBonusCardOwnerSerializer(data, true)
+    const serData = createBonusCardOwnerSerializer(data)
     const res = await this.put(`/bonus_card_owner/${data.id}`, serData)
     const serRes = getBonusCardOwnerSerializer(res.data)
     return serRes

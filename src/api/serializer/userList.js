@@ -13,9 +13,9 @@ const getUserListSerializer = (params = []) => {
   return serList
 }
 
-const createUserSerializer = (params = {}, formattPhone = false) => ({
+const createUserSerializer = (params = {}) => ({
   FIO: `${params.secondName} ${params.firstName} ${params.patronymic}`, // ФИО
-  phone: formattPhone ? params.phone.split('+')[1] : params.phone, // телефон
+  phone: params.phone, // телефон
   email: params?.email || null, // почта
   password: params.password, // пароль
   roleFK: params.role?.value, // роль
@@ -27,7 +27,7 @@ const getUserForEditSerializer = (params = {}) => {
     firstName: params.firstName, // имя
     secondName: params.secondName, // фамилия
     patronymic: params.patronymic, // отчество
-    phone: `+${params.phone}`, // телефон
+    phone: params.phone, // телефон
     email: params?.email || '', // почта
     password: params.password, // пароль
     role: {
