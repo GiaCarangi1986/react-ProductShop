@@ -252,7 +252,7 @@ export const WIDTH_COL_USER_LIST = {
   phone: 100,
   email: 135,
   password: 120,
-  role: 75,
+  role: 115,
 }
 
 export const SALE_LIST = {

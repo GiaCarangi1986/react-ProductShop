@@ -7,7 +7,7 @@ import {
   FORM_FIELDS,
   FORM_LABELS,
   SELECT_TYPES,
-  HEADER_BASIC
+  HEADER_BASIC,
 } from '../../../const';
 import { handingErrors, deleteSpaces, capitalize } from '../../../utils'
 import { Input, Fieldset, InputPhone } from '../../../views';

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import classNames from 'classnames';
 import { Button, Icon, PreloaderPage, ErrorText } from '../../../views';
-import { FORM_FIELDS, USER_ROLE, HEADER_BASIC } from '../../../const';
+import { FORM_FIELDS, USER_ROLE, HEADER_BASIC, ROLES } from '../../../const';
 import style from '../style.module.scss';
 import table_style from '../../CheckTable/check_table.module.scss'
 
@@ -19,7 +19,7 @@ const ListShow = ({
   handleSubmitError = () => { },
   onDelete = () => { },
   onAdd = () => { },
-  onEdit = () => { }
+  onEdit = () => { },
 }) => {
 
   const sendAddHeader = () => {
@@ -105,9 +105,10 @@ const ListShow = ({
                         })
                         const w = WIDTH_COL[product_line] || ''
                         const margin = leftOrCenter ? '' : 'auto'
+                        const value = product_line === 'role' ? ROLES[line[product_line]] : line[product_line]
                         return (
                           <td className={tdClasses} key={product_line}>
-                            <div style={{ minWidth: `${w - 1}px`, margin }}>{line[product_line]}</div>
+                            <div style={{ minWidth: `${w - 1}px`, margin }}>{value}</div>
                           </td>
                         )
                       })}
