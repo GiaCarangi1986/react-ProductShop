@@ -131,13 +131,6 @@ export function declensionBonusNumber(digital = 0) {
   }
 };
 
-export function declensionProduct(digital = 0) {
-  if (digital === 1) {
-    return 'а'
-  }
-  return 'ов'
-};
-
 export function capitalize(input) {
   return input.replace(/( |^)[а-яёa-z]/g, function (u) { return u.toUpperCase(); });
 }

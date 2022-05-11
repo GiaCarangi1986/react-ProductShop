@@ -19,7 +19,7 @@ import {
 } from '../../../const';
 import PayModal from '../../Modal/PayModal';
 import { dateFotmattedForTable } from '../../../utils/date';
-import { handingErrors, deleteSpaces, roundNumber, declensionProduct } from '../../../utils'
+import { handingErrors, deleteSpaces, roundNumber } from '../../../utils'
 import { addLineOfCheck } from '../../../schema'
 import style from '../style.module.scss';
 import table_style from '../../CheckTable/check_table.module.scss'
@@ -39,8 +39,7 @@ const WriteOffProduct = ({ children, write_off_act }) => {
   const [unit, setUnit] = useState(UNITS[0])
   const [wasAddProduct, setWasAddProduct] = useState(false)
   const [disabled, setDisabled] = useState(true)
-  const [productForm, setProductForm] = useState('')
-  const [productCount, setProductCount] = useState('')
+  const [productCount, setProductCount] = useState({})
   const [error, setError] = useState('')
 
   const handleSubmitError = (response) => {
@@ -117,17 +116,22 @@ const WriteOffProduct = ({ children, write_off_act }) => {
   }
 
   const writeOffCount = () => {
-    let count = 0
+    // let count = 0
+    const writeOffList = {
+      kg: 0,
+      piece: 0
+    }
     productList.forEach(line => {
-      count += +line.count
+      // console.log('line', line)
+      line.unit === UNITS[0] ? writeOffList.piece += +line.count : writeOffList.kg += +line.count
+      // count += +line.count
     })
-    return count
+    return writeOffList
   }
 
   const paymentСonfirmation = () => {
     const count = writeOffCount()
     setProductCount(count)
-    setProductForm(`продукт${declensionProduct(count)}`)
     dispatch('modal/toggle', {
       modal: MODAL_TYPES.payModal,
     })
@@ -368,7 +372,16 @@ const WriteOffProduct = ({ children, write_off_act }) => {
       </div>
       {latestDate === DEFAULT_DATE && <PreloaderPage loaderClass='admin_panel' />}
       <PayModal
-        headers={{ main: 'Подтвердите списание', text: `Ожидается списание ${productCount} ${productForm}`, btnCancel: 'Отмена', btnOk: 'Списать' }}
+        headers={{
+          main: 'Подтвердите списание',
+          text: <>
+            <p style={{ margin: 0 }}>Ожидается списание:</p>
+            {productCount.piece !== 0 && <p style={{ margin: 0 }}>{`штучные продукты - ${productCount.piece} шт`}</p>}
+            {productCount.kg !== 0 && <p style={{ margin: 0 }}>{`весовые продукты - ${productCount.kg} кг`}</p>}
+          </>,
+          btnCancel: 'Отмена',
+          btnOk: 'Списать'
+        }}
         func={payOrder} />
     </div>
   )
