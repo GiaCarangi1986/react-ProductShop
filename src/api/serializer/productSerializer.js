@@ -31,10 +31,10 @@ const productForMakeDeliverySerializer = (productList = []) => {
 const setMakeDeliverySerializer = (productList = []) => {
   const serProductList = []
   productList.forEach(product => {
-    if (product.count) {
+    if (product.choosen_count) {
       serProductList.push({
         productFK: product.id, // id продукта
-        productCount: product.count, // мин кол-во для заказа
+        productCount: product.choosen_count, // мин кол-во для заказа
         priceBuy: product.price, // цена - рандомная от тек цена - 45% до тек цена - 5% (условно откуда то приходит с другой системы)
       })
     }

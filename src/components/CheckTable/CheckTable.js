@@ -6,6 +6,7 @@ import { dataStates } from '@garpix/fetcher'
 import { SureDelete, ErrorModal } from '../Modal';
 import Table from './Table'
 import TableSettings from '../TableSettings'
+import { roundNumber } from '../../utils'
 import { Button, Icon, PreloaderPage } from '../../views'
 import {
   TABLE_EVENT_TYPES,
@@ -239,9 +240,10 @@ const CheckTable = ({
                     })
                     const w = WIDTH_COL[col] || ''
                     const m = leftOrCenter ? '' : 'auto'
+                    const value = col === 'sum_without_bonus' || col === 'sum' ? roundNumber(elem[col]) : elem[col]
                     return (
                       <td key={`${col}`} className={tdClasses}>
-                        <div style={{ minWidth: `${w - 1}px`, margin: m }}>{elem[col]}</div>
+                        <div style={{ minWidth: `${w - 1}px`, margin: m }}>{value}</div>
                       </td>
                     )
                   })}

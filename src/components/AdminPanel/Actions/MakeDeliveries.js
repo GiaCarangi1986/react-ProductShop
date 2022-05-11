@@ -296,7 +296,7 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
       </div>
       {loading && <PreloaderPage loaderClass='admin_panel' />}
       <PayModal
-        headers={{ main: 'Подтвердите покупку', text: `Ожидается оплата в размере ${sum} руб.`, btnCancel: 'Отмена', btnOk: 'Оплатить' }}
+        headers={{ main: 'Подтвердите покупку', text: `Ожидается оплата в размере ${roundNumber(sum)} руб.`, btnCancel: 'Отмена', btnOk: 'Оплатить' }}
         func={payOrder} />
     </div >
   )

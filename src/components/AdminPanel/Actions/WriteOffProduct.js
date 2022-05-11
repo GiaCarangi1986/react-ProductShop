@@ -290,7 +290,7 @@ const WriteOffProduct = ({ children, write_off_act }) => {
                             name={line.id}
                             value={-1}
                             onClick={handleChange}
-                            disabled={line.count === 1}
+                            disabled={line.count === 1 || line.unit === UNITS[1]}
                             variant='text'
                             data-cy='btn'
                           >
@@ -301,6 +301,7 @@ const WriteOffProduct = ({ children, write_off_act }) => {
                             title='Прибавить кол-во'
                             name={line.id}
                             value={1}
+                            disabled={line.unit === UNITS[1]}
                             onClick={handleChange}
                             variant='text'
                             data-cy='btn'
