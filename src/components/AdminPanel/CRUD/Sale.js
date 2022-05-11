@@ -13,7 +13,7 @@ import {
   MODAL_TYPES
 } from '../../../const';
 import { handingErrors, deleteSpaces, capitalize } from '../../../utils'
-import { formatDateToInput } from '../../../utils/date'
+import { dateFotmattedForMakeDeliveryBack } from '../../../utils/date'
 import Popup from '../../Popup'
 import { ProductSale } from '../../Modal';
 import { Input, Fieldset, Icon, Button } from '../../../views';
@@ -209,7 +209,7 @@ const BonusCardOwners = ({ children, sale }) => {
       if (!equal && _.isEqual(data?.productList, values.productList)) {
         equal = true
       }
-      const isDisabled = !isValid || equal
+      const isDisabled = !isValid || equal || !values?.productList?.length
       setDisabled(isDisabled)
       if (!data) {
         setData({ ...values })
@@ -219,7 +219,10 @@ const BonusCardOwners = ({ children, sale }) => {
 
   const func = header === `${HEADER_BASIC.add} ${HEADER}` ? addData : editData
   const funcAfterConfirm = header === `${HEADER_BASIC.add} ${HEADER}` ? addDataCorrect : editDataCorrect
-  const dateNow = formatDateToInput()
+  const dateMinForEnd = dateFotmattedForMakeDeliveryBack(
+    new Date() > new Date(formik.values.start_at)
+      ? new Date() : new Date(formik.values.start_at)
+  )
 
   return (
     <>
@@ -262,7 +265,6 @@ const BonusCardOwners = ({ children, sale }) => {
                 label={FORM_LABELS.start_at}
                 data-cy='title'
                 type='date'
-                max={dateNow}
               />
             </Fieldset>
             <Fieldset
@@ -277,8 +279,7 @@ const BonusCardOwners = ({ children, sale }) => {
                 label={FORM_LABELS.end_at}
                 data-cy='title'
                 type='date'
-                min={formik.values.start_at}
-                max={dateNow}
+                min={dateMinForEnd}
               />
             </Fieldset>
             <Fieldset
