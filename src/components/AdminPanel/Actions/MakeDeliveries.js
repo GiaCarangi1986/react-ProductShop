@@ -14,7 +14,7 @@ import {
 } from '../../../const';
 import PayModal from '../../Modal/PayModal';
 import { dateFotmattedForMakeDelivery } from '../../../utils/date';
-import { handingErrors } from '../../../utils'
+import { handingErrors, roundNumber } from '../../../utils'
 
 import style from '../style.module.scss';
 import table_style from '../../CheckTable/check_table.module.scss'
@@ -93,7 +93,7 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
         oldArr[index].choosen_count = +value
         break;
     }
-    oldArr[index].total_cost = oldArr[index].choosen_count * oldArr[index].price
+    oldArr[index].total_cost = roundNumber(oldArr[index].choosen_count * oldArr[index].price)
     setProductList(oldArr)
   }
 
@@ -150,7 +150,7 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
     [table_style['table_scroll-vertical']]: true,
   })
 
-  const totalInfo = `Итого: ${sum}`
+  const totalInfo = `Итого: ${roundNumber(sum)}`
   const dateInfo = `Последняя закупка была осуществлена ${latestDate}`
 
   const MENU_OPTIONS = [

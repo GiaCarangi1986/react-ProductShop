@@ -61,6 +61,7 @@ const WriteOffProduct = ({ children, write_off_act }) => {
   })
 
   const chooseProduct = (e, name) => {
+    formik.setFieldValue('count', 1)
     formik.setFieldValue(name, e)
     setUnit(e.unit)
 
