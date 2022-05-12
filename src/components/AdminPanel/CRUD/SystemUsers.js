@@ -8,6 +8,7 @@ import {
   FORM_LABELS,
   SELECT_TYPES,
   HEADER_BASIC,
+  ROLES
 } from '../../../const';
 import { handingErrors, deleteSpaces, capitalize } from '../../../utils'
 import { Input, Fieldset, InputPhone } from '../../../views';
@@ -24,7 +25,7 @@ const SystemUsers = ({ children, user }) => {
     setSystemUsers = () => { },
   } = user
 
-  const HEADER = 'держателя карты'
+  const HEADER = 'пользователя системы'
 
   const [disabled, setDisabled] = useState(true)
   const [loading, setLoading] = useState(false)
@@ -224,6 +225,7 @@ const SystemUsers = ({ children, user }) => {
                 onBlur={() => handleSelectBlur(FORM_FIELDS.role)}
                 onChange={(e) => chooseSelectValue(e, FORM_FIELDS.role)}
                 err={formik.errors.role && formik.touched.role}
+                isDisabled={data?.role?.label === ROLES.admin}
               />
             </Fieldset>
             <Fieldset
