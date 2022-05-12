@@ -5,11 +5,11 @@ const getSaleSerializer = (params = []) => {
   const serList = []
   params.forEach(el => {
     const nowDate = new Date()
-    nowDate.setHours(0, 0, 0)
-    nowDate.getTime()
+    nowDate.setHours(3, 0, 0, 0)
+    const nowDateTime = nowDate.getTime()
     const startDate = new Date(el.dateStart)?.getTime()
     const endDate = new Date(el.dateEnd)?.getTime()
-    const status = endDate < nowDate ? SALE_KIND.past : startDate <= nowDate ? SALE_KIND.present : SALE_KIND.future
+    const status = endDate < nowDateTime ? SALE_KIND.past : startDate <= nowDateTime ? SALE_KIND.present : SALE_KIND.future
     serList.push({
       id: el.id, // id
       start_date: dateFotmattedForMakeDelivery(el.dateStart), // дата начала проведения акции
