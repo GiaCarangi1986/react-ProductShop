@@ -4,7 +4,9 @@ import { SALE_KIND } from '../../const';
 const getSaleSerializer = (params = []) => {
   const serList = []
   params.forEach(el => {
-    const nowDate = new Date().getTime()
+    const nowDate = new Date()
+    nowDate.setHours(0, 0, 0)
+    nowDate.getTime()
     const startDate = new Date(el.dateStart)?.getTime()
     const endDate = new Date(el.dateEnd)?.getTime()
     const status = endDate < nowDate ? SALE_KIND.past : startDate <= nowDate ? SALE_KIND.present : SALE_KIND.future
