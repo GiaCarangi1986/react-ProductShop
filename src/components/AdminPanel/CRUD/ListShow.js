@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import classNames from 'classnames';
 import { Button, Icon, PreloaderPage, ErrorText } from '../../../views';
 import { FORM_FIELDS, USER_ROLE, HEADER_BASIC, ROLES } from '../../../const';
+// import Filter from './Filters';
 import style from '../style.module.scss';
 import table_style from '../../CheckTable/check_table.module.scss'
 
@@ -51,6 +52,9 @@ const ListShow = ({
   return (
     <div>
       {children}
+      {/* <div>
+        <Filter types={['date', 'chooseOption', 'searchName']} />
+      </div> */}
       <div className={classNames(table_style['table-grid'], style.container__right, style.container__right_big)}>
         <div className={classesScroll}>
           <div className={table_style['table-layout']}>

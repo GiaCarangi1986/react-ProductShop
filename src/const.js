@@ -153,13 +153,6 @@ export const SELECT_TYPES = {
   role: 'role'
 }
 
-export const MODALS_CHECK_TITLE = {
-  default: 'Добавление чека',
-  update: 'Редактирование чека',
-  payModal: 'Информация о совершении покупки',
-  checkList: 'Подготовка к оплате',
-}
-
 export const CHECK_LINES_HEADER = {
   name: 'Наименование',
   quantity_or_weight: 'Кол-во/вес',
@@ -430,4 +423,11 @@ export const ROLES = {
   admin: 'Администратор',
   mainKassir: 'Старший кассир',
   kassir: 'Кассир'
+}
+
+
+export const CRUD_FILTER_TYPES = {
+  date: 'date',
+  chooseOption: 'chooseOption',
+  searchName: 'chooseOption',
 }

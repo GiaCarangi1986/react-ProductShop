@@ -24,7 +24,7 @@ const SwitchBlock = ({ setFilters = () => { }, filters = {} }) => {
   return (
     <div className={style['table-settings-filter-check']}>
       <Switch
-        text='Только отложенные чеки'
+        text='Только отложенные покупки'
         value={String(+checked.delayed_show)}
         checked={checked.delayed_show}
         name={FORM_FIELDS.delayed_show}
@@ -32,7 +32,7 @@ const SwitchBlock = ({ setFilters = () => { }, filters = {} }) => {
         disabled={checked.changed_show}
       />
       <Switch
-        text='Только редактированные чеки'
+        text='Только чеки с возвратом'
         value={String(+checked.changed_show)}
         checked={checked.changed_show}
         name={FORM_FIELDS.changed_show}
