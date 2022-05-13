@@ -19,11 +19,11 @@ const SureDelete = ({ func = () => { }, data = {} }) => {
     setOpen(modal === MODAL_TYPES.sureDelete)
   }, [modal])
 
-  const messsage = `Выбранный чек с id = ${data.id} будет безвозратно удален`
+  const messsage = `Выбранная покупка с id = ${data.id} будет безвозратно удалена`
 
   return (
     <Modal setOpen={setOpen} variant='centered' open={open}>
-      <h2 className={style['modal-centered__title']}>Подтвердите удаление чека</h2>
+      <h2 className={style['modal-centered__title']}>Подтвердите отмену покупки</h2>
       <p>{messsage}</p>
       <div className={style['modal-btns']}>
         <Button buttonDis onClick={positiveAction} outline >

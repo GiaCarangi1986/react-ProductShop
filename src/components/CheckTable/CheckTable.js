@@ -95,7 +95,7 @@ const CheckTable = ({
 
   const viewCheck = (e) => {
     dispatch('page/toggle', {
-      headers: { main: 'Просмотр чека', left: 'История изменений', right: 'Чек-лист', type: PAGES_TYPES.viewCheck, id: e.target.name },
+      headers: { main: 'Просмотр покупки', left: 'История изменений', right: 'Состав покупки', type: PAGES_TYPES.viewCheck, id: e.target.name },
     })
     redirectToCheckPage()
   }
@@ -105,7 +105,7 @@ const CheckTable = ({
       headers: {
         main: e.target.name.delayed_check ? 'Оплата отложенной покупки' : 'Возврат товаров',
         left: 'История изменений',
-        right: 'Чек-лист',
+        right: 'Состав покупки',
         type: e.target.name.delayed_check ? PAGES_TYPES.payDelayCheck : PAGES_TYPES.editCheck,
         id: e.target.name.id,
         btnText: e.target.name.delayed_check ? 'Оплатить' : 'Выплатить'
@@ -218,7 +218,7 @@ const CheckTable = ({
                       </Button>
                       <Button
                         className='button-edit_action'
-                        title='Редактировать'
+                        title='Сделать возврат'
                         disabled={disActBtns}
                         variant='text'
                         data-cy='btn'
@@ -251,7 +251,7 @@ const CheckTable = ({
                     <div style={{ minWidth: '25px', margin: 'auto' }}>
                       <Button
                         className='button-delete_action'
-                        title='Удалить'
+                        title='Отменить покупку'
                         variant='text'
                         disabled={disActBtns}
                         data-cy='btn'

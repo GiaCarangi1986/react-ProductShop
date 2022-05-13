@@ -32,7 +32,7 @@ const SwitchBlock = ({ setFilters = () => { }, filters = {} }) => {
         disabled={checked.changed_show}
       />
       <Switch
-        text='Только чеки с возвратом'
+        text='Только покупки после возврата'
         value={String(+checked.changed_show)}
         checked={checked.changed_show}
         name={FORM_FIELDS.changed_show}

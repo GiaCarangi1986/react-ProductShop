@@ -30,7 +30,7 @@ const HeaderNavigation = () => {
           to={PATHS.check_list.path}
           className={setStyle}
         >
-          Операции с чеками
+          Операции с покупками
         </NavLink>
       </li>
       {haveRights && (

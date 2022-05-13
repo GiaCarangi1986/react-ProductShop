@@ -21,7 +21,7 @@ const TableSettings = ({
 
   const openCreateCheckPage = () => {
     dispatch('page/toggle', {
-      headers: { main: 'Добавление чека', left: 'Составляющие чека', right: 'Чек-лист', btnText: 'Перейти к оплате', type: PAGES_TYPES.addCheck, },
+      headers: { main: 'Создание покупки', left: 'Составляющие покупки', right: 'Состав покупки', btnText: 'Перейти к оплате', type: PAGES_TYPES.addCheck, },
     })
     navigate(PATHS.check_operations.path)
   }

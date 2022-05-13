@@ -19,7 +19,7 @@ const RightPart = ({
   linesOfCheck = [],
   discountCard = {},
   setLinesOfCheck = () => { },
-  rightHeader = 'Чек-лист',
+  rightHeader = 'Состав покупки',
   btnText = '',
   postponeCheck = () => { },
   addOrUpdateCheck = () => { },
@@ -302,7 +302,7 @@ const RightPart = ({
                         onClick={postponeCheck}
                         disabled={!linesOfCheck.length}
                       >
-                        Отложить чек
+                        Отложить покупку
                       </Button>
                     )}
                     <Button
