@@ -30,7 +30,7 @@ const ErrorModal = ({ errorMessage, func = () => { }, closeArea = undefined, dat
       <p>{errorMessage}</p>
       <div className={style['modal-btns']}>
         <Button buttonDis onClick={positiveAction} outline >
-          Удалить принудительно
+          Все равно осуществить возврат
         </Button>
         <Button onClick={closeModal} className='btn_choose_logout'>
           Отменить

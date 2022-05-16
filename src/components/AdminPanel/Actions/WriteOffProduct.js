@@ -19,7 +19,7 @@ import {
 } from '../../../const';
 import PayModal from '../../Modal/PayModal';
 import { dateFotmattedForTable } from '../../../utils/date';
-import { handingErrors, deleteSpaces, roundNumber } from '../../../utils'
+import { handingErrors, deleteSpaces, roundNumber, roundWeight } from '../../../utils'
 import { addLineOfCheck } from '../../../schema'
 import style from '../style.module.scss';
 import table_style from '../../CheckTable/check_table.module.scss'
@@ -323,7 +323,7 @@ const WriteOffProduct = ({ children, write_off_act }) => {
                         const w = WIDTH_COL_WRITEOFF_TBODY[product_line] || ''
                         const margin = leftOrCenter ? '' : 'auto'
                         const value = product_line === WRITEOFF_LINE_ADDING.count ?
-                          line.unit === UNITS[1] ? line[product_line] + ', кг' : line[product_line] + ', шт' :
+                          line.unit === UNITS[1] ? roundWeight(line[product_line]) + ', кг' : line[product_line] + ', шт' :
                           line[product_line]
                         return (
                           <td className={tdClasses} key={product_line}>

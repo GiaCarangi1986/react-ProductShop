@@ -19,7 +19,7 @@ const SureDelete = ({ func = () => { }, data = {} }) => {
     setOpen(modal === MODAL_TYPES.sureDelete)
   }, [modal])
 
-  const messsage = `Выбранная покупка с id = ${data.id} будет безвозратно удалена`
+  const messsage = `Будет осуществлен возврат покупки с id = ${data.id}`
 
   return (
     <Modal setOpen={setOpen} variant='centered' open={open}>

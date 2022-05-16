@@ -218,7 +218,7 @@ const CheckTable = ({
                       </Button>
                       <Button
                         className='button-edit_action'
-                        title='Сделать возврат'
+                        title='Осуществить возврат'
                         disabled={disActBtns}
                         variant='text'
                         data-cy='btn'

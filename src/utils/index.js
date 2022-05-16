@@ -23,6 +23,13 @@ export function roundNumber(number = 0) {
   return Math.round(number * 100) / 100
 }
 
+export function roundWeight(weight = 0) {
+  if (!weight) {
+    return weight
+  }
+  return Math.round(weight * 1000) / 1000
+}
+
 export function checkNumber(value) {
   if (Number.isNaN(Number(value))) {
     return value;

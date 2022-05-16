@@ -11,7 +11,7 @@ import {
   UNITS,
   PAGES_TYPES
 } from '../../const'
-import { roundNumber, calcTotalCostInLine, totalCostFunc } from '../../utils'
+import { roundNumber, calcTotalCostInLine, totalCostFunc, roundWeight } from '../../utils'
 import table_style from '../CheckTable/check_table.module.scss'
 import style from './check_operations.module.scss';
 
@@ -242,7 +242,7 @@ const RightPart = ({
                                   check_line_key === CHECK_LINE_ADDING.total_cost || check_line_key === CHECK_LINE_ADDING.price) ?
                                   'red' : 'black'
                                 const value = check_line_key === CHECK_LINE_ADDING.count ?
-                                  line.unit === UNITS[1] ? line[check_line_key] + ', кг' : line[check_line_key] + ', шт' :
+                                  line.unit === UNITS[1] ? roundWeight(line[check_line_key]) + ', кг' : line[check_line_key] + ', шт' :
                                   check_line_key === CHECK_LINE_ADDING.price ? roundNumber(line.ratio * line.price) : line[check_line_key]
                                 return (
                                   <td className={tdClasses} key={check_line_key}>
