@@ -43,7 +43,7 @@ const HistoryChanges = ({
                   onClick={setActiveBtn}
                   className={activeStyle}
                 >
-                  {`${line.date_time}, ${line.kassirName}`}
+                  {`id=${line.id} - ${line.date_time}, ${line.kassirName}`}
                 </Button>
               </li>
             )
