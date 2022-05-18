@@ -1,0 +1,30 @@
+.title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100%;
+  &:hover {
+    .user_name,
+    gx-icon {
+      color: var(--ps-color-accent);
+    }
+  }
+}
+
+.name {
+  display: block;
+  font-family: Roboto;
+  color: var(--ps-color-default);
+  margin: 0 10px 0 0;
+  max-width: 450px;
+}
+
+.period {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  width: 68.5vw;
+  &__text {
+    margin: 0;
+  }
+}

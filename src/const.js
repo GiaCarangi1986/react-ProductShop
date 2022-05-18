@@ -414,6 +414,12 @@ export const SALE_KIND = {
   future: 'запланирована'
 }
 
+export const SALE_KIND_VALUE = {
+  past: 'past',
+  present: 'present',
+  future: 'future'
+}
+
 export const HEADER_BASIC = {
   add: 'Добавление',
   update: 'Редактирование'

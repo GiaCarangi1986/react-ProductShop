@@ -10,10 +10,14 @@ import {
   SELECT_TYPES,
   HEADER_BASIC,
   POPUP_TYPES,
-  MODAL_TYPES
+  MODAL_TYPES,
+  SALE_KIND,
+  SALE_KIND_VALUE
 } from '../../../const';
 import { handingErrors, deleteSpaces, capitalize } from '../../../utils'
 import { dateFotmattedForMakeDeliveryBack } from '../../../utils/date'
+import { DropdownDescription } from '../../DropdownAction';
+import Search from '../../Search'
 import Popup from '../../Popup'
 import { ProductSale } from '../../Modal';
 import { Input, Fieldset, Icon, Button } from '../../../views';
@@ -41,6 +45,7 @@ const BonusCardOwners = ({ children, sale }) => {
   const [header, setHeader] = useState('')
   const [data, setData] = useState(null)
   const [productCheck, setProductCheck] = useState([])
+  const [optionName, setOptionName] = useState('Не выбрано')
 
   const handleSubmitError = (response) => {
     if (response) {
@@ -202,6 +207,32 @@ const BonusCardOwners = ({ children, sale }) => {
     formik.setFieldValue('productList', [...formik.values.productList].filter(line => line.id !== +e.target.name))
   }
 
+  const changeOption = (e) => {
+    if (e.target.name !== optionName) {
+      setOptionName(e.target.name)
+      // makeDelivery(e.target.value)
+      console.log('e.target.value', e.target.value)
+    }
+  }
+
+  const OPTIONS = [
+    {
+      func: e => changeOption(e),
+      text: 'все',
+      value: '',
+    },
+    {
+      func: e => changeOption(e),
+      text: SALE_KIND.present,
+      value: SALE_KIND_VALUE.present,
+    },
+    {
+      func: e => changeOption(e),
+      text: SALE_KIND.future,
+      value: SALE_KIND_VALUE.future,
+    }
+  ]
+
   useEffect(() => {
     if (formik) {
       const { isValid, values } = formik;
@@ -322,22 +353,29 @@ const BonusCardOwners = ({ children, sale }) => {
           </div>
         </AddOrUpdate>
       ) : (
-        <ListShow
-          children={children}
-          list={saleList}
-          setList={setSaleList}
-          WIDTH_COL={WIDTH_COL_SALE_LIST}
-          NAME_COL={SALE_LIST}
-          loading={loading}
-          setLoading={setLoading}
-          error={error}
-          setError={setError}
-          func={api.getSaleList}
-          handleSubmitError={handleSubmitError}
-          onDelete={onDelete}
-          onAdd={onAction}
-          onEdit={onEdit}
-        />
+        <div>
+          {children}
+          <div className={style.filter}>
+            <Search />
+            <DropdownDescription text='Статус:' options={OPTIONS} visiableText={optionName} />
+          </div>
+          <ListShow
+            children={children}
+            list={saleList}
+            setList={setSaleList}
+            WIDTH_COL={WIDTH_COL_SALE_LIST}
+            NAME_COL={SALE_LIST}
+            loading={loading}
+            setLoading={setLoading}
+            error={error}
+            setError={setError}
+            func={api.getSaleList}
+            handleSubmitError={handleSubmitError}
+            onDelete={onDelete}
+            onAdd={onAction}
+            onEdit={onEdit}
+          />
+        </div>
       )
       }
       <Popup />

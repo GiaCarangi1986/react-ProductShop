@@ -17,7 +17,7 @@ import {
   FORM_LABELS,
   SELECT_TYPES
 } from '../../../const';
-import PayModal from '../../Modal/PayModal';
+import { PayModal } from '../../Modal';
 import { dateFotmattedForTable } from '../../../utils/date';
 import { handingErrors, deleteSpaces, roundNumber, roundWeight } from '../../../utils'
 import { addLineOfCheck } from '../../../schema'

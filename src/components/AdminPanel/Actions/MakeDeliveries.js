@@ -12,7 +12,8 @@ import {
   POPUP_TYPES,
   DEFAULT_DATE,
 } from '../../../const';
-import PayModal from '../../Modal/PayModal';
+import { PayModal } from '../../Modal';
+import { DropdownDescription } from '../../DropdownAction';
 import { dateFotmattedForMakeDelivery } from '../../../utils/date';
 import { handingErrors, roundNumber } from '../../../utils'
 
@@ -176,22 +177,11 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
       {children}
       <h2 className={style.header_right}>{dateInfo}</h2>
       <div className={style.grid_row}>
-        <div className={style.period}>
-          <p className={style.period__text}>Выберите период рассчета кол-ва продуктов поставки:</p>
-          <Dropdown distance={5} className='user' withoutBase>
-            <Button slot='trigger' variant='text' className='user'>
-              <div className={user_style.user_title}>
-                <span className={user_style.user_name}>{period}</span>
-                <Icon
-                  icon='dropdownArrow'
-                  nameOfStyle='arrow'
-                  className={user_style.user_icon}
-                />
-              </div>
-            </Button>
-            <Menu styleForMenu='user' styleForMenuItem='user' items={MENU_OPTIONS} />
-          </Dropdown>
-        </div>
+        <DropdownDescription
+          text='Выберите период рассчета кол-ва продуктов поставки:'
+          visiableText={period}
+          options={MENU_OPTIONS}
+        />
       </div>
       <div className={classNames(table_style['table-grid'], style.container__right)}>
         <div className={classesScroll}>

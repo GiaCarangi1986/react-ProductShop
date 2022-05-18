@@ -9,6 +9,7 @@ import {
   SELECT_TYPES,
   HEADER_BASIC
 } from '../../../const';
+import Search from '../../Search'
 import { handingErrors, deleteSpaces, capitalize } from '../../../utils'
 import { Input, Fieldset, InputPhone } from '../../../views';
 import Select from '../../Select';
@@ -259,22 +260,28 @@ const BonusCardOwners = ({ children, bonus_card }) => {
           </div>
         </AddOrUpdate>
       ) : (
-        <ListShow
-          children={children}
-          list={bonusCardOwner}
-          setList={setBonusCardOwner}
-          WIDTH_COL={WIDTH_COL_BONUS_CARD_OWNER}
-          NAME_COL={BONUS_CARD_OWNER}
-          loading={loading}
-          setLoading={setLoading}
-          error={error}
-          setError={setError}
-          func={api.getBonusCardOwner}
-          handleSubmitError={handleSubmitError}
-          onDelete={onDelete}
-          onAdd={onAction}
-          onEdit={onEdit}
-        />
+        <div>
+          {children}
+          <div className={style.filter}>
+            <Search />
+          </div>
+          <ListShow
+            children={children}
+            list={bonusCardOwner}
+            setList={setBonusCardOwner}
+            WIDTH_COL={WIDTH_COL_BONUS_CARD_OWNER}
+            NAME_COL={BONUS_CARD_OWNER}
+            loading={loading}
+            setLoading={setLoading}
+            error={error}
+            setError={setError}
+            func={api.getBonusCardOwner}
+            handleSubmitError={handleSubmitError}
+            onDelete={onDelete}
+            onAdd={onAction}
+            onEdit={onEdit}
+          />
+        </div>
       )}
     </>
   )

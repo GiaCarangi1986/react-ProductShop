@@ -8,12 +8,15 @@ import {
   FORM_LABELS,
   SELECT_TYPES,
   HEADER_BASIC,
-  ROLES
+  ROLES,
+  USER_ROLE
 } from '../../../const';
 import { handingErrors, deleteSpaces, capitalize } from '../../../utils'
 import { Input, Fieldset, InputPhone } from '../../../views';
 import Select from '../../Select';
+import { DropdownDescription } from '../../DropdownAction';
 import ListShow from './ListShow';
+import Search from '../../Search'
 import AddOrUpdate from './AddOrUpdate';
 import { systemUserCRUD } from '../../../schema';
 import style from '../style.module.scss';
@@ -33,6 +36,7 @@ const SystemUsers = ({ children, user }) => {
   const [addUpdate, setAddUpdate] = useState(false)
   const [header, setHeader] = useState('')
   const [data, setData] = useState(null)
+  const [optionName, setOptionName] = useState('Не выбрано')
 
   const handleSubmitError = (response) => {
     if (response) {
@@ -133,6 +137,37 @@ const SystemUsers = ({ children, user }) => {
   const onEdit = (e) => {
     apiHandler(api.getUserForEdit, formik.setValues, e.target.name, onAction, HEADER_BASIC.update)
   }
+
+  const changeOption = (e) => {
+    if (e.target.name !== optionName) {
+      setOptionName(e.target.name)
+      // makeDelivery(e.target.value)
+      console.log('e.target.value', e.target.value)
+    }
+  }
+
+  const OPTIONS = [
+    {
+      func: e => changeOption(e),
+      text: 'все',
+      value: '',
+    },
+    {
+      func: e => changeOption(e),
+      text: ROLES.kassir,
+      value: USER_ROLE.kassir,
+    },
+    {
+      func: e => changeOption(e),
+      text: ROLES.mainKassir,
+      value: USER_ROLE.main_kassir,
+    },
+    {
+      func: e => changeOption(e),
+      text: ROLES.admin,
+      value: USER_ROLE.admin,
+    }
+  ]
 
   useEffect(() => {
     if (formik) {
@@ -261,22 +296,29 @@ const SystemUsers = ({ children, user }) => {
           </div>
         </AddOrUpdate>
       ) : (
-        <ListShow
-          children={children}
-          list={systemUsers}
-          setList={setSystemUsers}
-          WIDTH_COL={WIDTH_COL_USER_LIST}
-          NAME_COL={USER_LIST}
-          loading={loading}
-          setLoading={setLoading}
-          error={error}
-          setError={setError}
-          func={api.getUserList}
-          handleSubmitError={handleSubmitError}
-          onDelete={onDelete}
-          onAdd={onAction}
-          onEdit={onEdit}
-        />
+        <div>
+          {children}
+          <div className={style.filter}>
+            <Search />
+            <DropdownDescription text='Роль:' options={OPTIONS} visiableText={optionName} />
+          </div>
+          <ListShow
+            children={children}
+            list={systemUsers}
+            setList={setSystemUsers}
+            WIDTH_COL={WIDTH_COL_USER_LIST}
+            NAME_COL={USER_LIST}
+            loading={loading}
+            setLoading={setLoading}
+            error={error}
+            setError={setError}
+            func={api.getUserList}
+            handleSubmitError={handleSubmitError}
+            onDelete={onDelete}
+            onAdd={onAction}
+            onEdit={onEdit}
+          />
+        </div>
       )}
     </>
   )

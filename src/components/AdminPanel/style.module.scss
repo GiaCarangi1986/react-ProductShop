@@ -13,9 +13,9 @@
       height: calc(100vh - 295px);
     }
     &_big {
-      height: calc(100vh - 230px);
+      height: calc(100vh - 275px);
       @media (max-width: 1200px) {
-        height: calc(100vh - 205px);
+        height: calc(100vh - 245px);
       }
     }
     &_gragh {
@@ -99,6 +99,12 @@
   margin-bottom: 15px;
 }
 
+.filter {
+  display: flex;
+  gap: 25px;
+  margin-bottom: 15px;
+}
+
 .actions {
   display: flex !important;
   justify-content: center;
@@ -138,16 +144,6 @@
   column-gap: 5%;
   align-items: end;
   margin: 10px 0 20px 0;
-}
-
-.period {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  width: 68.5vw;
-  &__text {
-    margin: 0;
-  }
 }
 
 .chart {

@@ -3,6 +3,7 @@ import Media from "react-media";
 import { Button, Icon, Dropdown, Menu } from '../../views'
 import { MODAL_TYPES, SCREENS } from '../../const'
 import { useStoreon } from 'storeon/react';
+import DropdownAction from '../DropdownAction';
 import style from './user.module.scss'
 
 const User = () => {
@@ -41,21 +42,7 @@ const User = () => {
       </div>
       <Media queries={SCREENS}>
         {(matches) => (
-          <>
-            <Dropdown distance={matches.middle ? 12 : 20} className='user' withoutBase>
-              <Button slot='trigger' variant='text' className='user'>
-                <div className={style.user_title}>
-                  <span className={style.user_name}>{userFullName}</span>
-                  <Icon
-                    icon='dropdownArrow'
-                    nameOfStyle='arrow'
-                    className={style.user_icon}
-                  />
-                </div>
-              </Button>
-              <Menu styleForMenu='user' styleForMenuItem='user' items={MENU_OPTIONS} />
-            </Dropdown>
-          </>
+          <DropdownAction distance={matches.middle ? 12 : 20} visiableText={userFullName} options={MENU_OPTIONS} />
         )}
       </Media>
     </div>
