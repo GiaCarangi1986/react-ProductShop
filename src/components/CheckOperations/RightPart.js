@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import classNames from 'classnames'
 import _ from 'lodash'
 import { GxGrid, GxCol, GxRow } from '@garpix/garpix-web-components-react'
-import { Button, Form, Icon, Switch } from '../../views'
+import { Button, Form, Icon, Switch, Input } from '../../views'
 import {
   CHECK_LINES_HEADER,
   WIDTH_COL_CHECK,
@@ -246,7 +246,18 @@ const RightPart = ({
                                   check_line_key === CHECK_LINE_ADDING.price ? roundNumber(line.ratio * line.price) : line[check_line_key]
                                 return (
                                   <td className={tdClasses} key={check_line_key}>
-                                    <div style={{ minWidth: `${w - 1}px`, margin, color }}>{value}</div>
+                                    <div style={{ minWidth: `${w - 1}px`, margin, color }}>
+                                      {editCheck && check_line_key === CHECK_LINE_ADDING.price ? (
+                                        <Input
+                                          value={line[check_line_key]}
+                                          type='number'
+                                          nameOfStyle='input_count'
+                                        // onGx-input={handleInputChange}
+                                        // name={index}
+                                        />
+                                      )
+                                        : value}
+                                    </div>
                                   </td>
                                 )
                               })}
