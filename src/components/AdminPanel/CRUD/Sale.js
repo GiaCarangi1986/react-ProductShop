@@ -37,6 +37,7 @@ const BonusCardOwners = ({ children, sale }) => {
   const { dispatch } = useStoreon();
 
   const HEADER = 'акции'
+  const DEFAULT_OPTION = 'Не выбрано'
 
   const [disabled, setDisabled] = useState(true)
   const [loading, setLoading] = useState(false)
@@ -45,7 +46,7 @@ const BonusCardOwners = ({ children, sale }) => {
   const [header, setHeader] = useState('')
   const [data, setData] = useState(null)
   const [productCheck, setProductCheck] = useState([])
-  const [optionName, setOptionName] = useState('Не выбрано')
+  const [optionName, setOptionName] = useState(DEFAULT_OPTION)
   const [filters, setFilters] = useState({})
 
   const handleSubmitError = (response) => {
@@ -161,6 +162,8 @@ const BonusCardOwners = ({ children, sale }) => {
     setAddUpdate(true)
     setHeader(`${action} ${HEADER}`)
     setError('')
+    setFilters({})
+    setOptionName(DEFAULT_OPTION)
     if (action === HEADER_BASIC.add) {
       setData({ ...initialValues })
     }

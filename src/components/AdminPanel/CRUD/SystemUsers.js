@@ -29,6 +29,7 @@ const SystemUsers = ({ children, user }) => {
   } = user
 
   const HEADER = 'пользователя системы'
+  const DEFAULT_OPTION = 'Не выбрано'
 
   const [disabled, setDisabled] = useState(true)
   const [loading, setLoading] = useState(false)
@@ -36,7 +37,7 @@ const SystemUsers = ({ children, user }) => {
   const [addUpdate, setAddUpdate] = useState(false)
   const [header, setHeader] = useState('')
   const [data, setData] = useState(null)
-  const [optionName, setOptionName] = useState('Не выбрано')
+  const [optionName, setOptionName] = useState(DEFAULT_OPTION)
   const [filters, setFilters] = useState({})
 
   const handleSubmitError = (response) => {
@@ -130,6 +131,8 @@ const SystemUsers = ({ children, user }) => {
     setAddUpdate(true)
     setHeader(`${action} ${HEADER}`)
     setError('')
+    setFilters({})
+    setOptionName(DEFAULT_OPTION)
     if (action === HEADER_BASIC.add) {
       setData({ ...initialValues })
     }

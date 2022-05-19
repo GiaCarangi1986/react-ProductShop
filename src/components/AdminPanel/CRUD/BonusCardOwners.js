@@ -126,6 +126,7 @@ const BonusCardOwners = ({ children, bonus_card }) => {
     setAddUpdate(true)
     setHeader(`${action} ${HEADER}`)
     setError('')
+    setFilters({})
     if (action === HEADER_BASIC.add) {
       setData({ ...initialValues })
     }
