@@ -46,6 +46,7 @@ const BonusCardOwners = ({ children, sale }) => {
   const [data, setData] = useState(null)
   const [productCheck, setProductCheck] = useState([])
   const [optionName, setOptionName] = useState('Не выбрано')
+  const [filters, setFilters] = useState({})
 
   const handleSubmitError = (response) => {
     if (response) {
@@ -370,6 +371,7 @@ const BonusCardOwners = ({ children, sale }) => {
             error={error}
             setError={setError}
             func={api.getSaleList}
+            filters={filters}
             handleSubmitError={handleSubmitError}
             onDelete={onDelete}
             onAdd={onAction}

@@ -15,6 +15,12 @@ const getBonusCardOwnerSerializer = (params = []) => {
   return serList
 }
 
+const filterSerializer = (filters = {}) => {
+  return {
+    search: filters.search
+  }
+}
+
 const getBonusCardOwnerForEditSerializer = (params = {}) => {
   return {
     id: params.id, // id
@@ -39,4 +45,4 @@ const createBonusCardOwnerSerializer = (params = {}) => ({
   genderFK: params.gender?.value, // пол
 })
 
-export { getBonusCardOwnerSerializer, createBonusCardOwnerSerializer, getBonusCardOwnerForEditSerializer };
+export { getBonusCardOwnerSerializer, createBonusCardOwnerSerializer, getBonusCardOwnerForEditSerializer, filterSerializer };

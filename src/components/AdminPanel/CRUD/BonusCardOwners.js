@@ -33,6 +33,7 @@ const BonusCardOwners = ({ children, bonus_card }) => {
   const [addUpdate, setAddUpdate] = useState(false)
   const [header, setHeader] = useState('')
   const [data, setData] = useState(null)
+  const [filters, setFilters] = useState({})
 
   const handleSubmitError = (response) => {
     if (response) {
@@ -263,7 +264,7 @@ const BonusCardOwners = ({ children, bonus_card }) => {
         <div>
           {children}
           <div className={style.filter}>
-            <Search />
+            <Search filters={filters} setFilters={setFilters} />
           </div>
           <ListShow
             children={children}
@@ -276,6 +277,7 @@ const BonusCardOwners = ({ children, bonus_card }) => {
             error={error}
             setError={setError}
             func={api.getBonusCardOwner}
+            filters={filters}
             handleSubmitError={handleSubmitError}
             onDelete={onDelete}
             onAdd={onAction}

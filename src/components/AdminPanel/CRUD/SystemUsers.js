@@ -37,6 +37,7 @@ const SystemUsers = ({ children, user }) => {
   const [header, setHeader] = useState('')
   const [data, setData] = useState(null)
   const [optionName, setOptionName] = useState('Не выбрано')
+  const [filters, setFilters] = useState({})
 
   const handleSubmitError = (response) => {
     if (response) {
@@ -313,6 +314,7 @@ const SystemUsers = ({ children, user }) => {
             error={error}
             setError={setError}
             func={api.getUserList}
+            filters={filters}
             handleSubmitError={handleSubmitError}
             onDelete={onDelete}
             onAdd={onAction}

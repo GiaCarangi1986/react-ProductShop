@@ -1,18 +1,15 @@
 import React, { useState } from 'react'
 import { useFormik } from 'formik';
 import { Button, Form, Icon, Input } from '../../views';
-import { TABLE_EVENT_TYPES } from '../../const';
 
 import style from './search.module.scss';
 
-const Search = ({ setEventType = () => { }, loadData = () => { } }) => {
+const Search = ({ filters = {}, setFilters = () => { } }) => {
   const [isNotInputEmpty, setInputNotEmpty] = useState(false)
 
   const onSubmit = (values, actions) => {
     if (isNotInputEmpty) {
-      loadData(1, { search: values.search });
-
-      setEventType(TABLE_EVENT_TYPES.search)
+      setFilters({ ...filters, search: values.search })
       actions.setSubmitting(false)
       if (values.search === '') {
         setInputNotEmpty(false)
@@ -28,11 +25,10 @@ const Search = ({ setEventType = () => { }, loadData = () => { } }) => {
   })
 
   const clearSearchField = () => {
-    // if (filters?.search) {
-    //   formik.submitForm()
-    // }
+    if (filters?.search) {
+      formik.submitForm()
+    }
     formik.setFieldValue('search', '');
-    setEventType(null)
   }
 
   const handleChange = e => {

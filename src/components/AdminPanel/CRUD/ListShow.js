@@ -19,6 +19,7 @@ const ListShow = ({
   onDelete = () => { },
   onAdd = () => { },
   onEdit = () => { },
+  filters = {}
 }) => {
 
   const sendAddHeader = () => {
@@ -26,21 +27,20 @@ const ListShow = ({
   }
 
   useEffect(() => {
-    if (!list.length) {
-      setLoading(true)
-      func()
-        .then(res => {
-          setList(res)
-          setLoading(false)
-          setError('')
-        })
-        .catch(err => {
-          console.log('err', err)
-          handleSubmitError(err?.response)
-          setLoading(false)
-        })
-    }
-  }, [])
+    console.log('filters', filters)
+    setLoading(true)
+    func(filters)
+      .then(res => {
+        setList(res)
+        setLoading(false)
+        setError('')
+      })
+      .catch(err => {
+        console.log('err', err)
+        handleSubmitError(err?.response)
+        setLoading(false)
+      })
+  }, [filters])
 
   const classesScroll = classNames({
     [table_style['table_scroll-horizontal']]: true,
