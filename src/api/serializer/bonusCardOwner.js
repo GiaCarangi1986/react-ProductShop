@@ -17,7 +17,7 @@ const getBonusCardOwnerSerializer = (params = []) => {
 
 const filterSerializer = (filters = {}) => {
   return {
-    search: filters.search
+    search: filters?.search || ''
   }
 }
 

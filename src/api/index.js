@@ -24,7 +24,8 @@ import {
   getSaleForEditSerializer,
   createUserSerializer,
   getUserForEditSerializer,
-  filterSerializer
+  filterSerializerBonusCardOwner,
+  filterSerializerSale
 } from './serializer'
 import { dateFotmattedForMakeDeliveryBack, formatDateToBack } from '../utils/date'
 
@@ -143,7 +144,7 @@ class Api extends BaseApi {
   }
 
   getBonusCardOwner = async (filters) => {
-    const serFilters = filterSerializer(filters)
+    const serFilters = filterSerializerBonusCardOwner(filters)
     const res = await this.get('/bonus_card_owner/', serFilters)
     const serRes = getBonusCardOwnerSerializer(res.data)
     return serRes
@@ -175,8 +176,9 @@ class Api extends BaseApi {
     return serRes
   }
 
-  getSaleList = async () => {
-    const res = await this.get('/sale/')
+  getSaleList = async (filters) => {
+    const serFilters = filterSerializerSale(filters)
+    const res = await this.get('/sale/', serFilters)
     const serRes = getSaleSerializer(res.data)
     return serRes
   }

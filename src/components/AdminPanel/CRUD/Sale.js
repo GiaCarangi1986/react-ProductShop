@@ -211,8 +211,7 @@ const BonusCardOwners = ({ children, sale }) => {
   const changeOption = (e) => {
     if (e.target.name !== optionName) {
       setOptionName(e.target.name)
-      // makeDelivery(e.target.value)
-      console.log('e.target.value', e.target.value)
+      setFilters({ ...filters, status: e.target.value })
     }
   }
 
@@ -357,7 +356,7 @@ const BonusCardOwners = ({ children, sale }) => {
         <div>
           {children}
           <div className={style.filter}>
-            <Search />
+            <Search filters={filters} setFilters={setFilters} />
             <DropdownDescription text='Статус:' options={OPTIONS} visiableText={optionName} />
           </div>
           <ListShow

@@ -1,4 +1,4 @@
-import { dateFotmattedForMakeDelivery } from '../../utils/date';
+import { dateFotmattedForMakeDelivery, dateFotmattedForMakeDeliveryBack } from '../../utils/date';
 import { SALE_KIND } from '../../const';
 
 const getSaleSerializer = (params = []) => {
@@ -20,6 +20,14 @@ const getSaleSerializer = (params = []) => {
     })
   })
   return serList
+}
+
+const filterSerializer = (filters = {}) => {
+  return {
+    search: filters?.search || '',
+    status: filters?.status || '',
+    date: dateFotmattedForMakeDeliveryBack()
+  }
 }
 
 const getSaleCheckSerializer = (params = []) => {
@@ -74,4 +82,4 @@ const getSaleForEditSerializer = (params = {}) => {
   }
 }
 
-export { getSaleSerializer, createSaleSerializer, createSaleCheckSerializer, getSaleCheckSerializer, getSaleForEditSerializer };
+export { getSaleSerializer, createSaleSerializer, createSaleCheckSerializer, getSaleCheckSerializer, getSaleForEditSerializer, filterSerializer };
