@@ -17,7 +17,12 @@ import {
   getSaleForEditSerializer,
   filterSerializer as filterSerializerSale
 } from './sale'
-import { getUserListSerializer, createUserSerializer, getUserForEditSerializer } from './userList'
+import {
+  getUserListSerializer,
+  createUserSerializer,
+  getUserForEditSerializer,
+  filterSerializer as filterSerializerUser
+} from './userList'
 import {
   productGetSerializer,
   productForMakeDeliverySerializer,
@@ -52,5 +57,6 @@ export {
   createUserSerializer,
   getUserForEditSerializer,
   filterSerializerBonusCardOwner,
-  filterSerializerSale
+  filterSerializerSale,
+  filterSerializerUser
 }

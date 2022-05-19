@@ -15,6 +15,13 @@ const getUserListSerializer = (params = []) => {
   return serList
 }
 
+const filterSerializer = (filters = {}) => {
+  return {
+    search: filters?.search || '',
+    role: filters?.role || '',
+  }
+}
+
 const createUserSerializer = (params = {}) => ({
   FIO: `${params.secondName} ${params.firstName} ${params.patronymic}`, // ФИО
   phone: params.phone, // телефон
@@ -39,4 +46,4 @@ const getUserForEditSerializer = (params = {}) => {
   }
 }
 
-export { getUserListSerializer, createUserSerializer, getUserForEditSerializer };
+export { getUserListSerializer, createUserSerializer, getUserForEditSerializer, filterSerializer };

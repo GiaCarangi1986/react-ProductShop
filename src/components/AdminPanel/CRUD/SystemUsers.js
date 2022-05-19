@@ -142,8 +142,7 @@ const SystemUsers = ({ children, user }) => {
   const changeOption = (e) => {
     if (e.target.name !== optionName) {
       setOptionName(e.target.name)
-      // makeDelivery(e.target.value)
-      console.log('e.target.value', e.target.value)
+      setFilters({ ...filters, role: e.target.value })
     }
   }
 
@@ -300,7 +299,7 @@ const SystemUsers = ({ children, user }) => {
         <div>
           {children}
           <div className={style.filter}>
-            <Search />
+            <Search filters={filters} setFilters={setFilters} />
             <DropdownDescription text='Роль:' options={OPTIONS} visiableText={optionName} />
           </div>
           <ListShow

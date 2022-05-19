@@ -231,7 +231,7 @@ export const WIDTH_COL_BONUS_CARD_OWNER = {
 }
 
 export const USER_LIST = {
-  id: 'ID бонусной карты',
+  id: 'ID пользователя',
   fio: 'ФИО',
   phone: 'Телефон',
   email: 'Эл. почта',

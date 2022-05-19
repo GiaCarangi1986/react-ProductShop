@@ -27,7 +27,6 @@ const ListShow = ({
   }
 
   useEffect(() => {
-    console.log('filters', filters)
     setLoading(true)
     func(filters)
       .then(res => {
