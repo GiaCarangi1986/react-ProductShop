@@ -125,6 +125,20 @@ const RightPart = ({
     */
   }
 
+  const handleInputChange = e => {
+    const id = e.target.name
+    const price = e.target.value
+    const updateProductLines = [...linesOfCheckWithTotalSum]
+    const productLine = updateProductLines.filter(el => el.id === +id)[0]
+    const index = updateProductLines.indexOf(productLine)
+    productLine.price = roundNumber(price)
+    productLine.total_cost = roundNumber(productLine.ratio * productLine.price * productLine.count)
+    updateProductLines[index] = productLine
+    setNewCheckFields(updateProductLines)
+    setTotalSum(totalCostFunc(updateProductLines))
+    setLinesOfCheck(updateProductLines)
+  }
+
   useEffect(() => {
     const newArr = calcTotalCostInLine(linesOfCheck)
     setNewCheckFields(newArr)
@@ -249,11 +263,13 @@ const RightPart = ({
                                     <div style={{ minWidth: `${w - 1}px`, margin, color }}>
                                       {editCheck && check_line_key === CHECK_LINE_ADDING.price ? (
                                         <Input
+                                          disabled={hiddenActions}
                                           value={line[check_line_key]}
                                           type='number'
                                           nameOfStyle='input_count'
-                                        // onGx-input={handleInputChange}
-                                        // name={index}
+                                          onGx-input={handleInputChange}
+                                          name={line.id}
+                                          step={0.01}
                                         />
                                       )
                                         : value}
