@@ -47,12 +47,11 @@ const CheckOperations = () => {
   }
 
   const updateCheckInfo = (element = {}) => {
-    // console.log('element', element)
     setActiveLine(element.id)
     setDelayCheck(!element.paid)
     setLinesOfCheck(calcTotalCostInLine(element.linesCheckList))
     setLinesOfGeneratedCheck([])
-    if (element.bonus_count) {
+    if (element.cardId) {
       setDiscountCard({
         bonus: element.bonus_count,
         id: element.cardId
@@ -177,7 +176,7 @@ const CheckOperations = () => {
       deleteCheck()
     }
   }
-  console.log('discountCard', discountCard)
+
   useEffect(() => {
     if (headers && Object.keys(headers).length > 0) {
       setHeaders(headers)
@@ -226,8 +225,6 @@ const CheckOperations = () => {
                       activeLine,
                       addedChecks,
                       updateCheckInfo,
-                      // discountCard,
-                      // setDiscountCard,
                       error
                     }}
                   />

@@ -9,8 +9,6 @@ const HistoryChanges = ({
     addedChecks = [],
     activeLine = -1,
     updateCheckInfo = () => { },
-    // discountCard = {},
-    // setDiscountCard = () => { },
     error = []
   } = viewCheck
 
@@ -21,7 +19,8 @@ const HistoryChanges = ({
       linesCheckList: lineProps?.linesCheckList,
       totalCost: lineProps?.totalCost,
       cardId: lineProps?.cardId,
-      paid: lineProps?.paid
+      paid: lineProps?.paid,
+      bonus_count: lineProps?.bonus_count,
     })
   }
 
@@ -40,7 +39,8 @@ const HistoryChanges = ({
                     linesCheckList: line.linesCheckList,
                     totalCost: line.totalCost,
                     cardId: line.cardId,
-                    paid: line.paid
+                    paid: line.paid,
+                    bonus_count: line.bonus_count
                   }}
                   onClick={setActiveBtn}
                   className={activeStyle}
