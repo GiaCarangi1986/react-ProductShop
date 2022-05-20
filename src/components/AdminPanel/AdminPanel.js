@@ -8,6 +8,7 @@ import Revenue from './Reports/Revenue'
 import SystemUsers from './CRUD/SystemUsers'
 import Sale from './CRUD/Sale'
 import BonusCardOwners from './CRUD/BonusCardOwners'
+import Category from './CRUD/Category';
 import Options from './Options'
 import Popup from '../Popup';
 import { ADMIN_PANEL, DEFAULT_DATE } from '../../const';
@@ -26,6 +27,7 @@ const AdminPanel = () => {
   const [bonusCardOwner, setBonusCardOwner] = useState([])
   const [saleList, setSaleList] = useState([])
   const [systemUsers, setSystemUsers] = useState([])
+  const [categories, setCategories] = useState([])
 
   const handleClick = (e) => {
     setTypePage(e.target.value)
@@ -52,7 +54,8 @@ const AdminPanel = () => {
     revenue: Revenue,
     bonus_card: BonusCardOwners,
     user: SystemUsers,
-    sale: Sale
+    sale: Sale,
+    category: Category,
   }
 
   const RightPart = RIGHT_VIEWS[typePage]
@@ -106,6 +109,10 @@ const AdminPanel = () => {
             sale={{
               saleList,
               setSaleList,
+            }}
+            category={{
+              categories,
+              setCategories,
             }}
           >
             <div className={style.close}>
