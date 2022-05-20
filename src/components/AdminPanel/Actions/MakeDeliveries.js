@@ -19,7 +19,6 @@ import { handingErrors, roundNumber } from '../../../utils'
 
 import style from '../style.module.scss';
 import table_style from '../../CheckTable/check_table.module.scss'
-import user_style from '../../User/user.module.scss'
 
 import api from '../../../api'
 
@@ -251,7 +250,7 @@ const MakeDeliveries = ({ children, make_deliveries }) => {
                         const w = WIDTH_COL_MAKE_DELIVERS_TBODY[product_line] || ''
                         const margin = leftOrCenter ? '' : 'auto'
                         const value = product_line === MAKE_DELIVERS_LINE_ADDING.count ?
-                          line.unit === UNITS[1] ? line[product_line] + ', кг' : line[product_line] + ', шт' :
+                          line.unit === UNITS[1] ? roundNumber(line[product_line]) + ', кг' : line[product_line] + ', шт' :
                           line[product_line]
                         return (
                           <td className={tdClasses} key={product_line}>

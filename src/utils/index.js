@@ -83,14 +83,14 @@ export function totalCostFunc(linesOfCheck) {
   return roundNumber(totalCost)
 }
 
-export function generatCheck(discountCard = {}, linesOfCheck = [], currentUser = {}, paid = false, changedCheck = false) {
+export function generatCheck(discountCard = {}, linesOfCheck = [], currentUser = {}, paid = false, changedCheck = false, newBonusCount = 0, updateBonusCount = false) {
   let totalCost = totalCostFunc(linesOfCheck)
 
   const linesCheckList = arrCorrectProductLines(linesOfCheck)
 
   return {
     date_time: new Date(), // время покупки/отложенного чека
-    bonus_count: +discountCard?.bonus || 0, // кол-во использованных бонусов
+    bonus_count: (updateBonusCount ? newBonusCount : +discountCard?.bonus) || 0, // кол-во использованных бонусов
     totalCost, // итоговая стоимость (без бонусов)
     paid, // оплачен чек или нет (на данном этапе только false, ибо он тут отложен или только подготовлен к оплате)
     cardId: discountCard?.card?.value || discountCard?.id || null, // id карты (через id обращаемся при редактировании)

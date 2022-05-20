@@ -47,6 +47,7 @@ const CheckOperations = () => {
   }
 
   const updateCheckInfo = (element = {}) => {
+    // console.log('element', element)
     setActiveLine(element.id)
     setDelayCheck(!element.paid)
     setLinesOfCheck(calcTotalCostInLine(element.linesCheckList))
@@ -106,9 +107,9 @@ const CheckOperations = () => {
       })
   }
 
-  const createCheck = (paid = true) => { // этот запрос и на редакт/отложен, ибо одинаково все
+  const createCheck = (paid = true, newBonusCount = 0, updateBonusCount = false) => { // этот запрос и на редакт/отложен, ибо одинаково все
     setLoading(true)
-    const check = generatCheck(discountCard, linesOfCheck, currentUser, paid, activeLine)
+    const check = generatCheck(discountCard, linesOfCheck, currentUser, paid, activeLine, newBonusCount, updateBonusCount)
     api.createCheck(check, activeLine ? addedChecks[addedChecks.length - 1].id : null)
       .then((id) => {
         setLoading(false)
@@ -156,7 +157,7 @@ const CheckOperations = () => {
   } : {
     main: 'Возврат',
     text: `Ожидается возврат в размере 
-    ${roundNumber(correctSum(sumWithUsingBonus(prevTotalSum - (+discountCard?.bonus || 0)) - total_sum))} руб.`,
+    ${roundNumber(correctSum(sumWithUsingBonus(prevTotalSum - total_sum)))} руб.`,
     btnCancel: 'Отмена',
     btnOk: 'Выплатить',
   }
@@ -167,14 +168,16 @@ const CheckOperations = () => {
         payDelayCheck()
       }
       else {
-        createCheck()
+        const newBonusCount = PAGES_TYPES.editCheck ?
+          correctSum((+discountCard?.bonus || 0) - correctSum(prevTotalSum - total_sum)) : 0
+        createCheck(true, newBonusCount, true)
       }
     }
     else {
       deleteCheck()
     }
   }
-
+  console.log('discountCard', discountCard)
   useEffect(() => {
     if (headers && Object.keys(headers).length > 0) {
       setHeaders(headers)
@@ -223,6 +226,8 @@ const CheckOperations = () => {
                       activeLine,
                       addedChecks,
                       updateCheckInfo,
+                      // discountCard,
+                      // setDiscountCard,
                       error
                     }}
                   />

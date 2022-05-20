@@ -148,7 +148,8 @@ const RightPart = ({
       setLinesOfGeneratedCheck(_.cloneDeep(newArr))
     }
   }, [linesOfCheck])
-
+  // console.log('discountCard', discountCard)
+  // console.log('prevTotalSum', prevTotalSum)
   const viewPage = typePage === PAGES_TYPES.viewCheck
   const changeNotLastEntry = activeLine !== addedChecks[addedChecks.length - 1]?.id
   const editCheck = typePage === PAGES_TYPES.editCheck

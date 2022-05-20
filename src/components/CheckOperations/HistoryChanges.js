@@ -9,6 +9,8 @@ const HistoryChanges = ({
     addedChecks = [],
     activeLine = -1,
     updateCheckInfo = () => { },
+    // discountCard = {},
+    // setDiscountCard = () => { },
     error = []
   } = viewCheck
 
