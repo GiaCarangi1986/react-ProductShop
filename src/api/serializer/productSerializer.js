@@ -18,6 +18,7 @@ const productForMakeDeliverySerializer = (productList = []) => {
     serProductList.push({
       id: product.id, // id продукта
       label: product.title, // название продукта
+      category: product.category, // категория продукта
       manufacturer: product.manufacturer, // наименование производителя
       count: product.count, // мин кол-во для заказа
       unit: product.unit, // ед измер

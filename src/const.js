@@ -172,6 +172,7 @@ export const MAKE_DELIVERS_HEADER = {
   count: 'Заказываемое кол-во/вес',
   quantity_or_weight: 'Минимальный кол-во/вес',
   name: 'Наименование',
+  category: 'Категория',
   manufacturer: 'Производитель',
   price_piece_or_kg: 'Цена 1шт/1кг',
   total_cost: 'Общая стоимость',
@@ -180,8 +181,9 @@ export const MAKE_DELIVERS_HEADER = {
 export const WIDTH_COL_MAKE_DELIVERS = {
   count: 125,
   quantity_or_weight: 90,
-  name: 250,
-  manufacturer: 250,
+  name: 200,
+  category: 200,
+  manufacturer: 200,
   price_piece_or_kg: 90,
   total_cost: 90,
 }
@@ -283,6 +285,7 @@ export const WIDTH_COL_POPULAR_PRODUCTS = {
 export const MAKE_DELIVERS_LINE_ADDING = {
   count: 'count',
   label: 'label',
+  category: 'category',
   manufacturer: 'manufacturer',
   price: 'price',
   total_cost: 'total_cost',
@@ -290,8 +293,9 @@ export const MAKE_DELIVERS_LINE_ADDING = {
 
 export const WIDTH_COL_MAKE_DELIVERS_TBODY = {
   count: 90,
-  label: 250,
-  manufacturer: 250,
+  label: 200,
+  category: 200,
+  manufacturer: 200,
   price: 90,
   total_cost: 90,
 }

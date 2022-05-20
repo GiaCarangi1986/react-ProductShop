@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { useStoreon } from 'storeon/react';
-import { Button, Icon, Input, PreloaderPage, ErrorText, Dropdown, Menu } from '../../../views';
+import { Button, Icon, Input, PreloaderPage, ErrorText } from '../../../views';
 import {
   MAKE_DELIVERS_HEADER,
   WIDTH_COL_MAKE_DELIVERS,
