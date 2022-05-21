@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import _ from 'lodash'
 import { useFormik } from 'formik'
 import {
-  BONUS_CARD_OWNER,
-  WIDTH_COL_BONUS_CARD_OWNER,
+  CATEGORY,
+  WIDTH_COL_CATEGORY,
   FORM_FIELDS,
   FORM_LABELS,
   SELECT_TYPES,
@@ -271,13 +271,13 @@ const Category = ({ children, category }) => {
             children={children}
             list={categories}
             setList={setCategories}
-            WIDTH_COL={WIDTH_COL_BONUS_CARD_OWNER}
-            NAME_COL={BONUS_CARD_OWNER}
+            WIDTH_COL={WIDTH_COL_CATEGORY}
+            NAME_COL={CATEGORY}
             loading={loading}
             setLoading={setLoading}
             error={error}
             setError={setError}
-            func={api.getBonusCardOwner}
+            func={api.getCategory}
             filters={filters}
             handleSubmitError={handleSubmitError}
             onDelete={onDelete}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Media from "react-media";
-import { Button, Icon, Dropdown, Menu } from '../../views'
+import { Icon } from '../../views'
 import { MODAL_TYPES, SCREENS } from '../../const'
 import { useStoreon } from 'storeon/react';
 import DropdownAction from '../DropdownAction';

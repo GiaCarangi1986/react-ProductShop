@@ -268,6 +268,16 @@ export const WIDTH_COL_SALE_LIST = {
   status: 105
 }
 
+export const CATEGORY = {
+  id: 'ID категории',
+  title: 'Наименование',
+}
+
+export const WIDTH_COL_CATEGORY = {
+  id: 30,
+  title: 200,
+}
+
 export const POPULAR_PRODUCTS = {
   title: 'Название',
   manufacturer: 'Производитель',
@@ -343,6 +353,10 @@ export const ADMIN_CRUD = { // оформление бонусных карт н
     value: 'sale',
     title: 'Управление акциями'
   },
+  category: { // категории - создание, редактр и удаление
+    value: 'category',
+    title: 'Работа с категориями'
+  },
 }
 
 export const ADMIN_REPORTS = { // отчеты
@@ -388,6 +402,10 @@ export const ADMIN_PANEL = [
       {
         title: ADMIN_CRUD.user.title,
         value: ADMIN_CRUD.user.value
+      },
+      {
+        title: ADMIN_CRUD.category.title,
+        value: ADMIN_CRUD.category.value
       }
     ]
   },
