@@ -35,7 +35,8 @@ import {
   filterSerializer as filterSerializerCategory,
   createCategorySerializer,
   createCategoryCheckSerializer,
-  getCategoryCheckSerializer
+  getCategoryCheckSerializer,
+  getCategoryForEditSerializer
 } from './category'
 
 export {
@@ -71,5 +72,6 @@ export {
   filterSerializerCategory,
   createCategorySerializer,
   createCategoryCheckSerializer,
-  getCategoryCheckSerializer
+  getCategoryCheckSerializer,
+  getCategoryForEditSerializer,
 }

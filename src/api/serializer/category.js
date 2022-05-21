@@ -49,4 +49,26 @@ const getCategoryCheckSerializer = (params = []) => {
   return products
 }
 
-export { getCategorySerializer, filterSerializer, createCategorySerializer, createCategoryCheckSerializer, getCategoryCheckSerializer }
+const getCategoryForEditSerializer = (params = {}) => {
+  const productList = []
+  params?.productList.forEach(element => {
+    productList.push({
+      id: element.id,
+      label: element.title
+    })
+  });
+  return {
+    id: params.id, // id
+    title: params.title, // наименование
+    productList: [...productList], // список продуктов, участвующих в акции
+  }
+}
+
+export {
+  getCategorySerializer,
+  filterSerializer,
+  createCategorySerializer,
+  createCategoryCheckSerializer,
+  getCategoryCheckSerializer,
+  getCategoryForEditSerializer
+}
