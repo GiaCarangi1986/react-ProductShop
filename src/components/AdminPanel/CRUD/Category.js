@@ -172,7 +172,7 @@ const Category = ({ children, category }) => {
   }
 
   const addDataCorrect = () => {
-    apiHandler(api.addSale, setCategories, formik.values, comeBack)
+    apiHandler(api.addCategory, setCategories, formik.values, comeBack)
   }
 
   const editDataCorrect = () => {
@@ -204,7 +204,11 @@ const Category = ({ children, category }) => {
   useEffect(() => {
     if (formik) {
       const { isValid, values } = formik;
-      const isDisabled = !isValid || _.isEqual(values, data)
+      let equal = _.isEqual(values, data)
+      if (!equal && _.isEqual(data?.productList, values.productList)) {
+        equal = true
+      }
+      const isDisabled = !isValid || equal
       setDisabled(isDisabled)
       if (!data) {
         setData({ ...values })
