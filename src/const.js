@@ -118,7 +118,8 @@ export const FORM_LABELS = {
   phone: 'Телефон',
   password: 'Пароль',
   salePercent: 'Процент скидки',
-  role: 'Роль'
+  role: 'Роль',
+  title: 'Наименование',
 }
 
 export const FORM_FIELDS = {
@@ -141,7 +142,8 @@ export const FORM_FIELDS = {
   birthDate: 'birthDate',
   gender: 'gender',
   salePercent: 'salePercent',
-  role: 'role'
+  role: 'role',
+  title: 'title'
 }
 
 export const UNITS = ['шт', 'кг']

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import _ from 'lodash'
+import { useStoreon } from 'storeon/react';
 import { useFormik } from 'formik'
 import {
   CATEGORY,
@@ -7,15 +8,19 @@ import {
   FORM_FIELDS,
   FORM_LABELS,
   SELECT_TYPES,
-  HEADER_BASIC
+  HEADER_BASIC,
+  POPUP_TYPES,
+  MODAL_TYPES
 } from '../../../const';
 import Search from '../../Search'
-import { handingErrors, deleteSpaces, capitalize } from '../../../utils'
-import { Input, Fieldset, InputPhone } from '../../../views';
+import Popup from '../../Popup'
+import { ProductSale } from '../../Modal';
+import { handingErrors, deleteSpaces } from '../../../utils'
+import { Input, Fieldset, Button, Icon } from '../../../views';
 import Select from '../../Select';
 import ListShow from './ListShow';
 import AddOrUpdate from './AddOrUpdate';
-import { userCRUD } from '../../../schema';
+import { categoryCRUD } from '../../../schema';
 import style from '../style.module.scss';
 import api from '../../../api'
 
@@ -24,6 +29,8 @@ const Category = ({ children, category }) => {
     categories = [],
     setCategories = () => { },
   } = category
+
+  const { dispatch } = useStoreon();
 
   const HEADER = 'категории'
 
@@ -34,6 +41,7 @@ const Category = ({ children, category }) => {
   const [header, setHeader] = useState('')
   const [data, setData] = useState(null)
   const [filters, setFilters] = useState({})
+  const [productCheck, setProductCheck] = useState([])
 
   const handleSubmitError = (response) => {
     if (response) {
@@ -43,19 +51,14 @@ const Category = ({ children, category }) => {
   }
 
   const initialValues = {
-    firstName: '',
-    secondName: '',
-    patronymic: '',
-    phone: '',
-    email: '',
-    birthDate: null,
-    gender: null,
-    id: null
+    title: '',
+    product: null,
+    productList: []
   }
 
   const formik = useFormik({
     initialValues,
-    validationSchema: userCRUD,
+    validationSchema: categoryCRUD,
   })
 
   const handleBlur = e => {
@@ -65,13 +68,46 @@ const Category = ({ children, category }) => {
     formik.setFieldValue([name], value)
   }
 
-  const handleChangePhone = (e) => {
-    const { name } = e.target;
-    formik.setFieldValue(name, e.detail.value);
+  const addLine = () => {
+    const lines = [...formik.values.productList]
+    let exist = false
+    for (const line of lines) {
+      if (line.id === formik.values.product.value) {
+        exist = true
+        break
+      }
+    }
+    if (!exist) {
+      lines.push({
+        id: formik.values.product.value,
+        label: formik.values.product.name,
+      })
+    }
+    else {
+      dispatch('popup/toggle', {
+        popup: POPUP_TYPES.admin_panel,
+        text: `Продукт '${formik.values.product.name}' уже добавлен`
+      })
+    }
+    formik.setFieldValue('productList', lines.sort(
+      function (a, b) {
+        if (a.label > b.label) {
+          return 1;
+        }
+        if (a.label < b.label) {
+          return -1;
+        }
+        return 0;
+      }))
+    formik.setFieldValue(FORM_FIELDS.product, null)
+  }
+
+  const deleteProduct = (e) => {
+    formik.setFieldValue('productList', [...formik.values.productList].filter(line => line.id !== +e.target.name))
   }
 
   const handleInput = e => {
-    formik.setFieldValue(e.target.name, capitalize(e.target.value))
+    formik.setFieldValue(e.target.name, e.target.value)
   }
 
   const handleSelectBlur = (name = '') => {
@@ -110,16 +146,45 @@ const Category = ({ children, category }) => {
       })
   }
 
+  const checkCorrect = (apiFunc = () => { }, afterFunc = () => { }) => {
+    setLoading(true)
+    apiFunc(formik.values)
+      .then(res => {
+        if (res.length) {
+          setProductCheck(res)
+          dispatch('modal/toggle', {
+            modal: MODAL_TYPES.productSale,
+          })
+        }
+        else {
+          afterFunc()
+        }
+        setLoading(false)
+      })
+      .catch(err => {
+        console.log('err', err)
+        setLoading(false)
+      })
+  }
+
   const onDelete = e => {
     apiHandler(api.deleteBonusCardOwner, setCategories, e.target.name)
   }
 
+  const addDataCorrect = () => {
+    apiHandler(api.addSale, setCategories, formik.values, comeBack)
+  }
+
+  const editDataCorrect = () => {
+    apiHandler(api.editSale, setCategories, formik.values, comeBack)
+  }
+
   const addData = () => {
-    apiHandler(api.addBonusCardOwner, setCategories, formik.values, comeBack)
+    checkCorrect(api.checkCategory, addDataCorrect)
   }
 
   const editData = () => {
-    apiHandler(api.editBonusCardOwner, setCategories, formik.values, comeBack)
+    checkCorrect(api.checkCategory, editDataCorrect)
   }
 
   const onAction = (action) => {
@@ -148,117 +213,74 @@ const Category = ({ children, category }) => {
   }, [formik])
 
   const func = header === `${HEADER_BASIC.add} ${HEADER}` ? addData : editData
+  const funcAfterConfirm = header === `${HEADER_BASIC.add} ${HEADER}` ? addDataCorrect : editDataCorrect
 
   return (
     <>
       {addUpdate ? (
         <AddOrUpdate comeBack={comeBack} header={header} disabled={disabled} apply={func} error={error}>
           <div className={style.addupdate__row}>
+            <div className={style.wrap_add}>
+              <Fieldset>
+                <Select
+                  value={formik.values.product}
+                  name={FORM_FIELDS.product}
+                  label={FORM_LABELS.product}
+                  data-cy='title'
+                  type={SELECT_TYPES.product}
+                  func={api.getProductListForCreatingCheck}
+                  onBlur={() => handleSelectBlur(FORM_FIELDS.product)}
+                  onChange={(e) => chooseSelectValue(e, FORM_FIELDS.product)}
+                  err={formik.errors.product && formik.touched.product}
+                />
+              </Fieldset>
+              <Button
+                disabled={!formik.values.product}
+                className='btn_width-square'
+                data-cy='btn'
+                buttonDis
+                onClick={addLine}
+              >
+                +
+              </Button>
+            </div>
             <Fieldset
               errorClass='addOrUpdateCRUD'
-              error={formik.errors.secondName}
-              touched={formik.touched.secondName}>
+              error={formik.errors.title}
+              touched={formik.touched.title}>
               <Input
-                value={formik.values.secondName}
+                value={formik.values.title}
                 onGx-input={handleInput}
                 onGx-blur={handleBlur}
-                name={FORM_FIELDS.secondName}
-                label={FORM_LABELS.secondName}
+                name={FORM_FIELDS.title}
+                label={FORM_LABELS.title}
                 data-cy='title'
                 type='text'
-              />
-            </Fieldset>
-            <Fieldset
-              errorClass='addOrUpdateCRUD'
-              error={formik.errors.firstName}
-              touched={formik.touched.firstName}>
-              <Input
-                value={formik.values.firstName}
-                onGx-input={handleInput}
-                onGx-blur={handleBlur}
-                name={FORM_FIELDS.firstName}
-                label={FORM_LABELS.firstName}
-                data-cy='title'
-                type='text'
-              />
-            </Fieldset>
-            <Fieldset
-              errorClass='addOrUpdateCRUD'
-              error={formik.errors.patronymic}
-              touched={formik.touched.patronymic}>
-              <Input
-                value={formik.values.patronymic}
-                onGx-input={handleInput}
-                onGx-blur={handleBlur}
-                name={FORM_FIELDS.patronymic}
-                label={FORM_LABELS.patronymic}
-                data-cy='title'
-                type='text'
-              />
-            </Fieldset>
-            <Fieldset
-              errorClass='addOrUpdateCRUD'
-              containerClass='pressed_bottom'
-              error={formik.errors.gender}
-              touched={formik.touched.gender}>
-              <Select
-                value={formik.values.gender}
-                name={FORM_FIELDS.gender}
-                label={FORM_LABELS.gender}
-                data-cy='title'
-                type={SELECT_TYPES.gender}
-                func={api.getGenderListForSelect}
-                onBlur={() => handleSelectBlur(FORM_FIELDS.gender)}
-                onChange={(e) => chooseSelectValue(e, FORM_FIELDS.gender)}
-                err={formik.errors.gender && formik.touched.gender}
               />
             </Fieldset>
           </div>
           <div className={style.addupdate__row}>
-            <Fieldset
-              errorClass='addOrUpdateCRUD'
-              error={formik.errors.phone}
-              touched={formik.touched.phone}>
-              <InputPhone
-                label={FORM_LABELS.phone}
-                country='ru'
-                onlyCountries={['ru']}
-                name={FORM_FIELDS.phone}
-                type='text'
-                onGx-input={formik.handleChange}
-                onGx-change={handleChangePhone}
-                value={formik.values.phone}
-                onBlur={handleBlur}
-              />
-            </Fieldset>
-            <Fieldset
-              errorClass='addOrUpdateCRUD'
-              error={formik.errors.email}
-              touched={formik.touched.email}>
-              <Input
-                value={formik.values.email}
-                onGx-input={formik.handleChange}
-                onGx-blur={handleBlur}
-                name={FORM_FIELDS.email}
-                label={FORM_LABELS.email}
-                data-cy='title'
-                type='text'
-              />
-            </Fieldset>
-            <Fieldset
-              errorClass='addOrUpdateCRUD'
-              error={formik.errors.birthDate}
-              touched={formik.touched.birthDate}>
-              <Input
-                value={formik.values.birthDate}
-                onGx-input={formik.handleChange}
-                onGx-blur={handleBlur}
-                name={FORM_FIELDS.birthDate}
-                label={FORM_LABELS.birthDate}
-                data-cy='title'
-                type='date'
-              />
-            </Fieldset>
+            <p className={style.list_header}>Состав продуктов:</p>
+            <ul className={style.list_product}>
+              {formik.values?.productList.map(product => (
+                <li key={product.id} className={style.list_line}>
+                  <p className={style.list_item}>{product.label}</p>
+                  <div>
+                    <Button
+                      variant='text'
+                      className='button-delete_action'
+                      data-cy='btn'
+                      title='Удалить строку'
+                      name={product.id}
+                      onClick={deleteProduct}
+                    >
+                      <Icon slot='icon-left' icon='deleteIcon' />
+                    </Button>
+                  </div>
+
+                </li>
+              ))}
+            </ul>
           </div>
         </AddOrUpdate>
       ) : (
@@ -286,6 +308,8 @@ const Category = ({ children, category }) => {
           />
         </div>
       )}
+      <Popup />
+      <ProductSale data={productCheck} func={funcAfterConfirm} title='Внимание! В нижеперечисленных продуктах текущая категория будет заменена новой' />
     </>
   )
 }

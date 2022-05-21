@@ -383,7 +383,7 @@ const BonusCardOwners = ({ children, sale }) => {
       )
       }
       <Popup />
-      <ProductSale data={productCheck} func={funcAfterConfirm} />
+      <ProductSale data={productCheck} func={funcAfterConfirm} title='Внимание! В нижеперечисленных продуктах текущая акция будет заменена новой' />
     </>
   )
 }

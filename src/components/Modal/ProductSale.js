@@ -4,7 +4,7 @@ import { Button, Modal } from '../../views'
 import { MODAL_TYPES } from '../../const'
 import style from './modal.module.scss'
 
-const ProductSale = ({ func = () => { }, data = [] }) => {
+const ProductSale = ({ func = () => { }, data = [], title = '' }) => {
   const { modal, dispatch } = useStoreon('modal')
   const [open, setOpen] = useState(false)
 
@@ -21,7 +21,7 @@ const ProductSale = ({ func = () => { }, data = [] }) => {
 
   return (
     <Modal setOpen={setOpen} variant='centered' open={open}>
-      <h2 className={style['modal-centered__title']}>Внимание! В нижеперечисленных продуктах текущая акция будет заменена новой</h2>
+      <h2 className={style['modal-centered__title']}>{title}</h2>
       <ul className={style['modal-centered__list']}>
         {data.map((el, index) => {
           return (

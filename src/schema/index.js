@@ -135,6 +135,11 @@ const userCRUD = Yup.object().shape({
   gender: objectTemp
 })
 
+const categoryCRUD = Yup.object().shape({
+  title: stringTemp,
+  product: objectTemp.notRequired().nullable(),
+})
+
 const saleCRUD = Yup.object().shape({
   start_at: dateTemp,
   end_at: dateTempEnd.nullable().required(errorsMessenge.requiredField),
@@ -158,5 +163,6 @@ export {
   dateSearch,
   userCRUD,
   saleCRUD,
-  systemUserCRUD
+  systemUserCRUD,
+  categoryCRUD
 }

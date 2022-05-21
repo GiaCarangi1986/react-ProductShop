@@ -28,7 +28,10 @@ import {
   filterSerializerSale,
   filterSerializerUser,
   getCategorySerializer,
-  filterSerializerCategory
+  filterSerializerCategory,
+  createCategorySerializer,
+  createCategoryCheckSerializer,
+  getCategoryCheckSerializer
 } from './serializer'
 import { dateFotmattedForMakeDeliveryBack, formatDateToBack } from '../utils/date'
 
@@ -148,7 +151,21 @@ class Api extends BaseApi {
 
   getCategory = async (filters) => {
     const serFilters = filterSerializerCategory(filters)
-    const res = await this.get('/category/', filters)
+    const res = await this.get('/category/', serFilters)
+    const serRes = getCategorySerializer(res.data)
+    return serRes
+  }
+
+  checkCategory = async (data) => {
+    const serData = createCategoryCheckSerializer(data)
+    const res = await this.post('/category_check/', serData)
+    const serRes = getCategoryCheckSerializer(res.data)
+    return serRes
+  }
+
+  addCategory = async (data) => {
+    const serData = createCategorySerializer(data)
+    const res = await this.post('/category/', serData)
     const serRes = getCategorySerializer(res.data)
     return serRes
   }

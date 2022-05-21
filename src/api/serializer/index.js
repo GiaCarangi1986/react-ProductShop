@@ -30,7 +30,13 @@ import {
   setWriteOffSerializer
 } from './productSerializer'
 
-import { getCategorySerializer, filterSerializer as filterSerializerCategory } from './category'
+import {
+  getCategorySerializer,
+  filterSerializer as filterSerializerCategory,
+  createCategorySerializer,
+  createCategoryCheckSerializer,
+  getCategoryCheckSerializer
+} from './category'
 
 export {
   checkGetSerializer,
@@ -62,5 +68,8 @@ export {
   filterSerializerSale,
   filterSerializerUser,
   getCategorySerializer,
-  filterSerializerCategory
+  filterSerializerCategory,
+  createCategorySerializer,
+  createCategoryCheckSerializer,
+  getCategoryCheckSerializer
 }
