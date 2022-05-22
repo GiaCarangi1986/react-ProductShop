@@ -239,11 +239,13 @@ const BonusCardOwners = ({ children, sale }) => {
   useEffect(() => {
     if (formik) {
       const { isValid, values } = formik;
-      let equal = _.isEqual(values, data)
-      if (!equal && _.isEqual(data?.productList, values.productList)) {
+      const valuesWithoutProduct = { ...values }
+      delete valuesWithoutProduct.product
+      let equal = _.isEqual(valuesWithoutProduct, data)
+      if (equal && _.isEqual(data?.productList, valuesWithoutProduct.productList)) {
         equal = true
       }
-      const isDisabled = !isValid || equal || !values?.productList?.length
+      const isDisabled = !isValid || equal || !valuesWithoutProduct?.productList?.length
       setDisabled(isDisabled)
       if (!data) {
         setData({ ...values })

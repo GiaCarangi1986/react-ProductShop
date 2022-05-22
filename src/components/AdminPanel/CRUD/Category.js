@@ -118,6 +118,10 @@ const Category = ({ children, category }) => {
     formik.setFieldValue(name, e)
   }
 
+  const productExist = (id) => {
+    return data?.productList?.filter(el => el.id === id)[0] ?? false
+  }
+
   const comeBack = () => {
     setAddUpdate(false)
     formik.setValues(initialValues)
@@ -204,11 +208,13 @@ const Category = ({ children, category }) => {
   useEffect(() => {
     if (formik) {
       const { isValid, values } = formik;
-      let equal = _.isEqual(values, data)
-      if (!equal && _.isEqual(data?.productList, values.productList)) {
+      const valuesWithoutProduct = { ...values }
+      delete valuesWithoutProduct.product
+      let equal = _.isEqual(valuesWithoutProduct, data)
+      if (equal && _.isEqual(data?.productList, valuesWithoutProduct.productList)) {
         equal = true
       }
-      const isDisabled = !isValid || equal
+      const isDisabled = !isValid || equal || !valuesWithoutProduct?.productList?.length
       setDisabled(isDisabled)
       if (!data) {
         setData({ ...values })
@@ -277,11 +283,11 @@ const Category = ({ children, category }) => {
                       title='Удалить строку'
                       name={product.id}
                       onClick={deleteProduct}
+                      disabled={header === `${HEADER_BASIC.update} ${HEADER}` && productExist(product.id)}
                     >
                       <Icon slot='icon-left' icon='deleteIcon' />
                     </Button>
                   </div>
-
                 </li>
               ))}
             </ul>
