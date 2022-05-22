@@ -164,6 +164,12 @@ class Api extends BaseApi {
     return serRes
   }
 
+  checkCategoryDelete = async (id) => {
+    const res = await this.patch(`/category_check/${id}`)
+    const serRes = getCategoryCheckSerializer(res.data)
+    return serRes
+  }
+
   addCategory = async (data) => {
     const serData = createCategorySerializer(data)
     const res = await this.post('/category/', serData)

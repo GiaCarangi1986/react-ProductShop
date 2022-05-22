@@ -42,6 +42,7 @@ const Category = ({ children, category }) => {
   const [data, setData] = useState(null)
   const [filters, setFilters] = useState({})
   const [productCheck, setProductCheck] = useState([])
+  const [warning, setWarning] = useState('')
 
   const handleSubmitError = (response) => {
     if (response) {
@@ -150,15 +151,21 @@ const Category = ({ children, category }) => {
       })
   }
 
-  const checkCorrect = (apiFunc = () => { }, afterFunc = () => { }) => {
+  const checkCorrect = (
+    apiFunc = () => { },
+    afterFunc = () => { },
+    title = 'Внимание! В нижеперечисленных продуктах текущая категория будет заменена новой',
+    idForDeleteCheck = null
+  ) => {
     setLoading(true)
-    apiFunc(formik.values)
+    apiFunc(idForDeleteCheck || formik.values)
       .then(res => {
         if (res.length) {
           setProductCheck(res)
           dispatch('modal/toggle', {
             modal: MODAL_TYPES.productSale,
           })
+          setWarning(title)
         }
         else {
           afterFunc()
@@ -171,7 +178,7 @@ const Category = ({ children, category }) => {
       })
   }
 
-  const onDelete = e => {
+  const deleteDataCorrect = e => {
     apiHandler(api.deleteBonusCardOwner, setCategories, e.target.name)
   }
 
@@ -191,11 +198,17 @@ const Category = ({ children, category }) => {
     checkCorrect(api.checkCategory, editDataCorrect)
   }
 
+  const onDelete = (e) => {
+    const id = e.target.name
+    checkCorrect(api.checkCategoryDelete, deleteDataCorrect, 'Внимание! Вместе с данной категорией будут удалены следующие продукты:', id)
+  }
+
   const onAction = (action) => {
     setAddUpdate(true)
     setHeader(`${action} ${HEADER}`)
     setError('')
     setFilters({})
+    setWarning('')
     if (action === HEADER_BASIC.add) {
       setData({ ...initialValues })
     }
@@ -319,7 +332,7 @@ const Category = ({ children, category }) => {
         </div>
       )}
       <Popup />
-      <ProductSale data={productCheck} func={funcAfterConfirm} title='Внимание! В нижеперечисленных продуктах текущая категория будет заменена новой' />
+      <ProductSale data={productCheck} func={funcAfterConfirm} title={warning} />
     </>
   )
 }
