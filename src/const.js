@@ -373,6 +373,10 @@ export const ADMIN_CRUD = { // оформление бонусных карт н
     value: 'manufacturer',
     title: 'Работа с производителями'
   },
+  product: { // продукт - создание, редактр и удаление
+    value: 'product',
+    title: 'Управление продуктами'
+  },
 }
 
 export const ADMIN_REPORTS = { // отчеты
@@ -426,6 +430,10 @@ export const ADMIN_PANEL = [
       {
         title: ADMIN_CRUD.manufacturer.title,
         value: ADMIN_CRUD.manufacturer.value
+      },
+      {
+        title: ADMIN_CRUD.product.title,
+        value: ADMIN_CRUD.product.value
       },
     ]
   },

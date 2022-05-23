@@ -10,6 +10,7 @@ import Sale from './CRUD/Sale'
 import BonusCardOwners from './CRUD/BonusCardOwners'
 import Category from './CRUD/Category';
 import Manufacturer from './CRUD/Manufacturer';
+import Product from './CRUD/Product';
 import Options from './Options'
 import Popup from '../Popup';
 import { ADMIN_PANEL, DEFAULT_DATE } from '../../const';
@@ -30,6 +31,7 @@ const AdminPanel = () => {
   const [systemUsers, setSystemUsers] = useState([])
   const [categories, setCategories] = useState([])
   const [manufacturerList, setManufacturer] = useState([])
+  const [productList, setProduct] = useState([])
 
   const handleClick = (e) => {
     setTypePage(e.target.value)
@@ -48,6 +50,7 @@ const AdminPanel = () => {
     setSystemUsers([])
     setCategories([])
     setManufacturer([])
+    setProduct([])
   }
 
   const RIGHT_VIEWS = {
@@ -60,7 +63,8 @@ const AdminPanel = () => {
     user: SystemUsers,
     sale: Sale,
     category: Category,
-    manufacturer: Manufacturer
+    manufacturer: Manufacturer,
+    product: Product
   }
 
   const RightPart = RIGHT_VIEWS[typePage]
@@ -122,6 +126,10 @@ const AdminPanel = () => {
             manufacturer={{
               manufacturerList,
               setManufacturer,
+            }}
+            product={{
+              productList,
+              setProduct,
             }}
           >
             <div className={style.close}>
