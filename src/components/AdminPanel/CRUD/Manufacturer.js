@@ -185,11 +185,11 @@ const Manufacturer = ({ children, manufacturer }) => {
   }
 
   const addData = () => {
-    checkCorrect(api.checkCategory, addDataCorrect)
+    checkCorrect(api.checkManufacturer, addDataCorrect)
   }
 
   const editData = () => {
-    checkCorrect(api.checkCategory, editDataCorrect)
+    checkCorrect(api.checkManufacturer, editDataCorrect)
   }
 
   const onAction = (action) => {
