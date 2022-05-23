@@ -118,10 +118,6 @@ const Manufacturer = ({ children, manufacturer }) => {
     formik.setFieldValue(name, e)
   }
 
-  const productExist = (id) => {
-    return data?.productList?.filter(el => el.id === id)[0] ?? false
-  }
-
   const comeBack = () => {
     setAddUpdate(false)
     formik.setValues(initialValues)
@@ -173,7 +169,7 @@ const Manufacturer = ({ children, manufacturer }) => {
   }
 
   const onDelete = e => {
-    apiHandler(api.deleteBonusCardOwner, setManufacturer, e.target.name)
+    apiHandler(api.deleteManufacturer, setManufacturer, e.target.name)
   }
 
   const addDataCorrect = () => {
@@ -181,7 +177,7 @@ const Manufacturer = ({ children, manufacturer }) => {
   }
 
   const editDataCorrect = () => {
-    apiHandler(api.editCategory, setManufacturer, formik.values, comeBack)
+    apiHandler(api.editManufacturer, setManufacturer, formik.values, comeBack)
   }
 
   const addData = () => {
@@ -203,7 +199,7 @@ const Manufacturer = ({ children, manufacturer }) => {
   }
 
   const onEdit = (e) => {
-    apiHandler(api.getCategoryForEdit, formik.setValues, e.target.name, onAction, HEADER_BASIC.update)
+    apiHandler(api.getManufacturerForEdit, formik.setValues, e.target.name, onAction, HEADER_BASIC.update)
   }
 
   useEffect(() => {
@@ -284,7 +280,6 @@ const Manufacturer = ({ children, manufacturer }) => {
                       title='Удалить строку'
                       name={product.id}
                       onClick={deleteProduct}
-                      disabled={header === `${HEADER_BASIC.update} ${HEADER}` && productExist(product.id)}
                     >
                       <Icon slot='icon-left' icon='deleteIcon' />
                     </Button>
