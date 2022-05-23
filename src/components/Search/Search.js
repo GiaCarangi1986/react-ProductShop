@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import _ from 'lodash'
 import { useFormik } from 'formik';
 import { Button, Form, Icon, Input } from '../../views';
 
@@ -35,6 +36,12 @@ const Search = ({ filters = {}, setFilters = () => { } }) => {
     formik.handleChange(e)
     setInputNotEmpty(true)
   }
+
+  useEffect(() => {
+    if (!Object.keys(filters).length) {
+      formik.setValues({})
+    }
+  }, [filters])
 
   return (
     <Form

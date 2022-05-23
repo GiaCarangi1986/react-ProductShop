@@ -109,6 +109,7 @@ const BonusCardOwners = ({ children, sale }) => {
           setData({ ...res })
         }
         setError('')
+        setFilters({})
       })
       .catch(err => {
         console.log('err', err)

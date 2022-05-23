@@ -107,6 +107,7 @@ const SystemUsers = ({ children, user }) => {
           setData({ ...res })
         }
         setError('')
+        setFilters({})
       })
       .catch(err => {
         console.log('err', err)

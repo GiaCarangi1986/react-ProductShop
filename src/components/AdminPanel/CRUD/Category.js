@@ -144,6 +144,7 @@ const Category = ({ children, category }) => {
           setData({ ...res })
         }
         setError('')
+        setFilters({})
       })
       .catch(err => {
         console.log('err', err)
