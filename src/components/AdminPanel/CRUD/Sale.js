@@ -110,6 +110,7 @@ const BonusCardOwners = ({ children, sale }) => {
         }
         setError('')
         setFilters({})
+        setOptionName(DEFAULT_OPTION)
       })
       .catch(err => {
         console.log('err', err)

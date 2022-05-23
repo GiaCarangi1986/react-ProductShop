@@ -108,6 +108,7 @@ const SystemUsers = ({ children, user }) => {
         }
         setError('')
         setFilters({})
+        setOptionName(DEFAULT_OPTION)
       })
       .catch(err => {
         console.log('err', err)
