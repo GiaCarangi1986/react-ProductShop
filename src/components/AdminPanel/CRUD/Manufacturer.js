@@ -3,8 +3,8 @@ import _ from 'lodash'
 import { useStoreon } from 'storeon/react';
 import { useFormik } from 'formik'
 import {
-  CATEGORY,
-  WIDTH_COL_CATEGORY,
+  MANUFACTURE,
+  WIDTH_COL_MANUFACTURE,
   FORM_FIELDS,
   FORM_LABELS,
   SELECT_TYPES,
@@ -24,11 +24,11 @@ import { categoryCRUD } from '../../../schema';
 import style from '../style.module.scss';
 import api from '../../../api'
 
-const Manufacturer = ({ children, category }) => {
+const Manufacturer = ({ children, manufacturer }) => {
   const {
-    categories = [],
-    setCategories = () => { },
-  } = category
+    manufacturerList = [],
+    setManufacturer = () => { },
+  } = manufacturer
 
   const { dispatch } = useStoreon();
 
@@ -173,15 +173,15 @@ const Manufacturer = ({ children, category }) => {
   }
 
   const onDelete = e => {
-    apiHandler(api.deleteBonusCardOwner, setCategories, e.target.name)
+    apiHandler(api.deleteBonusCardOwner, setManufacturer, e.target.name)
   }
 
   const addDataCorrect = () => {
-    apiHandler(api.addCategory, setCategories, formik.values, comeBack)
+    apiHandler(api.addCategory, setManufacturer, formik.values, comeBack)
   }
 
   const editDataCorrect = () => {
-    apiHandler(api.editCategory, setCategories, formik.values, comeBack)
+    apiHandler(api.editCategory, setManufacturer, formik.values, comeBack)
   }
 
   const addData = () => {
@@ -302,15 +302,15 @@ const Manufacturer = ({ children, category }) => {
           </div>
           <ListShow
             children={children}
-            list={categories}
-            setList={setCategories}
-            WIDTH_COL={WIDTH_COL_CATEGORY}
-            NAME_COL={CATEGORY}
+            list={manufacturerList}
+            setList={setManufacturer}
+            WIDTH_COL={WIDTH_COL_MANUFACTURE}
+            NAME_COL={MANUFACTURE}
             loading={loading}
             setLoading={setLoading}
             error={error}
             setError={setError}
-            func={api.getCategory}
+            func={api.getManufacturer}
             filters={filters}
             handleSubmitError={handleSubmitError}
             onDelete={onDelete}

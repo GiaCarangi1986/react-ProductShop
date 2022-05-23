@@ -29,7 +29,7 @@ const AdminPanel = () => {
   const [saleList, setSaleList] = useState([])
   const [systemUsers, setSystemUsers] = useState([])
   const [categories, setCategories] = useState([])
-  const [manufacturer, setManufacturer] = useState([])
+  const [manufacturerList, setManufacturer] = useState([])
 
   const handleClick = (e) => {
     setTypePage(e.target.value)
@@ -120,7 +120,7 @@ const AdminPanel = () => {
               setCategories,
             }}
             manufacturer={{
-              manufacturer,
+              manufacturerList,
               setManufacturer,
             }}
           >

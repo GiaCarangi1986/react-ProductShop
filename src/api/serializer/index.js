@@ -39,6 +39,8 @@ import {
   getCategoryForEditSerializer
 } from './category'
 
+import { filterSerializer as filterSerializerManufacturer, getManufacturerSerializer } from './manufacturer'
+
 export {
   checkGetSerializer,
   checkParamsSerializer,
@@ -74,4 +76,6 @@ export {
   createCategoryCheckSerializer,
   getCategoryCheckSerializer,
   getCategoryForEditSerializer,
+  filterSerializerManufacturer,
+  getManufacturerSerializer
 }

@@ -280,6 +280,16 @@ export const WIDTH_COL_CATEGORY = {
   title: 200,
 }
 
+export const MANUFACTURE = {
+  id: 'ID категории',
+  title: 'Наименование',
+}
+
+export const WIDTH_COL_MANUFACTURE = {
+  id: 30,
+  title: 200,
+}
+
 export const POPULAR_PRODUCTS = {
   title: 'Название',
   manufacturer: 'Производитель',
