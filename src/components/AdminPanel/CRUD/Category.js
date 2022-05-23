@@ -43,6 +43,7 @@ const Category = ({ children, category }) => {
   const [filters, setFilters] = useState({})
   const [productCheck, setProductCheck] = useState([])
   const [warning, setWarning] = useState('')
+  const [idDelete, setIdDelete] = useState('')
 
   const handleSubmitError = (response) => {
     if (response) {
@@ -155,7 +156,7 @@ const Category = ({ children, category }) => {
     apiFunc = () => { },
     afterFunc = () => { },
     title = 'Внимание! В нижеперечисленных продуктах текущая категория будет заменена новой',
-    idForDeleteCheck = null
+    idForDeleteCheck = ''
   ) => {
     setLoading(true)
     apiFunc(idForDeleteCheck || formik.values)
@@ -166,9 +167,10 @@ const Category = ({ children, category }) => {
             modal: MODAL_TYPES.productSale,
           })
           setWarning(title)
+          setIdDelete(idForDeleteCheck)
         }
         else {
-          afterFunc()
+          afterFunc(idForDeleteCheck)
         }
         setLoading(false)
       })
@@ -178,8 +180,8 @@ const Category = ({ children, category }) => {
       })
   }
 
-  const deleteDataCorrect = e => {
-    apiHandler(api.deleteBonusCardOwner, setCategories, e.target.name)
+  const deleteDataCorrect = (idForDeleteCheck) => {
+    apiHandler(api.deleteCategory, setCategories, idForDeleteCheck)
   }
 
   const addDataCorrect = () => {
@@ -200,7 +202,12 @@ const Category = ({ children, category }) => {
 
   const onDelete = (e) => {
     const id = e.target.name
-    checkCorrect(api.checkCategoryDelete, deleteDataCorrect, 'Внимание! Вместе с данной категорией будут удалены следующие продукты:', id)
+    checkCorrect(
+      api.checkCategoryDelete,
+      deleteDataCorrect,
+      'Внимание! Вместе с данной категорией будут удалены следующие продукты:',
+      id,
+    )
   }
 
   const onAction = (action) => {
@@ -209,6 +216,7 @@ const Category = ({ children, category }) => {
     setError('')
     setFilters({})
     setWarning('')
+    setIdDelete('')
     if (action === HEADER_BASIC.add) {
       setData({ ...initialValues })
     }
