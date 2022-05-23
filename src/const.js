@@ -234,6 +234,30 @@ export const WIDTH_COL_BONUS_CARD_OWNER = {
   gender: 60,
 }
 
+export const PRODUCTS = {
+  id: 'id товара',
+  title: 'Наименование',
+  priceNow: 'Цена (без скидки)',
+  count: 'Общее кол-во',
+  expirationDate: 'Срок годности (сутки)',
+  category: 'Категория',
+  manufacturer: 'Производитель',
+  measurementUnits: 'Ед. измерения',
+  sale: 'id акции',
+}
+
+export const WIDTH_COL_PRODUCTS = {
+  id: 30,
+  title: 100,
+  priceNow: 45,
+  count: 30,
+  expirationDate: 30,
+  category: 80,
+  manufacturer: 80,
+  measurementUnits: 25,
+  sale: 30,
+}
+
 export const USER_LIST = {
   id: 'ID пользователя',
   fio: 'ФИО',

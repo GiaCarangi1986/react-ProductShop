@@ -27,7 +27,9 @@ import {
   productGetSerializer,
   productForMakeDeliverySerializer,
   setMakeDeliverySerializer,
-  setWriteOffSerializer
+  setWriteOffSerializer,
+  filterSerializer as filterSerializerProduct,
+  getProductCrud,
 } from './productSerializer'
 
 import {
@@ -86,5 +88,7 @@ export {
   getManufacturerSerializer,
   createManufacturerCheckSerializer,
   createManufacturerSerializer,
-  getManufacturerForEditSerializer
+  getManufacturerForEditSerializer,
+  filterSerializerProduct,
+  getProductCrud
 }

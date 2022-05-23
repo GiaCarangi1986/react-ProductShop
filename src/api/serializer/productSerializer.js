@@ -56,4 +56,35 @@ const setWriteOffSerializer = (productList = []) => {
   return serProductList
 }
 
-export { productGetSerializer, productForMakeDeliverySerializer, setMakeDeliverySerializer, setWriteOffSerializer };
+const filterSerializer = (filters = {}) => {
+  return {
+    search: filters?.search || ''
+  }
+}
+
+const getProductCrud = (params = []) => {
+  const serList = []
+  params.forEach(el => {
+    serList.push({
+      id: el.id, // id
+      title: el.title, // наименование
+      priceNow: roundNumber(el.priceNow), // текущая цена
+      count: el.count, // кол-во на складе
+      expirationDate: el.expirationDate, // срок годности в сутках
+      category: el.category, // категория
+      measurementUnits: el.measurementUnits, // ед. измер
+      sale: el.sale, // скидка
+      manufacturer: el.manufacturer, // производитель
+    })
+  })
+  return serList
+}
+
+export {
+  productGetSerializer,
+  productForMakeDeliverySerializer,
+  setMakeDeliverySerializer,
+  setWriteOffSerializer,
+  filterSerializer,
+  getProductCrud
+};
