@@ -35,7 +35,8 @@ import {
   getCategoryForEditSerializer,
   filterSerializerManufacturer,
   getManufacturerSerializer,
-  createManufacturerCheckSerializer
+  createManufacturerCheckSerializer,
+  createManufacturerSerializer
 } from './serializer'
 import { dateFotmattedForMakeDeliveryBack, formatDateToBack } from '../utils/date'
 
@@ -163,6 +164,13 @@ class Api extends BaseApi {
   checkManufacturer = async (data) => {
     const serData = createManufacturerCheckSerializer(data)
     const res = await this.post('/manufacturer_check/', serData)
+    const serRes = getManufacturerSerializer(res.data)
+    return serRes
+  }
+
+  addManufacturer = async (data) => {
+    const serData = createManufacturerSerializer(data)
+    const res = await this.post('/manufacturer/', serData)
     const serRes = getManufacturerSerializer(res.data)
     return serRes
   }

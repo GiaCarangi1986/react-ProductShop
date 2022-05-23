@@ -26,4 +26,15 @@ const createManufacturerCheckSerializer = (data = []) => {
   }
 }
 
-export { filterSerializer, getManufacturerSerializer, createManufacturerCheckSerializer }
+const createManufacturerSerializer = (params = {}) => {
+  const ids = []
+  params?.productList.forEach(element => {
+    ids.push(element.id)
+  });
+  return {
+    title: params.title, // наименование
+    productsID: ids, // список id продуктов для изменения
+  }
+}
+
+export { filterSerializer, getManufacturerSerializer, createManufacturerCheckSerializer, createManufacturerSerializer }

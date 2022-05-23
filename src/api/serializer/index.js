@@ -42,7 +42,8 @@ import {
 import {
   filterSerializer as filterSerializerManufacturer,
   getManufacturerSerializer,
-  createManufacturerCheckSerializer
+  createManufacturerCheckSerializer,
+  createManufacturerSerializer
 } from './manufacturer'
 
 export {
@@ -82,5 +83,6 @@ export {
   getCategoryForEditSerializer,
   filterSerializerManufacturer,
   getManufacturerSerializer,
-  createManufacturerCheckSerializer
+  createManufacturerCheckSerializer,
+  createManufacturerSerializer
 }

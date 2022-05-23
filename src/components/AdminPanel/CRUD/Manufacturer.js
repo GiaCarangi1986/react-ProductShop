@@ -177,7 +177,7 @@ const Manufacturer = ({ children, manufacturer }) => {
   }
 
   const addDataCorrect = () => {
-    apiHandler(api.addCategory, setManufacturer, formik.values, comeBack)
+    apiHandler(api.addManufacturer, setManufacturer, formik.values, comeBack)
   }
 
   const editDataCorrect = () => {
