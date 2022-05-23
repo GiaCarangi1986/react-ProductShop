@@ -85,7 +85,7 @@ class Api extends BaseApi {
     return serRes
   }
 
-  deleteCheck = async (id = '', isDelayCheck = false) => {
+  deleteCheck = async (id = '') => {
     const res = await this.delete(`/check/${id}`)
     return res.data
   }

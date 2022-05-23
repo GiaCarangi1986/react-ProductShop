@@ -340,7 +340,7 @@ const Category = ({ children, category }) => {
         </div>
       )}
       <Popup />
-      <ProductSale data={productCheck} func={funcAfterConfirm} title={warning} />
+      <ProductSale data={productCheck} func={idDelete ? deleteDataCorrect : funcAfterConfirm} title={warning} idDelete={idDelete} />
     </>
   )
 }

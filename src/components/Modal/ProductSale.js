@@ -4,7 +4,7 @@ import { Button, Modal } from '../../views'
 import { MODAL_TYPES } from '../../const'
 import style from './modal.module.scss'
 
-const ProductSale = ({ func = () => { }, data = [], title = '' }) => {
+const ProductSale = ({ func = () => { }, data = [], title = '', idDelete = '' }) => {
   const { modal, dispatch } = useStoreon('modal')
   const [open, setOpen] = useState(false)
 
@@ -12,7 +12,7 @@ const ProductSale = ({ func = () => { }, data = [], title = '' }) => {
 
   const positiveAction = () => {
     closeModal()
-    func()
+    func(idDelete)
   }
 
   useEffect(() => {
