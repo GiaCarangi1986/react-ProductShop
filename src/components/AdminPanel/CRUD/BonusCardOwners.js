@@ -80,12 +80,21 @@ const BonusCardOwners = ({ children }) => {
   }
 
   const comeBack = () => {
-    setAddUpdate(false)
     formik.setValues(initialValues)
     formik.setErrors({})
     formik.setTouched({})
     setHeader('')
     setError('')
+    setAddUpdate(false)
+  }
+
+  const clearFilters = () => {
+    setFilters({})
+  }
+
+  const applyChanges = () => {
+    comeBack()
+    clearFilters()
   }
 
   const apiHandler = (func, setFunc = () => { }, value, afterFunc = () => { }, params) => {
@@ -93,13 +102,12 @@ const BonusCardOwners = ({ children }) => {
     func(value)
       .then(res => {
         setFunc(res)
-        setLoading(false)
         params ? afterFunc(params) : afterFunc()
+        setLoading(false)
         if (params === HEADER_BASIC.update) {
           setData({ ...res })
         }
         setError('')
-        setFilters({})
       })
       .catch(err => {
         console.log('err', err)
@@ -109,22 +117,21 @@ const BonusCardOwners = ({ children }) => {
   }
 
   const onDelete = e => {
-    apiHandler(api.deleteBonusCardOwner, setBonusCardOwner, e.target.name)
+    apiHandler(api.deleteBonusCardOwner, setBonusCardOwner, e.target.name, clearFilters)
   }
 
   const addData = () => {
-    apiHandler(api.addBonusCardOwner, setBonusCardOwner, formik.values, comeBack)
+    apiHandler(api.addBonusCardOwner, setBonusCardOwner, formik.values, applyChanges)
   }
 
   const editData = () => {
-    apiHandler(api.editBonusCardOwner, setBonusCardOwner, formik.values, comeBack)
+    apiHandler(api.editBonusCardOwner, setBonusCardOwner, formik.values, applyChanges)
   }
 
   const onAction = (action) => {
     setAddUpdate(true)
     setHeader(`${action} ${HEADER}`)
     setError('')
-    setFilters({})
     if (action === HEADER_BASIC.add) {
       setData({ ...initialValues })
     }

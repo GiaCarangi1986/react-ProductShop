@@ -122,12 +122,21 @@ const Category = ({ children }) => {
   }
 
   const comeBack = () => {
-    setAddUpdate(false)
     formik.setValues(initialValues)
     formik.setErrors({})
     formik.setTouched({})
     setHeader('')
     setError('')
+    setAddUpdate(false)
+  }
+
+  const clearFilters = () => {
+    setFilters({})
+  }
+
+  const applyChanges = () => {
+    comeBack()
+    clearFilters()
   }
 
   const apiHandler = (func, setFunc = () => { }, value, afterFunc = () => { }, params) => {
@@ -135,13 +144,12 @@ const Category = ({ children }) => {
     func(value)
       .then(res => {
         setFunc(res)
-        setLoading(false)
         params ? afterFunc(params) : afterFunc()
+        setLoading(false)
         if (params === HEADER_BASIC.update) {
           setData({ ...res })
         }
         setError('')
-        setFilters({})
       })
       .catch(err => {
         console.log('err', err)
@@ -179,15 +187,15 @@ const Category = ({ children }) => {
   }
 
   const deleteDataCorrect = (idForDeleteCheck) => {
-    apiHandler(api.deleteCategory, setCategories, idForDeleteCheck)
+    apiHandler(api.deleteCategory, setCategories, idForDeleteCheck, clearFilters)
   }
 
   const addDataCorrect = () => {
-    apiHandler(api.addCategory, setCategories, formik.values, comeBack)
+    apiHandler(api.addCategory, setCategories, formik.values, applyChanges)
   }
 
   const editDataCorrect = () => {
-    apiHandler(api.editCategory, setCategories, formik.values, comeBack)
+    apiHandler(api.editCategory, setCategories, formik.values, applyChanges)
   }
 
   const addData = () => {
@@ -212,7 +220,6 @@ const Category = ({ children }) => {
     setAddUpdate(true)
     setHeader(`${action} ${HEADER}`)
     setError('')
-    setFilters({})
     setWarning('')
     setIdDelete('')
     if (action === HEADER_BASIC.add) {

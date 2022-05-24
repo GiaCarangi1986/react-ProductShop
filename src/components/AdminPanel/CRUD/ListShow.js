@@ -27,24 +27,18 @@ const ListShow = ({
   }
 
   useEffect(() => {
-    console.log('list', list)
-
-    if (Object.keys(filters).length !== 0 || list.length === 0) {
-      console.log('Object.keys(filters).length', Object.keys(filters).length)
-      console.log('list.length ', list.length)
-      setLoading(true)
-      func(filters)
-        .then(res => {
-          setList(res)
-          setLoading(false)
-          setError('')
-        })
-        .catch(err => {
-          console.log('err', err)
-          handleSubmitError(err?.response)
-          setLoading(false)
-        })
-    }
+    setLoading(true)
+    func(filters)
+      .then(res => {
+        setList(res)
+        setLoading(false)
+        setError('')
+      })
+      .catch(err => {
+        console.log('err', err)
+        handleSubmitError(err?.response)
+        setLoading(false)
+      })
   }, [filters])
 
   const classesScroll = classNames({

@@ -85,12 +85,22 @@ const SystemUsers = ({ children }) => {
   }
 
   const comeBack = () => {
-    setAddUpdate(false)
     formik.setValues(initialValues)
     formik.setErrors({})
     formik.setTouched({})
     setHeader('')
     setError('')
+    setAddUpdate(false)
+  }
+
+  const clearFilters = () => {
+    setFilters({})
+    setOptionName(DEFAULT_OPTION)
+  }
+
+  const applyChanges = () => {
+    comeBack()
+    clearFilters()
   }
 
   const apiHandler = (func, setFunc = () => { }, value, afterFunc = () => { }, params) => {
@@ -98,14 +108,12 @@ const SystemUsers = ({ children }) => {
     func(value)
       .then(res => {
         setFunc(res)
-        setLoading(false)
         params ? afterFunc(params) : afterFunc()
+        setLoading(false)
         if (params === HEADER_BASIC.update) {
           setData({ ...res })
         }
         setError('')
-        setFilters({})
-        setOptionName(DEFAULT_OPTION)
       })
       .catch(err => {
         console.log('err', err)
@@ -115,23 +123,21 @@ const SystemUsers = ({ children }) => {
   }
 
   const onDelete = e => {
-    apiHandler(api.deleteUser, setSystemUsers, e.target.name)
+    apiHandler(api.deleteUser, setSystemUsers, e.target.name, clearFilters)
   }
 
   const addData = () => {
-    apiHandler(api.addUser, setSystemUsers, formik.values, comeBack)
+    apiHandler(api.addUser, setSystemUsers, formik.values, applyChanges)
   }
 
   const editData = () => {
-    apiHandler(api.editUser, setSystemUsers, formik.values, comeBack)
+    apiHandler(api.editUser, setSystemUsers, formik.values, applyChanges)
   }
 
   const onAction = (action) => {
     setAddUpdate(true)
     setHeader(`${action} ${HEADER}`)
     setError('')
-    setFilters({})
-    setOptionName(DEFAULT_OPTION)
     if (action === HEADER_BASIC.add) {
       setData({ ...initialValues })
     }

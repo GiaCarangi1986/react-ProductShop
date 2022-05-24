@@ -116,12 +116,21 @@ const Manufacturer = ({ children }) => {
   }
 
   const comeBack = () => {
-    setAddUpdate(false)
     formik.setValues(initialValues)
     formik.setErrors({})
     formik.setTouched({})
     setHeader('')
     setError('')
+    setAddUpdate(false)
+  }
+
+  const clearFilters = () => {
+    setFilters({})
+  }
+
+  const applyChanges = () => {
+    comeBack()
+    clearFilters()
   }
 
   const apiHandler = (func, setFunc = () => { }, value, afterFunc = () => { }, params) => {
@@ -129,13 +138,12 @@ const Manufacturer = ({ children }) => {
     func(value)
       .then(res => {
         setFunc(res)
-        setLoading(false)
         params ? afterFunc(params) : afterFunc()
+        setLoading(false)
         if (params === HEADER_BASIC.update) {
           setData({ ...res })
         }
         setError('')
-        setFilters({})
       })
       .catch(err => {
         console.log('err', err)
@@ -166,15 +174,15 @@ const Manufacturer = ({ children }) => {
   }
 
   const onDelete = e => {
-    apiHandler(api.deleteManufacturer, setManufacturer, e.target.name)
+    apiHandler(api.deleteManufacturer, setManufacturer, e.target.name, clearFilters)
   }
 
   const addDataCorrect = () => {
-    apiHandler(api.addManufacturer, setManufacturer, formik.values, comeBack)
+    apiHandler(api.addManufacturer, setManufacturer, formik.values, applyChanges)
   }
 
   const editDataCorrect = () => {
-    apiHandler(api.editManufacturer, setManufacturer, formik.values, comeBack)
+    apiHandler(api.editManufacturer, setManufacturer, formik.values, applyChanges)
   }
 
   const addData = () => {
@@ -189,7 +197,6 @@ const Manufacturer = ({ children }) => {
     setAddUpdate(true)
     setHeader(`${action} ${HEADER}`)
     setError('')
-    setFilters({})
     if (action === HEADER_BASIC.add) {
       setData({ ...initialValues })
     }

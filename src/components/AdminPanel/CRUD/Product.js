@@ -80,12 +80,21 @@ const Product = ({ children }) => {
   }
 
   const comeBack = () => {
-    setAddUpdate(false)
     formik.setValues(initialValues)
     formik.setErrors({})
     formik.setTouched({})
     setHeader('')
     setError('')
+    setAddUpdate(false)
+  }
+
+  const clearFilters = () => {
+    setFilters({})
+  }
+
+  const applyChanges = () => {
+    comeBack()
+    clearFilters()
   }
 
   const apiHandler = (func, setFunc = () => { }, value, afterFunc = () => { }, params) => {
@@ -93,13 +102,12 @@ const Product = ({ children }) => {
     func(value)
       .then(res => {
         setFunc(res)
-        setLoading(false)
         params ? afterFunc(params) : afterFunc()
+        setLoading(false)
         if (params === HEADER_BASIC.update) {
           setData({ ...res })
         }
         setError('')
-        setFilters({})
       })
       .catch(err => {
         console.log('err', err)
@@ -109,22 +117,21 @@ const Product = ({ children }) => {
   }
 
   const onDelete = e => {
-    apiHandler(api.deleteProduct, setProduct, e.target.name)
+    apiHandler(api.deleteProduct, setProduct, e.target.name, clearFilters)
   }
 
   const addData = () => {
-    apiHandler(api.addBonusCardOwner, setProduct, formik.values, comeBack)
+    apiHandler(api.addBonusCardOwner, setProduct, formik.values, applyChanges)
   }
 
   const editData = () => {
-    apiHandler(api.editBonusCardOwner, setProduct, formik.values, comeBack)
+    apiHandler(api.editBonusCardOwner, setProduct, formik.values, applyChanges)
   }
 
   const onAction = (action) => {
     setAddUpdate(true)
     setHeader(`${action} ${HEADER}`)
     setError('')
-    setFilters({})
     if (action === HEADER_BASIC.add) {
       setData({ ...initialValues })
     }

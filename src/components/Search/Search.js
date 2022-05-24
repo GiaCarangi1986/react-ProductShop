@@ -20,7 +20,7 @@ const Search = ({ filters = {}, setFilters = () => { } }) => {
 
   const formik = useFormik({
     initialValues: {
-      search: ''
+      search: filters.search
     },
     onSubmit
   })
