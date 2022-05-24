@@ -24,11 +24,8 @@ import { categoryCRUD } from '../../../schema';
 import style from '../style.module.scss';
 import api from '../../../api'
 
-const Category = ({ children, category }) => {
-  const {
-    categories = [],
-    setCategories = () => { },
-  } = category
+const Category = ({ children }) => {
+  const [categories, setCategories] = useState([])
 
   const { dispatch } = useStoreon();
 

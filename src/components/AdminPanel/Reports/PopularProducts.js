@@ -13,11 +13,8 @@ import table_style from '../../CheckTable/check_table.module.scss'
 
 import api from '../../../api'
 
-const PopularProducts = ({ children, popular_product }) => {
-  const {
-    popularList,
-    setPopularList
-  } = popular_product
+const PopularProducts = ({ children }) => {
+  const [popularList, setPopularList] = useState([])
 
   const initDateValues = {
     date_search: {

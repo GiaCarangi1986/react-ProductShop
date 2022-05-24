@@ -19,11 +19,8 @@ import { userCRUD } from '../../../schema';
 import style from '../style.module.scss';
 import api from '../../../api'
 
-const Product = ({ children, product }) => {
-  const {
-    productList = [],
-    setProduct = () => { },
-  } = product
+const Product = ({ children }) => {
+  const [productList, setProduct] = useState([])
 
   const HEADER = 'продукта'
 

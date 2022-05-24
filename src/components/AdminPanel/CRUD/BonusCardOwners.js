@@ -19,11 +19,8 @@ import { userCRUD } from '../../../schema';
 import style from '../style.module.scss';
 import api from '../../../api'
 
-const BonusCardOwners = ({ children, bonus_card }) => {
-  const {
-    bonusCardOwner = [],
-    setBonusCardOwner = () => { },
-  } = bonus_card
+const BonusCardOwners = ({ children }) => {
+  const [bonusCardOwner, setBonusCardOwner] = useState([])
 
   const HEADER = 'держателя карты'
 

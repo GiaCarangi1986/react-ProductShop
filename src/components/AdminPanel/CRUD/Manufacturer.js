@@ -24,11 +24,8 @@ import { categoryCRUD } from '../../../schema';
 import style from '../style.module.scss';
 import api from '../../../api'
 
-const Manufacturer = ({ children, manufacturer }) => {
-  const {
-    manufacturerList = [],
-    setManufacturer = () => { },
-  } = manufacturer
+const Manufacturer = ({ children }) => {
+  const [manufacturerList, setManufacturer] = useState([])
 
   const { dispatch } = useStoreon();
 

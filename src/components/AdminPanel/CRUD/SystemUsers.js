@@ -22,11 +22,8 @@ import { systemUserCRUD } from '../../../schema';
 import style from '../style.module.scss';
 import api from '../../../api'
 
-const SystemUsers = ({ children, user }) => {
-  const {
-    systemUsers = [],
-    setSystemUsers = () => { },
-  } = user
+const SystemUsers = ({ children }) => {
+  const [systemUsers, setSystemUsers] = useState([])
 
   const HEADER = 'пользователя системы'
   const DEFAULT_OPTION = 'Не выбрано'

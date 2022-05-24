@@ -10,11 +10,8 @@ import table_style from '../../CheckTable/check_table.module.scss'
 
 import api from '../../../api'
 
-const Revenue = ({ children, revenue }) => {
-  const {
-    revenueList,
-    setRevenueList
-  } = revenue
+const Revenue = ({ children }) => {
+  const [revenueList, setRevenueList] = useState([])
 
   const initDateValues = {
     date_search: {

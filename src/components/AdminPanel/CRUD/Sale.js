@@ -28,11 +28,8 @@ import { saleCRUD } from '../../../schema';
 import style from '../style.module.scss';
 import api from '../../../api'
 
-const BonusCardOwners = ({ children, sale }) => {
-  const {
-    saleList = [],
-    setSaleList = () => { },
-  } = sale
+const BonusCardOwners = ({ children }) => {
+  const [saleList, setSaleList] = useState([])
 
   const { dispatch } = useStoreon();
 

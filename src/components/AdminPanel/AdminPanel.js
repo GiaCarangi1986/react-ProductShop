@@ -23,29 +23,12 @@ const AdminPanel = () => {
   const [latestMakeDeliveryDate, setLatestMakeDeliveryDate] = useState(DEFAULT_DATE)
   const [latestWriteOffDate, setLatestWriteOffDate] = useState(DEFAULT_DATE)
   const [period, setPeriod] = useState('Неделя')
-  const [peopleList, setPeopleList] = useState([])
-  const [popularList, setPopularList] = useState([])
-  const [revenueList, setRevenueList] = useState([])
-  const [bonusCardOwner, setBonusCardOwner] = useState([])
-  const [saleList, setSaleList] = useState([])
-  const [systemUsers, setSystemUsers] = useState([])
-  const [categories, setCategories] = useState([])
-  const [manufacturerList, setManufacturer] = useState([])
-  const [productList, setProduct] = useState([])
 
   const clearLists = () => {
     setMakeDeliveriesList([])
     setWriteOffList([])
     setLatestMakeDeliveryDate([])
     setLatestWriteOffDate([])
-    setPeopleList([])
-    setRevenueList([])
-    setBonusCardOwner([])
-    setSaleList([])
-    setSystemUsers([])
-    setCategories([])
-    setManufacturer([])
-    setProduct([])
   }
 
   const handleClick = (e) => {
@@ -98,42 +81,6 @@ const AdminPanel = () => {
               setTypePage,
               latestDate: latestWriteOffDate,
               setLatestDate: setLatestWriteOffDate,
-            }}
-            best_saler={{
-              peopleList,
-              setPeopleList
-            }}
-            popular_product={{
-              popularList,
-              setPopularList
-            }}
-            revenue={{
-              revenueList,
-              setRevenueList
-            }}
-            bonus_card={{
-              bonusCardOwner,
-              setBonusCardOwner,
-            }}
-            user={{
-              systemUsers,
-              setSystemUsers,
-            }}
-            sale={{
-              saleList,
-              setSaleList,
-            }}
-            category={{
-              categories,
-              setCategories,
-            }}
-            manufacturer={{
-              manufacturerList,
-              setManufacturer,
-            }}
-            product={{
-              productList,
-              setProduct,
             }}
           >
             <div className={style.close}>
