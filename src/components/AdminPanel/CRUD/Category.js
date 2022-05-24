@@ -240,7 +240,7 @@ const Category = ({ children }) => {
       if (equal && _.isEqual(data?.productList, valuesWithoutProduct.productList)) {
         equal = true
       }
-      const isDisabled = !isValid || equal || !valuesWithoutProduct?.productList?.length
+      const isDisabled = !isValid || equal
       setDisabled(isDisabled)
       if (!data) {
         setData({ ...values })
