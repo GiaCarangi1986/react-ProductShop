@@ -308,7 +308,6 @@ const SystemUsers = ({ children, user }) => {
             <DropdownDescription text='Роль:' options={OPTIONS} visiableText={optionName} />
           </div>
           <ListShow
-            children={children}
             list={systemUsers}
             setList={setSystemUsers}
             WIDTH_COL={WIDTH_COL_USER_LIST}

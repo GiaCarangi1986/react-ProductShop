@@ -296,7 +296,6 @@ const Manufacturer = ({ children, manufacturer }) => {
             <Search filters={filters} setFilters={setFilters} />
           </div>
           <ListShow
-            children={children}
             list={manufacturerList}
             setList={setManufacturer}
             WIDTH_COL={WIDTH_COL_MANUFACTURE}

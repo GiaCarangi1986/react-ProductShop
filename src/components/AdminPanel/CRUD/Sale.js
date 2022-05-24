@@ -367,7 +367,6 @@ const BonusCardOwners = ({ children, sale }) => {
             <DropdownDescription text='Статус:' options={OPTIONS} visiableText={optionName} />
           </div>
           <ListShow
-            children={children}
             list={saleList}
             setList={setSaleList}
             WIDTH_COL={WIDTH_COL_SALE_LIST}

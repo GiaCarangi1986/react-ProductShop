@@ -269,7 +269,6 @@ const BonusCardOwners = ({ children, bonus_card }) => {
             <Search filters={filters} setFilters={setFilters} />
           </div>
           <ListShow
-            children={children}
             list={bonusCardOwner}
             setList={setBonusCardOwner}
             WIDTH_COL={WIDTH_COL_BONUS_CARD_OWNER}

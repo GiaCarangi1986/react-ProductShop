@@ -112,7 +112,7 @@ const Product = ({ children, product }) => {
   }
 
   const onDelete = e => {
-    apiHandler(api.deleteBonusCardOwner, setProduct, e.target.name)
+    apiHandler(api.deleteProduct, setProduct, e.target.name)
   }
 
   const addData = () => {
@@ -269,7 +269,6 @@ const Product = ({ children, product }) => {
             <Search filters={filters} setFilters={setFilters} />
           </div>
           <ListShow
-            children={children}
             list={productList}
             setList={setProduct}
             WIDTH_COL={WIDTH_COL_PRODUCTS}

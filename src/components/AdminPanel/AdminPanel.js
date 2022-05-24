@@ -33,12 +33,7 @@ const AdminPanel = () => {
   const [manufacturerList, setManufacturer] = useState([])
   const [productList, setProduct] = useState([])
 
-  const handleClick = (e) => {
-    setTypePage(e.target.value)
-  }
-
-  const closeRightView = () => {
-    setTypePage('')
+  const clearLists = () => {
     setMakeDeliveriesList([])
     setWriteOffList([])
     setLatestMakeDeliveryDate([])
@@ -51,6 +46,15 @@ const AdminPanel = () => {
     setCategories([])
     setManufacturer([])
     setProduct([])
+  }
+
+  const handleClick = (e) => {
+    setTypePage(e.target.value)
+  }
+
+  const closeRightView = () => {
+    setTypePage('')
+    clearLists()
   }
 
   const RIGHT_VIEWS = {

@@ -322,7 +322,6 @@ const Category = ({ children, category }) => {
             <Search filters={filters} setFilters={setFilters} />
           </div>
           <ListShow
-            children={children}
             list={categories}
             setList={setCategories}
             WIDTH_COL={WIDTH_COL_CATEGORY}
