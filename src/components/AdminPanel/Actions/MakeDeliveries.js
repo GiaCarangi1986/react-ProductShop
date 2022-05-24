@@ -22,21 +22,15 @@ import table_style from '../../CheckTable/check_table.module.scss'
 
 import api from '../../../api'
 
-const MakeDeliveries = ({ children, make_deliveries }) => {
-  const {
-    productList = [],
-    setProductList = () => { },
-    setTypePage = () => { },
-    latestDate,
-    setLatestDate,
-    setPeriod,
-    period
-  } = make_deliveries
+const MakeDeliveries = ({ children, setTypePage }) => {
   const { dispatch } = useStoreon();
 
   const [sum, setSum] = useState(0)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [period, setPeriod] = useState('Неделя')
+  const [latestDate, setLatestDate] = useState(DEFAULT_DATE)
+  const [productList, setProductList] = useState([])
 
   const handleSubmitError = (response) => {
     if (response) {

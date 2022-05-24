@@ -13,23 +13,11 @@ import Manufacturer from './CRUD/Manufacturer';
 import Product from './CRUD/Product';
 import Options from './Options'
 import Popup from '../Popup';
-import { ADMIN_PANEL, DEFAULT_DATE } from '../../const';
+import { ADMIN_PANEL } from '../../const';
 import style from './style.module.scss';
 
 const AdminPanel = () => {
   const [typePage, setTypePage] = useState('')
-  const [makeDeliveriesList, setMakeDeliveriesList] = useState([])
-  const [writeOffList, setWriteOffList] = useState([])
-  const [latestMakeDeliveryDate, setLatestMakeDeliveryDate] = useState(DEFAULT_DATE)
-  const [latestWriteOffDate, setLatestWriteOffDate] = useState(DEFAULT_DATE)
-  const [period, setPeriod] = useState('Неделя')
-
-  const clearLists = () => {
-    setMakeDeliveriesList([])
-    setWriteOffList([])
-    setLatestMakeDeliveryDate([])
-    setLatestWriteOffDate([])
-  }
 
   const handleClick = (e) => {
     setTypePage(e.target.value)
@@ -37,7 +25,6 @@ const AdminPanel = () => {
 
   const closeRightView = () => {
     setTypePage('')
-    clearLists()
   }
 
   const RIGHT_VIEWS = {
@@ -66,22 +53,7 @@ const AdminPanel = () => {
       {RightPart && (
         <div className={style.right}>
           <RightPart
-            make_deliveries={{
-              productList: makeDeliveriesList,
-              setProductList: setMakeDeliveriesList,
-              setTypePage,
-              latestDate: latestMakeDeliveryDate,
-              setLatestDate: setLatestMakeDeliveryDate,
-              period,
-              setPeriod
-            }}
-            write_off_act={{
-              productList: writeOffList,
-              setProductList: setWriteOffList,
-              setTypePage,
-              latestDate: latestWriteOffDate,
-              setLatestDate: setLatestWriteOffDate,
-            }}
+            setTypePage={setTypePage}
           >
             <div className={style.close}>
               <Button

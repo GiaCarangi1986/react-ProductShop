@@ -26,14 +26,7 @@ import table_style from '../../CheckTable/check_table.module.scss'
 
 import api from '../../../api'
 
-const WriteOffProduct = ({ children, write_off_act }) => {
-  const {
-    productList = [],
-    setProductList = () => { },
-    setTypePage = () => { },
-    latestDate,
-    setLatestDate,
-  } = write_off_act
+const WriteOffProduct = ({ children, setTypePage }) => {
   const { dispatch, currentUser } = useStoreon('currentUser');
 
   const [unit, setUnit] = useState(UNITS[0])
@@ -41,6 +34,8 @@ const WriteOffProduct = ({ children, write_off_act }) => {
   const [disabled, setDisabled] = useState(true)
   const [productCount, setProductCount] = useState({})
   const [error, setError] = useState('')
+  const [latestDate, setLatestDate] = useState(DEFAULT_DATE)
+  const [productList, setProductList] = useState([])
 
   const handleSubmitError = (response) => {
     if (response) {
