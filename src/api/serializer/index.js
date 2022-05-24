@@ -30,6 +30,7 @@ import {
   setWriteOffSerializer,
   filterSerializer as filterSerializerProduct,
   getProductCrud,
+  createProductSerializer
 } from './productSerializer'
 
 import {
@@ -90,5 +91,6 @@ export {
   createManufacturerSerializer,
   getManufacturerForEditSerializer,
   filterSerializerProduct,
-  getProductCrud
+  getProductCrud,
+  createProductSerializer
 }

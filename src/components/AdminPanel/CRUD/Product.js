@@ -40,13 +40,13 @@ const Product = ({ children }) => {
   }
 
   const initialValues = {
-    firstName: '',
-    secondName: '',
-    patronymic: '',
-    phone: '',
-    email: '',
-    birthDate: null,
-    gender: null,
+    title: '',
+    priceNow: 1,
+    expirationDate: 1,
+    maybeOld: false,
+    category: null,
+    measurementUnits: null,
+    manufacturer: null,
     id: null
   }
 
@@ -153,7 +153,7 @@ const Product = ({ children }) => {
   }, [formik])
 
   const func = header === `${HEADER_BASIC.add} ${HEADER}` ? addData : editData
-
+  // maybeOld: false,
   return (
     <>
       {addUpdate ? (
@@ -161,42 +161,42 @@ const Product = ({ children }) => {
           <div className={style.addupdate__row}>
             <Fieldset
               errorClass='addOrUpdateCRUD'
-              error={formik.errors.secondName}
-              touched={formik.touched.secondName}>
+              error={formik.errors.title}
+              touched={formik.touched.title}>
               <Input
-                value={formik.values.secondName}
+                value={formik.values.title}
                 onGx-input={handleInput}
                 onGx-blur={handleBlur}
-                name={FORM_FIELDS.secondName}
-                label={FORM_LABELS.secondName}
+                name={FORM_FIELDS.title}
+                label={FORM_LABELS.title}
                 data-cy='title'
                 type='text'
               />
             </Fieldset>
             <Fieldset
               errorClass='addOrUpdateCRUD'
-              error={formik.errors.firstName}
-              touched={formik.touched.firstName}>
+              error={formik.errors.priceNow}
+              touched={formik.touched.priceNow}>
               <Input
-                value={formik.values.firstName}
+                value={formik.values.priceNow}
                 onGx-input={handleInput}
                 onGx-blur={handleBlur}
-                name={FORM_FIELDS.firstName}
-                label={FORM_LABELS.firstName}
+                name={FORM_FIELDS.priceNow}
+                label={FORM_LABELS.priceNow}
                 data-cy='title'
                 type='text'
               />
             </Fieldset>
             <Fieldset
               errorClass='addOrUpdateCRUD'
-              error={formik.errors.patronymic}
-              touched={formik.touched.patronymic}>
+              error={formik.errors.expirationDate}
+              touched={formik.touched.expirationDate}>
               <Input
-                value={formik.values.patronymic}
+                value={formik.values.expirationDate}
                 onGx-input={handleInput}
                 onGx-blur={handleBlur}
-                name={FORM_FIELDS.patronymic}
-                label={FORM_LABELS.patronymic}
+                name={FORM_FIELDS.expirationDate}
+                label={FORM_LABELS.expirationDate}
                 data-cy='title'
                 type='text'
               />
@@ -204,64 +204,54 @@ const Product = ({ children }) => {
             <Fieldset
               errorClass='addOrUpdateCRUD'
               containerClass='pressed_bottom'
-              error={formik.errors.gender}
-              touched={formik.touched.gender}>
+              error={formik.errors.category}
+              touched={formik.touched.category}>
               <Select
-                value={formik.values.gender}
-                name={FORM_FIELDS.gender}
-                label={FORM_LABELS.gender}
+                value={formik.values.category}
+                name={FORM_FIELDS.category}
+                label={FORM_LABELS.category}
                 data-cy='title'
-                type={SELECT_TYPES.gender}
+                type={SELECT_TYPES.category}
                 func={api.getGenderListForSelect}
-                onBlur={() => handleSelectBlur(FORM_FIELDS.gender)}
-                onChange={(e) => chooseSelectValue(e, FORM_FIELDS.gender)}
-                err={formik.errors.gender && formik.touched.gender}
+                onBlur={() => handleSelectBlur(FORM_FIELDS.category)}
+                onChange={(e) => chooseSelectValue(e, FORM_FIELDS.category)}
+                err={formik.errors.category && formik.touched.category}
               />
             </Fieldset>
           </div>
           <div className={style.addupdate__row}>
             <Fieldset
               errorClass='addOrUpdateCRUD'
-              error={formik.errors.phone}
-              touched={formik.touched.phone}>
-              <InputPhone
-                label={FORM_LABELS.phone}
-                country='ru'
-                onlyCountries={['ru']}
-                name={FORM_FIELDS.phone}
-                type='text'
-                onGx-input={formik.handleChange}
-                onGx-change={handleChangePhone}
-                value={formik.values.phone}
-                onBlur={handleBlur}
+              containerClass='pressed_bottom'
+              error={formik.errors.measurementUnits}
+              touched={formik.touched.measurementUnits}>
+              <Select
+                value={formik.values.measurementUnits}
+                name={FORM_FIELDS.measurementUnits}
+                label={FORM_LABELS.measurementUnits}
+                data-cy='title'
+                type={SELECT_TYPES.measurementUnits}
+                func={api.getGenderListForSelect}
+                onBlur={() => handleSelectBlur(FORM_FIELDS.measurementUnits)}
+                onChange={(e) => chooseSelectValue(e, FORM_FIELDS.measurementUnits)}
+                err={formik.errors.measurementUnits && formik.touched.measurementUnits}
               />
             </Fieldset>
             <Fieldset
               errorClass='addOrUpdateCRUD'
-              error={formik.errors.email}
-              touched={formik.touched.email}>
-              <Input
-                value={formik.values.email}
-                onGx-input={formik.handleChange}
-                onGx-blur={handleBlur}
-                name={FORM_FIELDS.email}
-                label={FORM_LABELS.email}
+              containerClass='pressed_bottom'
+              error={formik.errors.manufacturer}
+              touched={formik.touched.manufacturer}>
+              <Select
+                value={formik.values.manufacturer}
+                name={FORM_FIELDS.manufacturer}
+                label={FORM_LABELS.manufacturer}
                 data-cy='title'
-                type='text'
-              />
-            </Fieldset>
-            <Fieldset
-              errorClass='addOrUpdateCRUD'
-              error={formik.errors.birthDate}
-              touched={formik.touched.birthDate}>
-              <Input
-                value={formik.values.birthDate}
-                onGx-input={formik.handleChange}
-                onGx-blur={handleBlur}
-                name={FORM_FIELDS.birthDate}
-                label={FORM_LABELS.birthDate}
-                data-cy='title'
-                type='date'
+                type={SELECT_TYPES.manufacturer}
+                func={api.getGenderListForSelect}
+                onBlur={() => handleSelectBlur(FORM_FIELDS.manufacturer)}
+                onChange={(e) => chooseSelectValue(e, FORM_FIELDS.manufacturer)}
+                err={formik.errors.manufacturer && formik.touched.manufacturer}
               />
             </Fieldset>
           </div>

@@ -99,6 +99,11 @@ export const SCREENS = {
 };
 
 export const FORM_LABELS = {
+  manufacturer: 'Производитель',
+  measurementUnits: 'Ед. измерения',
+  category: 'Категория',
+  expirationDate: 'Срок годности (сутки)',
+  priceNow: 'Цена (без учета скидки)',
   start_at: 'Дата начала',
   end_at: 'Дата окончания',
   product: 'Товар',
@@ -123,6 +128,11 @@ export const FORM_LABELS = {
 }
 
 export const FORM_FIELDS = {
+  manufacturer: 'manufacturer',
+  measurementUnits: 'measurementUnits',
+  category: 'category',
+  expirationDate: 'expirationDate',
+  priceNow: 'priceNow',
   start_at: 'start_at',
   end_at: 'end_at',
   product: 'product',
