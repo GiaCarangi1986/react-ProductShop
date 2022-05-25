@@ -43,6 +43,26 @@ const Select = ({ func = () => { }, onInputFunc = () => { }, type, value, ...pro
     }
   }, [inputValue, value])
 
+  const standartSelect = (OBJ = null) => {
+    setLoading(true)
+    func()
+      .then((res) => {
+        const newRes = res.map(elem => {
+          return ({
+            label: OBJ ? OBJ[elem.title] : elem.title,
+            value: elem.id,
+          })
+        })
+
+        setOptions(newRes)
+        setLoading(false)
+      })
+      .catch((response) => {
+        console.log('response', response)
+        setLoading(false)
+      });
+  }
+
   useEffect(() => {
     switch (type) {
       case SELECT_TYPES.product:
@@ -72,44 +92,12 @@ const Select = ({ func = () => { }, onInputFunc = () => { }, type, value, ...pro
           });
         break;
 
-      case SELECT_TYPES.gender:
-        setLoading(true)
-        func()
-          .then((res) => {
-            const newRes = res.map(elem => {
-              return ({
-                label: elem.title,
-                value: elem.id,
-              })
-            })
-
-            setOptions(newRes)
-            setLoading(false)
-          })
-          .catch((response) => {
-            console.log('response', response)
-            setLoading(false)
-          });
+      case SELECT_TYPES.role:
+        standartSelect(ROLES)
         break;
 
-      case SELECT_TYPES.role:
-        setLoading(true)
-        func()
-          .then((res) => {
-            const newRes = res.map(elem => {
-              return ({
-                label: ROLES[elem.title],
-                value: elem.id,
-              })
-            })
-
-            setOptions(newRes)
-            setLoading(false)
-          })
-          .catch((response) => {
-            console.log('response', response)
-            setLoading(false)
-          });
+      default:
+        standartSelect()
         break;
     }
   }, [])

@@ -379,6 +379,24 @@ class Api extends BaseApi {
     const res = await this.get('/role/')
     return res.data
   }
+
+
+  getCategoryListForSelect = async () => {
+    const res = await this.get('/category_select/')
+    return res.data
+  }
+
+
+  getMeasurementUnitsListForSelect = async () => {
+    const res = await this.get('/measurement_units_select/')
+    return res.data
+  }
+
+
+  getManufacturerListForSelect = async () => {
+    const res = await this.get('/manufacturer_select/')
+    return res.data
+  }
 }
 
 export const MAIN_URL = 'http://localhost:4000'

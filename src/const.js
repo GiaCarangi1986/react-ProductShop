@@ -128,6 +128,7 @@ export const FORM_LABELS = {
 }
 
 export const FORM_FIELDS = {
+  maybeOld: 'maybeOld',
   manufacturer: 'manufacturer',
   measurementUnits: 'measurementUnits',
   category: 'category',
@@ -162,7 +163,10 @@ export const SELECT_TYPES = {
   product: 'product',
   card: 'card',
   gender: 'gender',
-  role: 'role'
+  role: 'role',
+  category: 'category',
+  measurementUnits: 'measurementUnits',
+  manufacturer: 'manufacturer',
 }
 
 export const CHECK_LINES_HEADER = {

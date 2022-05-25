@@ -11,7 +11,7 @@ import {
 } from '../../../const';
 import Search from '../../Search'
 import { handingErrors, deleteSpaces, capitalize } from '../../../utils'
-import { Input, Fieldset, InputPhone } from '../../../views';
+import { Input, Fieldset, Switch } from '../../../views';
 import Select from '../../Select';
 import ListShow from './ListShow';
 import AddOrUpdate from './AddOrUpdate';
@@ -212,7 +212,7 @@ const Product = ({ children }) => {
                 label={FORM_LABELS.category}
                 data-cy='title'
                 type={SELECT_TYPES.category}
-                func={api.getGenderListForSelect}
+                func={api.getCategoryListForSelect}
                 onBlur={() => handleSelectBlur(FORM_FIELDS.category)}
                 onChange={(e) => chooseSelectValue(e, FORM_FIELDS.category)}
                 err={formik.errors.category && formik.touched.category}
@@ -231,7 +231,7 @@ const Product = ({ children }) => {
                 label={FORM_LABELS.measurementUnits}
                 data-cy='title'
                 type={SELECT_TYPES.measurementUnits}
-                func={api.getGenderListForSelect}
+                func={api.getMeasurementUnitsListForSelect}
                 onBlur={() => handleSelectBlur(FORM_FIELDS.measurementUnits)}
                 onChange={(e) => chooseSelectValue(e, FORM_FIELDS.measurementUnits)}
                 err={formik.errors.measurementUnits && formik.touched.measurementUnits}
@@ -248,12 +248,19 @@ const Product = ({ children }) => {
                 label={FORM_LABELS.manufacturer}
                 data-cy='title'
                 type={SELECT_TYPES.manufacturer}
-                func={api.getGenderListForSelect}
+                func={api.getManufacturerListForSelect}
                 onBlur={() => handleSelectBlur(FORM_FIELDS.manufacturer)}
                 onChange={(e) => chooseSelectValue(e, FORM_FIELDS.manufacturer)}
                 err={formik.errors.manufacturer && formik.touched.manufacturer}
               />
             </Fieldset>
+            <Switch
+              text='Может распространяться скидка 50% по истечению срока годности'
+              value={String(+formik.values.maybeOld)}
+              checked={formik.values.maybeOld}
+              name={FORM_FIELDS.delayed_show}
+            // onGx-change={handleChangeSwitch}
+            />
           </div>
         </AddOrUpdate>
       ) : (
