@@ -51,6 +51,10 @@
   width: 75px;
 }
 
+.input_price::part(base) {
+  width: 95px;
+}
+
 .input_count::part(input) {
   padding: 0 5px;
 }

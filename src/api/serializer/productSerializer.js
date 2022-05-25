@@ -83,13 +83,36 @@ const getProductCrud = (params = []) => {
 
 const createProductSerializer = (params = {}) => ({
   title: params.title, // название
-  priceNow: +params.priceNow, // цена
+  priceNow: roundNumber(+params.priceNow), // цена
   expirationDate: params.finiteDate && +params.expirationDate || null, // срок годности в сутках
   maybeOld: params.maybeOld, // может ли распространяться скидка по старости
   categoryFK: params.category.value, // категория
   measurementUnitsFK: params.measurementUnits.value, // ед. измер.
   manufacturerFK: params.manufacturer?.value || null, // производитель
 })
+
+const getProductForEditSerializer = (params = {}) => {
+  return {
+    id: params.id, // id
+    title: params.title, // название
+    priceNow: String(params.priceNow), // цена
+    maybeOld: params.maybeOld, // может ли распространяться скидка по старости
+    category: {
+      value: params.category?.id,
+      label: params.category?.title
+    }, // категория
+    measurementUnits: {
+      value: params.measurementUnits?.id,
+      label: params.measurementUnits?.title
+    }, // ед. измер.
+    manufacturer: {
+      value: params.manufacturer?.id,
+      label: params.manufacturer?.title || ''
+    }, // производитель
+    finiteDate: params.expirationDate || false, // конечнен ли срок годности
+    expirationDate: String(params.expirationDate), // срок годности
+  }
+}
 
 export {
   productGetSerializer,
@@ -98,5 +121,6 @@ export {
   setWriteOffSerializer,
   filterSerializer,
   getProductCrud,
-  createProductSerializer
+  createProductSerializer,
+  getProductForEditSerializer
 };

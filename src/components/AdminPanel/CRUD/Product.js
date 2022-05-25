@@ -144,7 +144,7 @@ const Product = ({ children }) => {
   }
 
   const onEdit = (e) => {
-    apiHandler(api.getBonusCardOwnerForEdit, formik.setValues, e.target.name, onAction, HEADER_BASIC.update)
+    apiHandler(api.getProductForEdit, formik.setValues, e.target.name, onAction, HEADER_BASIC.update)
   }
 
   useEffect(() => {

@@ -40,7 +40,8 @@ import {
   getManufacturerForEditSerializer,
   filterSerializerProduct,
   getProductCrud,
-  createProductSerializer
+  createProductSerializer,
+  getProductForEditSerializer
 } from './serializer'
 import { dateFotmattedForMakeDeliveryBack, formatDateToBack } from '../utils/date'
 
@@ -259,9 +260,14 @@ class Api extends BaseApi {
 
   addProduct = async (data) => {
     const serData = createProductSerializer(data)
-    console.log('serData', serData)
     const res = await this.post('/product_crud/', serData)
     const serRes = getProductCrud(res.data)
+    return serRes
+  }
+
+  getProductForEdit = async (id) => {
+    const res = await this.patch(`/product_crud/${id}`)
+    const serRes = getProductForEditSerializer(res.data)
     return serRes
   }
 

@@ -6,6 +6,7 @@ import style from './input.module.scss';
 const Input = ({
   children = null,
   nameOfStyle = null,
+  otherStyle = null,
   value = null,
   clearable,
   ...props
@@ -14,6 +15,7 @@ const Input = ({
   const classes = classNames({
     [style.input]: true,
     [style[`${nameOfStyle}`]]: nameOfStyle,
+    [style[`${otherStyle}`]]: otherStyle,
     [style['input-value']]: value
   })
 

@@ -268,6 +268,7 @@ const RightPart = ({
                                           value={line[check_line_key]}
                                           type='number'
                                           nameOfStyle='input_count'
+                                          otherStyle='input_price'
                                           onGx-input={handleInputChange}
                                           name={line.id}
                                           step={0.01}
@@ -287,6 +288,7 @@ const RightPart = ({
                                     name={`${line.id}-${line.old_product}`}
                                     value={`${line.old_product}`}
                                     checked={line.old_product}
+                                    containerClass='old-product'
                                   />
                                 </div>
                               </td>
