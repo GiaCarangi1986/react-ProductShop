@@ -233,6 +233,10 @@
   border-radius: 50%;
 }
 
+.btn_width-square {
+  margin-right: 2px;
+}
+
 .btn_width-square::part(base) {
   width: 40px;
   min-width: 40px;

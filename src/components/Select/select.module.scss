@@ -7,7 +7,7 @@
   --gx-input-border-width: 2px;
   --gx-input-border-color: var(--df-border-color-default);
   --gx-input-border-color-hover: var(--df-border-color-hover);
-  --gx-input-border-color-focus: var(--df-border-color-hover);  
+  --gx-input-border-color-focus: var(--df-border-color-hover);
 }
 
 .select-label {
@@ -19,10 +19,14 @@
   margin-bottom: 7px;
   font-weight: 500;
   line-height: 16px;
+  margin-top: 3.8px;
 }
 
 @media (max-width: 1200px) {
   .select {
     height: 35px;
+  }
+  .select-label {
+    margin-top: 3.6px;
   }
 }

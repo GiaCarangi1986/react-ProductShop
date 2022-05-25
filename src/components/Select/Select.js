@@ -92,8 +92,34 @@ const Select = ({ func = () => { }, onInputFunc = () => { }, type, value, ...pro
           });
         break;
 
+      case SELECT_TYPES.card:
+        break;
+
       case SELECT_TYPES.role:
         standartSelect(ROLES)
+        break;
+
+      case SELECT_TYPES.manufacturer:
+        setLoading(true)
+        func()
+          .then((res) => {
+            const emptyOption = {
+              label: 'нет',
+              value: null
+            }
+            const newRes = res.map(elem => {
+              return ({
+                label: elem.title,
+                value: elem.id,
+              })
+            })
+            setOptions([emptyOption, ...newRes])
+            setLoading(false)
+          })
+          .catch((response) => {
+            console.log('response', response)
+            setLoading(false)
+          });
         break;
 
       default:

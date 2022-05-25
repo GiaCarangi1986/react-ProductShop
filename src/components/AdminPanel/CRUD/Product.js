@@ -15,7 +15,7 @@ import { Input, Fieldset, Switch } from '../../../views';
 import Select from '../../Select';
 import ListShow from './ListShow';
 import AddOrUpdate from './AddOrUpdate';
-import { userCRUD } from '../../../schema';
+import { productCRUD } from '../../../schema';
 import style from '../style.module.scss';
 import api from '../../../api'
 
@@ -52,7 +52,7 @@ const Product = ({ children }) => {
 
   const formik = useFormik({
     initialValues,
-    validationSchema: userCRUD,
+    validationSchema: productCRUD,
   })
 
   const handleBlur = e => {
@@ -60,11 +60,6 @@ const Product = ({ children }) => {
     const value = deleteSpaces(formik.values[name])
     formik.handleBlur(e)
     formik.setFieldValue([name], value)
-  }
-
-  const handleChangePhone = (e) => {
-    const { name } = e.target;
-    formik.setFieldValue(name, e.detail.value);
   }
 
   const handleInput = e => {
@@ -153,7 +148,7 @@ const Product = ({ children }) => {
   }, [formik])
 
   const func = header === `${HEADER_BASIC.add} ${HEADER}` ? addData : editData
-  // maybeOld: false,
+  console.log('formik.values', formik.values)
   return (
     <>
       {addUpdate ? (
@@ -201,6 +196,8 @@ const Product = ({ children }) => {
                 type='text'
               />
             </Fieldset>
+          </div>
+          <div className={style.addupdate__row}>
             <Fieldset
               errorClass='addOrUpdateCRUD'
               containerClass='pressed_bottom'
@@ -218,8 +215,6 @@ const Product = ({ children }) => {
                 err={formik.errors.category && formik.touched.category}
               />
             </Fieldset>
-          </div>
-          <div className={style.addupdate__row}>
             <Fieldset
               errorClass='addOrUpdateCRUD'
               containerClass='pressed_bottom'
