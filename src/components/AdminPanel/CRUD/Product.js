@@ -131,7 +131,7 @@ const Product = ({ children }) => {
   }
 
   const editData = () => {
-    apiHandler(api.editBonusCardOwner, setProduct, formik.values, applyChanges)
+    apiHandler(api.editProduct, setProduct, formik.values, applyChanges)
   }
 
   const onAction = (action) => {
