@@ -83,12 +83,12 @@ const getProductCrud = (params = []) => {
 
 const createProductSerializer = (params = {}) => ({
   title: params.title, // название
-  priceNow: params.priceNow, // цена
-  expirationDate: params.expirationDate, // срок годности в сутках
+  priceNow: +params.priceNow, // цена
+  expirationDate: params.finiteDate && +params.expirationDate || null, // срок годности в сутках
   maybeOld: params.maybeOld, // может ли распространяться скидка по старости
   categoryFK: params.category.value, // категория
   measurementUnitsFK: params.measurementUnits.value, // ед. измер.
-  manufacturerFK: params.manufacturer?.value, // производитель
+  manufacturerFK: params.manufacturer?.value || null, // производитель
 })
 
 export {

@@ -103,7 +103,7 @@ export const FORM_LABELS = {
   measurementUnits: 'Ед. измерения',
   category: 'Категория',
   expirationDate: 'Срок годности (сутки)',
-  priceNow: 'Цена (без учета скидки)',
+  priceNow: 'Цена за 1 кг/шт (без учета скидки)',
   start_at: 'Дата начала',
   end_at: 'Дата окончания',
   product: 'Товар',
@@ -128,6 +128,7 @@ export const FORM_LABELS = {
 }
 
 export const FORM_FIELDS = {
+  finiteDate: 'finiteDate',
   maybeOld: 'maybeOld',
   manufacturer: 'manufacturer',
   measurementUnits: 'measurementUnits',

@@ -259,6 +259,7 @@ class Api extends BaseApi {
 
   addProduct = async (data) => {
     const serData = createProductSerializer(data)
+    console.log('serData', serData)
     const res = await this.post('/product_crud/', serData)
     const serRes = getProductCrud(res.data)
     return serRes

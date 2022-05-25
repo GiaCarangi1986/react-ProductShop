@@ -10,7 +10,7 @@ import {
   HEADER_BASIC
 } from '../../../const';
 import Search from '../../Search'
-import { handingErrors, deleteSpaces, capitalize } from '../../../utils'
+import { handingErrors, deleteSpaces } from '../../../utils'
 import { Input, Fieldset, Switch } from '../../../views';
 import Select from '../../Select';
 import ListShow from './ListShow';
@@ -31,6 +31,7 @@ const Product = ({ children }) => {
   const [header, setHeader] = useState('')
   const [data, setData] = useState(null)
   const [filters, setFilters] = useState({})
+  const [disDate, setDisDate] = useState()
 
   const handleSubmitError = (response) => {
     if (response) {
@@ -47,6 +48,7 @@ const Product = ({ children }) => {
     category: null,
     measurementUnits: null,
     manufacturer: null,
+    finiteDate: true,
     id: null
   }
 
@@ -62,8 +64,17 @@ const Product = ({ children }) => {
     formik.setFieldValue([name], value)
   }
 
+  const handleChangeSwitch = (e) => {
+    formik.setFieldValue(e.target.name, e.target.checked)
+  }
+
+  const handleChangeDateSwitch = (e) => {
+    handleChangeSwitch(e)
+    setDisDate(!e.target.checked)
+  }
+
   const handleInput = e => {
-    formik.setFieldValue(e.target.name, capitalize(e.target.value))
+    formik.setFieldValue(e.target.name, e.target.value)
   }
 
   const handleSelectBlur = (name = '') => {
@@ -116,7 +127,7 @@ const Product = ({ children }) => {
   }
 
   const addData = () => {
-    apiHandler(api.addBonusCardOwner, setProduct, formik.values, applyChanges)
+    apiHandler(api.addProduct, setProduct, formik.values, applyChanges)
   }
 
   const editData = () => {
@@ -148,7 +159,7 @@ const Product = ({ children }) => {
   }, [formik])
 
   const func = header === `${HEADER_BASIC.add} ${HEADER}` ? addData : editData
-  console.log('formik.values', formik.values)
+
   return (
     <>
       {addUpdate ? (
@@ -179,7 +190,8 @@ const Product = ({ children }) => {
                 name={FORM_FIELDS.priceNow}
                 label={FORM_LABELS.priceNow}
                 data-cy='title'
-                type='text'
+                type='number'
+                step={0.01}
               />
             </Fieldset>
             <Fieldset
@@ -193,9 +205,17 @@ const Product = ({ children }) => {
                 name={FORM_FIELDS.expirationDate}
                 label={FORM_LABELS.expirationDate}
                 data-cy='title'
-                type='text'
+                type='number'
+                disabled={disDate}
               />
             </Fieldset>
+            <Switch
+              text='Продукт имеет конечный срок годности'
+              value={String(+formik.values.finiteDate)}
+              checked={formik.values.finiteDate}
+              name={FORM_FIELDS.finiteDate}
+              onGx-change={handleChangeDateSwitch}
+            />
           </div>
           <div className={style.addupdate__row}>
             <Fieldset
@@ -253,8 +273,8 @@ const Product = ({ children }) => {
               text='Может распространяться скидка 50% по истечению срока годности'
               value={String(+formik.values.maybeOld)}
               checked={formik.values.maybeOld}
-              name={FORM_FIELDS.delayed_show}
-            // onGx-change={handleChangeSwitch}
+              name={FORM_FIELDS.maybeOld}
+              onGx-change={handleChangeSwitch}
             />
           </div>
         </AddOrUpdate>

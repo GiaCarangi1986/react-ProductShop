@@ -26,7 +26,7 @@ const percentTemp = Yup.number()
 
 const countTemp = Yup.number()
   .nullable()
-  .min(0.001, errorsMessenge.positiveNumber)
+  .min(0.01, errorsMessenge.priceZero)
   .max(32767, errorsMessenge.bigNumber)
   .required(errorsMessenge.requiredField);
 
