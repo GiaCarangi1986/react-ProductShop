@@ -216,7 +216,7 @@ const MakeDeliveries = ({ children, setTypePage }) => {
                             <Icon slot='icon-left' icon='minus' />
                           </Button>
                           <Input
-                            value={line.choosen_count}
+                            value={roundNumber(line.choosen_count)}
                             type='number'
                             nameOfStyle='input_count'
                             onGx-input={handleInputChange}

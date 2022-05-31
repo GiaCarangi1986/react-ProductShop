@@ -155,7 +155,6 @@ const CheckTable = ({
 
   useEffect(() => {
     if (!modal && errorMessage) {
-      console.log('modal-errorMessage', modal, errorMessage)
       dispatch('modal/toggle', {
         modal: MODAL_TYPES.errorModal,
       })
