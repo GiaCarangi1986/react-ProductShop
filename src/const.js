@@ -51,7 +51,7 @@ export const ERROR_TEXT = {
 }
 
 export const NAMES = {
-  id: 'ID (штрих-код)',
+  id: 'ID (номер покупки)',
   date_time: 'Дата и время',
   kassir: 'ФИО кассира',
   bonus_pop: 'Кол-во снятых бонусов',
