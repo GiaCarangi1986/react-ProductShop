@@ -65,13 +65,15 @@ const arrCorrectProductLines = (linesOfCheck = []) => {
   return linesCheckList
 }
 
-export const calcTotalCostInLine = (checkLines = []) => {
+export const calcTotalCostInLine = (checkLines) => {
   const newArr = []
-  checkLines.forEach(line => {
-    const newLine = { ...line }
-    newLine.total_cost = roundNumber(line.price * line.count * line.ratio)
-    newArr.push(newLine)
-  })
+  if (Array.isArray(checkLines)) {
+    checkLines.forEach(line => {
+      const newLine = { ...line }
+      newLine.total_cost = roundNumber(line.price * line.count * line.ratio)
+      newArr.push(newLine)
+    })
+  }
   return newArr
 }
 
